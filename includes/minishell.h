@@ -26,10 +26,11 @@
 # include "minishell_lleodev.h"
 
 #define SHELL_1 "\033[1;36m\033[1;33m⸨ "
-#define SHELL_2 "\033[1;35m᯽  \033[1;32m"
-#define SHELL_3 " \033[1;34m⸩⸺  [\033[1;34m \033[0m ~/"
 
-#define SHELL_4 "\033[1;34m ]\033[0m\n\033[1;32m ⊷  \033[0m"
+#define SHELL_2 "\033[1;35m᯽  \033[1;32m"
+#define SHELL_3 " \033[1;34m⸩⸺  [\033[1;34m\033[1;37m~/"
+
+#define SHELL_4 "\033[1;34m]\033[0m\n\033[1;32m ⊷  \033[0m"
 
 
 #endif

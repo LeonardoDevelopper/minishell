@@ -18,6 +18,7 @@ int	check_builtins(char **cmd, t_info **info, char **env)
 	int	k;
 
 	k = 0;
+	env = env;
 	count_arg = ft_count(cmd);
 	if (ft_strcmp(cmd[k], "pwd"))
 		ft_pwd(count_arg);
@@ -35,7 +36,5 @@ int	check_builtins(char **cmd, t_info **info, char **env)
 		ft_unset(cmd, count_arg, info);
 	else
 		return (0);
-	//else if (!execute_cmd(cmd, count_arg, info, env))
-	//	return (0);
 	return (1);
 }
