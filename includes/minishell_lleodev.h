@@ -47,7 +47,7 @@ char	*redirect_stdin(char *cmd);
 
 int	ft_strlen_c(char *str, char c);
 char	*ft_strjoin_ptr(char *s1, char *s2);
-char	*remove_char(char *str, char c);
+char	*remove_char(char *str, char c, char *rep);
 
 t_child_p	*new_child_p(int pipe[]);
 

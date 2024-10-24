@@ -37,7 +37,7 @@ char	*ft_strjoin_ptr(char *s1, char *s2)
 	return (res);
 }
 
-char	*remove_char(char *str, char c)
+char	*remove_char(char *str, char c, char *rep)
 {
 	int	len;
 	char	*res;
@@ -51,15 +51,24 @@ char	*remove_char(char *str, char c)
 	res[len] = '\0';
 	while (*ptr_str)
 	{
-		if (*ptr_str == '\n')
-			*res = ' ';
+		if (rep)
+		{
+			if (*ptr_str == c)
+				*res = rep[0];
+			else
+				*res = *ptr_str;
+		}
 		else
-			*res = *ptr_str;
+		{
+			if (*ptr_str == c)
+				*ptr_str++;
+			else
+				*res = *ptr_str;
+		}
 		res++;
 		ptr_str++;
 	}
-	free(str);
-	return (start);
+	return (free(str), start);
 }
 
 void	free_matrix(char **matrix)

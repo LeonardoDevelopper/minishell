@@ -21,9 +21,9 @@ char	*display_shell(char *envp[], char **tmp_tmp, t_info **info)
 	char	*shell;
 
 	user = (char *)run_cmd("whoami", info, envp);
-	user = remove_char(user, '\n');
+	user = remove_char(user, '\n', NULL);
 	host = (char *)run_cmd("hostname", info, envp);
-	host = remove_char(host, '\n');
+	host = remove_char(host, '\n', " ");
 	getcwd(dir, sizeof(dir));
 	tmp_tmp = ft_split(host, '.');
 	shell = SHELL_1;
