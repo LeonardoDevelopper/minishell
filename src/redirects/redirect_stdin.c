@@ -20,7 +20,7 @@ int	verify_redirect_stdin(char *cmd)
 	char	*trimed_str;
 
 	i = 0;
-	fd = (-2);
+	fd = -2;
 	redirect = NULL;
 	while (cmd[i])
 	{

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	*run_cmd(char *cmd, t_info **info, char *env[])
+void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 {
 	t_child_p	*child;
 	int		pipe_fd[2];
@@ -20,6 +20,7 @@ void	*run_cmd(char *cmd, t_info **info, char *env[])
 	char	*full_path;
 	char	*output;
 	int	builtins;
+	int	*fd;
 
 	full_cmd = ft_split(cmd, ' ');
 	builtins = check_builtins(full_cmd, info, env);
@@ -32,9 +33,10 @@ void	*run_cmd(char *cmd, t_info **info, char *env[])
 			child = new_child_p(pipe_fd);
 			if (child->pid == 0)
 				run_child_p(full_path, full_cmd, child, env);
-			close(child->pipe_fd[1]);
+			fd = (int *)child->pipe_fd;
+			close(fd[1]);
 			waitpid(child->pid, &child->status, 0);
-			output = read_stdout_child((int )child->pipe_fd[0]);
+			output = read_stdout_child(fd[0]);
 			free(child);
 			free_matrix(full_cmd);
 			return (output);
@@ -43,4 +45,33 @@ void	*run_cmd(char *cmd, t_info **info, char *env[])
 			printf("%s%s is not recognized on this shell\n", RED_TEXT, cmd);
 	}
 	return NULL;
+}
+
+void	run_cmd(char *cmd, t_info **info, char *env[])
+{
+	t_child_p	*child;
+	char	**full_cmd;
+	char	*full_path;
+	int	builtins;
+
+	full_cmd = ft_split(cmd, ' ');
+	builtins = check_builtins(full_cmd, info, env);
+	if (!builtins)
+	{
+		full_path = cmd_exist(full_cmd[0]);
+		if (full_path)
+		{
+			child = new_child_p(NULL);
+			if (child->pid == 0)
+			{
+				run_child_p(full_path, full_cmd, child, env);
+				free(child);
+			}
+			waitpid(child->pid, &child->status, 0);
+			free(child);
+			free_matrix(full_cmd);
+		}
+		else
+			printf("%s%s is not recognized on this shell\n", RED_TEXT, cmd);
+	}
 }

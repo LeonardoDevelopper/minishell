@@ -28,11 +28,12 @@
 typedef struct	s_child_p
 {
 	int	pid;
-	int	*pipe_fd;
+	void	*pipe_fd;
 	int	status;
 }		t_child_p;
 
-void	*run_cmd(char *cmd, t_info **info, char *env[]);
+void	run_cmd(char *cmd, t_info **info, char *env[]);
+void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[]);
 void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[]);
 void	print_stdout_child(char *buffer);
 char	*display_shell(char *env[], char **tmp, t_info **info);
@@ -47,9 +48,10 @@ char	*redirect_stdin(char *cmd);
 
 int	ft_strlen_c(char *str, char c);
 char	*ft_strjoin_ptr(char *s1, char *s2);
-char	*remove_char(char *str, char c, char *rep);
+char	*replace_char(char *str, char c, char rep);
+char	*remove_end_char(char *str);
 
-t_child_p	*new_child_p(int pipe[]);
+t_child_p	*new_child_p(void *pipe);
 
 void	free_matrix(char **matrix);
 

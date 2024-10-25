@@ -25,19 +25,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	start = result;
 	while (*s1 != '\0')
 	{
-		//if (*s1 == '\n')
-		//	*result = ' ';
-		//else	
-			*result = *s1;
+		*result = *s1;
 		result++;
 		s1++;
 	}
 	while (*s2 != '\0')
 	{
-		//if (*s2 == '\n')
-		//	*result = ' ';
-		//else	
-			*result = *s2;
+		*result = *s2;
 		result++;
 		s2++;
 	}
