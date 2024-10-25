@@ -48,6 +48,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		shell = display_shell(envp, tmp, &info);
 		input = readline(shell);
+		ft_ctrld(input);
 		if (input && *input)
 		{
 			stdin_file = redirect_stdin(input);
