@@ -43,6 +43,7 @@ int	main(int argc, char *argv[], char *envp[])
 	info = NULL;
 	if (!fill_env(&info, envp))
 		return (1);
+	ft_signal();
 	while (1)
 	{
 		shell = display_shell(envp, tmp, &info);
@@ -51,17 +52,13 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			stdin_file = redirect_stdin(input);
 			if (stdin_file)
-			{
 				printf("%s", stdin_file);
-			}
 			else
-			{
-				output = (char *)run_cmd(input, &info, envp);
-				printf("%s", output);
-			}
+				run_cmd(input, &info, envp);
 			add_history(input);
 			free(input);
-			free(output);
+			//if (output);
+			//	free(output);
 		}
 		free(shell);
 	}

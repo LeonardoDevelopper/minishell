@@ -65,9 +65,10 @@ $(NAME) : $(OBJ) $(LIB)
 
 obj/%.o: src/%.c
 	clear
-	make lleodev_header
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	make lleodev_header
+	@echo "$(BLUE_BG)compiling $(NAME) sources...$(RESET)"
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIB):
 	$(COMPLIB)

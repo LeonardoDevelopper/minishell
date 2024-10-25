@@ -12,13 +12,17 @@
 
 #include "minishell.h"
 
-t_child_p	*new_child_p(int pipe[])
+t_child_p	*new_child_p(void *pipe)
 {
 	t_child_p	*child;
 
 	child = (t_child_p *)malloc(sizeof(t_child_p));
 	child->pid = fork();
-	child->pipe_fd = pipe;
+
+	if (pipe)
+		child->pipe_fd = (int *)pipe;
+	else
+		child->pipe_fd = NULL;
 	if (child->pid == -1)
 	{
 		perror("fork");
@@ -29,10 +33,17 @@ t_child_p	*new_child_p(int pipe[])
 
 void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[])
 {
-	close(child->pipe_fd[0]);
-	dup2(child->pipe_fd[1], STDOUT_FILENO);
+	int	*fd;
+
+	if (child->pipe_fd)
+	{
+		fd = (int *)child->pipe_fd;
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+	}
 	execve(cmd, abs_path, env);
-	close(child->pipe_fd[1]);
+	if (child->pipe_fd)
+		close(fd[1]);
 	perror("\nexecve: ");
 	exit(0);
 }
@@ -52,8 +63,9 @@ char	*read_stdout_child(int fd)
 	{
 		buffer = malloc(sizeof(char ) * 43);
 		n_bytes =  read(fd, buffer, 42);
-		buffer[n_bytes] = '\0';
-		output = ft_strjoin(output, buffer);
+		if (n_bytes > 0)
+			buffer[n_bytes] = '\0';
+		output = ft_strjoin_ptr(output, buffer);
 		free(buffer);
 	}
 	return (output);
