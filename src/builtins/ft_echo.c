@@ -121,9 +121,6 @@ void	ft_echo(char **echo, int ac, t_info **info)
 			k++;
 		}
 	}
-	printf("\nTODA ELA: %s", value);
-	printf("\n\n\n");
-
 	i = 0;
 	result = ft_split_echo(value);
 	while (result[i])
@@ -131,8 +128,6 @@ void	ft_echo(char **echo, int ac, t_info **info)
 		printf("%s\n", result[i]);
 		i++;
 	}
-
-
 /*
 	i = 1;
 	ac = ac;

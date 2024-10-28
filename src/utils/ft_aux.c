@@ -87,6 +87,8 @@ char	**ft_split_echo(char *str)
 	int			j;
 	int			k;
 	int			c;
+	int			check = 0;
+	int			ctr[2] = {34, 39};
 
 	i = 0;
 	j = 0;
@@ -95,23 +97,46 @@ char	**ft_split_echo(char *str)
 		i++;
 	while (str[i])
 	{
+		k = 0;
 		if (str[i] == 34)
 		{
+			mat[j][k] = str[i];
+			k++;
 			c = 34;
 			i++;
 		}
 		else if (str[i] == 39)
 		{
+			mat[j][k] = str[i];
+			k++;
 			c = 39;
 			i++;
 		}
-		k = 0;
+		else
+		{
+			c = 32;
+		}
 		while (str[i] && str[i] != c)
 		{
 			mat[j][k] = str[i];
 			k++;
 			i++;
 		}
+		/*if (str[i+1] && str[i+1] != 32)
+		{
+			mat[j][k] = str[i];
+			i++;
+			k++;
+			while (str[i] && str[i] != 32)
+			{
+				mat[j][k] = str[i];
+				k++;
+				i++;
+			}
+		}*/
+		mat[j][k] = str[i];
+		k++;
+		i++;
 		result[j] = mat[j];
 		j++;
 		while (str[i] && str[i] == 32)
