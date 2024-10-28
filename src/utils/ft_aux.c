@@ -86,16 +86,27 @@ char	**ft_split_echo(char *str)
 	int			i;
 	int			j;
 	int			k;
+	int			c;
 
 	i = 0;
 	j = 0;
 	ft_memset(mat, 0, sizeof(mat));
-	while (str[i] && (str[i] == 34 || str[i] == 39))
+	while (str[i] && str[i] == 32)
 		i++;
 	while (str[i])
 	{
+		if (str[i] == 34)
+		{
+			c = 34;
+			i++;
+		}
+		else if (str[i] == 39)
+		{
+			c = 39;
+			i++;
+		}
 		k = 0;
-		while (str[i] && str[i] != 34 && str[i] != 39)
+		while (str[i] && str[i] != c)
 		{
 			mat[j][k] = str[i];
 			k++;
@@ -103,7 +114,7 @@ char	**ft_split_echo(char *str)
 		}
 		result[j] = mat[j];
 		j++;
-		while (str[i] && (str[i] == 34 || str[i] == 39))
+		while (str[i] && str[i] == 32)
 			i++;
 	}
 	result[j] = NULL;

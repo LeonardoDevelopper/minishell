@@ -22,6 +22,9 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 	int	builtins;
 	int	*fd;
 
+
+
+
 	full_cmd = ft_split(cmd, ' ');
 	builtins = check_builtins(full_cmd, info, env);
 	if (!builtins)

@@ -71,30 +71,6 @@ void	expandecho(char **echo, t_info **info, int	indice)
 		free(aux);
 }
 
-/*
-void	auxecho(char **echo, t_info **info, int indice)
-{
-	int	i;
-	int	j;
-	int in_single_quote = 0;
-	int in_double_quote = 0;
-
-	i = indice;
-	j = 0;
-	while (echo[i][j])
-	{
-		if (echo[i][j] == '\'' && !in_double_quote)
-			in_single_quote = !in_single_quote; // Toggle single quote mode
-		else if (echo[i][j] == '"' && !in_single_quote)
-			in_double_quote = !in_double_quote; // Toggle double quote mode
-		else if (echo[i][j] == '$' && in_double_quote)
-			expandecho(echo, info, i); // Expand variables inside double quotes
-		else
-			printf("%c", echo[i][j]); // Print everything as is
-		j++;
-	}
-}
-*/
 void	auxecho(char **echo, t_info **info, int indice)
 {
 	int	i;
@@ -121,11 +97,35 @@ void	ft_echo(char **echo, int ac, t_info **info)
 {
 	int	i;
 	char	**result;
+	char	*value;
 
-
+	value = NULL;
+	value = malloc(sizeof(char *) * ft_strlen(echo[0]) * ft_count(echo) + 1);
+	printf("\n\n");
+	i = 1;
+	int k = 0;
+	int j;
+	while (echo[i])
+	{
+		j = 0;
+		while (echo[i][j])
+		{
+			value[k] = echo[i][j];
+			j++;
+			k++;
+		}
+		i++;
+		if (echo[i])
+		{
+			value[k] = 32;
+			k++;
+		}
+	}
+	printf("\nTODA ELA: %s", value);
+	printf("\n\n\n");
 
 	i = 0;
-	result = ft_split_echo(*echo);
+	result = ft_split_echo(value);
 	while (result[i])
 	{
 		printf("%s\n", result[i]);
@@ -133,6 +133,7 @@ void	ft_echo(char **echo, int ac, t_info **info)
 	}
 
 
+/*
 	i = 1;
 	ac = ac;
 	if (ac > 1 && ft_strcmp(echo[1], "-n"))
@@ -161,6 +162,6 @@ void	ft_echo(char **echo, int ac, t_info **info)
 		printf("\n");
 	}
 	else
-		printf("\n");
+		printf("\n");*/
 }
 ////////////// ECHO fim
