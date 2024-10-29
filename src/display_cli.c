@@ -20,10 +20,9 @@ char	*display_shell(char *envp[], char **tmp_tmp, t_info **info)
 	char	*tmp;
 	char	*shell;
 
-	user = (char *)run_cmd_catch_output("whoami", info, envp);
-	user = remove_end_char(user);
+	user = getenv("USER");
 	host = (char *)run_cmd_catch_output("hostname", info, envp);
-	//host = replace_char(host, '\n', ' ');
+	host = replace_char(host, '\n', ' ');
 	getcwd(dir, sizeof(dir));
 	tmp_tmp = ft_split(host, '.');
 	shell = SHELL_1;
@@ -39,5 +38,5 @@ char	*display_shell(char *envp[], char **tmp_tmp, t_info **info)
 	tmp = ft_strjoin(shell, tmp_tmp[count_desk(dir) - 1]);
 	free(shell);
 	shell = ft_strjoin(tmp, SHELL_4);
-	return (free(user), free(host),  shell);
+	return (free(host),  shell);
 }

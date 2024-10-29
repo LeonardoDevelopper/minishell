@@ -54,6 +54,8 @@ char	*replace_char(char *str, char c, char rep)
 	{
 		if (str[i] == c)
 			res[i] = rep;
+		else
+			res[i] = str[i];
 		i++;
 	}
 	free(str);
@@ -68,7 +70,7 @@ char	*remove_end_char(char *str)
 	i = 0;
 	res = (char *)malloc(sizeof(char ) * (ft_strlen(str)));
 	res[ft_strlen(str) - 1] = '\0';
-	while (str[i + 1])
+	while (i < (ft_strlen(str) - 1))
 	{
 		res[i] = str[i];
 		i++;

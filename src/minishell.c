@@ -34,7 +34,7 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*shell;
 	char	*output;
 	char	**tmp;;
-	char	*stdin_file;
+	int		stdin_file;
 	t_info	*info;
 
 	argc = argc;
@@ -50,9 +50,9 @@ int	main(int argc, char *argv[], char *envp[])
 		input = readline(shell);
 		if (input && *input)
 		{
-			stdin_file = redirect_stdin(input);
-			if (stdin_file)
-				printf("%s", stdin_file);
+			stdin_file = verify_redirect_stdin(input);
+			if (stdin_file >= 0)
+				redirect_stdin(stdin_file, input, envp);
 			else
 				run_cmd(input, &info, envp);
 			add_history(input);
@@ -62,7 +62,7 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		free(shell);
 	}
-	if(input)
+	if (input)
 		free(input);
 	return (0);
 }

@@ -28,9 +28,20 @@
 typedef struct	s_child_p
 {
 	int	pid;
-	void	*pipe_fd;
 	int	status;
+	void	*pipe_fd;
 }		t_child_p;
+
+typedef struct	s_exec_cmd
+{
+	t_child_p	*child;
+	t_info		*info;
+	int		redirect;
+	void	*output;
+	char	*input;
+	char	**full_path;
+	char	*cmd;
+}		t_exec_cmd;
 
 void	run_cmd(char *cmd, t_info **info, char *env[]);
 void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[]);
@@ -40,11 +51,12 @@ char	*display_shell(char *env[], char **tmp, t_info **info);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);
+
 int		count_desk(char *str);
 int		d_quote(char *cmd);
 int	verify_redirect_stdin(char *cmd);
 char	*read_file(int fd);
-char	*redirect_stdin(char *cmd);
+void	redirect_stdin(int fd, char *cmd, char *env[]);
 
 int	ft_strlen_c(char *str, char c);
 char	*ft_strjoin_ptr(char *s1, char *s2);

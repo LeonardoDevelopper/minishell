@@ -6,7 +6,7 @@
 /*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/12 13:01:40 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/10/25 13:44:33 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 		else
 			printf("%s%s is not recognized on this shell\n", RED_TEXT, cmd);
 	}
-	return NULL;
+	return (NULL);
 }
 
 void	run_cmd(char *cmd, t_info **info, char *env[])
