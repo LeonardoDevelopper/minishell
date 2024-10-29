@@ -122,18 +122,19 @@ char	**ft_split_echo(char *str)
 			k++;
 			i++;
 		}
-		/*if (str[i+1] && str[i+1] != 32)
+
+
+		if (str[i+1] && str[i+1] != 32)
 		{
-			mat[j][k] = str[i];
-			i++;
-			k++;
 			while (str[i] && str[i] != 32)
 			{
 				mat[j][k] = str[i];
 				k++;
 				i++;
 			}
-		}*/
+		}
+
+
 		mat[j][k] = str[i];
 		k++;
 		i++;

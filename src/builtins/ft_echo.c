@@ -71,7 +71,7 @@ void	expandecho(char **echo, t_info **info, int	indice)
 		free(aux);
 }
 
-void	auxecho(char **echo, t_info **info, int indice)
+int	print_echo(char **echo, t_info **info, int indice)
 {
 	int	i;
 	int	j;
@@ -123,40 +123,111 @@ void	ft_echo(char **echo, int ac, t_info **info)
 	}
 	i = 0;
 	result = ft_split_echo(value);
-	while (result[i])
+
+	int open = 0;
+	j = 0;
+	i = 0;
+	if (ft_strcmp(result[i], "-n"))
 	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-/*
-	i = 1;
-	ac = ac;
-	if (ac > 1 && ft_strcmp(echo[1], "-n"))
-	{
-		while (echo[i + 1])
+		while (result[i + 1])
 		{
-			if (echo[i + 1][0] == '$')
-				expandecho(echo, info, i + 1);
+			if (result[i + 1][0] == '$')
+				expandecho(result, info, i + 1);
 			else
-				auxecho(echo, info, i + 1);
+				//auxecho(result, info, i + 1);
 			i++;
 		}
 	}
-	else if (ac > 1)
+	else
 	{
-		while (echo[i])
+		while (result[i])
 		{
-			if (echo[i][0] == '$')
-				expandecho(echo, info, i);
-			else
-				auxecho(echo, info, i);
-			if (echo[i + 1])
-				printf(" ");
+			j = 0;
+			while (result[i][j])
+			{
+				if (result[i][j] == 34)
+				{
+					j++;
+					//printf("casragj: %c", result[i][j]);
+					while (result[i][j] != 34)
+					{
+						if (result[i][j] == '$')
+						{
+							double_asp(result[i], info, j);
+							while (result[i][j] != 32 && result[i][j] != 34 && result[i][j] != 39)
+								j++;
+							j = j - 1;
+						}
+						else
+							printf("%c", result[i][j]);
+						j++;
+					}
+				}
+				else if (result[i][j] == 39)
+				{
+					j++;
+					while (result[i][j] != 39)
+					{
+						printf("%c", result[i][j]);
+						j++;
+					}
+				}
+				else if (result[i][j] == '$')
+				{
+					expandecho(result, info, i);
+					while (result[i][j] != 32)
+						j++;
+				}
+				else
+				{
+					printf("%c", result[i][j]);
+				}
+				j++;
+			}
 			i++;
 		}
 		printf("\n");
 	}
-	else
-		printf("\n");*/
+	
+	printf("\n");
+}
+
+void	double_asp(char *str, t_info **info, int i)
+{
+	if (str[i] == '$')
+	{
+		i++;
+		resave(str, info, i);
+	}
+}
+
+void	resave(char *str, t_info **info, int i)
+{
+	t_info *tmp;
+	char	*aux;
+	int	k;
+	int	j;
+
+	tmp = *info;
+	aux = NULL;
+	aux = (char *)malloc(sizeof(char) * ft_strlen(str + 1));
+	j = 0;
+	k = 1;
+
+	while (str[i] && (str[i] != 32 && str[i] != 34 && str[i] != 39))
+	{
+		aux[j] = str[i];
+		i++;
+		j++;
+	}
+	aux[j] = '=';
+	//printf("\nSAVE: %s\n", aux);
+	while (tmp)
+	{
+		aux_cmpecho(aux, tmp);
+		tmp = tmp->next;
+	}
+	if (aux)
+		free(aux);
 }
 ////////////// ECHO fim
