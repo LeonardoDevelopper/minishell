@@ -47,6 +47,7 @@ int	ft_strcmp(char *str1, char *str2)
 		return (0);
 	return (1);
 }
+
 /*
 char	**ft_split(char *str)
 {
@@ -88,7 +89,6 @@ char	**ft_split_echo(char *str)
 	int			k;
 	int			c;
 	int			check = 0;
-	int			ctr[2] = {34, 39};
 
 	i = 0;
 	j = 0;
@@ -122,9 +122,7 @@ char	**ft_split_echo(char *str)
 			k++;
 			i++;
 		}
-
-
-		if (str[i+1] && str[i+1] != 32)
+		if (str[i + 1] && str[i + 1] != 32)
 		{
 			while (str[i] && str[i] != 32)
 			{
@@ -133,12 +131,10 @@ char	**ft_split_echo(char *str)
 				i++;
 			}
 		}
-
-
 		mat[j][k] = str[i];
-		k++;
-		i++;
+		mat[j][k+1] = '\0';
 		result[j] = mat[j];
+		i++;
 		j++;
 		while (str[i] && str[i] == 32)
 			i++;

@@ -30,8 +30,8 @@ void	aux_cmpecho(char *aux, t_info *tmp)
 			printf("%c", result[i + 1]);
 			i++;
 		}
-		if (result[i])
-			printf(" ");
+		//if (result[i])
+			//printf(" ");
 		if (result)
 			free(result);
 	}
@@ -49,11 +49,8 @@ void	expandecho(char **echo, t_info **info, int	indice)
 	aux = (char *)malloc(sizeof(char) * ft_strlen(echo[indice]) + 1);
 	j = 0;
 	k = 1;
-
 	if (echo[indice][j] == 34 || echo[indice][j] == 39)
-	{
 		k++;
-	}
 	while (echo[indice][j + 1])
 	{
 		if (echo[indice][j + k] == 34 && j > 0)
@@ -71,40 +68,18 @@ void	expandecho(char **echo, t_info **info, int	indice)
 		free(aux);
 }
 
-int	print_echo(char **echo, t_info **info, int indice)
-{
-	int	i;
-	int	j;
-
-	i = indice;
-	j = 0;
-	if (echo[i][j] == 34)
-	{
-		expandecho(echo, info, indice);
-		return ;
-	}
-	while (echo[i][j])
-	{
-		if (echo[i][j] && echo[i][j] != 34)
-			printf("%c", echo[i][j]);
-		j++;
-	}
-}
-
-
-
 void	ft_echo(char **echo, int ac, t_info **info)
 {
 	int	i;
+	int	k;
+	int	j;
 	char	**result;
 	char	*value;
 
 	value = NULL;
 	value = malloc(sizeof(char *) * ft_strlen(echo[0]) * ft_count(echo) + 1);
-	printf("\n\n");
 	i = 1;
-	int k = 0;
-	int j;
+	k = 0;
 	while (echo[i])
 	{
 		j = 0;
@@ -120,76 +95,75 @@ void	ft_echo(char **echo, int ac, t_info **info)
 			value[k] = 32;
 			k++;
 		}
+		value[k] = '\0';
 	}
 	i = 0;
 	result = ft_split_echo(value);
-
-	int open = 0;
-	j = 0;
-	i = 0;
-	if (ft_strcmp(result[i], "-n"))
+	if (ft_strcmp(result[i], "-n ")) //a string esta a vir com espaço no final
 	{
-		while (result[i + 1])
-		{
-			if (result[i + 1][0] == '$')
-				expandecho(result, info, i + 1);
-			else
-				//auxecho(result, info, i + 1);
-			i++;
-		}
+		i++;
+		check_echo(result, info, i);
 	}
 	else
 	{
-		while (result[i])
-		{
-			j = 0;
-			while (result[i][j])
-			{
-				if (result[i][j] == 34)
-				{
-					j++;
-					//printf("casragj: %c", result[i][j]);
-					while (result[i][j] != 34)
-					{
-						if (result[i][j] == '$')
-						{
-							double_asp(result[i], info, j);
-							while (result[i][j] != 32 && result[i][j] != 34 && result[i][j] != 39)
-								j++;
-							j = j - 1;
-						}
-						else
-							printf("%c", result[i][j]);
-						j++;
-					}
-				}
-				else if (result[i][j] == 39)
-				{
-					j++;
-					while (result[i][j] != 39)
-					{
-						printf("%c", result[i][j]);
-						j++;
-					}
-				}
-				else if (result[i][j] == '$')
-				{
-					expandecho(result, info, i);
-					while (result[i][j] != 32)
-						j++;
-				}
-				else
-				{
-					printf("%c", result[i][j]);
-				}
-				j++;
-			}
-			i++;
-		}
+		check_echo(result, info, i);
 		printf("\n");
 	}
-	
-	printf("\n");
+}
+
+void	check_echo(char **result, t_info **info, int i)
+{
+	int	j;
+
+	while (result[i])
+	{
+		j = 0;
+		while (result[i][j])
+		{
+			if (result[i][j] == 34)
+			{
+				j++;
+				while (result[i][j] != 34)
+				{
+					if (result[i][j] == '$')
+					{
+						double_asp(result[i], info, j);
+						while (result[i][j] != 32 && result[i][j] != 34 && result[i][j] != 39)
+						{
+							j++;
+							if (result[i][j] == '$')
+								double_asp(result[i], info, j);
+						}
+						j = j - 1;
+					}
+					else
+						printf("%c", result[i][j]);
+					j++;
+				}
+				if (result[i][j])//a questao do espaço
+					printf(" ");
+			}
+			else if (result[i][j] == 39)
+			{
+				j++;
+				while (result[i][j] != 39)
+				{
+					printf("%c", result[i][j]);
+					j++;
+				}
+			}
+			else if (result[i][j] == '$')
+			{
+				expandecho(result, info, i);
+				while (result[i][j] != 32)
+					j++;
+			}
+			else
+				printf("%c", result[i][j]);
+			j++;
+		}
+		i++;
+	}
 }
 
 void	double_asp(char *str, t_info **info, int i)
@@ -213,15 +187,13 @@ void	resave(char *str, t_info **info, int i)
 	aux = (char *)malloc(sizeof(char) * ft_strlen(str + 1));
 	j = 0;
 	k = 1;
-
-	while (str[i] && (str[i] != 32 && str[i] != 34 && str[i] != 39))
+	while (str[i] && (str[i] != 32 && str[i] != 34 && str[i] != 39 && str[i] != '$'))
 	{
 		aux[j] = str[i];
 		i++;
 		j++;
 	}
 	aux[j] = '=';
-	//printf("\nSAVE: %s\n", aux);
 	while (tmp)
 	{
 		aux_cmpecho(aux, tmp);
@@ -230,4 +202,42 @@ void	resave(char *str, t_info **info, int i)
 	if (aux)
 		free(aux);
 }
-////////////// ECHO fim
+
+
+/*
+
+Testes que não passaram:
+echo "$USER$HOME"
+echo "\"Hello\""
+echo "\\"
+
+
+
+Testes Básicos
+echo "Hello World"
+echo -n "Hello World"
+echo Hello World
+echo ""
+echo -n ""
+
+Testes com Variáveis
+echo "$USER"
+echo "$USER$HOME"
+echo "$USER $HOME"
+echo "User: $USER"
+echo '$USER'
+
+Testes com Aspas Simples e Duplas
+echo "'Hello'"
+echo '"Hello"'
+echo "'Hello' 'World'"
+echo '"$USER"'
+echo "'$USER'"
+echo "$USER '$HOME TEST'" '$HOME "$USER"'PAULO"
+
+Testes com Caractere Especial \
+echo "\"Hello\"" — Exibe aspas duplas escapadas.
+echo "\\" — Exibe uma barra invertida.
+echo -n "\\" — Testa a barra invertida com -n.
+
+*/
