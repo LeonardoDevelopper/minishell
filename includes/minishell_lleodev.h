@@ -32,6 +32,12 @@ typedef struct	s_child_p
 	void	*pipe_fd;
 }		t_child_p;
 
+typedef struct	s_redirect
+{
+	int	count;
+	int	*fd_list;
+}		t_redirect;
+
 typedef struct	s_exec_cmd
 {
 	t_child_p	*child;
@@ -39,7 +45,8 @@ typedef struct	s_exec_cmd
 	int		redirect;
 	void	*output;
 	char	*input;
-	char	**full_path;
+	char	**args;
+	char	*full_path;
 	char	*cmd;
 }		t_exec_cmd;
 
@@ -54,10 +61,10 @@ char	*read_stdout_child(int fd);
 
 int		count_desk(char *str);
 int		d_quote(char *cmd);
-int	verify_redirect_stdin(char *cmd);
+void	*verify_redirect_stdin(char *cmd);
 char	*read_file(int fd);
-void	redirect_stdin(int fd, char *cmd, char *env[]);
-
+void	redirect_stdin(t_redirect *redirec, char *cmd, char *env[]);
+int	verify_fd(t_redirect *redirec);
 int	ft_strlen_c(char *str, char c);
 char	*ft_strjoin_ptr(char *s1, char *s2);
 char	*replace_char(char *str, char c, char rep);

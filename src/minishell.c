@@ -32,9 +32,9 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	char	*input;
 	char	*shell;
-	char	*output;
+	//char	*output;
 	char	**tmp;;
-	int		stdin_file;
+	t_redirect	*redirect;
 	t_info	*info;
 
 	argc = argc;
@@ -50,9 +50,14 @@ int	main(int argc, char *argv[], char *envp[])
 		input = readline(shell);
 		if (input && *input)
 		{
-			stdin_file = verify_redirect_stdin(input);
-			if (stdin_file >= 0)
-				redirect_stdin(stdin_file, input, envp);
+			redirect = verify_redirect_stdin(input);
+			if (redirect)
+			{
+				if (!verify_fd(redirect))
+					printf("no such file or directory\n");
+				else
+					redirect_stdin(redirect, input, envp);
+			}
 			else
 				run_cmd(input, &info, envp);
 			add_history(input);
