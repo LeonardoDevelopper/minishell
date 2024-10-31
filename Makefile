@@ -35,7 +35,8 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/child_process/exec_bin.c		\
 	./src/child_process/child_process.c	\
 	./src/minishell.c			\
-	./src/display_cli.c
+	./src/display_cli.c			\
+	./src/catch_cmd_args.c
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 

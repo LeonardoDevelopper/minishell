@@ -38,17 +38,18 @@ typedef struct	s_redirect
 	int	*fd_list;
 }		t_redirect;
 
-typedef struct	s_exec_cmd
+typedef struct	s_cmd
 {
 	t_child_p	*child;
 	t_info		*info;
-	int		redirect;
+	t_redirect	*redirect;
 	void	*output;
+	char	*shell;
 	char	*input;
 	char	**args;
 	char	*full_path;
 	char	*cmd;
-}		t_exec_cmd;
+}		t_cmd;
 
 void	run_cmd(char *cmd, t_info **info, char *env[]);
 void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[]);
@@ -58,6 +59,8 @@ char	*display_shell(char *env[], char **tmp, t_info **info);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);
+int	count_cmd_args(char *cmd);
+char	**catch_cmd_args(char *cmd);
 
 int		count_desk(char *str);
 int		d_quote(char *cmd);

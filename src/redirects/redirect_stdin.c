@@ -29,6 +29,7 @@ void	*verify_redirect_stdin(char *cmd)
 	int		i;
 	char	**redirect;
 	char	*trimed_str;
+	char	**rd;
 	t_redirect	*redirec;
 
 	i = 1;
@@ -41,7 +42,8 @@ void	*verify_redirect_stdin(char *cmd)
 		redirec->fd_list = (int *)malloc(sizeof(int) * redirec->count);
 		while (redirect[i])
 		{
-			trimed_str = ft_strtrim(redirect[i], " ");
+			rd = ft_split(redirect[i], ' ');
+			trimed_str = ft_strtrim(rd[0], " ");
 			redirec->fd_list[i - 1] = open(trimed_str, O_RDONLY);
 			free(trimed_str);
 			i++;

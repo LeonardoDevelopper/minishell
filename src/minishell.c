@@ -30,9 +30,7 @@ int	count_desk(char *str)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char	*input;
-	char	*shell;
-	//char	*output;
+	t_cmd	*cmd;
 	char	**tmp;;
 	t_redirect	*redirect;
 	t_info	*info;
@@ -41,33 +39,33 @@ int	main(int argc, char *argv[], char *envp[])
 	argv = argv;
 	tmp = NULL;
 	info = NULL;
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!fill_env(&info, envp))
 		return (1);
 	ft_signal();
 	while (1)
 	{
-		shell = display_shell(envp, tmp, &info);
-		input = readline(shell);
-		if (input && *input)
+		cmd->shell = display_shell(envp, tmp, &info);
+		cmd->input = readline(cmd->shell);
+		if (cmd->input && *cmd->input)
 		{
-			redirect = verify_redirect_stdin(input);
-			if (redirect)
+			catch_cmd_args(cmd->input);
+		/*
+			cmd->redirect = verify_redirect_stdin(cmd->input);
+			if (cmd->redirect)
 			{
-				if (!verify_fd(redirect))
+				if (!verify_fd(cmd->redirect))
 					printf("no such file or directory\n");
 				else
-					redirect_stdin(redirect, input, envp);
+					redirect_stdin(cmd->redirect, cmd->input, envp);
 			}
 			else
 				run_cmd(input, &info, envp);
 			add_history(input);
 			free(input);
-			//if (output);
-			//	free(output);
+		*/
 		}
-		free(shell);
+		free(cmd->shell);
 	}
-	if (input)
-		free(input);
 	return (0);
 }
