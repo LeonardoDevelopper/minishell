@@ -1,1 +1,37 @@
 aborges
+
+/*
+Testes que não passaram:
+echo "$USER$HOME"
+echo "\"Hello\""
+echo "\\"
+echo "$USER '$HOME TEST'" '$HOME "$USER"'"PAULO" $USER
+
+Testes Básicos
+echo "Hello World"
+echo -n "Hello World"
+echo Hello World
+echo ""
+echo -n ""
+
+Testes com Variáveis
+echo "$USER"
+echo "$USER$HOME"
+echo "$USER $HOME"
+echo "User: $USER"
+echo '$USER'
+
+Testes com Aspas Simples e Duplas
+echo "'Hello'"
+echo '"Hello"'
+echo "'Hello' 'World'"
+echo '"$USER"'
+echo "'$USER'"
+echo "$USER '$HOME TEST'" '$HOME "$USER"'"PAULO"
+
+Testes com Caractere Especial \
+echo "\"Hello\"" — Exibe aspas duplas escapadas.
+echo "\\" — Exibe uma barra invertida.
+echo -n "\\" — Testa a barra invertida com -n.
+
+*/

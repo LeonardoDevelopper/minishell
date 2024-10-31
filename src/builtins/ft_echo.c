@@ -12,67 +12,12 @@
 
 #include "minishell.h"
 
-void	aux_cmpecho(char *aux, t_info *tmp)
-{
-	char *result;
-	int	i;
-
-	result = NULL;
-	if (ft_searstr(aux, tmp->value))
-	{
-		result = (char *)malloc(sizeof(char) * ft_strlen(tmp->value) + 1);
-		ft_strcpy(result, tmp->value);
-		i = 0;
-		while (result[i] != '=')
-			i++;
-		while (result[i + 1])
-		{
-			printf("%c", result[i + 1]);
-			i++;
-		}
-		//if (result[i])
-			//printf(" ");
-		if (result)
-			free(result);
-	}
-}
-
-void	expandecho(char **echo, t_info **info, int	indice)
-{
-	t_info *tmp;
-	char	*aux;
-	int	k;
-	int	j;
-
-	tmp = *info;
-	aux = NULL;
-	aux = (char *)malloc(sizeof(char) * ft_strlen(echo[indice]) + 1);
-	j = 0;
-	k = 1;
-	if (echo[indice][j] == 34 || echo[indice][j] == 39)
-		k++;
-	while (echo[indice][j + 1])
-	{
-		if (echo[indice][j + k] == 34 && j > 0)
-			break ;
-		aux[j] = echo[indice][j + k];
-		j++;
-	}
-	aux[j] = '=';
-	while (tmp)
-	{
-		aux_cmpecho(aux, tmp);
-		tmp = tmp->next;
-	}
-	if (aux)
-		free(aux);
-}
-
+//the my strin stake one more space in the last posiction
 void	ft_echo(char **echo, int ac, t_info **info)
 {
-	int	i;
-	int	k;
-	int	j;
+	int		i;
+	int		k;
+	int		j;
 	char	**result;
 	char	*value;
 
@@ -80,26 +25,10 @@ void	ft_echo(char **echo, int ac, t_info **info)
 	value = malloc(sizeof(char *) * ft_strlen(echo[0]) * ft_count(echo) + 1);
 	i = 1;
 	k = 0;
-	while (echo[i])
-	{
-		j = 0;
-		while (echo[i][j])
-		{
-			value[k] = echo[i][j];
-			j++;
-			k++;
-		}
-		i++;
-		if (echo[i])
-		{
-			value[k] = 32;
-			k++;
-		}
-		value[k] = '\0';
-	}
+	ft_echo1(echo, i, value);
 	i = 0;
 	result = ft_split_echo(value);
-	if (ft_strcmp(result[i], "-n ")) //a string esta a vir com espaço no final
+	if (ft_strcmp(result[i], "-n "))
 	{
 		i++;
 		check_echo(result, info, i);
@@ -109,6 +38,46 @@ void	ft_echo(char **echo, int ac, t_info **info)
 		check_echo(result, info, i);
 		printf("\n");
 	}
+	free(value);
+}
+
+void	check_double_quotes(char *str, t_info **info, int *j)
+{
+	(*j)++;
+	while (str[*j] != 34)
+	{
+		if (str[*j] == '$')
+		{
+			double_asp(str, info, *j);
+			while (str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
+			{
+				(*j)++;
+				if (str[*j] == '$')
+					double_asp(str, info, *j);
+			}
+			(*j)--;
+		}
+		else
+			printf("%c", str[*j]);
+		(*j)++;
+	}
+}
+
+void	check_single_quotes(char *str, int *j)
+{
+	(*j)++;
+	while (str[*j] != 39)
+	{
+		printf("%c", str[*j]);
+		(*j)++;
+	}
+}
+
+void	check_dollar_sign(char **result, t_info **info, int i, int *j)
+{
+	expandecho(result, info, i);
+	while (result[i][*j] != 32)
+		(*j)++;
 }
 
 void	check_echo(char **result, t_info **info, int i)
@@ -121,43 +90,11 @@ void	check_echo(char **result, t_info **info, int i)
 		while (result[i][j])
 		{
 			if (result[i][j] == 34)
-			{
-				j++;
-				while (result[i][j] != 34)
-				{
-					if (result[i][j] == '$')
-					{
-						double_asp(result[i], info, j);
-						while (result[i][j] != 32 && result[i][j] != 34 && result[i][j] != 39)
-						{
-							j++;
-							if (result[i][j] == '$')
-								double_asp(result[i], info, j);
-						}
-						j = j - 1;
-					}
-					else
-						printf("%c", result[i][j]);
-					j++;
-				}
-				if (result[i][j])//a questao do espaço
-					printf(" ");
-			}
+				check_double_quotes(result[i], info, &j);
 			else if (result[i][j] == 39)
-			{
-				j++;
-				while (result[i][j] != 39)
-				{
-					printf("%c", result[i][j]);
-					j++;
-				}
-			}
+				check_single_quotes(result[i], &j);
 			else if (result[i][j] == '$')
-			{
-				expandecho(result, info, i);
-				while (result[i][j] != 32)
-					j++;
-			}
+				check_dollar_sign(result, info, i, &j);
 			else
 				printf("%c", result[i][j]);
 			j++;
@@ -165,79 +102,3 @@ void	check_echo(char **result, t_info **info, int i)
 		i++;
 	}
 }
-
-void	double_asp(char *str, t_info **info, int i)
-{
-	if (str[i] == '$')
-	{
-		i++;
-		resave(str, info, i);
-	}
-}
-
-void	resave(char *str, t_info **info, int i)
-{
-	t_info *tmp;
-	char	*aux;
-	int	k;
-	int	j;
-
-	tmp = *info;
-	aux = NULL;
-	aux = (char *)malloc(sizeof(char) * ft_strlen(str + 1));
-	j = 0;
-	k = 1;
-	while (str[i] && (str[i] != 32 && str[i] != 34 && str[i] != 39 && str[i] != '$'))
-	{
-		aux[j] = str[i];
-		i++;
-		j++;
-	}
-	aux[j] = '=';
-	while (tmp)
-	{
-		aux_cmpecho(aux, tmp);
-		tmp = tmp->next;
-	}
-	if (aux)
-		free(aux);
-}
-
-
-/*
-
-Testes que não passaram:
-echo "$USER$HOME"
-echo "\"Hello\""
-echo "\\"
-
-
-
-Testes Básicos
-echo "Hello World"
-echo -n "Hello World"
-echo Hello World
-echo ""
-echo -n ""
-
-Testes com Variáveis
-echo "$USER"
-echo "$USER$HOME"
-echo "$USER $HOME"
-echo "User: $USER"
-echo '$USER'
-
-Testes com Aspas Simples e Duplas
-echo "'Hello'"
-echo '"Hello"'
-echo "'Hello' 'World'"
-echo '"$USER"'
-echo "'$USER'"
-echo "$USER '$HOME TEST'" '$HOME "$USER"'PAULO"
-
-Testes com Caractere Especial \
-echo "\"Hello\"" — Exibe aspas duplas escapadas.
-echo "\\" — Exibe uma barra invertida.
-echo -n "\\" — Testa a barra invertida com -n.
-
-*/

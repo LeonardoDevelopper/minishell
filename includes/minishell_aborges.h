@@ -57,8 +57,20 @@ void	ft_cd(char **cd, int ac);
 void	ft_exit(char **end, int ac);
 int		fill_env(t_info **info, char **env);
 void	ft_env(int ac, char **cmd, t_info **info);
-void	ft_echo(char **echo, int ac, t_info **info);
 int		check_env(char **export, t_info **info, int j);
+
+//builtin function echo
+void	ft_echo(char **echo, int ac, t_info **info);
+void	aux_cmpecho(char *aux, t_info *tmp);
+char	*create_aux_string(char *echo_indice);
+void	expandecho(char **echo, t_info **info, int indice);
+void	ft_echo1(char **echo, int i, char *value);
+void	double_asp(char *str, t_info **info, int i);
+void	resave(char *str, t_info **info, int i);
+void	check_double_quotes(char *str, t_info **info, int *j);
+void	check_single_quotes(char *str, int *j);
+void	check_dollar_sign(char **result, t_info **info, int i, int *j);
+void	check_echo(char **result, t_info **info, int i);
 
 //echo function
 void	aux_cmpecho(char *aux, t_info *tmp);
