@@ -47,12 +47,15 @@ int	count_cmd_args(char *cmd)
 
 char **catch_cmd_args(t_cmd *cmd)
 {
-	int		i = 0;
-	int		j = 0;
-	int		k = 1;
+	int		i;
+	int		j;
+	int		k;
 	char	**args;
 	char	**res;
 
+	i = 0;
+	j = 0;
+	k = 1;
 	if (count_cmd_args(cmd->input) < 1)
 		return (NULL);
 
