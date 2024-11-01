@@ -41,37 +41,26 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 			free_matrix(full_cmd);
 			return (output);
 		}
-		else
-			printf("%s%s is not recognized on this shell\n", RED_TEXT, cmd);
 	}
 	return (NULL);
 }
 
-void	run_cmd(char *cmd, t_info **info, char *env[])
+void	run_cmd(t_cmd *cmd, char *env[])
 {
 	t_child_p	*child;
-	char	**full_cmd;
-	char	*full_path;
 	int	builtins;
 
-	full_cmd = ft_split(cmd, ' ');
-	builtins = check_builtins(full_cmd, info, env);
+	builtins = check_builtins(cmd->cmd_splited, cmd->info, env);
 	if (!builtins)
 	{
-		full_path = cmd_exist(full_cmd[0]);
-		if (full_path)
+		child = new_child_p(NULL);
+		if (child->pid == 0)
 		{
-			child = new_child_p(NULL);
-			if (child->pid == 0)
-			{
-				run_child_p(full_path, full_cmd, child, env);
-				free(child);
-			}
-			waitpid(child->pid, &child->status, 0);
+			run_child_p(cmd->full_path, cmd->cmd_splited, child, env);
 			free(child);
-			free_matrix(full_cmd);
 		}
-		else
-			printf("%s%s is not recognized on this shell\n", RED_TEXT, cmd);
+		waitpid(child->pid, &child->status, 0);
+		free(child);
+		free_matrix(cmd->cmd_splited);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/14 08:13:53 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/01 18:17:46 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,39 +31,41 @@ int	count_desk(char *str)
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_cmd	*cmd;
-	char	**tmp;;
-	t_redirect	*redirect;
-	t_info	*info;
+	char	**tmp;
 
 	argc = argc;
 	argv = argv;
 	tmp = NULL;
-	info = NULL;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!fill_env(&info, envp))
+	if (!fill_env(&cmd->info, envp))
 		return (1);
 	ft_signal();
 	while (1)
 	{
-		cmd->shell = display_shell(envp, tmp, &info);
+		cmd->shell = display_shell(envp, tmp, &cmd->info);
 		cmd->input = readline(cmd->shell);
 		if (cmd->input && *cmd->input)
 		{
-			catch_cmd_args(cmd->input);
-		/*
-			cmd->redirect = verify_redirect_stdin(cmd->input);
-			if (cmd->redirect)
+			cmd->cmd_splited = ft_split(cmd->input, ' ');
+			cmd->full_path = cmd_exist(cmd->cmd_splited[0]);
+			if (cmd->full_path)
 			{
-				if (!verify_fd(cmd->redirect))
-					printf("no such file or directory\n");
+				cmd->args = catch_cmd_args(cmd);
+				cmd->redirect = verify_redirect_stdin(cmd->input);
+				if (cmd->redirect)
+				{
+					if (!verify_fd(cmd->redirect))
+						printf("no such file or directory\n");
+					else
+						redirect_stdin(cmd, envp);
+				}
 				else
-					redirect_stdin(cmd->redirect, cmd->input, envp);
+					run_cmd(cmd, envp);
+				add_history(cmd->input);
+				free(cmd->input);
 			}
 			else
-				run_cmd(input, &info, envp);
-			add_history(input);
-			free(input);
-		*/
+				printf("%s%s\n", RED_TEXT, "this command is not recognized on this shell");
 		}
 		free(cmd->shell);
 	}

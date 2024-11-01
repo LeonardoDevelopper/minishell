@@ -6,7 +6,7 @@
 /*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/30 12:01:44 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/01 18:16:43 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,24 @@ int	verify_fd(t_redirect *redirec)
 	return(1);
 }
 
-void	redirect_stdin(t_redirect *redirec, char *cmd, char *env[])
+void	redirect_stdin(t_cmd *cmd, char *env[])
 {
 	int	pipe_fd[2];
 	char	**full_cmd;
 	char	*path;
 	t_child_p	*child;
 
-	pipe_fd[0] = redirec->fd_list[redirec->count - 1];
+	pipe_fd[0] = cmd->redirect->fd_list[cmd->redirect->count - 1];
 	pipe_fd[1] = -1;
 	child = new_child_p(pipe_fd);
-	full_cmd = ft_split(cmd, ' ');
+	full_cmd = ft_split(cmd->input, ' ');
 	if (child->pid == 0)
 	{
 		path = cmd_exist(full_cmd[0]);
 		if (path)
 		{
 			dup2(pipe_fd[0], STDIN_FILENO);
-			if (execve(path, NULL, env) == -1) {
+			if (execve(path, cmd->args, env) == -1) {
 				perror("Erro ao executar execve");
 				return ;
 			}

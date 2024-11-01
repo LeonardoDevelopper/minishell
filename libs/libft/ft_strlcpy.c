@@ -6,7 +6,7 @@
 /*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 10:21:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/05/18 19:25:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/01 17:06:45 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,11 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 			i++;
 		return (i);
 	}
-	while (i < size - 1 && src[i] != '\0')
+	while (i < size - 1 && src[i])
 	{
 		dest[i] = src[i];
 		i++;
 	}
-	if (i < size)
-		dest[i] = '\0';
-	while (src[i] != '\0')
-		i++;
+	dest[i] = '\0';
 	return (i);
 }
