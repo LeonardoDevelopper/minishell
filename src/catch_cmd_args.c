@@ -54,7 +54,6 @@ char **catch_cmd_args(t_cmd *cmd)
 	char	**res;
 
 	i = 0;
-	j = 0;
 	k = 1;
 	if (count_cmd_args(cmd->input) < 1)
 		return (NULL);
