@@ -60,7 +60,7 @@ void	ft_env(int ac, char **cmd, t_info **info);
 int		check_env(char **export, t_info **info, int j);
 
 //builtin function echo
-void	ft_echo(char **echo, int ac, t_info **info);
+int		ft_echo(char **echo, int ac, t_info **info);
 void	aux_cmpecho(char *aux, t_info *tmp);
 char	*create_aux_string(char *echo_indice);
 void	expandecho(char **echo, t_info **info, int indice);
@@ -72,11 +72,6 @@ void	check_single_quotes(char *str, int *j);
 void	check_dollar_sign(char **result, t_info **info, int i, int *j);
 void	check_echo(char **result, t_info **info, int i);
 
-//echo function
-void	aux_cmpecho(char *aux, t_info *tmp);
-void	ft_echo(char **echo, int ac, t_info **info);
-void	auxecho(char **echo, t_info **info, int indice);
-void	expandecho(char **echo, t_info **info, int	indice);
 
 //export funcion
 void	ft_export(char **export, int ac, t_info **info);

@@ -19,11 +19,11 @@ LIB = ./libs/libft/libft.a
 COMPLIB = cd libs/libft/ && make
 
 SRC =	./src/builtins/ft_echo.c		\
+	./src/builtins/ft_echo_one.c		\
+	./src/builtins/ft_echo_two.c		\
 	./src/builtins/ft_unset.c		\
 	./src/builtins/ft_builtins.c		\
 	./src/builtins/ft_export.c		\
-	./src/builtins/ft_echo_one.c		\
-	./src/builtins/ft_echo_two.c		\
 	./src/builtins/ft_check_builtins.c	\
 	./src/quotes_handler/handle_quote.c	\
 	./src/utils/utils.c			\

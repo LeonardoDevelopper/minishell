@@ -63,7 +63,9 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		free(shell);
 	}
-	if(input)
+	if (input)
 		free(input);
+	if (info)
+		free_info_list(info);
 	return (0);
 }

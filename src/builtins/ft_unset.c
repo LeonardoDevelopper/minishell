@@ -43,7 +43,8 @@ void	ft_remove_env(char **unset, t_info **info, int indice)
 {
 	t_info	*tmp;
 	t_info	*tmp_back;
-	(void)unset;
+
+	unset = unset;
 	tmp = *info;
 	tmp_back = NULL;
 	while (tmp)

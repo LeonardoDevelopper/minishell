@@ -21,6 +21,8 @@ void	aux_cmpecho(char *aux, t_info *tmp)
 	if (ft_searstr(aux, tmp->value))
 	{
 		result = (char *)malloc(sizeof(char) * ft_strlen(tmp->value) + 1);
+		if (!result)
+			return ;
 		ft_strcpy(result, tmp->value);
 		i = 0;
 		while (result[i] != '=')
@@ -49,7 +51,9 @@ char	*create_aux_string(char *echo_indice)
 	aux = (char *)malloc(sizeof(char) * (ft_strlen(echo_indice) + 1));
 	if (!aux)
 		return (NULL);
-	while (echo_indice[j + k])
+	while (echo_indice[j + k] && echo_indice[j + k] != 32 &&
+			echo_indice[j + k] != 34 && echo_indice[j + k] != 39 &&
+			echo_indice[j + k] != '$')
 	{
 		if (echo_indice[j + k] == 34 && j > 0)
 			break ;
@@ -58,6 +62,7 @@ char	*create_aux_string(char *echo_indice)
 	}
 	aux[j] = '=';
 	aux[j + 1] = '\0';
+	//printf("O AUX: %s\n", aux);
 	return (aux);
 }
 

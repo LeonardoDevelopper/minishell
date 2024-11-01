@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 //the my strin stake one more space in the last posiction
-void	ft_echo(char **echo, int ac, t_info **info)
+int	ft_echo(char **echo, int ac, t_info **info)
 {
 	int		i;
 	int		k;
@@ -21,8 +21,20 @@ void	ft_echo(char **echo, int ac, t_info **info)
 	char	**result;
 	char	*value;
 
+	if (!echo)
+		return (0);
 	value = NULL;
-	value = malloc(sizeof(char *) * ft_strlen(echo[0]) * ft_count(echo) + 1);
+
+	i = 1;
+	int size = 0;
+	while (echo[i])
+	{
+		size += ft_strlen(echo[i]);
+		i++;
+	}
+	value = malloc(sizeof(char *) * size + ft_count(echo) - 1);
+	//if (!value)
+		//return (0);
 	i = 1;
 	k = 0;
 	ft_echo1(echo, i, value);
@@ -38,7 +50,8 @@ void	ft_echo(char **echo, int ac, t_info **info)
 		check_echo(result, info, i);
 		printf("\n");
 	}
-	free(value);
+	//free(value);
+	return (1);
 }
 
 void	check_double_quotes(char *str, t_info **info, int *j)
@@ -49,7 +62,7 @@ void	check_double_quotes(char *str, t_info **info, int *j)
 		if (str[*j] == '$')
 		{
 			double_asp(str, info, *j);
-			while (str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
+			while (str[*j] && str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
 			{
 				(*j)++;
 				if (str[*j] == '$')
@@ -94,10 +107,20 @@ void	check_echo(char **result, t_info **info, int i)
 			else if (result[i][j] == 39)
 				check_single_quotes(result[i], &j);
 			else if (result[i][j] == '$')
-				check_dollar_sign(result, info, i, &j);
+			{
+				//check_dollar_sign(result, info, i, &j);
+				expandecho(result, info, i);
+				while (result[i][j] && result[i][j] != 32 && result[i][j] != 34 &&
+						result[i][j] != 39 && result[i][j] != '$')
+				{
+					j++;
+				}
+				printf("\nTerminnou: %c\n", result[i][j]);
+			}
 			else
 				printf("%c", result[i][j]);
 			j++;
+			printf("\nTerminnou: %c\n", result[i][j]);
 		}
 		i++;
 	}

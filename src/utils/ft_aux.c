@@ -48,38 +48,6 @@ int	ft_strcmp(char *str1, char *str2)
 	return (1);
 }
 
-/*
-char	**ft_split(char *str)
-{
-	static char	mat[250][250];
-	static char	*result[250];
-	int			i;
-	int			j;
-	int			k;
-
-	i = 0;
-	j = 0;
-	ft_memset(mat, 0, sizeof(mat));
-	while (str[i] && (str[i] == 32 || str[i] == 9))
-		i++;
-	while (str[i])
-	{
-		k = 0;
-		while (str[i] && str[i] != 32 && str[i] != 9)
-		{
-			mat[j][k] = str[i];
-			k++;
-			i++;
-		}
-		result[j] = mat[j];
-		j++;
-		while (str[i] && (str[i] == 32 || str[i] == 9))
-			i++;
-	}
-	result[j] = NULL;
-	return (result);
-}*/
-
 char	**ft_split_echo(char *str)
 {
 	static char	mat[250][250];
@@ -93,6 +61,7 @@ char	**ft_split_echo(char *str)
 	i = 0;
 	j = 0;
 	ft_memset(mat, 0, sizeof(mat));
+	memset(result, 0, sizeof(result));
 	while (str[i] && str[i] == 32)
 		i++;
 	while (str[i])
@@ -143,54 +112,7 @@ char	**ft_split_echo(char *str)
 	return (result);
 }
 
-/*
-char	**ft_split(char *str)
-{
-	static char	mat[250][250];
-	static char	*result[250];
-	int			i;
-	int			j;
-	int			k;
-
-	i = 0;
-	j = 0;
-	ft_memset(mat, 0, sizeof(mat));
-	while (str[i] && (str[i] == 32 || str[i] == 9))
-		i++;
-	while (str[i])
-	{
-		k = 0;
-		while (str[i] && str[i] != 32 && str[i] != 9)
-		{
-			if (str[i] && (str[i] == 34 || str[i] == 39))
-			{
-				i++;
-				while (str[i] && (str[i] != 34 && str[i] != 39))
-				{
-					mat[j][k] = str[i];
-					i++;
-					k++;
-				}
-			}
-			else
-			{
-				mat[j][k] = str[i];
-				k++;
-			}
-			i++;
-		}
-		result[j] = mat[j];
-		j++;
-		while (str[i] && (str[i] == 32 || str[i] == 9))
-			i++;
-	}
-	result[j] = NULL;
-	return (result);
-}
-*/
-
-
-//split para o path
+//split to path
 char	**ft_split_path(char *path)
 {
 	static char	mat[250][250];
