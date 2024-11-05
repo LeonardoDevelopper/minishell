@@ -37,42 +37,42 @@ void	aux_cmpecho(char *aux, t_info *tmp)
 	}
 }
 
-char	*create_aux_string(char *echo_indice)
+char	*create_aux_string(char *echo_indice, int i)
 {
 	char	*aux;
 	int		j;
 	int		k;
 
 	j = 0;
-	if (echo_indice[0] == 34 || echo_indice[0] == 39)
+	if (echo_indice[i] == 34 || echo_indice[i] == 39)
 		k = 2;
 	else
 		k = 1;
 	aux = (char *)malloc(sizeof(char) * (ft_strlen(echo_indice) + 1));
 	if (!aux)
 		return (NULL);
-	while (echo_indice[j + k] && echo_indice[j + k] != 32 &&
-			echo_indice[j + k] != 34 && echo_indice[j + k] != 39 &&
-			echo_indice[j + k] != '$')
+	while (echo_indice[i + k] && echo_indice[i + k] != 32 &&
+			echo_indice[i + k] != 34 && echo_indice[i + k] != 39 &&
+			echo_indice[i + k] != '$')
 	{
-		if (echo_indice[j + k] == 34 && j > 0)
+		if (echo_indice[i + k] == 34 && j > 0)
 			break ;
-		aux[j] = echo_indice[j + k];
+		aux[j] = echo_indice[i + k];
 		j++;
+		i++;
 	}
 	aux[j] = '=';
 	aux[j + 1] = '\0';
-	//printf("O AUX: %s\n", aux);
 	return (aux);
 }
 
-void	expandecho(char **echo, t_info **info, int indice)
+void	expandecho(char **echo, t_info **info, int indice, int i)
 {
 	t_info	*tmp;
 	char	*aux;
 
 	tmp = *info;
-	aux = create_aux_string(echo[indice]);
+	aux = create_aux_string(echo[indice], i);
 	if (!aux)
 		return ;
 	while (tmp)

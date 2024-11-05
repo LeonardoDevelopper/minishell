@@ -48,6 +48,59 @@ int	ft_strcmp(char *str1, char *str2)
 	return (1);
 }
 
+/*
+char	**ft_split_echo(char *str)
+{
+	static char	mat[250][250];
+	static char	*result[250];
+	int			i = 0;
+	int			j = 0;
+	int			k;
+	int			c;
+
+	ft_memset(mat, 0, sizeof(mat));
+	memset(result, 0, sizeof(result));
+
+	// Ignora espaços iniciais
+	while (str[i] && str[i] == ' ')
+		i++;
+
+	while (str[i] && j < 250) // Limita a quantidade de substrings a 250
+	{
+		k = 0;
+		// Identifica tipo de aspas ou espaço como delimitador
+		if (str[i] == '"')
+			c = 34;
+		else if (str[i] == '\'')
+			c = 39;
+		else
+			c = 32; // Espaço como delimitador
+
+		if (c != 32)
+			i++; // Avança além da aspa inicial
+
+		// Copia caracteres até encontrar o delimitador ou ultrapassar o limite de 250
+		while (str[i] && str[i] != c && k < 249) // Limita cada substring a 249 caracteres
+			mat[j][k++] = str[i++];
+
+		// Adiciona caractere nulo no final de cada substring
+		mat[j][k] = '\0';
+		result[j] = mat[j];
+		j++;
+
+		// Pula o delimitador final, se não for o final da string
+		if (str[i])
+			i++;
+
+		// Ignora espaços entre substrings
+		while (str[i] && str[i] == ' ')
+			i++;
+	}
+	result[j] = NULL; // Define o último elemento como NULL
+	return (result);
+}
+*/
+
 char	**ft_split_echo(char *str)
 {
 	static char	mat[250][250];
@@ -56,15 +109,15 @@ char	**ft_split_echo(char *str)
 	int			j;
 	int			k;
 	int			c;
-	int			check = 0;
 
 	i = 0;
 	j = 0;
 	ft_memset(mat, 0, sizeof(mat));
-	memset(result, 0, sizeof(result));
+	ft_memset(result, 0, sizeof(result));
+	//ft_memset(result, 0, sizeof(result));
 	while (str[i] && str[i] == 32)
 		i++;
-	while (str[i])
+	while (i < ft_strlen(str))
 	{
 		k = 0;
 		if (str[i] == 34)
@@ -91,24 +144,40 @@ char	**ft_split_echo(char *str)
 			k++;
 			i++;
 		}
-		if (str[i + 1] && str[i + 1] != 32)
+		if (str[i + 1])
 		{
-			while (str[i] && str[i] != 32)
+			while (str[i + 1] && str[i + 1] != 32 && str[i + 1] != c)
 			{
 				mat[j][k] = str[i];
 				k++;
 				i++;
 			}
 		}
-		mat[j][k] = str[i];
-		mat[j][k+1] = '\0';
+		if (str[i + 1] && str[i + 1] != 32 && str[i + 1] != c)
+		{
+			while (str[i + 1] && str[i + 1] != 32 && str[i + 1] != c)
+			{
+				mat[j][k] = str[i];
+				k++;
+				i++;
+			}
+		}
+
+		if (str[i])
+		{
+			mat[j][k] = str[i];
+			mat[j][k + 1] = '\0';
+		}
+		else
+			mat[j][k] = '\0';
 		result[j] = mat[j];
 		i++;
 		j++;
+
 		while (str[i] && str[i] == 32)
 			i++;
 	}
-	result[j] = NULL;
+	result[j] = '\0';
 	return (result);
 }
 

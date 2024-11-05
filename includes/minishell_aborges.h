@@ -62,8 +62,8 @@ int		check_env(char **export, t_info **info, int j);
 //builtin function echo
 int		ft_echo(char **echo, int ac, t_info **info);
 void	aux_cmpecho(char *aux, t_info *tmp);
-char	*create_aux_string(char *echo_indice);
-void	expandecho(char **echo, t_info **info, int indice);
+char	*create_aux_string(char *echo_indice, int i);
+void	expandecho(char **echo, t_info **info, int indice, int i);
 void	ft_echo1(char **echo, int i, char *value);
 void	double_asp(char *str, t_info **info, int i);
 void	resave(char *str, t_info **info, int i);

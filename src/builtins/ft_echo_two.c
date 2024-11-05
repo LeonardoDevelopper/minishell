@@ -25,14 +25,12 @@ void	resave(char *str, t_info **info, int i)
 {
 	t_info	*tmp;
 	char	*aux;
-	//int		k;
 	int		j;
 
 	tmp = *info;
 	aux = NULL;
 	aux = (char *)malloc(sizeof(char) * ft_strlen(str + 1));
 	j = 0;
-	//k = 1;
 	while (str[i] && (str[i] != 32 && str[i]
 			!= 34 && str[i] != 39 && str[i] != '$'))
 	{

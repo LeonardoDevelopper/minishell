@@ -33,13 +33,16 @@ int	ft_echo(char **echo, int ac, t_info **info)
 		i++;
 	}
 	value = malloc(sizeof(char *) * size + ft_count(echo) - 1);
-	//if (!value)
-		//return (0);
+	if (!value)
+		return (0);
 	i = 1;
 	k = 0;
 	ft_echo1(echo, i, value);
 	i = 0;
 	result = ft_split_echo(value);
+	//printf("%s\n", result[0]);
+	//printf("%s\n", result[1]);
+	//printf("%s\n", result[2]);
 	if (ft_strcmp(result[i], "-n "))
 	{
 		i++;
@@ -50,7 +53,7 @@ int	ft_echo(char **echo, int ac, t_info **info)
 		check_echo(result, info, i);
 		printf("\n");
 	}
-	//free(value);
+	free(value);
 	return (1);
 }
 
@@ -79,19 +82,27 @@ void	check_double_quotes(char *str, t_info **info, int *j)
 void	check_single_quotes(char *str, int *j)
 {
 	(*j)++;
-	while (str[*j] != 39)
+	while (str[*j] && str[*j] != 39)
 	{
 		printf("%c", str[*j]);
 		(*j)++;
 	}
 }
 
-void	check_dollar_sign(char **result, t_info **info, int i, int *j)
+/* 
+echo '"$HOME $USER" BETA BORGES 'OLA' "$USER"'
+void	check_single_quotes(char *str, int *j)
 {
-	expandecho(result, info, i);
-	while (result[i][*j] != 32)
+	(*j)++; // Avança para o próximo caractere após a primeira aspas simples
+	while (str[*j] && str[*j] != 39) // Verifica se str[*j] não é '\0' e não é uma aspas simples
+	{
+		printf("%c", str[*j]);
+		(*j)++;
+	}
+	if (str[*j] == 39) // Avança além da aspas de fechamento, se ela existir
 		(*j)++;
 }
+*/
 
 void	check_echo(char **result, t_info **info, int i)
 {
@@ -102,26 +113,26 @@ void	check_echo(char **result, t_info **info, int i)
 		j = 0;
 		while (result[i][j])
 		{
-			if (result[i][j] == 34)
+			if (result[i][j] && result[i][j] == 34)
 				check_double_quotes(result[i], info, &j);
-			else if (result[i][j] == 39)
+			else if (result[i][j] && result[i][j] == 39)
 				check_single_quotes(result[i], &j);
-			else if (result[i][j] == '$')
+			else if (result[i][j] && result[i][j] == '$')
 			{
-				//check_dollar_sign(result, info, i, &j);
-				expandecho(result, info, i);
+				expandecho(result, info, i, j);
+				j++;
 				while (result[i][j] && result[i][j] != 32 && result[i][j] != 34 &&
-						result[i][j] != 39 && result[i][j] != '$')
+						result[i][j] != 39 && result[i][j + 1] != '$')
 				{
 					j++;
 				}
-				printf("\nTerminnou: %c\n", result[i][j]);
 			}
-			else
+			else if (result[i][j])
 				printf("%c", result[i][j]);
 			j++;
-			printf("\nTerminnou: %c\n", result[i][j]);
 		}
 		i++;
+		if (result[i])
+			printf(" ");
 	}
 }
