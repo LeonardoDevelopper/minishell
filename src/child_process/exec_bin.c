@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
+void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 {
 	t_child_p	*child;
 	int		pipe_fd[2];
@@ -26,7 +26,7 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 
 
 	full_cmd = ft_split(cmd, ' ');
-	builtins = check_builtins(full_cmd, info, env);
+	builtins = check_builtins(full_cmd, enviro, env);
 	if (!builtins)
 	{
 		full_path = cmd_exist(full_cmd[0]);
@@ -50,7 +50,7 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 	return NULL;
 }
 
-void	run_cmd(char *cmd, t_info **info, char *env[])
+void	run_cmd(char *cmd, t_enviro **enviro, char *env[])
 {
 	t_child_p	*child;
 	char	**full_cmd;
@@ -58,7 +58,7 @@ void	run_cmd(char *cmd, t_info **info, char *env[])
 	int	builtins;
 
 	full_cmd = ft_split(cmd, ' ');
-	builtins = check_builtins(full_cmd, info, env);
+	builtins = check_builtins(full_cmd, enviro, env);
 	if (!builtins)
 	{
 		full_path = cmd_exist(full_cmd[0]);

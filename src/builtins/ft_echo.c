@@ -12,21 +12,38 @@
 
 #include "minishell.h"
 
+void	ft_echo_aux(t_enviro **enviro, char **value)
+{
+	char	**result;
+	int		i;
+
+	i = 0;
+	result = ft_split_echo(value);
+	if (ft_strcmp(result[i], "-n "))
+	{
+		i++;
+		check_echo(result, enviro, i);
+	}
+	else
+	{
+		check_echo(result, enviro, i);
+		printf("\n");
+	}
+}
+
 //the my strin stake one more space in the last posiction
-int	ft_echo(char **echo, int ac, t_info **info)
+int	ft_echo(char **echo, int ac, t_enviro **enviro)
 {
 	int		i;
-	int		k;
 	int		j;
-	char	**result;
+	int		size;
 	char	*value;
 
 	if (!echo)
 		return (0);
 	value = NULL;
-
 	i = 1;
-	int size = 0;
+	size = 0;
 	while (echo[i])
 	{
 		size += ft_strlen(echo[i]);
@@ -36,40 +53,25 @@ int	ft_echo(char **echo, int ac, t_info **info)
 	if (!value)
 		return (0);
 	i = 1;
-	k = 0;
 	ft_echo1(echo, i, value);
-	i = 0;
-	result = ft_split_echo(value);
-	//printf("%s\n", result[0]);
-	//printf("%s\n", result[1]);
-	//printf("%s\n", result[2]);
-	if (ft_strcmp(result[i], "-n "))
-	{
-		i++;
-		check_echo(result, info, i);
-	}
-	else
-	{
-		check_echo(result, info, i);
-		printf("\n");
-	}
+	ft_echo_aux(enviro, value);
 	free(value);
 	return (1);
 }
 
-void	check_double_quotes(char *str, t_info **info, int *j)
+void	check_double_quotes(char *str, t_enviro **enviro, int *j)
 {
 	(*j)++;
 	while (str[*j] != 34)
 	{
 		if (str[*j] == '$')
 		{
-			double_asp(str, info, *j);
+			double_asp(str, enviro, *j);
 			while (str[*j] && str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
 			{
 				(*j)++;
 				if (str[*j] == '$')
-					double_asp(str, info, *j);
+					double_asp(str, enviro, *j);
 			}
 			(*j)--;
 		}
@@ -79,32 +81,18 @@ void	check_double_quotes(char *str, t_info **info, int *j)
 	}
 }
 
-void	check_single_quotes(char *str, int *j)
+void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)
 {
+	expandecho(result, enviro, i, *j);
 	(*j)++;
-	while (str[*j] && str[*j] != 39)
+	while (result[i][*j] && result[i][*j] != 32 && result[i][*j] != 34 &&
+			result[i][*j] != 39 && result[i][*j + 1] != '$')
 	{
-		printf("%c", str[*j]);
 		(*j)++;
 	}
 }
 
-/* 
-echo '"$HOME $USER" BETA BORGES 'OLA' "$USER"'
-void	check_single_quotes(char *str, int *j)
-{
-	(*j)++; // Avança para o próximo caractere após a primeira aspas simples
-	while (str[*j] && str[*j] != 39) // Verifica se str[*j] não é '\0' e não é uma aspas simples
-	{
-		printf("%c", str[*j]);
-		(*j)++;
-	}
-	if (str[*j] == 39) // Avança além da aspas de fechamento, se ela existir
-		(*j)++;
-}
-*/
-
-void	check_echo(char **result, t_info **info, int i)
+void	check_echo(char **result, t_enviro **enviro, int i)
 {
 	int	j;
 
@@ -114,19 +102,11 @@ void	check_echo(char **result, t_info **info, int i)
 		while (result[i][j])
 		{
 			if (result[i][j] && result[i][j] == 34)
-				check_double_quotes(result[i], info, &j);
+				check_double_quotes(result[i], enviro, &j);
 			else if (result[i][j] && result[i][j] == 39)
 				check_single_quotes(result[i], &j);
 			else if (result[i][j] && result[i][j] == '$')
-			{
-				expandecho(result, info, i, j);
-				j++;
-				while (result[i][j] && result[i][j] != 32 && result[i][j] != 34 &&
-						result[i][j] != 39 && result[i][j + 1] != '$')
-				{
-					j++;
-				}
-			}
+				aux_check_echo(result, enviro, i, &j);
 			else if (result[i][j])
 				printf("%c", result[i][j]);
 			j++;

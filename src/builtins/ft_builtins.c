@@ -27,10 +27,10 @@ void	ft_pwd(int ac)
 		return ;
 }
 
-void	ft_env(int ac, char **env, t_info **info)
+void	ft_env(int ac, char **env, t_enviro **enviro)
 {
 	int		i;
-	t_info	*tmp;
+	t_enviro	*tmp;
 	char	*list[1000];
 
 	if (ac > 1)
@@ -38,7 +38,7 @@ void	ft_env(int ac, char **env, t_info **info)
 		printf("env: ‘%s’: No such file or directory\n", env[1]);
 		return ;
 	}
-	tmp = *info;
+	tmp = *enviro;
 	i = 0;
 	while (tmp)
 	{
@@ -46,10 +46,37 @@ void	ft_env(int ac, char **env, t_info **info)
 		i++;
 		tmp = tmp->next;
 	}
-	i = ft_listsize(info) - 1;
+	i = ft_listsize(enviro) - 1;
 	while (i >= 0)
 	{
 		printf("%s\n", list[i]);
+		i--;
+	}
+}
+
+void	ft_env_export(int ac, char **env, t_enviro **enviro)
+{
+	int		i;
+	t_enviro	*tmp;
+	char	*list[1000];
+
+	if (ac > 1)
+	{
+		printf("env: ‘%s’: No such file or directory\n", env[1]);
+		return ;
+	}
+	tmp = *enviro;
+	i = 0;
+	while (tmp)
+	{
+		list[i] = tmp->value;
+		i++;
+		tmp = tmp->next;
+	}
+	i = ft_listsize(enviro) - 1;
+	while (i >= 0)
+	{
+		printf("declare -x %s\n", list[i]);
 		i--;
 	}
 }

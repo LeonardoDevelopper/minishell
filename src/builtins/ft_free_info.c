@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_info.c                                     :+:      :+:    :+:   */
+/*   ft_free_enviro.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,15 +12,15 @@
 
 #include "minishell.h"
 
-void	free_info_list(t_info **info)
+void	free_enviro_list(t_enviro **enviro)
 {
-	t_info	*tmp;
+	t_enviro	*tmp;
 
-	while (*info)
+	while (*enviro)
 	{
-		tmp = (*info)->next;
-		free((*info)->value);
-		free(*info);
-		*info = tmp;
+		tmp = (*enviro)->next;
+		free((*enviro)->value);
+		free(*enviro);
+		*enviro = tmp;
 	}
 }

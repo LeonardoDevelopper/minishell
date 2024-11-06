@@ -25,15 +25,15 @@ int	ft_count(char **str)
 }
 
 
-int	ft_listsize(t_info **info)
+int	ft_listsize(t_enviro **enviro)
 {
 	int		i;
-	t_info	*tmp;
+	t_enviro	*tmp;
 
-	if (!info || !*info)
+	if (!enviro || !*enviro)
 		return (0);
 	i = 0;
-	tmp = *info;
+	tmp = *enviro;
 	while (tmp)
 	{
 		i++;

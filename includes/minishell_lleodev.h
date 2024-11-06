@@ -32,11 +32,11 @@ typedef struct	s_child_p
 	int	status;
 }		t_child_p;
 
-void	run_cmd(char *cmd, t_info **info, char *env[]);
-void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[]);
+void	run_cmd(char *cmd, t_enviro **enviro, char *env[]);
+void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[]);
 void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[]);
 void	print_stdout_child(char *buffer);
-char	*display_shell(char *env[], char **tmp, t_info **info);
+char	*display_shell(char *env[], char **tmp, t_enviro **enviro);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);

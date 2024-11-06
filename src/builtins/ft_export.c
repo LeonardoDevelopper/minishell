@@ -12,14 +12,14 @@
 
 #include "minishell.h"
 
-void	export_check1(char **export, t_info **info, int j)
+void	export_check1(char **export, t_enviro **enviro, int j)
 {
-	t_info	*tmp;
+	t_enviro	*tmp;
 
-	tmp = (t_info *)malloc(sizeof(t_info));
+	tmp = (t_enviro *)malloc(sizeof(t_enviro));
 	if (!tmp)
 		return ;
-	tmp->indice = (*info)->indice + 1;
+	tmp->indice = (*enviro)->indice + 1;
 	tmp->value = (char *)malloc(sizeof(char) * (strlen(export[j]) + 1));
 	if (!tmp->value)
 	{
@@ -27,11 +27,11 @@ void	export_check1(char **export, t_info **info, int j)
 		return ;
 	}
 	ft_strcpy(tmp->value, export[j]);
-	tmp->next = *info;
-	*info = tmp;
+	tmp->next = *enviro;
+	*enviro = tmp;
 }
 
-void	export_check(char **export, int ac, t_info **info, int j)
+void	export_check(char **export, int ac, t_enviro **enviro, int j)
 {
 	int	check;
 	int	i;
@@ -47,10 +47,10 @@ void	export_check(char **export, int ac, t_info **info, int j)
 	}
 	if (check == 1)
 	{
-		if (check_env(export, info, j) && j == ac)
+		if (check_env(export, enviro, j) && j == ac)
 			return ;
-		else if (!check_env(export, info, j))
-			export_check1(export, info, j);
+		else if (!check_env(export, enviro, j))
+			export_check1(export, enviro, j);
 	}
 	else
 	{
@@ -58,26 +58,26 @@ void	export_check(char **export, int ac, t_info **info, int j)
 	}
 }
 
-void	ft_export(char **export, int ac, t_info **info)
+void	ft_export(char **export, int ac, t_enviro **enviro)
 {
 	int	j;
 
 	if (ac == 1)
-		ft_env(ac, export, info);
+		ft_env_export(ac, export, enviro);
 	else if (ac > 1)
 	{
 		j = 1;
 		while (j < ac)
 		{
-			export_check(export, ac, info, j);
+			export_check(export, ac, enviro, j);
 			j++;
 		}
 	}
 }
 
-int	check_env(char **export, t_info **info, int j)
+int	check_env(char **export, t_enviro **enviro, int j)
 {
-	t_info	*tmp;
+	t_enviro	*tmp;
 	int		check;
 	char	*result;
 
@@ -88,7 +88,7 @@ int	check_env(char **export, t_info **info, int j)
 		return (0);
 	}
 	ft_strcpy(result, export[j]);
-	tmp = *info;
+	tmp = *enviro;
 	check = 0;
 	while (tmp)
 	{
@@ -96,7 +96,7 @@ int	check_env(char **export, t_info **info, int j)
 		{
 			check = 1;
 			printf("existe\n");
-			ft_replace_env(export, info, tmp->indice, j);
+			ft_replace_env(export, enviro, tmp->indice, j);
 		}
 		tmp = tmp->next;
 	}
@@ -104,11 +104,11 @@ int	check_env(char **export, t_info **info, int j)
 	return (check);
 }
 
-void	ft_replace_env(char **export, t_info **info, int indice, int j)
+void	ft_replace_env(char **export, t_enviro **enviro, int indice, int j)
 {
-	t_info	*tmp;
+	t_enviro	*tmp;
 
-	tmp = *info;
+	tmp = *enviro;
 	while (tmp)
 	{
 		if (tmp->indice == indice)

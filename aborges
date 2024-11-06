@@ -2,7 +2,6 @@ aborges
 
 /*
 Testes que não passaram:
-echo "$USER$HOME"
 echo "\"Hello\""
 echo "\\"
 echo "$USER '$HOME TEST'" '$HOME "$USER"'"PAULO" $USER
@@ -29,21 +28,16 @@ echo '"$USER"'
 echo "'$USER'"
 echo "$USER '$HOME TEST'" '$HOME "$USER"'"PAULO"
 
-Testes com Caractere Especial \
-echo "\"Hello\"" — Exibe aspas duplas escapadas.
-echo "\\" — Exibe uma barra invertida.
-echo -n "\\" — Testa a barra invertida com -n.
-
+/*
+if (str[i + 1] && str[i + 1] != 32 && str[i + 1] != c)
+{
+	while (str[i + 1] && str[i + 1] != 32 && str[i + 1] != c)
+	{
+		mat[j][k] = str[i];
+		k++;
+		i++;
+	}
+}
 */
 
-		/*
-				if (str[i + 1] && str[i + 1] != 32 && str[i + 1] != c)
-		{
-			while (str[i + 1] && str[i + 1] != 32 && str[i + 1] != c)
-			{
-				mat[j][k] = str[i];
-				k++;
-				i++;
-			}
-		}
-		*/
+valgrind --leak-check=full ./minishell

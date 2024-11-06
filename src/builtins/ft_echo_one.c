@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	aux_cmpecho(char *aux, t_info *tmp)
+void	aux_cmpecho(char *aux, t_enviro *tmp)
 {
 	char	*result;
 	int		i;
@@ -51,9 +51,9 @@ char	*create_aux_string(char *echo_indice, int i)
 	aux = (char *)malloc(sizeof(char) * (ft_strlen(echo_indice) + 1));
 	if (!aux)
 		return (NULL);
-	while (echo_indice[i + k] && echo_indice[i + k] != 32 &&
-			echo_indice[i + k] != 34 && echo_indice[i + k] != 39 &&
-			echo_indice[i + k] != '$')
+	while (echo_indice[i + k] && echo_indice[i + k] != 32
+		&& echo_indice[i + k] != 34 && echo_indice[i + k] != 39
+		&& echo_indice[i + k] != '$')
 	{
 		if (echo_indice[i + k] == 34 && j > 0)
 			break ;
@@ -66,12 +66,12 @@ char	*create_aux_string(char *echo_indice, int i)
 	return (aux);
 }
 
-void	expandecho(char **echo, t_info **info, int indice, int i)
+void	expandecho(char **echo, t_enviro **enviro, int indice, int i)
 {
-	t_info	*tmp;
+	t_enviro	*tmp;
 	char	*aux;
 
-	tmp = *info;
+	tmp = *enviro;
 	aux = create_aux_string(echo[indice], i);
 	if (!aux)
 		return ;
@@ -105,5 +105,15 @@ void	ft_echo1(char **echo, int i, char *value)
 			k++;
 		}
 		value[k] = '\0';
+	}
+}
+
+void	check_single_quotes(char *str, int *j)
+{
+	(*j)++;
+	while (str[*j] && str[*j] != 39)
+	{
+		printf("%c", str[*j]);
+		(*j)++;
 	}
 }

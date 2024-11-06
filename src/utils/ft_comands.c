@@ -12,14 +12,13 @@
 
 #include "minishell.h"
 
-///////////ABSOLUT WAY
-int	ft_absolutway(char **cmd, char **env, t_info **info)
+int	ft_absolutway(char **cmd, char **env, t_enviro **enviro)
 {
 	int		j;
 	int		i;
 	pid_t	pid;
 	char	**args;
-	(void)info;
+	(void)enviro;
 	args = NULL;
 	args = (char **)malloc(sizeof(char) * ft_count(cmd) + 1);
 	i = 0;
@@ -71,15 +70,15 @@ int	ft_absolutway(char **cmd, char **env, t_info **info)
 }
 
 ///////////////////////////////////////
-int	ft_execute(char **cmd, int ac, char **env, t_info **info)
+int	ft_execute(char **cmd, int ac, char **env, t_enviro **enviro)
 {
-	t_info	*tmp;
+	t_enviro	*tmp;
 	char	*args[2];
 	char	*result;
 	char	**paths;
 	int		i;
 
-	tmp = *info;
+	tmp = *enviro;
 	while (tmp)
 	{
 		if (ft_searstr("PATH=", tmp->value))
@@ -114,14 +113,14 @@ int	ft_execute(char **cmd, int ac, char **env, t_info **info)
 	return (0);
 }
 
-int	execute_cmd(char **cmd, int ac, t_info **info, char **env)
+int	execute_cmd(char **cmd, int ac, t_enviro **enviro, char **env)
 {
 	pid_t	pid;
 
 	if (*cmd[0] == '/')
 	{
 		printf("Probabilidade de caminho absoluto\n");
-		ft_absolutway(cmd, env, info);
+		ft_absolutway(cmd, env, enviro);
 	}
 	else
 	{
@@ -133,7 +132,7 @@ int	execute_cmd(char **cmd, int ac, t_info **info, char **env)
 		}
 		if (pid == 0)
 		{
-			if (!ft_execute(cmd, ac, env, info))
+			if (!ft_execute(cmd, ac, env, enviro))
 				return (0);
 		}
 		else if (pid > 0)

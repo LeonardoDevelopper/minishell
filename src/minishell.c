@@ -35,18 +35,18 @@ int	main(int argc, char *argv[], char *envp[])
 	char	*output;
 	char	**tmp;;
 	char	*stdin_file;
-	t_info	*info;
+	t_enviro	*enviro;
 
 	argc = argc;
 	argv = argv;
 	tmp = NULL;
-	info = NULL;
-	if (!fill_env(&info, envp))
+	enviro = NULL;
+	if (!fill_env(&enviro, envp))
 		return (1);
 	ft_signal();
 	while (1)
 	{
-		shell = display_shell(envp, tmp, &info);
+		shell = display_shell(envp, tmp, &enviro);
 		input = readline(shell);
 		ft_ctrld(input);
 		if (input && *input)
@@ -55,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 			if (stdin_file)
 				printf("%s", stdin_file);
 			else
-				run_cmd(input, &info, envp);
+				run_cmd(input, &enviro, envp);
 			add_history(input);
 			free(input);
 			//if (output);
@@ -65,7 +65,7 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	if (input)
 		free(input);
-	if (info)
-		free_info_list(info);
+	if (enviro)
+		free_enviro_list(enviro);
 	return (0);
 }
