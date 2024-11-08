@@ -29,9 +29,9 @@ void	ft_pwd(int ac)
 
 void	ft_env(int ac, char **env, t_enviro **enviro)
 {
-	int		i;
+	int			i;
 	t_enviro	*tmp;
-	char	*list[1000];
+	char		*list[1000];
 
 	if (ac > 1)
 	{
@@ -56,9 +56,9 @@ void	ft_env(int ac, char **env, t_enviro **enviro)
 
 void	ft_env_export(int ac, char **env, t_enviro **enviro)
 {
-	int		i;
+	int			i;
 	t_enviro	*tmp;
-	char	*list[1000];
+	char		*list[1000];
 
 	if (ac > 1)
 	{

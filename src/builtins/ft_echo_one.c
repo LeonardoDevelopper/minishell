@@ -69,7 +69,7 @@ char	*create_aux_string(char *echo_indice, int i)
 void	expandecho(char **echo, t_enviro **enviro, int indice, int i)
 {
 	t_enviro	*tmp;
-	char	*aux;
+	char		*aux;
 
 	tmp = *enviro;
 	aux = create_aux_string(echo[indice], i);

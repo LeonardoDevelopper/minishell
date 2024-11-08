@@ -24,8 +24,8 @@ void	double_asp(char *str, t_enviro **enviro, int i)
 void	resave(char *str, t_enviro **enviro, int i)
 {
 	t_enviro	*tmp;
-	char	*aux;
-	int		j;
+	char		*aux;
+	int			j;
 
 	tmp = *enviro;
 	aux = NULL;

@@ -78,8 +78,8 @@ void	ft_export(char **export, int ac, t_enviro **enviro)
 int	check_env(char **export, t_enviro **enviro, int j)
 {
 	t_enviro	*tmp;
-	int		check;
-	char	*result;
+	int			check;
+	char		*result;
 
 	result = (char *)malloc(sizeof(char) * ft_strlen(export[j]) + 1);
 	if (!result)

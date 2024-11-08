@@ -22,7 +22,6 @@ typedef struct s_enviro
 
 //auxi function // libft
 int		ft_count(char **str);
-char	**ft_split_echo(char *str);
 
 //char	**ft_split(char *str);
 char	*ft_toupper_str(char *str);
@@ -42,6 +41,7 @@ void	ft_env(int ac, char **cmd, t_enviro **enviro);
 int		check_env(char **export, t_enviro **enviro, int j);
 
 //builtin function echo
+char	**ft_split_echo(char *str);
 char	*create_aux_string(char *echo_indice, int i);
 int		ft_echo(char **echo, int ac, t_enviro **enviro);
 

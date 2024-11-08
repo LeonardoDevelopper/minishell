@@ -15,7 +15,7 @@
 void	ft_unset(char **unset, int ac, t_enviro **enviro)
 {
 	t_enviro	*tmp;
-	int		j;
+	int			j;
 
 	if (ac == 1)
 		return ;
