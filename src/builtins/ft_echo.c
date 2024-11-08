@@ -39,8 +39,10 @@ int	ft_echo(char **echo, int ac, t_enviro **enviro)
 	int		size;
 	char	*value;
 
-	if (!echo)
-		return (0);
+	if (!echo[1])
+		printf("\n");
+	if (!echo[1])
+		return (1);
 	value = NULL;
 	i = 1;
 	size = 0;

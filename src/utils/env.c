@@ -15,7 +15,7 @@
 int	fill_env(t_enviro **enviro, char **env)
 {
 	t_enviro	*tmp;
-	int		i;
+	int			i;
 
 	*enviro = NULL;
 	i = 0;

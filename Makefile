@@ -21,6 +21,7 @@ COMPLIB = cd libs/libft/ && make
 SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_echo_one.c		\
 	./src/builtins/ft_echo_two.c		\
+	./src/utils/ft_split_echo.c      \
 	./src/builtins/ft_unset.c		\
 	./src/builtins/ft_builtins.c		\
 	./src/builtins/ft_export.c		\

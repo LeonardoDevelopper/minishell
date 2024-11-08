@@ -69,14 +69,13 @@ int	ft_absolutway(char **cmd, char **env, t_enviro **enviro)
 	return (1);
 }
 
-///////////////////////////////////////
 int	ft_execute(char **cmd, int ac, char **env, t_enviro **enviro)
 {
 	t_enviro	*tmp;
-	char	*args[2];
-	char	*result;
-	char	**paths;
-	int		i;
+	char		*args[2];
+	char		*result;
+	char		**paths;
+	int			i;
 
 	tmp = *enviro;
 	while (tmp)

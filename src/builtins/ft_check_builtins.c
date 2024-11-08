@@ -27,7 +27,11 @@ int	check_builtins(char **cmd, t_enviro **enviro, char **env)
 	else if (ft_strcmp(cmd[k], "exit"))
 		ft_exit(cmd, count_arg);
 	else if (ft_strcmp(cmd[k], "echo"))
+	{
+		if (ft_strcmp(cmd[k + 1], "-n") && !cmd[k + 2])
+			return (1);
 		ft_echo(cmd, count_arg, enviro);
+	}
 	else if (ft_strcmp(cmd[k], "cd"))
 		ft_cd(cmd, count_arg);
 	else if (ft_strcmp(cmd[k], "export"))

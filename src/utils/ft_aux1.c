@@ -24,10 +24,9 @@ int	ft_count(char **str)
 	return (i);
 }
 
-
 int	ft_listsize(t_enviro **enviro)
 {
-	int		i;
+	int			i;
 	t_enviro	*tmp;
 
 	if (!enviro || !*enviro)
