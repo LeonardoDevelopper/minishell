@@ -79,17 +79,21 @@ void	redirect_stdin(t_cmd *cmd, char *env[])
 	pipe_fd[1] = -1;
 	child = new_child_p(pipe_fd);
 	full_cmd = ft_split(cmd->input, ' ');
-	if (child->pid == 0)
-	{
+//	if (child->pid == 0)
+//	{
 		path = cmd_exist(full_cmd[0]);
 		if (path)
 		{
-			dup2(pipe_fd[0], STDIN_FILENO);
-			if (execve(path, cmd->args, env) == -1) {
-				perror("Erro ao executar execve");
-				return ;
-			}
-			close(pipe_fd[0]);
+			int	i = 0;
+			//while (cmd->args[i])
+			//	printf("\n%s", cmd->args[i++]);
+//			dup2(pipe_fd[0], STDIN_FILENO);
+//			if (execve(path, cmd->args, env) == -1)
+		//	{
+		//		perror("Erro ao executar execve");
+		//		return ;
+		//	}
+		//	close(pipe_fd[0]);
 		}
-	}
+//	}
 }

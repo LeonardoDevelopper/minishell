@@ -36,7 +36,13 @@ typedef struct	s_redirect
 {
 	int	count;
 	int	*fd_list;
-}		t_redirect;
+}
+
+typedef struct	s_prec
+{
+		int	num_args;
+		char	**args;
+}		t_prec;
 
 typedef struct	s_cmd
 {
@@ -49,30 +55,35 @@ typedef struct	s_cmd
 	char	**args;
 	char	*full_path;
 	char	**cmd_splited;
+	t_prec	**precedence;
 	char	*cmd;
 }		t_cmd;
 
 void	run_cmd(t_cmd *cmd, char *env[]);
 void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[]);
 void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[]);
+void	*verify_redirect_stdin(char *cmd);
+void	redirect_stdin(t_cmd *cmd, char *env[]);
 void	print_stdout_child(char *buffer);
+char	**ft_split_del(char *str, c);
+char	**ft_split_args(char *str);
 char	*display_shell(char *env[], char **tmp, t_info **info);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);
-int	count_cmd_args(char *cmd);
 char	**catch_cmd_args(t_cmd *cmd);
-
-int		count_desk(char *str);
-int		d_quote(char *cmd);
-void	*verify_redirect_stdin(char *cmd);
-char	*read_file(int fd);
-void	redirect_stdin(t_cmd *cmd, char *env[]);
-int	verify_fd(t_redirect *redirec);
-int	ft_strlen_c(char *str, char c);
 char	*ft_strjoin_ptr(char *s1, char *s2);
+char	*read_file(int fd);
 char	*replace_char(char *str, char c, char rep);
 char	*remove_end_char(char *str);
+
+int	count_rows_del(char *str, char c);
+int	count_cmd_args(char *cmd);
+int	count_rowss(char *str);
+int		count_desk(char *str);
+int		d_quote(char *cmd);
+int	verify_fd(t_redirect *redirec);
+int	ft_strlen_c(char *str, char c);
 
 t_child_p	*new_child_p(void *pipe);
 

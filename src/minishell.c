@@ -32,6 +32,7 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_cmd	*cmd;
 	char	**tmp;
+	int	builtins;
 
 	argc = argc;
 	argv = argv;
@@ -47,25 +48,40 @@ int	main(int argc, char *argv[], char *envp[])
 		if (cmd->input && *cmd->input)
 		{
 			cmd->cmd_splited = ft_split(cmd->input, ' ');
-			cmd->full_path = cmd_exist(cmd->cmd_splited[0]);
-			if (cmd->full_path)
+			builtins = check_builtins(cmd->cmd_splited, cmd->info, envp);
+			if (!builtins)
 			{
-				cmd->args = catch_cmd_args(cmd);
-				cmd->redirect = verify_redirect_stdin(cmd->input);
-				if (cmd->redirect)
+				cmd->full_path = cmd_exist(cmd->cmd_splited[0]);
+				if (cmd->full_path)
 				{
-					if (!verify_fd(cmd->redirect))
-						printf("no such file or directory\n");
-					else
-						redirect_stdin(cmd, envp);
+					cmd->precedence = (t_prec **)malloc(sizeof(t_proc *) * count_rows_del(cmd->input, '|') + 1);
+					cmd->precedence[count_rows_del(cmd->input)] = NULL;
+					while (cmd->precedence[p])
+					{
+						cmd->precedence[p]->args = ft_split(cmd->input, '|');
+					}
+					int	i = 0;
+					while (cmd->precedence[i])
+					{
+						cmd->args = ft_split(cmd->precedence[i], ' ');
+						cmd->redirect = verify_redirect_stdin(cmd->precedence[i]);
+						if (cmd->redirect)
+						{
+							if (!verify_fd(cmd->redirect))
+								printf("no such file or directory\n");
+							else
+								redirect_stdin(cmd, envp);
+						}
+						else
+							run_cmd(cmd, envp);
+						i++;
+					}
+					add_history(cmd->input);
+					free(cmd->input);
 				}
 				else
-					run_cmd(cmd, envp);
-				add_history(cmd->input);
-				free(cmd->input);
+					printf("%s%s%s\n", RED_TEXT, "this command is not recognized on this shell: ", cmd->cmd_splited[0]);
 			}
-			else
-				printf("%s%s\n", RED_TEXT, "this command is not recognized on this shell");
 		}
 		free(cmd->shell);
 	}

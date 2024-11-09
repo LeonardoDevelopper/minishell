@@ -31,8 +31,20 @@ int	count_cmd_args(char *cmd)
 	return (count);
 }
 
+char	**catch_cmd_args(t_cmd *cmd)
+{
+	int	i;
+	int	j;
+	char	**args;
+
+	i = 0;
+	j = 0;
+	args = ft_split_args(cmd->input);
+	return (args);
+}
 
 
+/*
 char **catch_cmd_args(t_cmd *cmd)
 {
 	int		i;
@@ -83,3 +95,5 @@ char **catch_cmd_args(t_cmd *cmd)
 	}
 	return (res);
 }
+
+*/
