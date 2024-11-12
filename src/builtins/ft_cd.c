@@ -14,36 +14,36 @@
 
 void	ft_oldpwd(char **oldpwd, t_enviro **enviro)
 {
-	char *pwd_value;
-	char *temp;
+	char	*pwd_value;
+	char	*temp;
 
 	oldpwd[0] = (char *)malloc(strlen("export") + 1);
 	if (!oldpwd[0])
-		return;
+		return ;
 	ft_strcpy(oldpwd[0], "export");
 	pwd_value = search_env("PWD=", enviro);
 	if (!pwd_value)
 	{
 		free(oldpwd[0]);
 		oldpwd[0] = NULL;
-		return;
+		return ;
 	}
 	temp = ft_strjoin("OLD", pwd_value);
 	if (!temp)
 	{
 		free(oldpwd[0]);
-		return;
+		return ;
 	}
 	oldpwd[1] = temp;
 }
 
 void	ft_new_pwd(char **pwd, t_enviro **enviro)
 {
-	char *temp;
+	char	*temp;
 
 	pwd[0] = (char *)malloc(strlen("export") + 1);
 	if (!pwd[0])
-		return;
+		return ;
 	ft_strcpy(pwd[0], "export");
 	temp = (char *)malloc(1024);
 	if (!temp)
@@ -66,25 +66,26 @@ void	ft_new_pwd(char **pwd, t_enviro **enviro)
 		return ;
 }
 
-void	ft_condition_cd(char **cd, char **oldpwd, char **pwd, int ac, t_enviro **enviro)
+void	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
+		t_enviro **enviro)
 {
 	char	*home;
 
-	if (ac == 1)
+	if (ft_count(cd) == 1)
 	{
 		home = getenv("HOME");
 		if (!home)
 		{
 			free(oldpwd);
 			free(pwd);
-			return;
+			return ;
 		}
 		if (chdir(home) == -1)
 			printf("cd: string not in pwd\n");
 		ft_new_pwd(pwd, enviro);
 		ft_export(pwd, 2, enviro);
 	}
-	else if (ac == 2)
+	else if (ft_count(cd) == 2)
 	{
 		if (chdir(cd[1]) == -1)
 			printf("cd: string not in %s\n", cd[1]);
@@ -93,15 +94,16 @@ void	ft_condition_cd(char **cd, char **oldpwd, char **pwd, int ac, t_enviro **en
 	}
 }
 
-void    ft_start_cd(char **cd, char **oldpwd, char **pwd, int ac, t_enviro **enviro)
+void	ft_start_cd(char **cd, char **oldpwd, char **pwd,
+		t_enviro **enviro)
 {
-    oldpwd[0] = NULL;
+	oldpwd[0] = NULL;
 	oldpwd[1] = NULL;
 	pwd[0] = NULL;
 	pwd[1] = NULL;
 	ft_oldpwd(oldpwd, enviro);
 	ft_export(oldpwd, 2, enviro);
-	ft_condition_cd(cd, oldpwd, pwd, ac, enviro);
+	ft_condition_cd(cd, oldpwd, pwd, enviro);
 	free_cd(pwd, oldpwd);
 }
 
@@ -114,12 +116,12 @@ void	ft_cd(char **cd, int ac, t_enviro **enviro)
 		return ;
 	oldpwd = (char **)malloc(2 * sizeof(char *));
 	if (!oldpwd)
-		return;
+		return ;
 	pwd = (char **)malloc(2 * sizeof(char *));
 	if (!pwd)
 	{
 		free(oldpwd);
-		return;
+		return ;
 	}
-	ft_start_cd(cd, oldpwd, pwd, ac, enviro);
+	ft_start_cd(cd, oldpwd, pwd, enviro);
 }
