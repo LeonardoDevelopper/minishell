@@ -34,7 +34,8 @@ char	*ft_strjoin_space(char *s1, char *s2);
 
 //builtin function
 void	ft_pwd(int ac);
-void	ft_cd(char **cd, int ac);
+char	*search_env(char *world, t_enviro **enviro);
+void	ft_cd(char **cd, int ac, t_enviro **enviro);
 void	ft_exit(char **end, int ac);
 int		fill_env(t_enviro **enviro, char **env);
 void	ft_env(int ac, char **cmd, t_enviro **enviro);

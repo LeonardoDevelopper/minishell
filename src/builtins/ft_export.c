@@ -95,7 +95,6 @@ int	check_env(char **export, t_enviro **enviro, int j)
 		if (ft_searstr(result, tmp->value))
 		{
 			check = 1;
-			printf("existe\n");
 			ft_replace_env(export, enviro, tmp->indice, j);
 		}
 		tmp = tmp->next;

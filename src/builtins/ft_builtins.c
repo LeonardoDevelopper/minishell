@@ -81,25 +81,17 @@ void	ft_env_export(int ac, char **env, t_enviro **enviro)
 	}
 }
 
-void	ft_cd(char **cd, int ac)
+char	*search_env(char *world, t_enviro **enviro)
 {
-	char	*home;
+	t_enviro	*tmp;
 
-	home = getenv("HOME");
-	if (ac == 1)
+	tmp = *enviro;
+	while (tmp)
 	{
-		if (!home)
-			return ;
-		if (chdir(home) == -1)
-			printf("cd: string not in pwd\n");
+		if (ft_searstr(world, tmp->value))
+			return (tmp->value);
+		tmp = tmp->next;
 	}
-	else if (ac == 2)
-	{
-		if (chdir(cd[1]) == -1)
-			printf("cd: string not in %s\n", cd[1]);
-	}
-	else
-		return ;
 }
 
 void	ft_exit(char **end, int ac)
