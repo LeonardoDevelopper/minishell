@@ -29,6 +29,8 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_aux.c			\
 	./src/utils/ft_aux1.c			\
 	./src/utils/env.c			\
+	./src/utils/ft_split_prec.c		\
+	./src/utils/ft_split_prec_deli.c	\
 	./src/signal_handler/ft_takesignal.c	\
 	./src/redirects/redirect_stdin.c	\
 	./src/child_process/path.c		\
@@ -36,8 +38,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/child_process/child_process.c	\
 	./src/minishell.c			\
 	./src/display_cli.c			\
-	./src/catch_cmd_args.c			\
-	./src/utils/ft_split_args.c
+	./src/catch_cmd_args.c
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 

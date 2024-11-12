@@ -80,6 +80,37 @@ char	*remove_end_char(char *str)
 	return (res);
 }
 
+char	*remove_char(char *str, char c)
+{
+	int	i;
+	int	j;
+	int	counter;
+	char	*new;
+
+	i = 0;
+	j = 0;
+	counter = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			counter++;
+		i++;
+	}
+	if (!counter)
+		return (str);
+	new = (char *)malloc(sizeof(char ) * ((ft_strlen(str) - counter) + 1));
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != c)
+			new[j++] = str[i++];
+		else
+			i++;
+	}
+	new[j] = '\0';
+	return (new);
+}
+
 void	free_matrix(char **matrix)
 {
 	int	i;

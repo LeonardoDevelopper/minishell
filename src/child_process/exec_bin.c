@@ -45,6 +45,26 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 	return (NULL);
 }
 
+void	run_cmd_test(t_prec *prec, t_info **info, char *env[])
+{
+	t_child_p	*child;
+	int	builtins;
+
+	builtins = check_builtins(prec->args, info, env);
+	if (!builtins)
+	{
+		child = new_child_p(NULL);
+		if (child->pid == 0)
+		{
+			run_child_p(prec->full_path, prec->args, child, env);
+			free(child);
+		}
+		waitpid(child->pid, &child->status, 0);
+		free(child);
+		//free_matrix(cmd->cmd_splited);
+	}
+}
+
 void	run_cmd(t_cmd *cmd, char *env[])
 {
 	t_child_p	*child;

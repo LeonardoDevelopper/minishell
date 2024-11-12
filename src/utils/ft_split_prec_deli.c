@@ -26,7 +26,7 @@ int	ft_strlen_del(char *str, char c)
 	return (len);
 }
 
-char	**ft_split_del(char *str, c)
+char	**ft_split_del(char *str, char c)
 {
 	int	i;
 	int	j;
@@ -35,17 +35,17 @@ char	**ft_split_del(char *str, c)
 	char	**res;
 
 	i = 0;
-	len1 = count_rowss(str) + 1;
+	len1 = count_rows_del(str, c) + 1;
 	res = (char **)malloc(sizeof(char *) * (len1 + 1));
 	res[len1] = NULL;
 	while (i < len1)
 	{
-		len2 = ft_strlenn(str);
+		len2 = ft_strlen_del(str, c);
 		res[i] = (char *)malloc(sizeof(char ) * (len2 + 1));
 		j = 0;
-		while (*str && (*str == c)
+		while (*str && (*str == c))
 			str++;
-		while (*str && !(*str == c)
+		while (*str && !(*str == c))
 			res[i][j++] = *str++;
 		res[i][j] = '\0';
 		i++;
