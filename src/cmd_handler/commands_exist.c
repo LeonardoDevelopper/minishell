@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   commands_exist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/17 10:21:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/01 17:06:45 by lleodev          ###   ########.fr       */
+/*   Created: 2024/11/13 13:04:59 by lleodev           #+#    #+#             */
+/*   Updated: 2024/11/13 13:05:02 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+int	comd_exits(t_cmd *cmd)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	if (size == 0)
+	while (i <= cmd->cmd_num)
 	{
-		while (src[i])
-			i++;
-		return (i);
-	}
-	while (i < size - 1 && src[i])
-	{
-		dest[i] = src[i];
+		if (!cmd->precedence[i]->path)
+		{
+			printf("%s%s%s\n", RED_TEXT, "This command is not recognized on this shell: ", cmd->precedence[i]->cmd);
+			return (0);
+		}
 		i++;
 	}
-	dest[i] = '\0';
-	return (i);
+	return (1);
 }

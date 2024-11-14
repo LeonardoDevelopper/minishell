@@ -28,30 +28,79 @@
 typedef struct	s_child_p
 {
 	int	pid;
-	void	*pipe_fd;
 	int	status;
+	void	*pipe_fd;
 }		t_child_p;
 
-void	run_cmd(char *cmd, t_info **info, char *env[]);
-void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[]);
+typedef struct	s_redirect
+{
+	int	count;
+	int	*fd_list;
+}		t_redirect;
+
+typedef struct	s_prec
+{
+		int	num_args;
+		char	*path;
+		char	*input;
+		char	*cmd;
+		char	**args;
+		t_redirect	*redirect;
+}		t_prec;
+
+typedef struct	cmd_s
+{
+	t_child_p	*child;
+	t_enviro		*enviro;
+	void	*output;
+	t_redirect	*redirect;
+	int	cmd_num;
+	char	*shell;
+	char	*input;
+	char	**args;
+	char	**env;
+	char	*full_path;
+	char	**cmd_splited;
+	t_prec	**precedence;
+	char	*cmd;
+}		t_cmd;
+
+void	run_multiple_cmd(t_cmd *cmd);
+void	run_cmd(t_cmd *cmd, char *env[]);
+void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
+void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[]);
 void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[]);
+void	*verify_redirect_stdin(char *cmd);
+void	redirect_stdin(t_cmd *cmd, char *env[]);
+void	redirect_stdin_test(t_prec *prec, char *env[]);
+void	print_args(t_cmd *cmd);
 void	print_stdout_child(char *buffer);
-char	*display_shell(char *env[], char **tmp, t_info **info);
+void	print_args(t_cmd *cmd);
+char	**ft_split_del(char *str, char c);
+char	**ft_split_args(char *str);
+char	*display_shell(char *env[], char **tmp, t_enviro **enviro);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);
-int		count_desk(char *str);
-int		d_quote(char *cmd);
-int	verify_redirect_stdin(char *cmd);
-char	*read_file(int fd);
-char	*redirect_stdin(char *cmd);
-
-int	ft_strlen_c(char *str, char c);
+char	**catch_cmd_args(t_cmd *cmd);
 char	*ft_strjoin_ptr(char *s1, char *s2);
+char	*read_file(int fd);
 char	*replace_char(char *str, char c, char rep);
 char	*remove_end_char(char *str);
+char	*remove_char(char *str, char c);
+
+int		count_cmds_num(char *input);
+int		count_rows_del(char *str, char c);
+int		count_cmd_args(char *cmd);
+int		count_rowss(char *str);
+int		count_desk(char *str);
+int		count_rows_splited(char **strstr);
+int		d_quote(char *cmd);
+int		verify_fd(t_redirect *redirec);
+int		ft_strlen_c(char *str, char c);
 
 t_child_p	*new_child_p(void *pipe);
+t_prec	**split_cmds(char *input, int num_cmd);
 
 void	free_matrix(char **matrix);
 

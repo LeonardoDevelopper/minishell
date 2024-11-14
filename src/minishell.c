@@ -6,7 +6,7 @@
 /*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/14 08:13:53 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/13 10:32:03 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,40 +30,38 @@ int	count_desk(char *str)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	char	*input;
-	char	*shell;
-	char	*output;
-	char	**tmp;;
-	char	*stdin_file;
-	t_info	*info;
+	t_cmd	*cmd;
+	char	**tmp;
+	int	builtins;
 
 	argc = argc;
 	argv = argv;
 	tmp = NULL;
-	info = NULL;
-	if (!fill_env(&info, envp))
+	cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	if (!fill_env(&cmd->enviro, envp))
 		return (1);
 	ft_signal();
 	while (1)
 	{
-		shell = display_shell(envp, tmp, &info);
-		input = readline(shell);
-		ft_ctrld(input);
-		if (input && *input)
+		cmd->shell = display_shell(envp, tmp, &cmd->enviro);
+		cmd->input = readline(cmd->shell);
+		cmd->env = envp;
+		if (cmd->input && *cmd->input)
 		{
-			stdin_file = redirect_stdin(input);
-			if (stdin_file)
-				printf("%s", stdin_file);
-			else
-				run_cmd(input, &info, envp);
-			add_history(input);
-			free(input);
-			//if (output);
-			//	free(output);
+			cmd->cmd_splited = ft_split(cmd->input, ' ');
+			builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, envp);
+			if (!builtins)
+			{
+				cmd->cmd_num = count_cmds_num(cmd->input);
+				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
+				if (comd_exits(cmd))
+					run_multiple_cmd(cmd);
+				
+			}
+			add_history(cmd->input);
+			free(cmd->input);
 		}
-		free(shell);
+		free(cmd->shell);
 	}
-	if(input)
-		free(input);
 	return (0);
 }

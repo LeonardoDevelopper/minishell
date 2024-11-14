@@ -12,75 +12,119 @@
 
 #include "minishell.h"
 
-//the my strin stake one more space in the last posiction
-void	ft_echo(char **echo, int ac, t_info **info)
+void	ft_echo_aux(t_enviro **enviro, char **value)
 {
-	int		i;
-	int		k;
-	int		j;
 	char	**result;
-	char	*value;
+	int		i;
+	char	*end_result;
 
-	value = NULL;
-	value = malloc(sizeof(char *) * ft_strlen(echo[0]) * ft_count(echo) + 1);
-	i = 1;
-	k = 0;
-	ft_echo1(echo, i, value);
+	result_echo(0, 1);
 	i = 0;
 	result = ft_split_echo(value);
 	if (ft_strcmp(result[i], "-n "))
 	{
 		i++;
-		check_echo(result, info, i);
+		check_echo(result, enviro, i);
+		end_result = epur_str(result_echo('\0', 0));
+		printf("%s", end_result);
+		free(end_result);
 	}
 	else
 	{
-		check_echo(result, info, i);
+		check_echo(result, enviro, i);
+		end_result = epur_str(result_echo('\0', 0));
+		printf("%s", end_result);
+		free(end_result);
 		printf("\n");
 	}
-	free(value);
 }
 
-void	check_double_quotes(char *str, t_info **info, int *j)
+char *result_echo(int c, int reset)
+{
+	static char	str[250];
+	static int	i;
+
+	if (reset)
+	{
+		i = 0;
+		str[0] = '\0';
+	}
+	if (i < 249 && c != '\0')
+	{
+		str[i] = c;
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+//the my strin stake one more space in the last posiction
+char	*ft_echo(char **echo, t_enviro **enviro)
+{
+	int		i;
+	int		j;
+	int		size;
+	char	*value;
+
+	if (!echo[1])
+		printf("\n");
+	if (!echo[1])
+		return (1);
+	value = NULL;
+	i = 1;
+	size = 0;
+	while (echo[i])
+	{
+		size += ft_strlen(echo[i]);
+		i++;
+	}
+	value = malloc(sizeof(char *) * size + ft_count(echo) - 1);
+	if (!value)
+		return (0);
+	i = 1;
+	ft_echo1(echo, i, value);
+	ft_echo_aux(enviro, value);
+
+	free(value);
+	return (result_echo('\0', 0));
+}
+
+void	check_double_quotes(char *str, t_enviro **enviro, int *j)
 {
 	(*j)++;
 	while (str[*j] != 34)
 	{
 		if (str[*j] == '$')
 		{
-			double_asp(str, info, *j);
-			while (str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
+			double_asp(str, enviro, *j);
+			while (str[*j] && str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
 			{
 				(*j)++;
 				if (str[*j] == '$')
-					double_asp(str, info, *j);
+					double_asp(str, enviro, *j);
 			}
 			(*j)--;
 		}
 		else
-			printf("%c", str[*j]);
+		{
+			result_echo(str[*j], 0);
+		}
 		(*j)++;
 	}
 }
 
-void	check_single_quotes(char *str, int *j)
+void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)
 {
+	expandecho(result, enviro, i, *j);
 	(*j)++;
-	while (str[*j] != 39)
+	while (result[i][*j] && result[i][*j] != 32 && result[i][*j] != 34 &&
+			result[i][*j] != 39 && result[i][*j + 1] != '$')
 	{
-		printf("%c", str[*j]);
 		(*j)++;
 	}
 }
 
-void	check_dollar_sign(char **result, t_info **info, int i, int *j)
-{
-	expandecho(result, info, i);
-	while (result[i][*j] != 32)
-		(*j)++;
-}
-
-void	check_echo(char **result, t_info **info, int i)
+void	check_echo(char **result, t_enviro **enviro, int i)
 {
 	int	j;
 
@@ -89,16 +133,22 @@ void	check_echo(char **result, t_info **info, int i)
 		j = 0;
 		while (result[i][j])
 		{
-			if (result[i][j] == 34)
-				check_double_quotes(result[i], info, &j);
-			else if (result[i][j] == 39)
+			if (result[i][j] && result[i][j] == 34)
+				check_double_quotes(result[i], enviro, &j);
+			else if (result[i][j] && result[i][j] == 39)
 				check_single_quotes(result[i], &j);
-			else if (result[i][j] == '$')
-				check_dollar_sign(result, info, i, &j);
-			else
-				printf("%c", result[i][j]);
+			else if (result[i][j] && result[i][j] == '$')
+				aux_check_echo(result, enviro, i, &j);
+			else if (result[i][j])
+			{
+				result_echo(result[i][j], 0);
+			}
 			j++;
 		}
 		i++;
+		if (result[i])
+		{
+			result_echo(32, 0);
+		}
 	}
 }

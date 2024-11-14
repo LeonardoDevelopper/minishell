@@ -12,27 +12,25 @@
 
 #include "minishell.h"
 
-void	double_asp(char *str, t_info **info, int i)
+void	double_asp(char *str, t_enviro **enviro, int i)
 {
 	if (str[i] == '$')
 	{
 		i++;
-		resave(str, info, i);
+		resave(str, enviro, i);
 	}
 }
 
-void	resave(char *str, t_info **info, int i)
+void	resave(char *str, t_enviro **enviro, int i)
 {
-	t_info	*tmp;
-	char	*aux;
-	int		k;
-	int		j;
+	t_enviro	*tmp;
+	char		*aux;
+	int			j;
 
-	tmp = *info;
+	tmp = *enviro;
 	aux = NULL;
 	aux = (char *)malloc(sizeof(char) * ft_strlen(str + 1));
 	j = 0;
-	k = 1;
 	while (str[i] && (str[i] != 32 && str[i]
 			!= 34 && str[i] != 39 && str[i] != '$'))
 	{
