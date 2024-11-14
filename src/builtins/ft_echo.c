@@ -25,21 +25,14 @@ void	ft_echo_aux(t_enviro **enviro, char **value)
 	{
 		i++;
 		check_echo(result, enviro, i);
-		end_result = epur_str(result_echo('\0', 0));
-		printf("%s", end_result);
-		free(end_result);
 	}
 	else
 	{
 		check_echo(result, enviro, i);
-		end_result = epur_str(result_echo('\0', 0));
-		printf("%s", end_result);
-		free(end_result);
-		printf("\n");
 	}
 }
 
-char *result_echo(int c, int reset)
+char	*result_echo(int c, int reset)
 {
 	static char	str[250];
 	static int	i;
@@ -84,33 +77,8 @@ char	*ft_echo(char **echo, t_enviro **enviro)
 	i = 1;
 	ft_echo1(echo, i, value);
 	ft_echo_aux(enviro, value);
-
 	free(value);
-	return (result_echo('\0', 0));
-}
-
-void	check_double_quotes(char *str, t_enviro **enviro, int *j)
-{
-	(*j)++;
-	while (str[*j] != 34)
-	{
-		if (str[*j] == '$')
-		{
-			double_asp(str, enviro, *j);
-			while (str[*j] && str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
-			{
-				(*j)++;
-				if (str[*j] == '$')
-					double_asp(str, enviro, *j);
-			}
-			(*j)--;
-		}
-		else
-		{
-			result_echo(str[*j], 0);
-		}
-		(*j)++;
-	}
+	return (epur_str(result_echo('\0', 0)));
 }
 
 void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)

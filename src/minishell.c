@@ -46,6 +46,7 @@ int	main(int argc, char *argv[], char *envp[])
 		cmd->shell = display_shell(envp, tmp, &cmd->enviro);
 		cmd->input = readline(cmd->shell);
 		cmd->env = envp;
+		ft_ctrld(cmd->input);
 		if (cmd->input && *cmd->input)
 		{
 			cmd->cmd_splited = ft_split(cmd->input, ' ');
@@ -56,7 +57,6 @@ int	main(int argc, char *argv[], char *envp[])
 				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
 				if (comd_exits(cmd))
 					run_multiple_cmd(cmd);
-				
 			}
 			add_history(cmd->input);
 			free(cmd->input);

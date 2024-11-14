@@ -33,9 +33,9 @@ int		ft_strcmp(char *str1, char *str2);
 char	*ft_strjoin_space(char *s1, char *s2);
 
 //builtin function
-void	ft_pwd(int ac);
+int		ft_pwd(int ac);
 char	*search_env(char *world, t_enviro **enviro);
-void	ft_cd(char **cd, int ac, t_enviro **enviro);
+int		ft_cd(char **cd, int ac, t_enviro **enviro);
 void	ft_exit(char **end, int ac);
 int		fill_env(t_enviro **enviro, char **env);
 void	ft_env(int ac, char **cmd, t_enviro **enviro);
@@ -66,9 +66,6 @@ void	ft_replace_env(char **export, t_enviro **enviro, int indice, int j);
 //unset function
 int		ft_searstr_unset(char *s1, char *s2);
 void	ft_unset(char **unset, int ac, t_enviro **enviro);
-
-//main function
-//int		check_arg(char *arg, t_enviro **enviro, char **env);
 
 //comand function
 void	ft_signal(void);
