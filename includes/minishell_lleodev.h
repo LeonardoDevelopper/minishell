@@ -91,7 +91,6 @@ char	*remove_char(char *str, char c);
 
 int		count_cmds_num(char *input);
 int		count_rows_del(char *str, char c);
-int		count_rows_del(char *str, char c);
 int		count_cmd_args(char *cmd);
 int		count_rowss(char *str);
 int		count_desk(char *str);

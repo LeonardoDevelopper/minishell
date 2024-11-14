@@ -57,9 +57,9 @@ int	main(int argc, char *argv[], char *envp[])
 				if (comd_exits(cmd))
 					run_multiple_cmd(cmd);
 				
-				add_history(cmd->input);
-				free(cmd->input);
 			}
+			add_history(cmd->input);
+			free(cmd->input);
 		}
 		free(cmd->shell);
 	}

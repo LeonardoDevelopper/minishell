@@ -12,16 +12,6 @@
 
 #include "minishell.h"
 
-int	ft_strlen_c(char *str, char c)
-{
-	int	len;
-
-	len = 0;
-	while (str[len] != c)
-		len++;
-	return (len);
-}
-
 char	*ft_strjoin_ptr(char *s1, char *s2)
 {
 	int		i;

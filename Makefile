@@ -32,11 +32,6 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/cmd_handler/split_commands.c	\
 	./src/cmd_handler/commands_exist.c	\
 	./src/quotes_handler/handle_quote.c	\
-	./src/utils/utils.c			\
-	./src/utils/ft_comands.c		\
-	./src/utils/ft_aux.c			\
-	./src/utils/ft_aux1.c			\
-	./src/utils/env.c			\
 	./src/utils/ft_split_prec.c		\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
@@ -49,11 +44,9 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/child_process/path.c			\
 	./src/child_process/exec_bin.c		\
 	./src/child_process/child_process.c	\
-	./src/minishell.c			\
 	./src/display_cli.c			\
-	./src/catch_cmd_args.c
-	./src/minishell.c					\
-	./src/display_cli.c
+	./src/catch_cmd_args.c		\
+	./src/minishell.c	
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 
