@@ -23,7 +23,10 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int count_arg)
 	if (ft_strcmp(cmd[k], "pwd"))
 		return (ft_pwd(count_arg));
 	else if (ft_strcmp(cmd[k], "env"))
+	{
 		ft_env(count_arg, cmd, enviro);
+		return (1);
+	}
 	else if (ft_strcmp(cmd[k], "exit"))
 		ft_exit(cmd, count_arg);
 	else
