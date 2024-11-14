@@ -12,16 +12,16 @@
 
 #include "minishell.h"
 
-int	fill_env(t_info **info, char **env)
+int	fill_env(t_enviro **enviro, char **env)
 {
-	t_info	*tmp;
-	int		i;
+	t_enviro	*tmp;
+	int			i;
 
-	*info = NULL;
+	*enviro = NULL;
 	i = 0;
 	while (env[i])
 	{
-		tmp = (t_info *)malloc(sizeof(t_info));
+		tmp = (t_enviro *)malloc(sizeof(t_enviro));
 		if (!tmp)
 			return (0);
 		tmp->indice = i;
@@ -31,9 +31,9 @@ int	fill_env(t_info **info, char **env)
 			free(tmp);
 			return (0);
 		}
-		strcpy(tmp->value, env[i]);
-		tmp->next = *info;
-		*info = tmp;
+		ft_strcpy(tmp->value, env[i]);
+		tmp->next = *enviro;
+		*enviro = tmp;
 		i++;
 	}
 	return (1);
