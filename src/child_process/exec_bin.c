@@ -56,7 +56,7 @@ void	run_cmd_test(t_prec *prec, t_info **info, char *env[])
 		child = new_child_p(NULL);
 		if (child->pid == 0)
 		{
-			run_child_p(prec->full_path, prec->args, child, env);
+			run_child_p(prec->path, prec->args, child, env);
 			free(child);
 		}
 		waitpid(child->pid, &child->status, 0);
@@ -82,5 +82,37 @@ void	run_cmd(t_cmd *cmd, char *env[])
 		waitpid(child->pid, &child->status, 0);
 		free(child);
 		free_matrix(cmd->cmd_splited);
+	}
+}
+
+void	run_multiple_cmd(t_cmd *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (i <= cmd->cmd_num)
+	{
+		if (cmd->precedence[i]->path)
+		{
+			cmd->precedence[i]->redirect = verify_redirect_stdin(cmd->precedence[i]->input);
+			if (cmd->precedence[i]->redirect)
+			{
+				if (!verify_fd(cmd->precedence[i]->redirect))
+				{
+					printf("No such file or directory\n");
+					return ;
+				}
+				else
+					redirect_stdin_test(cmd->precedence[i], cmd->env);
+			}
+			else
+				run_cmd_test(cmd->precedence[i], &cmd->info, cmd->env);
+		}
+		else
+		{
+			printf("%s%s%s\n", RED_TEXT, "This command is not recognized on this shell: ", cmd->precedence[i]->cmd);
+			return ;
+		}
+		i++;
 	}
 }

@@ -78,7 +78,7 @@ void	redirect_stdin_test(t_prec *prec, char *env[])
 	pipe_fd[0] = prec->redirect->fd_list[prec->redirect->count - 1];
 	pipe_fd[1] = -1;
 	child = new_child_p(pipe_fd);
-	full_cmd = ft_split(prec->cmd, ' ');
+	full_cmd = ft_split(prec->input, ' ');
 	if (child->pid == 0)
 	{
 		path = cmd_exist(full_cmd[0]);

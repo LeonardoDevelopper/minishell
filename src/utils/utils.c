@@ -80,6 +80,16 @@ char	*remove_end_char(char *str)
 	return (res);
 }
 
+int	count_rows_splited(char **strstr)
+{
+	int	i;
+
+	i = 0;
+	while (strstr[i])
+		i++;
+	return (i);
+}
+
 char	*remove_char(char *str, char c)
 {
 	int	i;
