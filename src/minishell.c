@@ -38,18 +38,18 @@ int	main(int argc, char *argv[], char *envp[])
 	argv = argv;
 	tmp = NULL;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!fill_env(&cmd->info, envp))
+	if (!fill_env(&cmd->enviro, envp))
 		return (1);
 	ft_signal();
 	while (1)
 	{
-		cmd->shell = display_shell(envp, tmp, &cmd->info);
+		cmd->shell = display_shell(envp, tmp, &cmd->enviro);
 		cmd->input = readline(cmd->shell);
 		cmd->env = envp;
 		if (cmd->input && *cmd->input)
 		{
 			cmd->cmd_splited = ft_split(cmd->input, ' ');
-			builtins = check_builtins(cmd->cmd_splited, &cmd->info, envp);
+			builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, envp);
 			if (!builtins)
 			{
 				cmd->cmd_num = count_cmds_num(cmd->input);

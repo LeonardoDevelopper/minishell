@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	aux_cmpecho(char *aux, t_info *tmp)
+void	aux_cmpecho(char *aux, t_enviro *tmp)
 {
 	char *result;
 	int	i;
@@ -37,14 +37,14 @@ void	aux_cmpecho(char *aux, t_info *tmp)
 	}
 }
 
-void	expandecho(char **echo, t_info **info, int	indice)
+void	expandecho(char **echo, t_enviro **enviro, int	indice)
 {
-	t_info *tmp;
+	t_enviro *tmp;
 	char	*aux;
 	int	k;
 	int	j;
 
-	tmp = *info;
+	tmp = *enviro;
 	aux = NULL;
 	aux = (char *)malloc(sizeof(char) * ft_strlen(echo[indice]) + 1);
 	j = 0;
@@ -72,7 +72,7 @@ void	expandecho(char **echo, t_info **info, int	indice)
 }
 
 /*
-void	auxecho(char **echo, t_info **info, int indice)
+void	auxecho(char **echo, t_enviro **enviro, int indice)
 {
 	int	i;
 	int	j;
@@ -88,14 +88,14 @@ void	auxecho(char **echo, t_info **info, int indice)
 		else if (echo[i][j] == '"' && !in_single_quote)
 			in_double_quote = !in_double_quote; // Toggle double quote mode
 		else if (echo[i][j] == '$' && in_double_quote)
-			expandecho(echo, info, i); // Expand variables inside double quotes
+			expandecho(echo, enviro, i); // Expand variables inside double quotes
 		else
 			printf("%c", echo[i][j]); // Print everything as is
 		j++;
 	}
 }
 */
-void	auxecho(char **echo, t_info **info, int indice)
+void	auxecho(char **echo, t_enviro **enviro, int indice)
 {
 	int	i;
 	int	j;
@@ -104,7 +104,7 @@ void	auxecho(char **echo, t_info **info, int indice)
 	j = 0;
 	if (echo[i][j] == 34)
 	{
-		expandecho(echo, info, indice);
+		expandecho(echo, enviro, indice);
 		return ;
 	}
 	while (echo[i][j])
@@ -117,7 +117,7 @@ void	auxecho(char **echo, t_info **info, int indice)
 
 
 
-void	ft_echo(char **echo, int ac, t_info **info)
+void	ft_echo(char **echo, int ac, t_enviro **enviro)
 {
 	int	i;
 	char	**result;
@@ -140,9 +140,9 @@ void	ft_echo(char **echo, int ac, t_info **info)
 		while (echo[i + 1])
 		{
 			if (echo[i + 1][0] == '$')
-				expandecho(echo, info, i + 1);
+				expandecho(echo, enviro, i + 1);
 			else
-				auxecho(echo, info, i + 1);
+				auxecho(echo, enviro, i + 1);
 			i++;
 		}
 	}
@@ -151,9 +151,9 @@ void	ft_echo(char **echo, int ac, t_info **info)
 		while (echo[i])
 		{
 			if (echo[i][0] == '$')
-				expandecho(echo, info, i);
+				expandecho(echo, enviro, i);
 			else
-				auxecho(echo, info, i);
+				auxecho(echo, enviro, i);
 			if (echo[i + 1])
 				printf(" ");
 			i++;

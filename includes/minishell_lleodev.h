@@ -51,7 +51,7 @@ typedef struct	s_prec
 typedef struct	cmd_s
 {
 	t_child_p	*child;
-	t_info		*info;
+	t_enviro		*enviro;
 	void	*output;
 	t_redirect	*redirect;
 	int	cmd_num;
@@ -67,8 +67,8 @@ typedef struct	cmd_s
 
 void	run_multiple_cmd(t_cmd *cmd);
 void	run_cmd(t_cmd *cmd, char *env[]);
-void	run_cmd_test(t_prec *prec, t_info **info, char *env[]);
-void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[]);
+void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
+void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[]);
 void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[]);
 void	*verify_redirect_stdin(char *cmd);
 void	redirect_stdin(t_cmd *cmd, char *env[]);
@@ -78,7 +78,7 @@ void	print_stdout_child(char *buffer);
 void	print_args(t_cmd *cmd);
 char	**ft_split_del(char *str, char c);
 char	**ft_split_args(char *str);
-char	*display_shell(char *env[], char **tmp, t_info **info);
+char	*display_shell(char *env[], char **tmp, t_enviro **enviro);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);

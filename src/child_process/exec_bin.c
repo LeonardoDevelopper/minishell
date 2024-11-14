@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
+void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 {
 	t_child_p	*child;
 	int		pipe_fd[2];
@@ -23,7 +23,7 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 	int	*fd;
 
 	full_cmd = ft_split(cmd, ' ');
-	builtins = check_builtins(full_cmd, info, env);
+	builtins = check_builtins(full_cmd, enviro, env);
 	if (!builtins)
 	{
 		full_path = cmd_exist(full_cmd[0]);
@@ -45,12 +45,12 @@ void	*run_cmd_catch_output(char *cmd, t_info **info, char *env[])
 	return (NULL);
 }
 
-void	run_cmd_test(t_prec *prec, t_info **info, char *env[])
+void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
 {
 	t_child_p	*child;
 	int	builtins;
 
-	builtins = check_builtins(prec->args, info, env);
+	builtins = check_builtins(prec->args, enviro, env);
 	if (!builtins)
 	{
 		child = new_child_p(NULL);
@@ -70,7 +70,7 @@ void	run_cmd(t_cmd *cmd, char *env[])
 	t_child_p	*child;
 	int	builtins;
 
-	builtins = check_builtins(cmd->cmd_splited, cmd->info, env);
+	builtins = check_builtins(cmd->cmd_splited, cmd->enviro, env);
 	if (!builtins)
 	{
 		child = new_child_p(NULL);
@@ -106,7 +106,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 					redirect_stdin_test(cmd->precedence[i], cmd->env);
 			}
 			else
-				run_cmd_test(cmd->precedence[i], &cmd->info, cmd->env);
+				run_cmd_test(cmd->precedence[i], &cmd->enviro, cmd->env);
 		}
 		else
 		{
