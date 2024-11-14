@@ -42,7 +42,7 @@ int	check_builtins(char **cmd, t_enviro **enviro, char **env)
 	{
 		if (ft_strcmp(cmd[k + 1], "-n") && !cmd[k + 2])
 			return (1);
-		ft_echo(cmd, count_arg, enviro);
+		ft_echo(cmd, enviro);
 	}
 	else if (!check_builtins_one(cmd, enviro, k, count_arg))
 		return (0);

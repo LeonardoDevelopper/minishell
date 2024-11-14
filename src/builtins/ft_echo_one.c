@@ -29,7 +29,7 @@ void	aux_cmpecho(char *aux, t_enviro *tmp)
 			i++;
 		while (result[i + 1])
 		{
-			printf("%c", result[i + 1]);
+			result_echo(result[i + 1], 0);
 			i++;
 		}
 		if (result)
@@ -113,7 +113,7 @@ void	check_single_quotes(char *str, int *j)
 	(*j)++;
 	while (str[*j] && str[*j] != 39)
 	{
-		printf("%c", str[*j]);
+		result_echo(str[*j], 0);
 		(*j)++;
 	}
 }

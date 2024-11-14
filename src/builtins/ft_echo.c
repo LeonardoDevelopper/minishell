@@ -16,23 +16,50 @@ void	ft_echo_aux(t_enviro **enviro, char **value)
 {
 	char	**result;
 	int		i;
+	char	*end_result;
 
+	result_echo(0, 1);
 	i = 0;
 	result = ft_split_echo(value);
 	if (ft_strcmp(result[i], "-n "))
 	{
 		i++;
 		check_echo(result, enviro, i);
+		end_result = epur_str(result_echo('\0', 0));
+		printf("%s", end_result);
+		free(end_result);
 	}
 	else
 	{
 		check_echo(result, enviro, i);
+		end_result = epur_str(result_echo('\0', 0));
+		printf("%s", end_result);
+		free(end_result);
 		printf("\n");
 	}
 }
 
+char *result_echo(int c, int reset)
+{
+	static char	str[250];
+	static int	i;
+
+	if (reset)
+	{
+		i = 0;
+		str[0] = '\0';
+	}
+	if (i < 249 && c != '\0')
+	{
+		str[i] = c;
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
 //the my strin stake one more space in the last posiction
-int	ft_echo(char **echo, int ac, t_enviro **enviro)
+char	*ft_echo(char **echo, t_enviro **enviro)
 {
 	int		i;
 	int		j;
@@ -57,8 +84,9 @@ int	ft_echo(char **echo, int ac, t_enviro **enviro)
 	i = 1;
 	ft_echo1(echo, i, value);
 	ft_echo_aux(enviro, value);
+
 	free(value);
-	return (1);
+	return (result_echo('\0', 0));
 }
 
 void	check_double_quotes(char *str, t_enviro **enviro, int *j)
@@ -78,7 +106,9 @@ void	check_double_quotes(char *str, t_enviro **enviro, int *j)
 			(*j)--;
 		}
 		else
-			printf("%c", str[*j]);
+		{
+			result_echo(str[*j], 0);
+		}
 		(*j)++;
 	}
 }
@@ -110,11 +140,15 @@ void	check_echo(char **result, t_enviro **enviro, int i)
 			else if (result[i][j] && result[i][j] == '$')
 				aux_check_echo(result, enviro, i, &j);
 			else if (result[i][j])
-				printf("%c", result[i][j]);
+			{
+				result_echo(result[i][j], 0);
+			}
 			j++;
 		}
 		i++;
 		if (result[i])
-			printf(" ");
+		{
+			result_echo(32, 0);
+		}
 	}
 }

@@ -44,7 +44,10 @@ int		check_env(char **export, t_enviro **enviro, int j);
 //builtin function echo
 char	**ft_split_echo(char *str);
 char	*create_aux_string(char *echo_indice, int i);
-int		ft_echo(char **echo, int ac, t_enviro **enviro);
+//int		ft_echo(char **echo, t_enviro **enviro);
+char	*ft_echo(char **echo, t_enviro **enviro);
+
+char	*result_echo(int c, int reset);
 
 void	aux_cmpecho(char *aux, t_enviro *tmp);
 void	check_single_quotes(char *str, int *j);
@@ -65,7 +68,7 @@ int		ft_searstr_unset(char *s1, char *s2);
 void	ft_unset(char **unset, int ac, t_enviro **enviro);
 
 //main function
-int		check_arg(char *arg, t_enviro **enviro, char **env);
+//int		check_arg(char *arg, t_enviro **enviro, char **env);
 
 //comand function
 void	ft_signal(void);

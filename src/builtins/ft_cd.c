@@ -87,7 +87,8 @@ void	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
 	}
 	else if (ft_count(cd) == 2)
 	{
-		if (chdir(cd[1]) == -1)
+		//if (chdir(cd[1]) == -1) //AQUI
+		if (chdir(ft_echo(cd, enviro)) == -1) //AQUI cd $HOME
 			printf("cd: string not in %s\n", cd[1]);
 		ft_new_pwd(pwd, enviro);
 		ft_export(pwd, 2, enviro);
