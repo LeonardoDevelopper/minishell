@@ -12,19 +12,22 @@
 
 #include "minishell.h"
 
-void	ft_pwd(int ac)
+int	ft_pwd(int ac)
 {
 	char	dir[1500];
 
 	if (ac != 1)
 	{
 		printf("pwd: too many arguments\n");
-		return ;
+		return (0);
 	}
-	if (getcwd(dir, sizeof(dir)) != NULL)
-		printf("%s\n", dir);
+	if (getcwd(dir, sizeof(dir)) == NULL)
+		return (0);
 	else
-		return ;
+	{
+		printf("%s\n", dir);
+		return (1);
+	}
 }
 
 void	ft_env(int ac, char **env, t_enviro **enviro)

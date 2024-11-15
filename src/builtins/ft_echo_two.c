@@ -21,6 +21,30 @@ void	double_asp(char *str, t_enviro **enviro, int i)
 	}
 }
 
+void	check_double_quotes(char *str, t_enviro **enviro, int *j)
+{
+	(*j)++;
+	while (str[*j] != 34)
+	{
+		if (str[*j] == '$')
+		{
+			double_asp(str, enviro, *j);
+			while (str[*j] && str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
+			{
+				(*j)++;
+				if (str[*j] == '$')
+					double_asp(str, enviro, *j);
+			}
+			(*j)--;
+		}
+		else
+		{
+			result_echo(str[*j], 0);
+		}
+		(*j)++;
+	}
+}
+
 void	resave(char *str, t_enviro **enviro, int i)
 {
 	t_enviro	*tmp;
