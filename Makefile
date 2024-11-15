@@ -19,29 +19,34 @@ LIB = ./libs/libft/libft.a
 COMPLIB = cd libs/libft/ && make
 
 SRC =	./src/builtins/ft_echo.c		\
-	./src/builtins/ft_unset.c		\
+	./src/builtins/ft_echo_one.c		\
+	./src/builtins/ft_echo_two.c		\
+	./src/builtins/ft_cd.c				\
+	./src/utils/ft_split_echo.c      	\
+	./src/builtins/ft_unset.c			\
 	./src/builtins/ft_builtins.c		\
-	./src/builtins/ft_export.c		\
+	./src/builtins/ft_free_builtins.c	\
+	./src/builtins/ft_export.c			\
 	./src/builtins/ft_check_builtins.c	\
 	./src/cmd_handler/list_commands.c	\
 	./src/cmd_handler/split_commands.c	\
 	./src/cmd_handler/commands_exist.c	\
 	./src/quotes_handler/handle_quote.c	\
-	./src/utils/utils.c			\
-	./src/utils/ft_comands.c		\
-	./src/utils/ft_aux.c			\
-	./src/utils/ft_aux1.c			\
-	./src/utils/env.c			\
 	./src/utils/ft_split_prec.c		\
 	./src/utils/ft_split_prec_deli.c	\
+	./src/utils/utils.c					\
+	./src/utils/ft_comands.c			\
+	./src/utils/ft_aux.c				\
+	./src/utils/ft_aux1.c				\
+	./src/utils/env.c					\
 	./src/signal_handler/ft_takesignal.c	\
 	./src/redirects/redirect_stdin.c	\
-	./src/child_process/path.c		\
+	./src/child_process/path.c			\
 	./src/child_process/exec_bin.c		\
 	./src/child_process/child_process.c	\
-	./src/minishell.c			\
 	./src/display_cli.c			\
-	./src/catch_cmd_args.c
+	./src/catch_cmd_args.c		\
+	./src/minishell.c	
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 

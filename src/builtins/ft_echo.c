@@ -12,155 +12,143 @@
 
 #include "minishell.h"
 
-void	aux_cmpecho(char *aux, t_info *tmp)
+void	ft_echo_aux(t_enviro **enviro, char **value)
 {
-	char *result;
-	int	i;
-
-	result = NULL;
-	if (ft_searstr(aux, tmp->value))
-	{
-		result = (char *)malloc(sizeof(char) * ft_strlen(tmp->value) + 1);
-		ft_strcpy(result, tmp->value);
-		i = 0;
-		while (result[i] != '=')
-			i++;
-		while (result[i + 1])
-		{
-			printf("%c", result[i + 1]);
-			i++;
-		}
-		if (result[i])
-			printf(" ");
-		if (result)
-			free(result);
-	}
-}
-
-void	expandecho(char **echo, t_info **info, int	indice)
-{
-	t_info *tmp;
-	char	*aux;
-	int	k;
-	int	j;
-
-	tmp = *info;
-	aux = NULL;
-	aux = (char *)malloc(sizeof(char) * ft_strlen(echo[indice]) + 1);
-	j = 0;
-	k = 1;
-
-	if (echo[indice][j] == 34 || echo[indice][j] == 39)
-	{
-		k++;
-	}
-	while (echo[indice][j + 1])
-	{
-		if (echo[indice][j + k] == 34 && j > 0)
-			break ;
-		aux[j] = echo[indice][j + k];
-		j++;
-	}
-	aux[j] = '=';
-	while (tmp)
-	{
-		aux_cmpecho(aux, tmp);
-		tmp = tmp->next;
-	}
-	if (aux)
-		free(aux);
-}
-
-/*
-void	auxecho(char **echo, t_info **info, int indice)
-{
-	int	i;
-	int	j;
-	int in_single_quote = 0;
-	int in_double_quote = 0;
-
-	i = indice;
-	j = 0;
-	while (echo[i][j])
-	{
-		if (echo[i][j] == '\'' && !in_double_quote)
-			in_single_quote = !in_single_quote; // Toggle single quote mode
-		else if (echo[i][j] == '"' && !in_single_quote)
-			in_double_quote = !in_double_quote; // Toggle double quote mode
-		else if (echo[i][j] == '$' && in_double_quote)
-			expandecho(echo, info, i); // Expand variables inside double quotes
-		else
-			printf("%c", echo[i][j]); // Print everything as is
-		j++;
-	}
-}
-*/
-void	auxecho(char **echo, t_info **info, int indice)
-{
-	int	i;
-	int	j;
-
-	i = indice;
-	j = 0;
-	if (echo[i][j] == 34)
-	{
-		expandecho(echo, info, indice);
-		return ;
-	}
-	while (echo[i][j])
-	{
-		if (echo[i][j] && echo[i][j] != 34)
-			printf("%c", echo[i][j]);
-		j++;
-	}
-}
-
-
-
-void	ft_echo(char **echo, int ac, t_info **info)
-{
-	int	i;
 	char	**result;
+	int		i;
+	char	*end_result;
 
-
-
+	result_echo(0, 1);
 	i = 0;
-	result = ft_split_echo(*echo);
-	while (result[i])
+	result = ft_split_echo(value);
+	if (ft_strcmp(result[i], "-n "))
 	{
-		printf("%s\n", result[i]);
 		i++;
-	}
-
-
-	i = 1;
-	ac = ac;
-	if (ac > 1 && ft_strcmp(echo[1], "-n"))
-	{
-		while (echo[i + 1])
-		{
-			if (echo[i + 1][0] == '$')
-				expandecho(echo, info, i + 1);
-			else
-				auxecho(echo, info, i + 1);
-			i++;
-		}
-	}
-	else if (ac > 1)
-	{
-		while (echo[i])
-		{
-			if (echo[i][0] == '$')
-				expandecho(echo, info, i);
-			else
-				auxecho(echo, info, i);
-			if (echo[i + 1])
-				printf(" ");
-			i++;
-		}
-		printf("\n");
+		check_echo(result, enviro, i);
+		end_result = epur_str(result_echo('\0', 0));
+		printf("%s", end_result);
+		free(end_result);
 	}
 	else
+	{
+		check_echo(result, enviro, i);
+		end_result = epur_str(result_echo('\0', 0));
+		printf("%s", end_result);
+		free(end_result);
 		printf("\n");
+	}
 }
-////////////// ECHO fim
+
+char *result_echo(int c, int reset)
+{
+	static char	str[250];
+	static int	i;
+
+	if (reset)
+	{
+		i = 0;
+		str[0] = '\0';
+	}
+	if (i < 249 && c != '\0')
+	{
+		str[i] = c;
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+//the my strin stake one more space in the last posiction
+char	*ft_echo(char **echo, t_enviro **enviro)
+{
+	int		i;
+	int		j;
+	int		size;
+	char	*value;
+
+	if (!echo[1])
+		printf("\n");
+	if (!echo[1])
+		return (1);
+	value = NULL;
+	i = 1;
+	size = 0;
+	while (echo[i])
+	{
+		size += ft_strlen(echo[i]);
+		i++;
+	}
+	value = malloc(sizeof(char *) * size + ft_count(echo) - 1);
+	if (!value)
+		return (0);
+	i = 1;
+	ft_echo1(echo, i, value);
+	ft_echo_aux(enviro, value);
+
+	free(value);
+	return (result_echo('\0', 0));
+}
+
+void	check_double_quotes(char *str, t_enviro **enviro, int *j)
+{
+	(*j)++;
+	while (str[*j] != 34)
+	{
+		if (str[*j] == '$')
+		{
+			double_asp(str, enviro, *j);
+			while (str[*j] && str[*j] != 32 && str[*j] != 34 && str[*j] != 39)
+			{
+				(*j)++;
+				if (str[*j] == '$')
+					double_asp(str, enviro, *j);
+			}
+			(*j)--;
+		}
+		else
+		{
+			result_echo(str[*j], 0);
+		}
+		(*j)++;
+	}
+}
+
+void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)
+{
+	expandecho(result, enviro, i, *j);
+	(*j)++;
+	while (result[i][*j] && result[i][*j] != 32 && result[i][*j] != 34 &&
+			result[i][*j] != 39 && result[i][*j + 1] != '$')
+	{
+		(*j)++;
+	}
+}
+
+void	check_echo(char **result, t_enviro **enviro, int i)
+{
+	int	j;
+
+	while (result[i])
+	{
+		j = 0;
+		while (result[i][j])
+		{
+			if (result[i][j] && result[i][j] == 34)
+				check_double_quotes(result[i], enviro, &j);
+			else if (result[i][j] && result[i][j] == 39)
+				check_single_quotes(result[i], &j);
+			else if (result[i][j] && result[i][j] == '$')
+				aux_check_echo(result, enviro, i, &j);
+			else if (result[i][j])
+			{
+				result_echo(result[i][j], 0);
+			}
+			j++;
+		}
+		i++;
+		if (result[i])
+		{
+			result_echo(32, 0);
+		}
+	}
+}

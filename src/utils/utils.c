@@ -1,15 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
+/*   Updated: 2024/11/08 10:27:16 by aborges          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-int	ft_strlen_c(char *str, char c)
-{
-	int	len;
-
-	len = 0;
-	while (str[len] != c)
-		len++;
-	return (len);
-}
-
 
 char	*ft_strjoin_ptr(char *s1, char *s2)
 {
@@ -44,7 +45,7 @@ char	*ft_strjoin_ptr(char *s1, char *s2)
 
 char	*replace_char(char *str, char c, char rep)
 {
-	int	i;
+	int		i;
 	char	*res;
 
 	i = 0;
@@ -64,7 +65,7 @@ char	*replace_char(char *str, char c, char rep)
 
 char	*remove_end_char(char *str)
 {
-	int	i;
+	int		i;
 	char	*res;
 
 	i = 0;

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*display_shell(char *envp[], char **tmp_tmp, t_info **info)
+char	*display_shell(char *envp[], char **tmp_tmp, t_enviro **enviro)
 {
 	char	*user;
 	char	*host;
@@ -21,7 +21,7 @@ char	*display_shell(char *envp[], char **tmp_tmp, t_info **info)
 	char	*shell;
 
 	user = getenv("USER");
-	host = (char *)run_cmd_catch_output("hostname", info, envp);
+	host = (char *)run_cmd_catch_output("hostname", enviro, envp);
 	host = replace_char(host, '\n', ' ');
 	getcwd(dir, sizeof(dir));
 	tmp_tmp = ft_split(host, '.');
