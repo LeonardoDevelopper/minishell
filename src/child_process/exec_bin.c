@@ -64,7 +64,6 @@ void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
 		}
 		waitpid(child->pid, &child->status, 0);
 		free(child);
-		//free_matrix(cmd->cmd_splited);
 	}
 }
 
@@ -97,10 +96,10 @@ void	run_multiple_cmd(t_cmd *cmd)
 	{
 		if (cmd->precedence[i]->path)
 		{
-			cmd->precedence[i]->redirect = verify_redirect_stdin(cmd->precedence[i]->input);
-			if (cmd->precedence[i]->redirect)
+			cmd->precedence[i]->stdin_redirect = verify_redirect_stdin(cmd->precedence[i]->input);
+			if (cmd->precedence[i]->stdin_redirect)
 			{
-				if (!verify_fd(cmd->precedence[i]->redirect))
+				if (!verify_fd(cmd->precedence[i]->stdin_redirect))
 				{
 					printf("No such file or directory\n");
 					return ;

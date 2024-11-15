@@ -6,7 +6,7 @@
 /*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/13 10:32:03 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/15 11:11:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	main(int argc, char *argv[], char *envp[])
 			{
 				cmd->cmd_num = count_cmds_num(cmd->input);
 				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
-				if (comd_exits(cmd))
-					run_multiple_cmd(cmd);
+				print_args(cmd);
+				//run_multiple_cmd(cmd);
 			}
 			add_history(cmd->input);
 			free(cmd->input);

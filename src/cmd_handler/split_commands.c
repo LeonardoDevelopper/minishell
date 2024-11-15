@@ -19,13 +19,14 @@ t_prec	**split_cmds(char *input, int num_cmd)
 
 	p = 0;
 	precedence = (t_prec **)malloc(sizeof(t_prec *) * (num_cmd + 2));
+	precedence[num_cmd + 1] = NULL;
 	char	**commands = ft_split(input, '|');
 	while (p <= num_cmd)
 	{
 		precedence[p] = (t_prec *)malloc(sizeof(t_prec));
 		char *str_trimmed = ft_strtrim(commands[p], " ");
 		precedence[p]->input = str_trimmed;
-		precedence[p]->redirect = verify_redirect_stdin(precedence[p]->input);
+		precedence[p]->stdin_redirect = verify_redirect_stdin(precedence[p]->input);
 		char	*remove = remove_char(str_trimmed, '<');
 		precedence[p]->cmd = ft_split(remove, ' ')[0];
 		precedence[p]->path = cmd_exist(precedence[p]->cmd);

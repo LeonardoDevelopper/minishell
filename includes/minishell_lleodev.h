@@ -45,7 +45,8 @@ typedef struct	s_prec
 		char	*input;
 		char	*cmd;
 		char	**args;
-		t_redirect	*redirect;
+		t_redirect	*stdin_redirect;
+		t_redirect	*stdout_redirect;
 }		t_prec;
 
 typedef struct	cmd_s

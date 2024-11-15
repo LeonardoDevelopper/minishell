@@ -26,12 +26,14 @@ void	print_args(t_cmd *cmd)
 		int	j = 0;
 		while (cmd->precedence[i]->args[j])
 			printf("%s, ", cmd->precedence[i]->args[j++]);
-			if(cmd->precedence[i]->redirect)
+			if(cmd->precedence[i]->stdin_redirect)
 			{
 				int	r = 0;
-				printf("\nRedirects: ");
-				while (r < cmd->precedence[i]->redirect->count)
-					printf("%d, ", cmd->precedence[i]->redirect->fd_list[r++]);
+				printf("\nRedirects: \n");
+				printf("\tstdin: ");
+				while (r < cmd->precedence[i]->stdin_redirect->count)
+					printf("%d, ", cmd->precedence[i]->stdin_redirect->fd_list[r++]);
+				printf("\tstdout: ");
 			}
 			i++;
 			printf("\n");

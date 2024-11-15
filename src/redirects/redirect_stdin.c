@@ -75,7 +75,7 @@ void	redirect_stdin_test(t_prec *prec, char *env[])
 	char	*path;
 	t_child_p	*child;
 
-	pipe_fd[0] = prec->redirect->fd_list[prec->redirect->count - 1];
+	pipe_fd[0] = prec->stdin_redirect->fd_list[prec->stdin_redirect->count - 1];
 	pipe_fd[1] = -1;
 	child = new_child_p(pipe_fd);
 	full_cmd = ft_split(prec->input, ' ');
@@ -93,34 +93,4 @@ void	redirect_stdin_test(t_prec *prec, char *env[])
 			close(pipe_fd[0]);
 		}
 	}
-}
-
-void	redirect_stdin(t_cmd *cmd, char *env[])
-{
-	int	pipe_fd[2];
-	char	**full_cmd;
-	char	*path;
-	t_child_p	*child;
-
-	pipe_fd[0] = cmd->redirect->fd_list[cmd->redirect->count - 1];
-	pipe_fd[1] = -1;
-	child = new_child_p(pipe_fd);
-	full_cmd = ft_split(cmd->input, ' ');
-//	if (child->pid == 0)
-//	{
-		path = cmd_exist(full_cmd[0]);
-		if (path)
-		{
-			int	i = 0;
-			//while (cmd->args[i])
-			//	printf("\n%s", cmd->args[i++]);
-//			dup2(pipe_fd[0], STDIN_FILENO);
-//			if (execve(path, cmd->args, env) == -1)
-		//	{
-		//		perror("Erro ao executar execve");
-		//		return ;
-		//	}
-		//	close(pipe_fd[0]);
-		}
-//	}
 }
