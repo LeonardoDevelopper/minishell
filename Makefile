@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleodev <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/11/13 13:05:33 by lleodev          ###   ########.fr        #
+#    Updated: 2024/11/16 14:19:18 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/env.c					\
 	./src/signal_handler/ft_takesignal.c	\
 	./src/redirects/redirect_stdin.c	\
+	./src/redirects/redirect_stdout.c	\
 	./src/child_process/path.c			\
 	./src/child_process/exec_bin.c		\
 	./src/child_process/child_process.c	\

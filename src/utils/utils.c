@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/08 10:27:16 by aborges          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:28:15 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,86 @@ void	free_matrix(char **matrix)
 		while (matrix[i])
 			free(matrix[i++]);
 		free(matrix);
+	}
+}
+
+char	*ft_variadic_strjoin(char *str, ...)
+{
+	
+}
+
+int	count_mat_char(char **mat)
+{
+	int	i;
+	int	j;
+	int	size;
+
+	i = 0;
+	size = 0;
+	while (mat[i])
+	{
+		j = 0;
+		while (mat[i][j])
+		{
+			size++;
+			j++;
+		}
+		size += 1;
+		i++;
+	}
+	return (size);
+}
+char	*ft_strjoin_matrix(char **mat, char c)
+{
+	int	i;
+	int	j;
+	int	k;
+	int	size;
+	char	*new_str;
+
+	i = 0;
+	k = 0;
+	size = count_mat_char(mat);
+	new_str = (char *)malloc(sizeof(char ) * (size + 1));
+	if (!new_str)
+		return (NULL);
+	new_str[size] = '\0';
+	while (mat[i])
+	{
+		j = 0;
+		while (mat[i][j])
+		{
+			new_str[k] = mat[i][j];
+			j++;
+			k++;
+		}
+		new_str[k++] = c;
+		i++;
+	}
+	return (new_str);
+}
+
+char	*remove_str(char *str)
+{
+	char	**mat1;
+	char	**mat2;
+	static char	res[1024];
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	k = 0;
+	mat1 = ft_split(str, ' ');
+	while (mat1[i])
+	{
+		mat2 = ft_split(mat1[i], '<');
+		j = 0;
+		while (mat2[j])
+		{
+			printf("\n%s", mat2[j]);
+			j++;
+		}
+		i++;
 	}
 }

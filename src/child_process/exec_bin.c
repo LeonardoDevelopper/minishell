@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_bin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/25 13:44:33 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:50:30 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 			pipe(pipe_fd);
 			child = new_child_p(pipe_fd);
 			if (child->pid == 0)
-				run_child_p(full_path, full_cmd, child, env);
+				run_child_p_test(full_path, full_cmd, child, env);
 			fd = (int *)child->pipe_fd;
 			close(fd[1]);
 			waitpid(child->pid, &child->status, 0);
@@ -51,15 +51,18 @@ void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
 {
 	t_child_p	*child;
-	int	builtins;
+	int			builtins;
+	int			pipe_fd[2];
 
 	builtins = check_builtins(prec->args, enviro, env);
 	if (!builtins)
 	{
-		child = new_child_p(NULL);
+		pipe_fd[0] = prec->stdin;
+		pipe_fd[1] = prec->stdout;
+		child = new_child_p(pipe_fd);
 		if (child->pid == 0)
 		{
-			run_child_p(prec->path, prec->args, child, env);
+			run_child_p(prec, child, env);
 			free(child);
 		}
 		waitpid(child->pid, &child->status, 0);
@@ -70,15 +73,15 @@ void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
 void	run_cmd(t_cmd *cmd, char *env[])
 {
 	t_child_p	*child;
-	int	builtins;
+	int			builtins;
 
-	builtins = check_builtins(cmd->cmd_splited, cmd->enviro, env);
+	builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, env);
 	if (!builtins)
 	{
 		child = new_child_p(NULL);
 		if (child->pid == 0)
 		{
-			run_child_p(cmd->full_path, cmd->cmd_splited, child, env);
+			run_child_p(cmd->precedence[0], child, env);
 			free(child);
 		}
 		waitpid(child->pid, &child->status, 0);
@@ -96,7 +99,6 @@ void	run_multiple_cmd(t_cmd *cmd)
 	{
 		if (cmd->precedence[i]->path)
 		{
-			cmd->precedence[i]->stdin_redirect = verify_redirect_stdin(cmd->precedence[i]->input);
 			if (cmd->precedence[i]->stdin_redirect)
 			{
 				if (!verify_fd(cmd->precedence[i]->stdin_redirect))
@@ -104,15 +106,14 @@ void	run_multiple_cmd(t_cmd *cmd)
 					printf("No such file or directory\n");
 					return ;
 				}
-				else
-					redirect_stdin_test(cmd->precedence[i], cmd->env);
 			}
-			else
-				run_cmd_test(cmd->precedence[i], &cmd->enviro, cmd->env);
+			run_cmd_test(cmd->precedence[i], &cmd->enviro, cmd->env);
 		}
 		else
 		{
-			printf("%s%s%s\n", RED_TEXT, "This command is not recognized on this shell: ", cmd->precedence[i]->cmd);
+			printf("%s%s%s\n", RED_TEXT,
+				"This command is not recognized on this shell: ",
+				cmd->precedence[i]->cmd);
 			return ;
 		}
 		i++;

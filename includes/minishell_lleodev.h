@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_lleodev.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/11 09:58:04 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:28:34 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct	s_prec
 		char	**args;
 		t_redirect	*stdin_redirect;
 		t_redirect	*stdout_redirect;
+		int			stdout;
+		int			stdin;
 }		t_prec;
 
 typedef struct	cmd_s
@@ -55,7 +57,7 @@ typedef struct	cmd_s
 	t_enviro		*enviro;
 	void	*output;
 	t_redirect	*redirect;
-	int	cmd_num;
+	int			cmd_num;
 	char	*shell;
 	char	*input;
 	char	**args;
@@ -70,15 +72,18 @@ void	run_multiple_cmd(t_cmd *cmd);
 void	run_cmd(t_cmd *cmd, char *env[]);
 void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
 void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[]);
-void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[]);
+void	run_child_p(t_prec *prec, t_child_p *child, char *env[]);
 void	*verify_redirect_stdin(char *cmd);
+void    *verify_redirect_stdout(char *input);
 void	redirect_stdin(t_cmd *cmd, char *env[]);
 void	redirect_stdin_test(t_prec *prec, char *env[]);
 void	print_args(t_cmd *cmd);
 void	print_stdout_child(char *buffer);
+void	run_child_p_test(char *path, char **args, t_child_p *child, char *env[]);
 void	print_args(t_cmd *cmd);
 char	**ft_split_del(char *str, char c);
 char	**ft_split_args(char *str);
+char	*ft_strjoin_matrix(char **mat, char c);
 char	*display_shell(char *env[], char **tmp, t_enviro **enviro);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
@@ -89,6 +94,7 @@ char	*read_file(int fd);
 char	*replace_char(char *str, char c, char rep);
 char	*remove_end_char(char *str);
 char	*remove_char(char *str, char c);
+char	*remove_str(char *mat);
 
 int		count_cmds_num(char *input);
 int		count_rows_del(char *str, char c);
