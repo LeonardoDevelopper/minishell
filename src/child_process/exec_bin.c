@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/16 19:50:30 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/17 16:50:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,6 @@ void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 	int	builtins;
 	int	*fd;
 
-
-
-
 	full_cmd = ft_split(cmd, ' ');
 	builtins = check_builtins(full_cmd, enviro, env);
 	if (!builtins)
@@ -39,7 +36,7 @@ void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 			fd = (int *)child->pipe_fd;
 			close(fd[1]);
 			waitpid(child->pid, &child->status, 0);
-			output = read_stdout_child(fd[0]);
+			output = read_stdout_child(fd[0]); // so preciso mudar a entrada padrao do proximo comando para o lado de leitura do pipe
 			free(child);
 			free_matrix(full_cmd);
 			return (output);
@@ -93,6 +90,7 @@ void	run_cmd(t_cmd *cmd, char *env[])
 void	run_multiple_cmd(t_cmd *cmd)
 {
 	int	i;
+	int	stdout_fd = 0;
 
 	i = 0;
 	while (i <= cmd->cmd_num)
@@ -107,7 +105,18 @@ void	run_multiple_cmd(t_cmd *cmd)
 					return ;
 				}
 			}
-			run_cmd_test(cmd->precedence[i], &cmd->enviro, cmd->env);
+			if (i > 0)
+			cmd->precedence[i]->stdin = stdout_fd;
+			if (i == cmd->cmd_num)
+			{
+				printf("NO_CATCH\n");
+				run_cmd_test(cmd->precedence[i], &cmd->enviro, cmd->env);
+			}
+			else
+			{
+				printf("CATCH\n");
+				stdout_fd = run_cmd_catch_output_test(cmd->precedence[i], &cmd->enviro, cmd->env);
+			}
 		}
 		else
 		{
@@ -118,4 +127,23 @@ void	run_multiple_cmd(t_cmd *cmd)
 		}
 		i++;
 	}
+}
+
+
+int	run_cmd_catch_output_test(t_prec *prec, t_enviro **enviro, char *env[])
+{
+	t_child_p	*child;
+	int		pipe_fd[2];
+	int	*fd;
+
+	pipe(pipe_fd);
+	child = new_child_p(pipe_fd);
+	if (child->pid == 0)
+		run_child_p(prec, child, env);
+	fd = (int *)child->pipe_fd;
+	close(fd[1]);
+	waitpid(child->pid, &child->status, 0);
+	// so preciso mudar a entrada padrao do proximo comando para o lado de leitura do pipe
+	free(child);
+	return (fd[0]);
 }

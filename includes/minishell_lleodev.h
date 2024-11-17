@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/16 19:28:34 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/17 15:48:54 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ char	*remove_end_char(char *str);
 char	*remove_char(char *str, char c);
 char	*remove_str(char *mat);
 
+int		run_cmd_catch_output_test(t_prec *prec, t_enviro **enviro, char *env[]);
 int		count_cmds_num(char *input);
 int		count_rows_del(char *str, char c);
 int		count_cmd_args(char *cmd);
