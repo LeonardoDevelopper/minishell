@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/17 16:25:02 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/18 09:13:49 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	count_desk(char *str)
 {
 	int	i;
 	int	count;
-	
+
 	i = 0;
 	count = 0;
 	while (str[i])

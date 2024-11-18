@@ -24,14 +24,14 @@ char	*display_shell(char *envp[], char **tmp_tmp, t_enviro **enviro)
 	host = (char *)run_cmd_catch_output("hostname", enviro, envp);
 	host = remove_char(host, '\n');
 	getcwd(dir, sizeof(dir));
-	//tmp_tmp = ft_split(host, '.');
+	tmp_tmp = ft_split(host, '.');
 	shell = SHELL_1;
 	tmp = ft_strjoin(shell, user);
 	shell = ft_strjoin(tmp, SHELL_2);
 	free(tmp);
-	tmp = ft_strjoin(shell, host);
+	tmp = ft_strjoin(shell, tmp_tmp[0]);
 	free(shell);
-	//free_matrix(tmp_tmp);
+	free_matrix(tmp_tmp);
 	shell = ft_strjoin(tmp, SHELL_3);
 	free(tmp);
 	tmp_tmp = ft_split(dir, '/');

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/17 16:50:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/18 10:33:40 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,25 @@ void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
 	builtins = check_builtins(prec->args, enviro, env);
 	if (!builtins)
 	{
-		pipe_fd[0] = prec->stdin;
-		pipe_fd[1] = prec->stdout;
-		child = new_child_p(pipe_fd);
-		if (child->pid == 0)
+		if (prec->path)
 		{
-			run_child_p(prec, child, env);
+			pipe_fd[0] = prec->stdin;
+			pipe_fd[1] = prec->stdout;
+			child = new_child_p(pipe_fd);
+			if (child->pid == 0)
+			{
+				run_child_p(prec, child, env);
+				free(child);
+			}
+			waitpid(child->pid, &child->status, 0);
 			free(child);
 		}
-		waitpid(child->pid, &child->status, 0);
-		free(child);
+		else
+		{
+			printf("%s%s%s\n", RED_TEXT,
+				"This command is not recognized on this shell: ",
+				prec->cmd);
+		}
 	}
 }
 
