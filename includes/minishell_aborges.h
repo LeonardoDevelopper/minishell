@@ -44,7 +44,6 @@ int		check_env(char **export, t_enviro **enviro, int j);
 //builtin function echo
 char	**ft_split_echo(char *str);
 char	*create_aux_string(char *echo_indice, int i);
-//int		ft_echo(char **echo, t_enviro **enviro);
 char	*ft_echo(char **echo, t_enviro **enviro);
 
 char	*result_echo(int c, int reset);
@@ -59,13 +58,13 @@ void	check_double_quotes(char *str, t_enviro **enviro, int *j);
 void	expandecho(char **echo, t_enviro **enviro, int indice, int i);
 
 //export funcion
-void	ft_export(char **export, int ac, t_enviro **enviro);
+int		ft_export(char **export, int ac, t_enviro **enviro);
 void	ft_remove_env(char **unset, t_enviro **enviro, int indice);
 void	ft_replace_env(char **export, t_enviro **enviro, int indice, int j);
 
 //unset function
 int		ft_searstr_unset(char *s1, char *s2);
-void	ft_unset(char **unset, int ac, t_enviro **enviro);
+int		ft_unset(char **unset, int ac, t_enviro **enviro);
 
 //comand function
 void	ft_signal(void);

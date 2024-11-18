@@ -17,9 +17,9 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int count_arg)
 	if (ft_strcmp(cmd[k], "cd"))
 		return (ft_cd(cmd, count_arg, enviro));
 	else if (ft_strcmp(cmd[k], "export"))
-		ft_export(cmd, count_arg, enviro);
+		return (ft_export(cmd, count_arg, enviro));
 	else if (ft_strcmp(cmd[k], "unset"))
-		ft_unset(cmd, count_arg, enviro);
+		return (ft_unset(cmd, count_arg, enviro));
 	if (ft_strcmp(cmd[k], "pwd"))
 		return (ft_pwd(count_arg));
 	else if (ft_strcmp(cmd[k], "env"))

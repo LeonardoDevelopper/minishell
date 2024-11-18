@@ -16,11 +16,6 @@ int	ft_pwd(int ac)
 {
 	char	dir[1500];
 
-	if (ac != 1)
-	{
-		printf("pwd: too many arguments\n");
-		return (0);
-	}
 	if (getcwd(dir, sizeof(dir)) == NULL)
 		return (0);
 	else

@@ -37,6 +37,8 @@ void	export_check(char **export, int ac, t_enviro **enviro, int j)
 	int	i;
 
 	i = 0;
+	if (!export[j])
+		return ;
 	while (export[j][i])
 	{
 		if (export[j][i] == '=' && export[j][i - 1] == '\0')
@@ -53,12 +55,10 @@ void	export_check(char **export, int ac, t_enviro **enviro, int j)
 			export_check1(export, enviro, j);
 	}
 	else
-	{
 		printf("No\n");
-	}
 }
 
-void	ft_export(char **export, int ac, t_enviro **enviro)
+int	ft_export(char **export, int ac, t_enviro **enviro)
 {
 	int	j;
 
@@ -67,12 +67,14 @@ void	ft_export(char **export, int ac, t_enviro **enviro)
 	else if (ac > 1)
 	{
 		j = 1;
+		export[0] = ft_echo(export, enviro);
 		while (j < ac)
 		{
 			export_check(export, ac, enviro, j);
 			j++;
 		}
 	}
+	return (1);
 }
 
 int	check_env(char **export, t_enviro **enviro, int j)
