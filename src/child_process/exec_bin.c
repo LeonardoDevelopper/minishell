@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/18 10:33:40 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/19 13:44:40 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,12 @@ void	run_multiple_cmd(t_cmd *cmd)
 				}
 			}
 			if (i > 0)
-			cmd->precedence[i]->stdin = stdout_fd;
+				cmd->precedence[i]->stdin = stdout_fd;
 			if (i == cmd->cmd_num)
-			{
-				printf("NO_CATCH\n");
 				run_cmd_test(cmd->precedence[i], &cmd->enviro, cmd->env);
-			}
 			else
 			{
-				printf("CATCH\n");
+				printf("CATCH");
 				stdout_fd = run_cmd_catch_output_test(cmd->precedence[i], &cmd->enviro, cmd->env);
 			}
 		}
@@ -150,9 +147,8 @@ int	run_cmd_catch_output_test(t_prec *prec, t_enviro **enviro, char *env[])
 	if (child->pid == 0)
 		run_child_p(prec, child, env);
 	fd = (int *)child->pipe_fd;
-	close(fd[1]);
-	waitpid(child->pid, &child->status, 0);
-	// so preciso mudar a entrada padrao do proximo comando para o lado de leitura do pipe
+	//close(fd[1]);
+	//waitpid(child->pid, &child->status, 0);
 	free(child);
-	return (fd[0]);
+	return (fd[1]);
 }

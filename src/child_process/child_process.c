@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:38:41 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/16 15:39:50 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/19 13:45:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	run_child_p(t_prec *prec, t_child_p *child, char *env[])
 	execve(prec->path, prec->args, env);
 	if (child->pipe_fd)
 	{
-		close(fd[0]);
-		close(fd[1]);
+		if (fd[0] != STDIN_FILENO)
+			free(fd[0]);
+		//if (fd[1] != STDOUT_FILENO)
+		//	free(fd[1]);
 	}
 	perror("\nexecve: ");
 	exit(0);
