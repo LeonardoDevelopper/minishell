@@ -67,7 +67,7 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 	else if (ac > 1)
 	{
 		j = 1;
-		export[0] = ft_echo(export, enviro);
+		export[1] = ft_echo(export, enviro);
 		while (j < ac)
 		{
 			export_check(export, ac, enviro, j);

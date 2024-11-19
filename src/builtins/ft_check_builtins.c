@@ -56,6 +56,27 @@ int	check_builtins(char **cmd, t_enviro **enviro, char **env)
 	int	count_arg;
 	int	k;
 
+	//export 0a=1  deve dar erro, nao pode iniciar com um numero.
+	//export a     deve armazenar nas variaveis de ambiente, nao mostrar com env
+					//mas com export
+	//exit 10	   deve armazenar 10 na variavel ? e 
+					//imprimir quando dar um echo apenas
+	//echo $?      expamde o ? e traz o valor, 0 quer dizer ok
+
+
+
+	char	**mat;
+	mat = malloc(sizeof(1024));
+	mat[0] = cmd[0];
+	mat[1] = cmd[0];
+	mat[2] = NULL;
+	printf("mat: %s\n", ft_echo(mat, enviro));
+	cmd[ft_count(cmd)] = NULL;
+	printf("cmd:%d %s\n",ft_count(cmd), ft_echo(cmd, enviro));
+
+
+
+
 	k = 0;
 	env = env;
 	count_arg = ft_count(cmd);
@@ -66,6 +87,10 @@ int	check_builtins(char **cmd, t_enviro **enviro, char **env)
 		return (case_echo(cmd, enviro, env));
 	}
 	else if (!check_builtins_one(cmd, enviro, k, count_arg))
+	{
+		free(mat);
 		return (0);
+	}
+	free(mat);
 	return (1);
 }
