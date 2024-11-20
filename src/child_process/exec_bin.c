@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 18:19:50 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 18:50:39 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 	t_child_p	*child;
 
 	pipes = create_pipes(cmd);
-
+	i = 0;
 	while (i < cmd->cmd_num)
 	{
 		child = new_child_p(NULL);
