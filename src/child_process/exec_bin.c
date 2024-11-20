@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 18:50:39 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 18:56:10 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,15 @@ void	run_multiple_cmd(t_cmd *cmd)
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
+	wait_p(cmd->cmd_num);
+}
+
+void	wait_p(int num)
+{
+	int	i;
+
 	i = 0;
-	while (i < cmd->cmd_num)
+	while (i < num)
 	{
 		wait(NULL);
 		i++;

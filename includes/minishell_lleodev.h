@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 12:29:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 18:56:29 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct	cmd_s
 	char	*cmd;
 }		t_cmd;
 
+void	wait_p(int num);
 void	run_multiple_cmd_test(t_cmd *cmd);
 void	run_multiple_cmd(t_cmd *cmd);
 void	run_cmd(t_cmd *cmd, char *env[]);
