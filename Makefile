@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/11/18 10:02:16 by lleodev          ###   ########.fr        #
+#    Updated: 2024/11/20 12:07:13 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/child_process/path.c			\
 	./src/child_process/exec_bin.c		\
 	./src/child_process/child_process.c	\
+	./src/child_process/pipe_handler.c	\
 	./src/display_cli.c			\
 	./src/catch_cmd_args.c		\
 	./src/minishell.c	

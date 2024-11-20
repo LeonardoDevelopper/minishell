@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/17 15:48:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 12:29:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 //################################COLORS######################################
 
-#define GREEN_TEXT "\033[1;32m"
-#define RED_TEXT "\033[1;31m"
-#define ORANGE_TEXT "\033[1;33m"
-#define BLUE_TEXT "\033[1;34m"
-#define GREEN_BG "\033[42m"
-#define RED_BG "\033[41m"
-#define ORANGE_BG "\033[43m"
-#define BLUE_BG "\033[44m"
-#define RESET "\033[0m"
+# define GREEN_TEXT "\033[1;32m"
+# define RED_TEXT "\033[1;31m"
+# define ORANGE_TEXT "\033[1;33m"
+# define BLUE_TEXT "\033[1;34m"
+# define GREEN_BG "\033[42m"
+# define RED_BG "\033[41m"
+# define ORANGE_BG "\033[43m"
+# define BLUE_BG "\033[44m"
+# define RESET "\033[0m"
+# define CMD_NO_EXIST "This command is not recognized on this shell: "
 
 typedef struct	s_child_p
 {
@@ -68,6 +69,7 @@ typedef struct	cmd_s
 	char	*cmd;
 }		t_cmd;
 
+void	run_multiple_cmd_test(t_cmd *cmd);
 void	run_multiple_cmd(t_cmd *cmd);
 void	run_cmd(t_cmd *cmd, char *env[]);
 void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
@@ -95,7 +97,10 @@ char	*replace_char(char *str, char c, char rep);
 char	*remove_end_char(char *str);
 char	*remove_char(char *str, char c);
 char	*remove_str(char *mat);
+int	test_cmds(t_cmd *cmd);
 
+int		**create_pipes(t_cmd *cmd);
+int close_pipes(int **pipes, int pipe_num);
 int		run_cmd_catch_output_test(t_prec *prec, t_enviro **enviro, char *env[]);
 int		count_cmds_num(char *input);
 int		count_rows_del(char *str, char c);
@@ -106,6 +111,7 @@ int		count_rows_splited(char **strstr);
 int		d_quote(char *cmd);
 int		verify_fd(t_redirect *redirec);
 int		ft_strlen_c(char *str, char c);
+int	cmd_exits(t_cmd *cmd);
 
 t_child_p	*new_child_p(void *pipe);
 t_prec	**split_cmds(char *input, int num_cmd);

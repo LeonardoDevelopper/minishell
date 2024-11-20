@@ -1,41 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands_exist.c                                   :+:      :+:    :+:   */
+/*   pipe_handler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 13:04:59 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 11:43:30 by lleodev          ###   ########.fr       */
+/*   Created: 2024/11/20 11:44:50 by lleodev           #+#    #+#             */
+/*   Updated: 2024/11/20 12:49:55 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cmd_exits(t_cmd *cmd)
+int	**create_pipes(t_cmd *cmd)
+{
+	int	**pipes;
+	int	i;
+    int num;
+
+	i = 0;
+    num = cmd->cmd_num + 1;
+	pipes = (int **)malloc(sizeof(int *) * num);
+    while (i <= num)
+	{
+		pipes[i] = (int *)malloc(sizeof(int) * 2);
+		if (pipe(pipes[i]) == -1)
+			perror("pipe");
+		i++;
+	}
+	return (pipes);
+}
+
+int close_pipes(int **pipes, int pipe_num)
 {
 	int	i;
 
 	i = 0;
-	while (i <= cmd->cmd_num)
+	while (i <= pipe_num - 1)
 	{
-		if (cmd->precedence[i]->path)
-		{
-			if (cmd->precedence[i]->stdin_redirect)
-			{
-				if (!verify_fd(cmd->precedence[i]->stdin_redirect))
-				{
-					printf("No such file or directory\n");
-					return (0);
-				}
-			}
-		}
-		else
-		{
-			printf("%s%s%s\n", RED_TEXT, CMD_NO_EXIST,
-				cmd->precedence[i]->cmd);
-			return (0);
-		}
+		close(pipes[i][0]);
+		close(pipes[i][1]);
 		i++;
 	}
 	return (1);
