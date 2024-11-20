@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:44:50 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 12:49:55 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 18:17:11 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	**create_pipes(t_cmd *cmd)
     int num;
 
 	i = 0;
-    num = cmd->cmd_num + 1;
+    num = cmd->cmd_num - 1;
 	pipes = (int **)malloc(sizeof(int *) * num);
-    while (i <= num)
+    while (i < num)
 	{
 		pipes[i] = (int *)malloc(sizeof(int) * 2);
 		if (pipe(pipes[i]) == -1)
@@ -36,7 +36,7 @@ int close_pipes(int **pipes, int pipe_num)
 	int	i;
 
 	i = 0;
-	while (i <= pipe_num - 1)
+	while (i < pipe_num - 1)
 	{
 		close(pipes[i][0]);
 		close(pipes[i][1]);

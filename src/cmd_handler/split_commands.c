@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/16 19:52:48 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 17:48:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ t_prec	**split_cmds(char *input, int num_cmd)
 	int		pipe[2];
 
 	p = 0;
-	precedence = (t_prec **)malloc(sizeof(t_prec *) * (num_cmd + 2));
-	precedence[num_cmd + 1] = NULL;
+	precedence = (t_prec **)malloc(sizeof(t_prec *) * (num_cmd + 1));
+	precedence[num_cmd] = NULL;
 	char	**commands = ft_split(input, '|');
-	while (p <= num_cmd)
+	while (p < num_cmd)
 	{
 		precedence[p] = (t_prec *)malloc(sizeof(t_prec));
 		char *str_trimmed = ft_strtrim(commands[p], " ");

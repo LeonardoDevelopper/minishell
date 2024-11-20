@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 12:53:49 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 18:19:50 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,34 @@ void	run_cmd(t_cmd *cmd, char *env[])
 
 void	run_multiple_cmd(t_cmd *cmd)
 {
-	int				i;
-	int				**pipes;
-	t_child_p		*child;
+	int			**pipes;
+	int			i;
+	t_child_p	*child;
 
-	i = 0;
 	pipes = create_pipes(cmd);
-	while (i <= cmd->cmd_num)
+
+	while (i < cmd->cmd_num)
 	{
 		child = new_child_p(NULL);
 		if (child->pid == 0)
 		{
 			if (i > 0)
 				dup2(pipes[i - 1][0], STDIN_FILENO);
-			if (i <= cmd->cmd_num - 1)
+			if (i < cmd->cmd_num - 1)
 				dup2(pipes[i][1], STDOUT_FILENO);
 			close_pipes(pipes, cmd->cmd_num);
 			execve(cmd->precedence[i]->path,
 				cmd->precedence[i]->args, cmd->args);
+			perror("execve");
 			exit(EXIT_FAILURE);
 		}
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
+	i = 0;
+	while (i < cmd->cmd_num)
+	{
+		wait(NULL);
+		i++;
+	}
 }

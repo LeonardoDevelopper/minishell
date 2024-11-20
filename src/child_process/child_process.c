@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:38:41 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 10:58:36 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 16:48:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ t_child_p	*new_child_p(void *pipe)
 	t_child_p	*child;
 
 	child = (t_child_p *)malloc(sizeof(t_child_p));
+	if (!child)
+		return (NULL);
 	child->pid = fork();
-
 	if (pipe)
 		child->pipe_fd = (int *)pipe;
 	else
