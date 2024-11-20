@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect_stdin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/12 15:35:13 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 22:46:42 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	*verify_redirect_stdin(char *cmd)
 int	verify_fd(t_redirect *redirec)
 {
 	int	i;
+
 
 	i = 0;
 	while (i < redirec->count)

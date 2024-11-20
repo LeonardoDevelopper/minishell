@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 18:56:29 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 21:47:24 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		d_quote(char *cmd);
 int		verify_fd(t_redirect *redirec);
 int		ft_strlen_c(char *str, char c);
 int	cmd_exits(t_cmd *cmd);
+int verify_dup_redirect_stdout(char *input);
 
 t_child_p	*new_child_p(void *pipe);
 t_prec	**split_cmds(char *input, int num_cmd);
