@@ -6,18 +6,18 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:04:59 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 11:43:30 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:59:17 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cmd_exits(t_cmd *cmd)
+int	test_commands(t_cmd *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (i <= cmd->cmd_num)
+	while (i < cmd->cmd_num)
 	{
 		if (cmd->precedence[i]->path)
 		{

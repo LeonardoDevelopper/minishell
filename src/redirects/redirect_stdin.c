@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 22:46:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:56:44 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,29 +69,27 @@ int	verify_fd(t_redirect *redirec)
 	return(1);
 }
 
-void	redirect_stdin_test(t_prec *prec, char *env[])
+int verify_dup_redirect_stdin(char *input)
 {
-	int	pipe_fd[2];
-	char	**full_cmd;
-	char	*path;
-	t_child_p	*child;
+    int i;
+    int count;
 
-	pipe_fd[0] = prec->stdin_redirect->fd_list[prec->stdin_redirect->count - 1];
-	pipe_fd[1] = -1;
-	child = new_child_p(pipe_fd);
-	full_cmd = ft_split(prec->input, ' ');
-	if (child->pid == 0)
-	{
-		path = cmd_exist(full_cmd[0]);
-		if (path)
-		{
-			dup2(pipe_fd[0], STDIN_FILENO);
-			if (execve(path, prec->args, env) == -1)
-			{
-				perror("Erro ao executar execve");
-				return ;
-			}
-			close(pipe_fd[0]);
-		}
-	}
+    i = 0;
+    count = 0;
+    while (input[i])
+    {
+        if (input[i] == '>')
+        {
+            count++;
+        }
+        else
+        {
+            if ((count == 2) && input[i + 1] != '>')
+                return (1);
+            else if (count == 1 && input[i + 1] != '>')
+                return (0);
+        }
+        i++;
+    }
+    return (-1);
 }

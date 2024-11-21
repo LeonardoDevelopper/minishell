@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 21:47:24 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/21 14:54:37 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ char	*replace_char(char *str, char c, char rep);
 char	*remove_end_char(char *str);
 char	*remove_char(char *str, char c);
 char	*remove_str(char *mat);
-int	test_cmds(t_cmd *cmd);
+int		test_commands(t_cmd *cmd);
+int 	verify_dup_redirect_stdin(char *input);
 
 int		**create_pipes(t_cmd *cmd);
 int close_pipes(int **pipes, int pipe_num);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 17:48:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/21 15:00:13 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		precedence[p]->input = str_trimmed;
 		precedence[p]->stdin_redirect = verify_redirect_stdin(precedence[p]->input);
 		if (precedence[p]->stdin_redirect)
-			precedence[p]->stdin = precedence[p]->stdin_redirect->fd_list[precedence[p]->stdin_redirect->count - 1];
+		{
+			//	if (handle_heredoc())
+			//		precedence[p]->stdin = STDIN_FILENO;
+			//	else
+					precedence[p]->stdin = precedence[p]->stdin_redirect->fd_list[precedence[p]->stdin_redirect->count - 1];
+		}
 		else
 			precedence[p]->stdin = STDIN_FILENO;
 		//char	*str_args = remove_str(precedence[p]->input);
