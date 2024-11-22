@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/21 15:00:13 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/22 13:18:21 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_prec	**split_cmds(char *input, int num_cmd)
 	t_prec	**precedence;
 	char	**aux;
 	char	*stdout;
+	char	*stdin;
 	int		p;
 	int		pipe[2];
 
@@ -32,10 +33,15 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		precedence[p]->stdin_redirect = verify_redirect_stdin(precedence[p]->input);
 		if (precedence[p]->stdin_redirect)
 		{
-			//	if (handle_heredoc())
-			//		precedence[p]->stdin = STDIN_FILENO;
-			//	else
-					precedence[p]->stdin = precedence[p]->stdin_redirect->fd_list[precedence[p]->stdin_redirect->count - 1];
+			if (verify_heredoc(precedence[p]->input) > 0)
+			{
+				handle_heredoc(ft_split(precedence[p]->input, '<')[1]);
+				return (NULL);
+			}
+			else if (verify_heredoc(precedence[p]->input) < 0)
+				return (printf("error: Invalid token\n"), NULL);
+			else if (verify_heredoc(precedence[p]->input) == 0)
+				precedence[p]->stdin = precedence[p]->stdin_redirect->fd_list[precedence[p]->stdin_redirect->count - 1];
 		}
 		else
 			precedence[p]->stdin = STDIN_FILENO;

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/21 14:54:37 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/22 12:10:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ char	*replace_char(char *str, char c, char rep);
 char	*remove_end_char(char *str);
 char	*remove_char(char *str, char c);
 char	*remove_str(char *mat);
+char	*handle_heredoc(char *del);
 int		test_commands(t_cmd *cmd);
 int 	verify_dup_redirect_stdin(char *input);
-
 int		**create_pipes(t_cmd *cmd);
-int close_pipes(int **pipes, int pipe_num);
+int 	close_pipes(int **pipes, int pipe_num);
 int		run_cmd_catch_output_test(t_prec *prec, t_enviro **enviro, char *env[]);
 int		count_cmds_num(char *input);
 int		count_rows_del(char *str, char c);
@@ -113,8 +113,9 @@ int		count_rows_splited(char **strstr);
 int		d_quote(char *cmd);
 int		verify_fd(t_redirect *redirec);
 int		ft_strlen_c(char *str, char c);
-int	cmd_exits(t_cmd *cmd);
-int verify_dup_redirect_stdout(char *input);
+int		cmd_exits(t_cmd *cmd);
+int		verify_dup_redirect_stdout(char *input);
+int		verify_heredoc(char *input);
 
 t_child_p	*new_child_p(void *pipe);
 t_prec	**split_cmds(char *input, int num_cmd);
