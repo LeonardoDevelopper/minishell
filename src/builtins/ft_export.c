@@ -68,13 +68,18 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 	{
 		j = 1;
 		export[1] = ft_echo(export, enviro);
+		if (ft_type_caracter(export[1][0]) || ft_isdigit(export[1][0])) // flata caracteres especiasi
+		{
+			printf("export: %s: not a valid identifier\n", export[1]);
+			return (1);
+		}
 		while (j < ac)
 		{
 			export_check(export, ac, enviro, j);
 			j++;
 		}
 	}
-	return (1);
+	return (0);
 }
 
 int	check_env(char **export, t_enviro **enviro, int j)

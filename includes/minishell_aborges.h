@@ -22,6 +22,7 @@ typedef struct s_enviro
 
 //auxi function // libft
 int		ft_count(char **str);
+int		ft_type_caracter(char c);
 
 //char	**ft_split(char *str);
 char	*ft_toupper_str(char *str);
@@ -36,7 +37,7 @@ char	*ft_strjoin_space(char *s1, char *s2);
 int		ft_pwd(int ac);
 char	*search_env(char *world, t_enviro **enviro);
 int		ft_cd(char **cd, int ac, t_enviro **enviro);
-void	ft_exit(char **end, int ac);
+void	ft_exit(char **end, int ac, t_enviro **enviro);
 int		fill_env(t_enviro **enviro, char **env);
 void	ft_env(int ac, char **cmd, t_enviro **enviro);
 int		check_env(char **export, t_enviro **enviro, int j);

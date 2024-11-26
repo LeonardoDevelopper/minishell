@@ -19,11 +19,8 @@ void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 	char	**full_cmd;
 	char	*full_path;
 	char	*output;
-	int	builtins;
-	int	*fd;
-
-
-
+	int		builtins;
+	int		*fd;
 
 	full_cmd = ft_split(cmd, ' ');
 	builtins = check_builtins(full_cmd, enviro, env);

@@ -86,14 +86,20 @@ int	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
 			return (0);
 		}
 		if (chdir(home) == -1)
+		{
 			printf("cd: string not in pwd\n");
+			return (-1);
+		}
 		ft_new_pwd(pwd, enviro);		
 		ft_export(pwd, 2, enviro);
 	}
 	else if (ft_count(cd) == 2)
 	{
 		if (chdir(ft_echo(cd, enviro)) == -1)
+		{
 			printf("cd: string not in %s\n", cd[1]);
+			return (-1);
+		}
 		ft_new_pwd(pwd, enviro);
 		ft_export(pwd, 2, enviro);
 	}
@@ -109,9 +115,11 @@ int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 	pwd[1] = NULL;
 
 	ft_oldpwd(oldpwd, enviro);
-	ft_condition_cd(cd, oldpwd, pwd, enviro);
+	if (ft_condition_cd(cd, oldpwd, pwd, enviro) == -1)
+		return (-1);
 	ft_export(oldpwd, 2, enviro);
 	free_cd(pwd, oldpwd);
+	return (1);
 }
 
 int	ft_cd(char **cd, int ac, t_enviro **enviro)
@@ -133,6 +141,5 @@ int	ft_cd(char **cd, int ac, t_enviro **enviro)
 		free(oldpwd);
 		return (0);
 	}
-	ft_start_cd(cd, oldpwd, pwd, enviro);
-	return (1);
+	return (ft_start_cd(cd, oldpwd, pwd, enviro));
 }

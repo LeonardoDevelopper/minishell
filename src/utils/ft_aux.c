@@ -79,3 +79,32 @@ char	**ft_split_path(char *path)
 	result[j] = NULL;
 	return (result);
 }
+
+int	ft_type_caracter(char c)
+{
+	char	str[15];
+	int		i;
+
+	str[0] = '~';
+	str[1] = '!';
+	str[2] = '@';
+	str[3] = '#';
+	str[4] = '$';
+	str[5] = '%';
+	str[6] = '^';
+	str[7] = '&';
+	str[8] = '*';
+	str[9] = '(';
+	str[10] = ')';
+	str[11] = '+';
+	str[12] = '-';
+	str[13] = '=';
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
