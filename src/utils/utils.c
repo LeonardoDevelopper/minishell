@@ -93,9 +93,9 @@ int	count_rows_splited(char **strstr)
 
 char	*remove_char(char *str, char c)
 {
-	int	i;
-	int	j;
-	int	counter;
+	int		i;
+	int		j;
+	int		counter;
 	char	*new;
 
 	i = 0;

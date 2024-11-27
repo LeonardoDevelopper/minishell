@@ -50,34 +50,3 @@ void	ft_new_pwd(char **pwd, t_enviro **enviro)
 	}
 	ft_new_pwd_aux(pwd, enviro, temp);
 }
-
-/*
-void	ft_new_pwd(char **pwd, t_enviro **enviro)
-{
-	char	*temp;
-
-	pwd[0] = (char *)malloc(strlen("export") + 1);
-	if (!pwd[0])
-		return ;
-	ft_strcpy(pwd[0], "export");
-	temp = (char *)malloc(1024);
-	if (!temp)
-	{
-		free(pwd[0]);
-		return ;
-	}
-	if (getcwd(temp, 1024) == NULL)
-	{
-		perror("Erro em getcwd");
-		free(pwd[0]);
-		free(temp);
-		return ;
-	}
-	pwd[1] = ft_strjoin("PWD=", temp);
-	free(temp);
-	if (!pwd[1])
-		free(pwd[0]);
-	if (!pwd[1])
-		return ;
-}
-*/

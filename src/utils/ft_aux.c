@@ -48,6 +48,20 @@ int	ft_strcmp(char *str1, char *str2)
 	return (1);
 }
 
+int	get_start_index(char *path)
+{
+	int	i;
+
+	i = 0;
+	if (!path)
+		return (-1);
+	while (path[i] && path[i] != '=')
+		i++;
+	if (path[i] == '=')
+		i++;
+	return (i);
+}
+
 char	**ft_split_path(char *path)
 {
 	static char	mat[250][250];
@@ -56,25 +70,20 @@ char	**ft_split_path(char *path)
 	int			j;
 	int			k;
 
-	i = 0;
+	i = get_start_index(path);
 	j = 0;
+	if (i == -1)
+		return (NULL);
 	ft_memset(mat, 0, sizeof(mat));
-	while (path[i] && (path[i] != '='))
-		i++;
-	i++;
 	while (path[i])
 	{
 		k = 0;
 		while (path[i] && path[i] != ':')
-		{
-			mat[j][k] = path[i];
-			i++;
-			k++;
-		}
+			mat[j][k++] = path[i++];
 		mat[j][k] = '/';
-		result[j] = mat[j];
-		j++;
-		i++;
+		result[j++] = mat[j];
+		if (path[i])
+			i++;
 	}
 	result[j] = NULL;
 	return (result);

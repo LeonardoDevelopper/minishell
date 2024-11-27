@@ -33,9 +33,10 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/cmd_handler/split_commands.c	\
 	./src/cmd_handler/commands_exist.c	\
 	./src/quotes_handler/handle_quote.c	\
-	./src/utils/ft_split_prec.c		\
+	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
+	./src/utils/ft_utils_one.c			\
 	./src/utils/ft_comands.c			\
 	./src/utils/ft_aux.c				\
 	./src/utils/ft_aux1.c				\
