@@ -6,13 +6,13 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/11/22 13:33:13 by lleodev          ###   ########.fr        #
+#    Updated: 2024/11/25 12:15:09 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra  -g -fsanitize=address
+CFLAGS = -Wall -Wextra  -g
 INCLUDES = -I./includes/ -I./libs/libft/
 
 LIB = ./libs/libft/libft.a
@@ -31,8 +31,9 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/cmd_handler/list_commands.c	\
 	./src/cmd_handler/split_commands.c	\
 	./src/cmd_handler/commands_exist.c	\
+	./src/cmd_handler/catch_cmd_args.c	\
 	./src/quotes_handler/handle_quote.c	\
-	./src/utils/ft_split_prec.c		\
+	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
 	./src/utils/ft_comands.c			\
@@ -42,13 +43,12 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/signal_handler/ft_takesignal.c	\
 	./src/redirects/redirect_stdin.c	\
 	./src/redirects/redirect_stdout.c	\
-	./src/redirects/heredoc.c	\
+	./src/redirects/heredoc.c			\
 	./src/child_process/path.c			\
 	./src/child_process/exec_bin.c		\
 	./src/child_process/child_process.c	\
 	./src/child_process/pipe_handler.c	\
-	./src/display_cli.c			\
-	./src/catch_cmd_args.c		\
+	./src/display_cli.c					\
 	./src/minishell.c	
 
 OBJ = $(SRC:./src/%.c=obj/%.o)

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 19:13:22 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:15:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,15 @@ void	run_multiple_cmd(t_cmd *cmd)
 		{
 			if (i > 0)
 				dup2(pipes[i - 1][0], STDIN_FILENO);
-			if (i < cmd->cmd_num - 1)
+			if (i < cmd->cmd_num -1)
 				dup2(pipes[i][1], STDOUT_FILENO);
+			if (cmd->precedence[i]->stdin_redirect)
+				dup2(cmd->precedence[i]->stdin, STDIN_FILENO);
 			if (cmd->precedence[i]->stdout_redirect)
 				dup2(cmd->precedence[i]->stdout, STDOUT_FILENO);
 			close_pipes(pipes, cmd->cmd_num);
 			execve(cmd->precedence[i]->path,
-				cmd->precedence[i]->args, cmd->args);
+				cmd->precedence[i]->args, cmd->env);
 			perror("execve");
 			exit(EXIT_FAILURE);
 		}

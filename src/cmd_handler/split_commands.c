@@ -6,11 +6,16 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/22 13:18:21 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:22:07 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	count_cmds_num(char *input)
+{
+	return (count_rows_del(input, '|'));
+}
 
 t_prec	**split_cmds(char *input, int num_cmd)
 {
@@ -45,35 +50,22 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		}
 		else
 			precedence[p]->stdin = STDIN_FILENO;
-		//char	*str_args = remove_str(precedence[p]->input);
 		char	*remove = remove_char(str_trimmed, '<');
-		//printf("\nARGS : %s\n", str_args);
-		precedence[p]->cmd = ft_split(remove, ' ')[0];
+		precedence[p]->cmd = ft_split(str_trimmed, ' ')[0];
 		precedence[p]->path = cmd_exist(precedence[p]->cmd);
 		aux = ft_split(remove, ' ');
 		stdout = ft_strjoin_matrix(aux, ' ');
 		precedence[p]->stdout_redirect = verify_redirect_stdout(stdout);
+		char	*args = catch_cmd_args(precedence[p]->input);
+		precedence[p]->args = ft_split(args, ' ');
+		precedence[p]->num_args = count_rows_splited(precedence[p]->args);
 		if (precedence[p]->stdout_redirect)
-		{
-			char	*remove2 = remove_char(stdout, '>');
-			precedence[p]->args = ft_split(remove2, ' ');
-			precedence[p]->num_args = count_rows_splited(precedence[p]->args);
-			free(precedence[p]->args[precedence[p]->num_args -1]);
-			precedence[p]->args[precedence[p]->num_args -1] = NULL;
 			precedence[p]->stdout = precedence[p]->stdout_redirect->fd_list[0];
-		}
 		else
-		{
-			precedence[p]->args = ft_split(stdout, ' ');
-			precedence[p]->num_args = count_rows_splited(precedence[p]->args);
 			precedence[p]->stdout = STDOUT_FILENO;
-		}
 		p++;
 	}
 	return (precedence);
 }
 
-int	count_cmds_num(char *input)
-{
-	return (count_rows_del(input, '|'));
-}
+

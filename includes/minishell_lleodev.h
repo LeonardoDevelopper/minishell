@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/22 12:10:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/27 09:29:45 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*display_shell(char *env[], char **tmp, t_enviro **enviro);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);
-char	**catch_cmd_args(t_cmd *cmd);
+char	*catch_cmd_args(char *cmd);
 char	*ft_strjoin_ptr(char *s1, char *s2);
 char	*read_file(int fd);
 char	*replace_char(char *str, char c, char rep);
@@ -116,6 +116,7 @@ int		ft_strlen_c(char *str, char c);
 int		cmd_exits(t_cmd *cmd);
 int		verify_dup_redirect_stdout(char *input);
 int		verify_heredoc(char *input);
+int		count_char(char *str, int c);
 
 t_child_p	*new_child_p(void *pipe);
 t_prec	**split_cmds(char *input, int num_cmd);
