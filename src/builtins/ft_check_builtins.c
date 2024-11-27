@@ -48,7 +48,28 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env)
 		printf("\n");
 	}
 	free(result_echo);
-	return (1);
+	return (0);
+}
+
+int	ft_check_cots(char **str)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	k = 0;
+	while (str[i])
+	{
+		int	j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == 34)
+				k++;
+			j++;
+		}
+		i++;
+	}
+	return (k);
 }
 
 int	check_builtins(char **cmd, t_enviro **enviro, char **env)
@@ -57,10 +78,12 @@ int	check_builtins(char **cmd, t_enviro **enviro, char **env)
 	int	k;
 	int	retur;
 
-	//export a     deve armazenar nas variaveis de ambiente, 
-	//nao mostrar com env mas com export
 	k = 0;
-	env = env;
+	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
+	{
+		printf("Invalid arg! %d\n", ft_check_cots(cmd));
+		return (1);
+	}
 	count_arg = ft_count(cmd);
 	if (ft_strcmp(remove_char(cmd[k], '"'), "echo"))
 	{

@@ -51,13 +51,12 @@ char	*result_echo(int c, int reset)
 	return (str);
 }
 
-//the my strin stake one more space in the last posiction
 char	*ft_echo(char **echo, t_enviro **enviro)
 {
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 	size_t		size;
-	char	*value;
+	char		*value;
 
 	if (!echo[1])
 		printf("\n");

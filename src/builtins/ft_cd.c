@@ -38,37 +38,19 @@ void	ft_oldpwd(char **oldpwd, t_enviro **enviro)
 	oldpwd[2] = NULL;
 }
 
-void	ft_new_pwd(char **pwd, t_enviro **enviro)
+void	ft_condition_cd_aux(char **cd, char **oldpwd, char **pwd,
+		t_enviro **enviro)
 {
-	char	*temp;
-
-	pwd[0] = (char *)malloc(strlen("export") + 1);
-	if (!pwd[0])
+	if (chdir(cd[1]) == -1)
 	{
-		free(pwd);
-		return ;
+		if (chdir(ft_echo(cd, enviro)) == -1)
+		{
+			printf("cd: string not in %s\n", cd[1]);
+			return (1);
+		}
 	}
-	ft_strcpy(pwd[0], "export");
-	temp = (char *)malloc(1024);
-	if (!temp)
-	{
-		free(pwd[0]);
-		return ;
-	}
-	if (getcwd(temp, 1024) == NULL)
-	{
-		perror("Erro em getcwd");
-		free(pwd[0]);
-		free(temp);
-		return ;
-	}
-	pwd[1] = ft_strjoin("PWD=", temp);
-	pwd[2] = NULL;
-	free(temp);
-	if (!pwd[1])
-		free(pwd[0]);
-	if (!pwd[1])
-		return ;
+	ft_new_pwd(pwd, enviro);
+	ft_export(pwd, 2, enviro);
 }
 
 int	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
@@ -88,21 +70,13 @@ int	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
 		if (chdir(home) == -1)
 		{
 			printf("cd: string not in pwd\n");
-			return (-1);
-		}
-		ft_new_pwd(pwd, enviro);		
-		ft_export(pwd, 2, enviro);
-	}
-	else if (ft_count(cd) == 2)
-	{
-		if (chdir(ft_echo(cd, enviro)) == -1)
-		{
-			printf("cd: string not in %s\n", cd[1]);
-			return (-1);
+			return (1);
 		}
 		ft_new_pwd(pwd, enviro);
 		ft_export(pwd, 2, enviro);
 	}
+	else
+		ft_condition_cd_aux(cd, oldpwd, pwd, enviro);
 	return (1);
 }
 
@@ -113,13 +87,12 @@ int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 	oldpwd[1] = NULL;
 	pwd[0] = NULL;
 	pwd[1] = NULL;
-
 	ft_oldpwd(oldpwd, enviro);
 	if (ft_condition_cd(cd, oldpwd, pwd, enviro) == -1)
 		return (-1);
 	ft_export(oldpwd, 2, enviro);
 	free_cd(pwd, oldpwd);
-	return (1);
+	return (0);
 }
 
 int	ft_cd(char **cd, int ac, t_enviro **enviro)
@@ -127,11 +100,6 @@ int	ft_cd(char **cd, int ac, t_enviro **enviro)
 	char	**oldpwd;
 	char	**pwd;
 
-	if (ac > 2)
-	{
-		printf("cd: too many arguments");
-		return (0);
-	}
 	oldpwd = (char **)malloc(2 * sizeof(char *));
 	if (!oldpwd)
 		return (0);
