@@ -40,3 +40,33 @@ int	test_commands(t_cmd *cmd)
 	}
 	return (1);
 }
+
+int	is_builtins(char **cmd)
+{
+	int	k;
+
+	k = 0;
+	if (!cmd || !cmd[k])
+		return (0);
+
+	char *clean_cmd = remove_char(cmd[k], '"');
+	if (!clean_cmd)
+		return (0);
+
+	if (ft_strcmp(clean_cmd, "echo"))
+		return (1);
+	else if (ft_strcmp(clean_cmd, "cd"))
+		return (1);
+	else if (ft_strcmp(clean_cmd, "export"))
+		return (1);
+	else if (ft_strcmp(clean_cmd, "unset"))
+		return (1);
+	else if (ft_strcmp(clean_cmd, "pwd"))
+		return (1);
+	else if (ft_strcmp(clean_cmd, "env"))
+		return (1);
+	else if (ft_strcmp(clean_cmd, "exit"))
+		return (1);
+	else
+		return (0);
+}

@@ -41,6 +41,7 @@ void	ft_exit(char **end, int ac, t_enviro **enviro);
 int		fill_env(t_enviro **enviro, char **env);
 void	ft_env(int ac, char **cmd, t_enviro **enviro);
 int		check_env(char **export, t_enviro **enviro, int j);
+int		is_builtins(char **cmd);
 
 //builtin function echo
 char	**ft_split_echo(char *str);

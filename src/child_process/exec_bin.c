@@ -91,6 +91,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 {
 	int			**pipes;
 	int			i;
+	int			builtins;
 	t_child_p	*child;
 
 	pipes = create_pipes(cmd);
@@ -98,24 +99,31 @@ void	run_multiple_cmd(t_cmd *cmd)
 	while (i < cmd->cmd_num)
 	{
 		child = new_child_p(NULL);
-		if (child->pid == 0)
+		int			builtins;
+
+		//builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, cmd->env);
+		builtins = is_builtins(cmd);
+		if (!builtins)
 		{
-			if (i > 0)
-				dup2(pipes[i - 1][0], STDIN_FILENO);
-			if (i < cmd->cmd_num -1)
-				dup2(pipes[i][1], STDOUT_FILENO);
-			if (cmd->precedence[i]->stdin_redirect)
-				dup2(cmd->precedence[i]->stdin, STDIN_FILENO);
+			if (child->pid == 0)
+			{
+				if (i > 0)
+					dup2(pipes[i - 1][0], STDIN_FILENO);
+				if (i < cmd->cmd_num -1)
+					dup2(pipes[i][1], STDOUT_FILENO);
+				if (cmd->precedence[i]->stdin_redirect)
+					dup2(cmd->precedence[i]->stdin, STDIN_FILENO);
+				if (cmd->precedence[i]->stdout_redirect)
+					dup2(cmd->precedence[i]->stdout, STDOUT_FILENO);
+				close_pipes(pipes, cmd->cmd_num);
+				execve(cmd->precedence[i]->path,
+					cmd->precedence[i]->args, cmd->env);
+				perror("execve");
+				exit(EXIT_FAILURE);
+			}
 			if (cmd->precedence[i]->stdout_redirect)
-				dup2(cmd->precedence[i]->stdout, STDOUT_FILENO);
-			close_pipes(pipes, cmd->cmd_num);
-			execve(cmd->precedence[i]->path,
-				cmd->precedence[i]->args, cmd->env);
-			perror("execve");
-			exit(EXIT_FAILURE);
+				close(cmd->precedence[i]->stdout);
 		}
-		if (cmd->precedence[i]->stdout_redirect)
-			close(cmd->precedence[i]->stdout);
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
