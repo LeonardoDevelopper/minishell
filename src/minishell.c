@@ -41,6 +41,7 @@ int	main(int argc, char *argv[], char *envp[])
 	if (!fill_env(&cmd->enviro, envp))
 		return (1);
 	ft_signal();
+
 	while (1)
 	{
 		cmd->shell = display_shell(envp, tmp, &cmd->enviro);
