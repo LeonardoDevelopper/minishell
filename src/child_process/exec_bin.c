@@ -92,6 +92,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 	i = 0;
 	while (i <= cmd->cmd_num)
 	{
+		printf("aaaaaaaaaaaaaaaaaa\n");
 		if (cmd->precedence[i]->path)
 		{
 			cmd->precedence[i]->redirect = verify_redirect_stdin(cmd->precedence[i]->input);
