@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 11:18:52 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:42:52 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*catch_cmd_args(char *cmd)
 				args[k++] = args_splited[i][j++];
 			args[k++] = ' ';
 			i++;
+			
 		}
 	}
 	args[k] = '\0';

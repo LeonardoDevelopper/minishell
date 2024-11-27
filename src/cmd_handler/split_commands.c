@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 11:22:07 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:33:28 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,7 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		if (precedence[p]->stdin_redirect)
 		{
 			if (verify_heredoc(precedence[p]->input) > 0)
-			{
-				handle_heredoc(ft_split(precedence[p]->input, '<')[1]);
-				return (NULL);
-			}
+				handle_heredoc('del');
 			else if (verify_heredoc(precedence[p]->input) < 0)
 				return (printf("error: Invalid token\n"), NULL);
 			else if (verify_heredoc(precedence[p]->input) == 0)
@@ -50,12 +47,9 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		}
 		else
 			precedence[p]->stdin = STDIN_FILENO;
-		char	*remove = remove_char(str_trimmed, '<');
 		precedence[p]->cmd = ft_split(str_trimmed, ' ')[0];
 		precedence[p]->path = cmd_exist(precedence[p]->cmd);
-		aux = ft_split(remove, ' ');
-		stdout = ft_strjoin_matrix(aux, ' ');
-		precedence[p]->stdout_redirect = verify_redirect_stdout(stdout);
+		precedence[p]->stdout_redirect = verify_redirect_stdout(str_trimmed);
 		char	*args = catch_cmd_args(precedence[p]->input);
 		precedence[p]->args = ft_split(args, ' ');
 		precedence[p]->num_args = count_rows_splited(precedence[p]->args);
