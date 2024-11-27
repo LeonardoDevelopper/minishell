@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   display_cli.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:43:12 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/14 16:43:14 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/16 19:35:01 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*display_shell(char *envp[], char **tmp_tmp, t_enviro **enviro)
 
 	user = getenv("USER");
 	host = (char *)run_cmd_catch_output("hostname", enviro, envp);
-	host = replace_char(host, '\n', ' ');
+	host = remove_char(host, '\n');
 	getcwd(dir, sizeof(dir));
 	tmp_tmp = ft_split(host, '.');
 	shell = SHELL_1;
@@ -35,7 +35,9 @@ char	*display_shell(char *envp[], char **tmp_tmp, t_enviro **enviro)
 	shell = ft_strjoin(tmp, SHELL_3);
 	free(tmp);
 	tmp_tmp = ft_split(dir, '/');
-	tmp = ft_strjoin(shell, tmp_tmp[count_desk(dir) - 1]);
+	tmp_tmp++;
+	tmp_tmp++;
+	tmp = ft_strjoin(shell, ft_strjoin_matrix(tmp_tmp, '/'));
 	free(shell);
 	shell = ft_strjoin(tmp, SHELL_4);
 	return (free(host),  shell);

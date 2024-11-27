@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:38:41 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/14 08:38:43 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/20 16:48:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ t_child_p	*new_child_p(void *pipe)
 	t_child_p	*child;
 
 	child = (t_child_p *)malloc(sizeof(t_child_p));
+	if (!child)
+		return (NULL);
 	child->pid = fork();
-
 	if (pipe)
 		child->pipe_fd = (int *)pipe;
 	else
@@ -31,7 +32,29 @@ t_child_p	*new_child_p(void *pipe)
 	return (child);
 }
 
-void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[])
+void	run_child_p(t_prec *prec, t_child_p *child, char *env[])
+{
+	int	*fd;
+
+	if (child->pipe_fd)
+	{
+		fd = (int *)child->pipe_fd;
+		if (fd[0] != STDIN_FILENO)
+			dup2(fd[0], STDIN_FILENO);
+		if (fd[1] != STDOUT_FILENO)
+			dup2(fd[1], STDOUT_FILENO);
+	}
+	execve(prec->path, prec->args, env);
+	if (child->pipe_fd)
+	{
+		if (fd[1] != STDOUT_FILENO)
+			free(fd[1]);
+	}
+	perror("\nexecve: ");
+	exit(0);
+}
+
+void	run_child_p_test(char *path, char **args, t_child_p *child, char *env[])
 {
 	int	*fd;
 
@@ -41,7 +64,7 @@ void	run_child_p(char *cmd, char **abs_path, t_child_p *child, char *env[])
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 	}
-	execve(cmd, abs_path, env);
+	execve(path, args, env);
 	if (child->pipe_fd)
 		close(fd[1]);
 	perror("\nexecve: ");

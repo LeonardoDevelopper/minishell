@@ -1,6 +1,10 @@
 {
     "files.associations": {
         "type_traits": "c",
-        "minishell.h": "c"
-    }
+        "minishell.h": "c",
+        "history.h": "c",
+        "stdio.h": "c",
+        "readline.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "enabled"
 }

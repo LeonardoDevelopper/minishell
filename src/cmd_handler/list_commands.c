@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:23:10 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/13 12:23:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/16 14:14:33 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,23 @@ void	print_args(t_cmd *cmd)
 		int	j = 0;
 		while (cmd->precedence[i]->args[j])
 			printf("%s, ", cmd->precedence[i]->args[j++]);
-			if(cmd->precedence[i]->redirect)
+		if (cmd->precedence[i]->stdin_redirect || cmd->precedence[i]->stdout_redirect)
+		{
+			int	r = 0;
+			printf("\nRedirects: \n");
+			if (cmd->precedence[i]->stdin_redirect)
 			{
-				int	r = 0;
-				printf("\nRedirects: ");
-				while (r < cmd->precedence[i]->redirect->count)
-					printf("%d, ", cmd->precedence[i]->redirect->fd_list[r++]);
+				printf("\tstdin: ");
+				while (r < cmd->precedence[i]->stdin_redirect->count)
+					printf("%d, ", cmd->precedence[i]->stdin_redirect->fd_list[r++]);
 			}
-			i++;
-			printf("\n");
+			if (cmd->precedence[i]->stdout_redirect)
+			{
+				printf("\n\tstdout: ");
+				printf("%d", cmd->precedence[i]->stdout_redirect->fd_list[0]);
+			}
+		}
+		i++;
+		printf("\n");
 	}
 }

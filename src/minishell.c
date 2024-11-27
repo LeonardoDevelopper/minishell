@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/13 10:32:03 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/27 11:12:40 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	count_desk(char *str)
 {
 	int	i;
 	int	count;
-	
+
 	i = 0;
 	count = 0;
 	while (str[i])
@@ -53,10 +53,14 @@ int	main(int argc, char *argv[], char *envp[])
 			builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, envp);
 			if (!builtins)
 			{
-				cmd->cmd_num = count_cmds_num(cmd->input);
+				cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
-				if (comd_exits(cmd))
-					run_multiple_cmd(cmd);
+				print_args(cmd);
+				if (cmd->precedence)
+				{
+					if (test_commands(cmd))
+						run_multiple_cmd(cmd);
+				}
 			}
 			add_history(cmd->input);
 			free(cmd->input);
