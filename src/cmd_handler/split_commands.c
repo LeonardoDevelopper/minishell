@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 11:33:28 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/28 15:34:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		if (precedence[p]->stdin_redirect)
 		{
 			if (verify_heredoc(precedence[p]->input) > 0)
-				handle_heredoc('del');
+				handle_heredoc("");
 			else if (verify_heredoc(precedence[p]->input) < 0)
 				return (printf("error: Invalid token\n"), NULL);
 			else if (verify_heredoc(precedence[p]->input) == 0)

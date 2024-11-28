@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 11:15:58 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/28 15:32:59 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 	i = 0;
 	while (i < cmd->cmd_num)
 	{
-		child = new_child_p(NULL);
+		cmd->precedence[i]->child = new_child_p(NULL);
 		int			builtins;
 
 		//builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, cmd->env);

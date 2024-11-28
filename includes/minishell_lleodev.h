@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 09:29:45 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/28 15:32:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ typedef struct	s_prec
 		char	**args;
 		t_redirect	*stdin_redirect;
 		t_redirect	*stdout_redirect;
+		t_child_p	*child;
 		int			stdout;
 		int			stdin;
 }		t_prec;
 
 typedef struct	cmd_s
 {
-	t_child_p	*child;
 	t_enviro		*enviro;
 	void	*output;
 	t_redirect	*redirect;
