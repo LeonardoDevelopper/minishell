@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_utils_one.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 15:25:51 by lleodev           #+#    #+#             */
-/*   Updated: 2024/05/16 15:44:00 by lleodev          ###   ########.fr       */
+/*   Created: 2024/11/27 13:10:45 by aborges           #+#    #+#             */
+/*   Updated: 2024/11/27 13:10:46 by aborges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "minishell.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_count(char **str)
 {
-	int	len;
+	int	i;
 
-	len = 0;
 	if (!str)
-		return (len);
-	while (str[len])
-		len++;
-	return (len);
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

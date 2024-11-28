@@ -22,6 +22,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_echo_one.c		\
 	./src/builtins/ft_echo_two.c		\
 	./src/builtins/ft_cd.c				\
+	./src/builtins/ft_cd_one.c			\
 	./src/utils/ft_split_echo.c      	\
 	./src/builtins/ft_unset.c			\
 	./src/builtins/ft_builtins.c		\
@@ -36,6 +37,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
+	./src/utils/ft_utils_one.c			\
 	./src/utils/ft_comands.c			\
 	./src/utils/ft_aux.c				\
 	./src/utils/ft_aux1.c				\

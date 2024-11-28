@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_unset(char **unset, int ac, t_enviro **enviro)
+int	ft_unset(char **unset, int ac, t_enviro **enviro)
 {
 	t_enviro	*tmp;
 	int			j;
@@ -22,21 +22,22 @@ void	ft_unset(char **unset, int ac, t_enviro **enviro)
 	if (ac > 1)
 	{
 		j = 1;
+		unset[j] = ft_echo(unset, enviro);
+		if (!unset[j])
+			return (0);
 		while (j < ac)
 		{
 			tmp = *enviro;
 			while (tmp)
 			{
 				if (ft_searstr_unset(unset[j], tmp->value))
-				{
-					printf("existe indice: %d\n", tmp->indice);
 					ft_remove_env(unset, enviro, tmp->indice);
-				}
 				tmp = tmp->next;
 			}
 			j++;
 		}
 	}
+	return (1);
 }
 
 void	ft_remove_env(char **unset, t_enviro **enviro, int indice)

@@ -22,6 +22,7 @@ typedef struct s_enviro
 
 //auxi function // libft
 int		ft_count(char **str);
+int		ft_type_caracter(char c);
 
 //char	**ft_split(char *str);
 char	*ft_toupper_str(char *str);
@@ -36,15 +37,15 @@ char	*ft_strjoin_space(char *s1, char *s2);
 int		ft_pwd(int ac);
 char	*search_env(char *world, t_enviro **enviro);
 int		ft_cd(char **cd, int ac, t_enviro **enviro);
-void	ft_exit(char **end, int ac);
+void	ft_exit(char **end, int ac, t_enviro **enviro);
 int		fill_env(t_enviro **enviro, char **env);
 void	ft_env(int ac, char **cmd, t_enviro **enviro);
 int		check_env(char **export, t_enviro **enviro, int j);
+int		is_builtins(char **cmd);
 
 //builtin function echo
 char	**ft_split_echo(char *str);
 char	*create_aux_string(char *echo_indice, int i);
-//int		ft_echo(char **echo, t_enviro **enviro);
 char	*ft_echo(char **echo, t_enviro **enviro);
 
 char	*result_echo(int c, int reset);
@@ -59,13 +60,13 @@ void	check_double_quotes(char *str, t_enviro **enviro, int *j);
 void	expandecho(char **echo, t_enviro **enviro, int indice, int i);
 
 //export funcion
-void	ft_export(char **export, int ac, t_enviro **enviro);
+int		ft_export(char **export, int ac, t_enviro **enviro);
 void	ft_remove_env(char **unset, t_enviro **enviro, int indice);
 void	ft_replace_env(char **export, t_enviro **enviro, int indice, int j);
 
 //unset function
 int		ft_searstr_unset(char *s1, char *s2);
-void	ft_unset(char **unset, int ac, t_enviro **enviro);
+int		ft_unset(char **unset, int ac, t_enviro **enviro);
 
 //comand function
 void	ft_signal(void);

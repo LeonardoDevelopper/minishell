@@ -51,18 +51,17 @@ char	*result_echo(int c, int reset)
 	return (str);
 }
 
-//the my strin stake one more space in the last posiction
 char	*ft_echo(char **echo, t_enviro **enviro)
 {
-	int		i;
-	int		j;
-	int		size;
-	char	*value;
+	int			i;
+	int			j;
+	size_t		size;
+	char		*value;
 
 	if (!echo[1])
 		printf("\n");
 	if (!echo[1])
-		return (1);
+		return (NULL);
 	value = NULL;
 	i = 1;
 	size = 0;
@@ -73,7 +72,7 @@ char	*ft_echo(char **echo, t_enviro **enviro)
 	}
 	value = malloc(sizeof(char *) * size + ft_count(echo) - 1);
 	if (!value)
-		return (0);
+		return (NULL);
 	i = 1;
 	ft_echo1(echo, i, value);
 	ft_echo_aux(enviro, value);

@@ -37,6 +37,8 @@ void	export_check(char **export, int ac, t_enviro **enviro, int j)
 	int	i;
 
 	i = 0;
+	if (!export[j])
+		return ;
 	while (export[j][i])
 	{
 		if (export[j][i] == '=' && export[j][i - 1] == '\0')
@@ -53,12 +55,10 @@ void	export_check(char **export, int ac, t_enviro **enviro, int j)
 			export_check1(export, enviro, j);
 	}
 	else
-	{
 		printf("No\n");
-	}
 }
 
-void	ft_export(char **export, int ac, t_enviro **enviro)
+int	ft_export(char **export, int ac, t_enviro **enviro)
 {
 	int	j;
 
@@ -67,12 +67,20 @@ void	ft_export(char **export, int ac, t_enviro **enviro)
 	else if (ac > 1)
 	{
 		j = 1;
+		export[1] = ft_echo(export, enviro);
+		if (ft_type_caracter(export[1][0]) ||
+			ft_isdigit(export[1][0]))
+		{
+			printf("export: %s: not a valid identifier\n", export[1]);
+			return (1);
+		}
 		while (j < ac)
 		{
 			export_check(export, ac, enviro, j);
 			j++;
 		}
 	}
+	return (0);
 }
 
 int	check_env(char **export, t_enviro **enviro, int j)

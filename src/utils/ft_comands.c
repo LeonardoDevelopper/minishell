@@ -18,7 +18,8 @@ int	ft_absolutway(char **cmd, char **env, t_enviro **enviro)
 	int		i;
 	pid_t	pid;
 	char	**args;
-	(void)enviro;
+
+	enviro = enviro;
 	args = NULL;
 	args = (char **)malloc(sizeof(char) * ft_count(cmd) + 1);
 	i = 0;

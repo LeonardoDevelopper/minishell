@@ -16,11 +16,6 @@ int	ft_pwd(int ac)
 {
 	char	dir[1500];
 
-	if (ac != 1)
-	{
-		printf("pwd: too many arguments\n");
-		return (0);
-	}
 	if (getcwd(dir, sizeof(dir)) == NULL)
 		return (0);
 	else
@@ -52,7 +47,8 @@ void	ft_env(int ac, char **env, t_enviro **enviro)
 	i = ft_listsize(enviro) - 1;
 	while (i >= 0)
 	{
-		printf("%s\n", list[i]);
+		if (ft_searstr(list[i], "?=") == NULL)
+			printf("%s\n", list[i]);
 		i--;
 	}
 }
@@ -79,7 +75,8 @@ void	ft_env_export(int ac, char **env, t_enviro **enviro)
 	i = ft_listsize(enviro) - 1;
 	while (i >= 0)
 	{
-		printf("declare -x %s\n", list[i]);
+		if (ft_searstr(list[i], "?=") == NULL)
+			printf("declare -x %s\n", list[i]);
 		i--;
 	}
 }
@@ -97,13 +94,11 @@ char	*search_env(char *world, t_enviro **enviro)
 	}
 }
 
-void	ft_exit(char **end, int ac)
+void	ft_exit(char **end, int ac, t_enviro **enviro)
 {
-	(void)ac;
 	if (ac > 1)
-		printf ("there is 2 or more arg");
-	if (!end)
-		return ;
-	rl_clear_history();
-	exit (1);
+		exit(ft_atoi(end[1]));
+	if (end)
+		rl_clear_history();
+	exit(0);
 }
