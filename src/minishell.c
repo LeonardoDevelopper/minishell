@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 12:07:11 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/28 14:01:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 			{
 				cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
-				print_args(cmd);
+				//print_args(cmd);
 				if (cmd->precedence)
 				{
 					if (test_commands(cmd))
