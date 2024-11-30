@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/28 15:32:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/30 11:08:27 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct	s_prec
 		t_redirect	*stdin_redirect;
 		t_redirect	*stdout_redirect;
 		t_child_p	*child;
+		int			builtins;
 		int			stdout;
 		int			stdin;
 }		t_prec;
@@ -84,6 +85,7 @@ void	print_args(t_cmd *cmd);
 void	print_stdout_child(char *buffer);
 void	run_child_p_test(char *path, char **args, t_child_p *child, char *env[]);
 void	print_args(t_cmd *cmd);
+char	**handle_double_quotes(char *input);
 char	**ft_split_del(char *str, char c);
 char	**ft_split_args(char *str);
 char	*ft_strjoin_matrix(char **mat, char c);
@@ -98,7 +100,9 @@ char	*replace_char(char *str, char c, char rep);
 char	*remove_end_char(char *str);
 char	*remove_char(char *str, char c);
 char	*remove_str(char *mat);
-char	*handle_heredoc(char *del);
+int		ft_handle_tokens(char *input);
+int		ft_handle_quotes(char *input);
+int		handle_heredoc(char *del);
 int		test_commands(t_cmd *cmd);
 int 	verify_dup_redirect_stdin(char *input);
 int		**create_pipes(t_cmd *cmd);
@@ -117,6 +121,8 @@ int		cmd_exits(t_cmd *cmd);
 int		verify_dup_redirect_stdout(char *input);
 int		verify_heredoc(char *input);
 int		count_char(char *str, int c);
+int		is_builtins(t_prec **prec);
+int		check_builtins(t_prec *prec, t_enviro **enviro, char **env);
 
 t_child_p	*new_child_p(void *pipe);
 t_prec	**split_cmds(char *input, int num_cmd);

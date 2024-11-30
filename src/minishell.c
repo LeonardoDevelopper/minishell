@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/28 14:01:48 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/30 00:48:33 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_ctrld(cmd->input);
 		if (cmd->input && *cmd->input)
 		{
-			cmd->cmd_splited = ft_split(cmd->input, ' ');
-			builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, envp);
-			if (!builtins)
+			if (ft_handle_tokens(cmd->input) && ft_handle_quotes(cmd->input))
 			{
+				cmd->cmd_splited = ft_split(cmd->input, ' ');
 				cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
-				//print_args(cmd);
+				print_args(cmd);
 				if (cmd->precedence)
 				{
 					if (test_commands(cmd))

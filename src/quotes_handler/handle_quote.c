@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:52:00 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/22 14:52:02 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/30 02:17:06 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,43 @@ char	*quote(char *cmd)
 		}
 	}
 	return (quote);
+}
+
+int	ft_handle_tokens(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '\\' || input[i] == ';' || input[i] == '&')
+		{
+			ft_putstr_fd("error: Unexpected token at the input\n", STDERR_FILENO);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+int	ft_handle_quotes(char *input)
+{
+	if (count_char(input, '"') % 2 != 0)
+	{
+		ft_putstr_fd("error: Unclosed quote\n", STDERR_FILENO);
+		return (0);
+	}
+	return (1);
+}
+
+char	**handle_double_quotes(char *input)
+{
+	int	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (input[i])
+		i++;
+	}
 }

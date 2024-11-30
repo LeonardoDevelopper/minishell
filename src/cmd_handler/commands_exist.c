@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:04:59 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/21 14:59:17 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/29 14:40:55 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	test_commands(t_cmd *cmd)
 	i = 0;
 	while (i < cmd->cmd_num)
 	{
-		if (cmd->precedence[i]->path)
+		if (is_builtins(&cmd->precedence[i]) || cmd->precedence[i]->path)
 		{
 			if (cmd->precedence[i]->stdin_redirect)
 			{
@@ -41,32 +41,27 @@ int	test_commands(t_cmd *cmd)
 	return (1);
 }
 
-int	is_builtins(char **cmd)
+int	is_builtins(t_prec **prec)
 {
-	int	k;
+	t_prec	*tmp;
 
-	k = 0;
-	if (!cmd || !cmd[k])
-		return (0);
-
-	char *clean_cmd = remove_char(cmd[k], '"');
-	if (!clean_cmd)
-		return (0);
-
-	if (ft_strcmp(clean_cmd, "echo"))
-		return (1);
-	else if (ft_strcmp(clean_cmd, "cd"))
-		return (1);
-	else if (ft_strcmp(clean_cmd, "export"))
-		return (1);
-	else if (ft_strcmp(clean_cmd, "unset"))
-		return (1);
-	else if (ft_strcmp(clean_cmd, "pwd"))
-		return (1);
-	else if (ft_strcmp(clean_cmd, "env"))
-		return (1);
-	else if (ft_strcmp(clean_cmd, "exit"))
-		return (1);
-	else
-		return (0);
+	tmp = *prec;
+	tmp->builtins = 0;
+	if (!tmp->cmd)
+		tmp->builtins = 0;
+	if (ft_strcmp(tmp->cmd, "echo"))
+		tmp->builtins = 1;
+	else if (ft_strcmp(tmp->cmd, "cd"))
+		tmp->builtins = 1;
+	else if (ft_strcmp(tmp->cmd, "export"))
+		tmp->builtins = 1;
+	else if (ft_strcmp(tmp->cmd, "unset"))
+		tmp->builtins = 1;
+	else if (ft_strcmp(tmp->cmd, "pwd"))
+		tmp->builtins = 1;
+	else if (ft_strcmp(tmp->cmd, "env"))
+		tmp->builtins = 1;
+	else if (ft_strcmp(tmp->cmd, "exit"))
+		tmp->builtins = 1;
+	return (tmp->builtins);
 }

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/28 15:34:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/30 01:09:32 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		if (precedence[p]->stdin_redirect)
 		{
 			if (verify_heredoc(precedence[p]->input) > 0)
-				handle_heredoc("");
+			{
+				precedence[p]->stdin_redirect->fd_list[precedence[p]->stdin_redirect->count - 1] = handle_heredoc(ft_strtrim(ft_split(precedence[p]->input, ' ')[2], " "));
+				precedence[p]->stdin = precedence[p]->stdin_redirect->fd_list[precedence[p]->stdin_redirect->count - 1];
+			}
 			else if (verify_heredoc(precedence[p]->input) < 0)
 				return (printf("error: Invalid token\n"), NULL);
 			else if (verify_heredoc(precedence[p]->input) == 0)
@@ -50,6 +53,7 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		precedence[p]->cmd = ft_split(str_trimmed, ' ')[0];
 		precedence[p]->path = cmd_exist(precedence[p]->cmd);
 		precedence[p]->stdout_redirect = verify_redirect_stdout(str_trimmed);
+		handle_double_quotes(precedence[p]->input);
 		char	*args = catch_cmd_args(precedence[p]->input);
 		precedence[p]->args = ft_split(args, ' ');
 		precedence[p]->num_args = count_rows_splited(precedence[p]->args);
@@ -61,5 +65,3 @@ t_prec	**split_cmds(char *input, int num_cmd)
 	}
 	return (precedence);
 }
-
-

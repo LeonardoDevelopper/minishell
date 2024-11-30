@@ -4,7 +4,10 @@
         "minishell.h": "c",
         "history.h": "c",
         "stdio.h": "c",
-        "readline.h": "c"
+        "readline.h": "c",
+        "minishell_aborges.h": "c",
+        "minishell_lleodev.h": "c",
+        "cstdlib": "c"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

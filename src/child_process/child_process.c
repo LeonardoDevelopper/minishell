@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:38:41 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/20 16:48:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/29 17:58:23 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	run_child_p_test(char *path, char **args, t_child_p *child, char *env[])
 	if (child->pipe_fd)
 		close(fd[1]);
 	perror("\nexecve: ");
-	exit(0);
+	exit(1);
 }
 
 char	*read_stdout_child(int fd)

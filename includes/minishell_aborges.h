@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   minishell_aborges.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <aborges@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 13:57:12 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/23 12:27:16 by aborges          ###   ########.fr       */
+/*   Updated: 2024/11/30 11:09:11 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_exit(char **end, int ac, t_enviro **enviro);
 int		fill_env(t_enviro **enviro, char **env);
 void	ft_env(int ac, char **cmd, t_enviro **enviro);
 int		check_env(char **export, t_enviro **enviro, int j);
-int		is_builtins(char **cmd);
 
 //builtin function echo
 char	**ft_split_echo(char *str);
@@ -72,7 +71,7 @@ int		ft_unset(char **unset, int ac, t_enviro **enviro);
 void	ft_signal(void);
 void	ft_ctrld(char *input);
 void	ft_signal_value(int signal_value);
-int		check_builtins(char **cmd, t_enviro **enviro, char **env);
+// int		check_builtins(t_prec *prec, t_enviro **enviro, char **env);
 int		ft_execute(char **cmd, int ac, char **env, t_enviro **enviro);
 int		execute_cmd(char **cmd, int ac, t_enviro **enviro, char **env);
 
