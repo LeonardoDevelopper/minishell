@@ -12,23 +12,26 @@
 
 #include "minishell.h"
 
-int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int count_arg)
+int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
 {
+	int	count_arg;
+
+	count_arg = ft_count(cmd);
 	if (ft_strcmp(remove_char(cmd[k], '"'), "cd"))
 		return (ft_cd(cmd, count_arg, enviro));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "export"))
-		return (ft_export(cmd, count_arg, enviro));
+		return (ft_export(cmd, count_arg, enviro, fd));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "unset"))
 		return (ft_unset(cmd, count_arg, enviro));
 	if (ft_strcmp(remove_char(cmd[k], '"'), "pwd"))
-		return (ft_pwd(count_arg));
+		return (ft_pwd(count_arg, fd));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "env"))
 	{
-		ft_env(count_arg, cmd, enviro);
+		ft_env(count_arg, cmd, enviro, fd);
 		return (1);
 	}
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "exit"))
-		ft_exit(cmd, count_arg, enviro);
+		ft_exit(cmd, count_arg, enviro, fd);
 	else
 		return (0);
 }
@@ -44,12 +47,11 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	{
 		dup2(fd, STDOUT_FILENO);
 		close(fd);
-		printf("%s", result_echo );
-		//ft_putstr_fd(result_echo, fd);
+		ft_putstr_fd(result_echo, fd);
 	}
 	else
 	{
-		printf("%s", result_echo);
+		ft_putstr_fd(result_echo, fd);
 		printf("\n");
 	}
 	free(result_echo);
@@ -79,19 +81,22 @@ int	ft_check_cots(char **str)
 
 int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 {
-	int	count_arg;
-	int	k;
-	int	retur;
+	int		count_arg;
+	int		k;
+	int		retur;
 	char	**cmd;
+	int		fd;
 
 	k = 0;
 	cmd = ft_split(prec->input, ' ');
+	count_arg = ft_count(cmd);
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
-		printf("Invalid arg! %d\n", ft_check_cots(cmd));
+		ft_putstr_fd("Invalid arg! ", prec->stdout);
+		ft_putstr_fd("ft_check_cots(cmd)", prec->stdout);
+		printf("\n");
 		return (1);
 	}
-	count_arg = ft_count(cmd);
 	if (ft_strcmp(remove_char(cmd[k], '"'), "echo"))
 	{
 		if (ft_strcmp(cmd[k + 1], "-n") && !cmd[k + 2])
@@ -100,7 +105,7 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	}
 	else
 	{
-		retur = check_builtins_one(cmd, enviro, k, count_arg);
+		retur = check_builtins_one(cmd, enviro, k, prec->stdout);
 		if (retur != 0)
 			init_status(enviro, retur);
 		return (retur);

@@ -34,19 +34,18 @@ int		ft_strcmp(char *str1, char *str2);
 char	*ft_strjoin_space(char *s1, char *s2);
 
 //builtin function
-int		ft_pwd(int ac);
+//int		ft_pwd(int ac, t_prec *prec);
 char	*search_env(char *world, t_enviro **enviro);
 int		ft_cd(char **cd, int ac, t_enviro **enviro);
-void	ft_exit(char **end, int ac, t_enviro **enviro);
+//void	ft_exit(char **end, int ac, t_enviro **enviro, int fd);
 int		fill_env(t_enviro **enviro, char **env);
-void	ft_env(int ac, char **cmd, t_enviro **enviro);
+//void	ft_env(int ac, char **cmd, t_enviro **enviro, int fd);
 int		check_env(char **export, t_enviro **enviro, int j);
 
 //builtin function echo
 char	**ft_split_echo(char *str);
 char	*create_aux_string(char *echo_indice, int i);
 char	*ft_echo(char **echo, t_enviro **enviro);
-
 char	*result_echo(int c, int reset);
 
 void	aux_cmpecho(char *aux, t_enviro *tmp);
@@ -59,7 +58,7 @@ void	check_double_quotes(char *str, t_enviro **enviro, int *j);
 void	expandecho(char **echo, t_enviro **enviro, int indice, int i);
 
 //export funcion
-int		ft_export(char **export, int ac, t_enviro **enviro);
+//int		ft_export(char **export, int ac, t_enviro **enviro, int fd);
 void	ft_remove_env(char **unset, t_enviro **enviro, int indice);
 void	ft_replace_env(char **export, t_enviro **enviro, int indice, int j);
 

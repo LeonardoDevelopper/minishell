@@ -12,20 +12,22 @@
 
 #include "minishell.h"
 
-int	ft_pwd(int ac)
+int	ft_pwd(int ac, int fd)
 {
+	ac = ac;
 	char	dir[1500];
 
 	if (getcwd(dir, sizeof(dir)) == NULL)
 		return (0);
 	else
 	{
-		printf("%s\n", dir);
+		ft_putstr_fd(dir, fd);
+		printf("\n");
 		return (1);
 	}
 }
 
-void	ft_env(int ac, char **env, t_enviro **enviro)
+void	ft_env(int ac, char **env, t_enviro **enviro, int fd)
 {
 	int			i;
 	t_enviro	*tmp;
@@ -33,7 +35,11 @@ void	ft_env(int ac, char **env, t_enviro **enviro)
 
 	if (ac > 1)
 	{
-		printf("env: ‘%s’: No such file or directory\n", env[1]);
+		//printf("env: ‘%s’: No such file or directory\n", env[1]);
+		ft_putstr_fd("env: ", fd);
+		ft_putstr_fd(env[1], fd);
+		ft_putstr_fd(": No such file or directory", fd);
+		printf("\n");
 		return ;
 	}
 	tmp = *enviro;
@@ -48,12 +54,16 @@ void	ft_env(int ac, char **env, t_enviro **enviro)
 	while (i >= 0)
 	{
 		if (ft_searstr(list[i], "?=") == NULL)
-			printf("%s\n", list[i]);
+		{
+			ft_putstr_fd(list[i], fd);
+			printf("\n");
+		}
+			//printf("%s\n", list[i]);
 		i--;
 	}
 }
 
-void	ft_env_export(int ac, char **env, t_enviro **enviro)
+void	ft_env_export(int ac, char **env, t_enviro **enviro, int fd)
 {
 	int			i;
 	t_enviro	*tmp;
@@ -76,7 +86,12 @@ void	ft_env_export(int ac, char **env, t_enviro **enviro)
 	while (i >= 0)
 	{
 		if (ft_searstr(list[i], "?=") == NULL)
-			printf("declare -x %s\n", list[i]);
+		{
+			ft_putstr_fd("declare -x ", fd);
+			ft_putstr_fd(list[i], fd);
+			printf("\n");
+		}
+			//printf("declare -x %s\n", list[i]);
 		i--;
 	}
 }
@@ -94,7 +109,7 @@ char	*search_env(char *world, t_enviro **enviro)
 	}
 }
 
-void	ft_exit(char **end, int ac, t_enviro **enviro)
+void	ft_exit(char **end, int ac, t_enviro **enviro, int fd)
 {
 	if (ac > 1)
 		exit(ft_atoi(end[1]));
