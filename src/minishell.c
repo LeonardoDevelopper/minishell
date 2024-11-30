@@ -55,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 			{
 				cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
-				print_args(cmd);
+				//print_args(cmd);
 				if (cmd->precedence)
 				{
 					if (test_commands(cmd))

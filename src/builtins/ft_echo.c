@@ -27,9 +27,7 @@ void	ft_echo_aux(t_enviro **enviro, char **value)
 		check_echo(result, enviro, i);
 	}
 	else
-	{
 		check_echo(result, enviro, i);
-	}
 }
 
 char	*result_echo(int c, int reset)
@@ -107,15 +105,11 @@ void	check_echo(char **result, t_enviro **enviro, int i)
 			else if (result[i][j] && result[i][j] == '$')
 				aux_check_echo(result, enviro, i, &j);
 			else if (result[i][j])
-			{
 				result_echo(result[i][j], 0);
-			}
 			j++;
 		}
 		i++;
 		if (result[i])
-		{
 			result_echo(32, 0);
-		}
 	}
 }

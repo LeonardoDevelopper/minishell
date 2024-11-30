@@ -98,13 +98,13 @@ void	run_multiple_cmd(t_cmd *cmd)
 	i = 0;
 	while (i < cmd->cmd_num)
 	{
-		child = new_child_p(NULL);
-		int			builtins;
 
-		//builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, cmd->env);
+		int			builtins;
 		builtins = is_builtins(cmd);
-		if (!builtins)
+		//builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, cmd->env);
+		/*if (!builtins)
 		{
+			child = new_child_p(NULL);
 			if (child->pid == 0)
 			{
 				if (i > 0)
@@ -123,7 +123,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 			}
 			if (cmd->precedence[i]->stdout_redirect)
 				close(cmd->precedence[i]->stdout);
-		}
+		}*/
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
