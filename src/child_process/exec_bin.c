@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 11:15:58 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/11/30 11:10:49 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,24 +23,20 @@ void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[])
 	t_child_p		*child;
 
 	full_cmd = ft_split(cmd, ' ');
-	builtins = check_builtins(full_cmd, enviro, env);
-	if (!builtins)
+	full_path = cmd_exist(full_cmd[0]);
+	if (full_path)
 	{
-		full_path = cmd_exist(full_cmd[0]);
-		if (full_path)
-		{
-			pipe(pipe_fd);
-			child = new_child_p(pipe_fd);
-			if (child->pid == 0)
-				run_child_p_test(full_path, full_cmd, child, env);
-			fd = (int *)child->pipe_fd;
-			close(fd[1]);
-			waitpid(child->pid, &child->status, 0);
-			output = read_stdout_child(fd[0]);
-			free(child);
-			free_matrix(full_cmd);
-			return (output);
-		}
+		pipe(pipe_fd);
+		child = new_child_p(pipe_fd);
+		if (child->pid == 0)
+			run_child_p_test(full_path, full_cmd, child, env);
+		fd = (int *)child->pipe_fd;
+		close(fd[1]);
+		waitpid(child->pid, &child->status, 0);
+		output = read_stdout_child(fd[0]);
+		free(child);
+		free_matrix(full_cmd);
+		return (output);
 	}
 	return (NULL);
 }
@@ -70,60 +66,51 @@ void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
 void	run_cmd(t_cmd *cmd, char *env[])
 {
 	t_child_p	*child;
-	int			builtins;
 
-	builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, env);
-	if (!builtins)
+	child = new_child_p(NULL);
+	if (child->pid == 0)
 	{
-		child = new_child_p(NULL);
-		if (child->pid == 0)
-		{
-			run_child_p(cmd->precedence[0], child, env);
-			free(child);
-		}
-		waitpid(child->pid, &child->status, 0);
+		run_child_p(cmd->precedence[0], child, env);
 		free(child);
-		free_matrix(cmd->cmd_splited);
 	}
+	waitpid(child->pid, &child->status, 0);
+	free(child);
+	free_matrix(cmd->cmd_splited);
 }
 
 void	run_multiple_cmd(t_cmd *cmd)
 {
 	int			**pipes;
 	int			i;
-	int			builtins;
-	t_child_p	*child;
 
 	pipes = create_pipes(cmd);
 	i = 0;
 	while (i < cmd->cmd_num)
 	{
-
-		int			builtins;
-		builtins = is_builtins(cmd);
-		//builtins = check_builtins(cmd->cmd_splited, &cmd->enviro, cmd->env);
-		/*if (!builtins)
+		cmd->precedence[i]->child = new_child_p(NULL);
+		if (cmd->precedence[i]->child->pid == 0)
 		{
-			child = new_child_p(NULL);
-			if (child->pid == 0)
+			if (i > 0)
+				dup2(pipes[i - 1][0], STDIN_FILENO);
+			if (i < cmd->cmd_num -1)
+				dup2(pipes[i][1], STDOUT_FILENO);
+			if (cmd->precedence[i]->stdin_redirect)
+				dup2(cmd->precedence[i]->stdin, STDIN_FILENO);
+			if (cmd->precedence[i]->stdout_redirect)
+				dup2(cmd->precedence[i]->stdout, STDOUT_FILENO);
+			close_pipes(pipes, cmd->cmd_num);
+			if (cmd->precedence[i]->builtins)
+				check_builtins(cmd->precedence[i], &cmd->enviro, cmd->env);
+			else
 			{
-				if (i > 0)
-					dup2(pipes[i - 1][0], STDIN_FILENO);
-				if (i < cmd->cmd_num -1)
-					dup2(pipes[i][1], STDOUT_FILENO);
-				if (cmd->precedence[i]->stdin_redirect)
-					dup2(cmd->precedence[i]->stdin, STDIN_FILENO);
-				if (cmd->precedence[i]->stdout_redirect)
-					dup2(cmd->precedence[i]->stdout, STDOUT_FILENO);
-				close_pipes(pipes, cmd->cmd_num);
 				execve(cmd->precedence[i]->path,
 					cmd->precedence[i]->args, cmd->env);
 				perror("execve");
 				exit(EXIT_FAILURE);
 			}
-			if (cmd->precedence[i]->stdout_redirect)
-				close(cmd->precedence[i]->stdout);
-		}*/
+		}
+		if (cmd->precedence[i]->stdout_redirect)
+			close(cmd->precedence[i]->stdout);
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);

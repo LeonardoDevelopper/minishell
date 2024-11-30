@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checker.c                                       :+:      :+:    :+:   */
+/*   ft_check_builtins.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <aborges@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/23 12:22:58 by aborges          ###   ########.fr       */
+/*   Updated: 2024/11/30 11:19:01 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int count_arg)
 		return (0);
 }
 
-int	case_echo(char **cmd, t_enviro **enviro, char **env)
+int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 {
 	char	*result_echo;
 
@@ -41,7 +41,12 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env)
 	if (!result_echo)
 		return (0);
 	if (ft_strcmp(cmd[1], "-n"))
-		printf("%s", result_echo);
+	{
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+		printf("%s", result_echo );
+		//ft_putstr_fd(result_echo, fd);
+	}
 	else
 	{
 		printf("%s", result_echo);
@@ -72,13 +77,15 @@ int	ft_check_cots(char **str)
 	return (k);
 }
 
-int	check_builtins(char **cmd, t_enviro **enviro, char **env)
+int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 {
 	int	count_arg;
 	int	k;
 	int	retur;
+	char	**cmd;
 
 	k = 0;
+	cmd = ft_split(prec->input, ' ');
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
 		printf("Invalid arg! %d\n", ft_check_cots(cmd));
@@ -89,7 +96,7 @@ int	check_builtins(char **cmd, t_enviro **enviro, char **env)
 	{
 		if (ft_strcmp(cmd[k + 1], "-n") && !cmd[k + 2])
 			return (1);
-		return (case_echo(cmd, enviro, env));
+		return (case_echo(cmd, enviro, env, prec->stdout));
 	}
 	else
 	{
