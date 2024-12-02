@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:19:31 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/30 11:08:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 11:39:13 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # include "minishell_aborges.h"
 # include "minishell_lleodev.h"
 
-#define SHELL_1 "\033[1;36m\033[1;33m┌───("
-#define SHELL_2 "\033[1;35m᯽ \033[1;32m"
-#define SHELL_3 "\033[1;34m)⸺ [\033[1;34m\033[1;37m~/"
-#define SHELL_4 "\033[1;34m]\033[0m\n\033[1;32m\033[1;36m\033[1;33m└──$ \033[0m"
+#define SHELL_1 "\033[1;36m\033[1;33m┌───(\0"
+#define SHELL_2 "\033[1;35m᯽ \033[1;32m\0"
+#define SHELL_3 "\033[1;34m)⸺ [\033[1;34m\033[1;37m~/\0"
+#define SHELL_4 "\033[1;34m]\033[0m\n\033[1;32m\033[1;36m\033[1;33m└──$ \033[0m\0"
 
 #endif

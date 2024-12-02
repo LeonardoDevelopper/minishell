@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/16 19:28:15 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:06:14 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ char	*remove_char(char *str, char c)
 			i++;
 	}
 	new[j] = '\0';
+	free(str);
 	return (new);
 }
 
@@ -171,11 +172,9 @@ char	*ft_strjoin_matrix(char **mat, char c)
 
 	i = 0;
 	k = 0;
-	size = count_mat_char(mat);
-	new_str = (char *)malloc(sizeof(char ) * (size + 1));
+	new_str = (char *)malloc(sizeof(char ) * (1024));
 	if (!new_str)
 		return (NULL);
-	new_str[size] = '\0';
 	while (mat[i])
 	{
 		j = 0;
@@ -188,6 +187,7 @@ char	*ft_strjoin_matrix(char **mat, char c)
 		new_str[k++] = c;
 		i++;
 	}
+	new_str[k] = '\0';
 	return (new_str);
 }
 

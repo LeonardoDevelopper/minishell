@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/30 11:08:27 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:36:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,22 @@ typedef struct	s_prec
 typedef struct	cmd_s
 {
 	t_enviro		*enviro;
-	void	*output;
-	t_redirect	*redirect;
 	int			cmd_num;
 	char	*shell;
 	char	*input;
-	char	**args;
 	char	**env;
-	char	*full_path;
-	char	**cmd_splited;
 	t_prec	**precedence;
-	char	*cmd;
 }		t_cmd;
 
+void    free_prec(t_prec **prec);
+void    free_cmd(t_cmd *cmd);
 void	wait_p(int num);
+void    handle_cmd(t_cmd *cmd);
 void	run_multiple_cmd_test(t_cmd *cmd);
 void	run_multiple_cmd(t_cmd *cmd);
 void	run_cmd(t_cmd *cmd, char *env[]);
 void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
-void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[]);
+void	*run_cmd_catch_output(char *cmd, char *env[]);
 void	run_child_p(t_prec *prec, t_child_p *child, char *env[]);
 void	*verify_redirect_stdin(char *cmd);
 void    *verify_redirect_stdout(char *input);
@@ -89,7 +86,7 @@ char	**handle_double_quotes(char *input);
 char	**ft_split_del(char *str, char c);
 char	**ft_split_args(char *str);
 char	*ft_strjoin_matrix(char **mat, char c);
-char	*display_shell(char *env[], char **tmp, t_enviro **enviro);
+char	*display_shell(char *env[], char **tmp, char **enviro);
 char	*cmd_exist(char *cmd);
 char	**split_dir(void);
 char	*read_stdout_child(int fd);

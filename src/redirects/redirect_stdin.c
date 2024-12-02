@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/21 14:56:44 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:41:39 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,9 @@ int verify_dup_redirect_stdin(char *input)
         i++;
     }
     return (-1);
+}
+
+void	handle_stdin(t_prec * prec)
+{
+	
 }

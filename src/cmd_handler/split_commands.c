@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/30 01:09:32 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:38:05 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@ int	count_cmds_num(char *input)
 t_prec	**split_cmds(char *input, int num_cmd)
 {
 	t_prec	**precedence;
-	char	**aux;
-	char	*stdout;
-	char	*stdin;
 	int		p;
 	int		pipe[2];
 

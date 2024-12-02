@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/30 11:19:01 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 10:39:22 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,23 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	char	*result_echo;
 
 	result_echo = ft_echo(cmd, enviro);
-	if (!result_echo)
+	char	*aux = catch_cmd_args(result_echo);
+	if (!aux)
 		return (0);
 	if (ft_strcmp(cmd[1], "-n"))
 	{
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
-		printf("%s", result_echo );
-		//ft_putstr_fd(result_echo, fd);
+		ft_putstr_fd(aux, fd);
+		ft_putchar_fd('\n', fd);
+
 	}
 	else
 	{
-		printf("%s", result_echo);
-		printf("\n");
+		ft_putstr_fd(aux, fd);
+		ft_putchar_fd('\n', fd);
 	}
-	free(result_echo);
+	if (fd != 1)
+		close(fd);
+	free(aux);
 	return (0);
 }
 

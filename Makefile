@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/11/25 12:15:09 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/02 13:17:30 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/cmd_handler/split_commands.c	\
 	./src/cmd_handler/commands_exist.c	\
 	./src/cmd_handler/catch_cmd_args.c	\
+	./src/cmd_handler/handle_cmd.c		\
 	./src/quotes_handler/handle_quote.c	\
 	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
@@ -43,6 +44,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_aux1.c				\
 	./src/utils/env.c					\
 	./src/signal_handler/ft_takesignal.c	\
+	./src/free_handler/free.c			\
 	./src/redirects/redirect_stdin.c	\
 	./src/redirects/redirect_stdout.c	\
 	./src/redirects/heredoc.c			\
