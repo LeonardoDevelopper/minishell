@@ -124,9 +124,10 @@ int		count_char(char *str, int c);
 
 int		is_builtins(t_prec **prec);
 int		check_builtins(t_prec *prec, t_enviro **enviro, char **env);
-int		ft_pwd(int ac, int fd);
+int		ft_pwd(int fd);
 void	ft_env(int ac, char **cmd, t_enviro **enviro, int fd);
-int		ft_export(char **export, int ac, t_enviro **enviro, int fd);
+int		ft_export(char **export, int ac, t_enviro **enviro);
+void	print_chech_builtin(t_prec *prec);
 void	ft_exit(char **end, int ac, t_enviro **enviro, int fd);
 
 t_child_p	*new_child_p(void *pipe);

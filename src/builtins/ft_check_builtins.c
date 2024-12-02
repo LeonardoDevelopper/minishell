@@ -20,11 +20,11 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
 	if (ft_strcmp(remove_char(cmd[k], '"'), "cd"))
 		return (ft_cd(cmd, count_arg, enviro));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "export"))
-		return (ft_export(cmd, count_arg, enviro, fd));
+		return (ft_export(cmd, count_arg, enviro));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "unset"))
 		return (ft_unset(cmd, count_arg, enviro));
 	if (ft_strcmp(remove_char(cmd[k], '"'), "pwd"))
-		return (ft_pwd(count_arg, fd));
+		return (ft_pwd(fd));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "env"))
 	{
 		ft_env(count_arg, cmd, enviro, fd);
@@ -36,6 +36,22 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
 		return (0);
 }
 
+int	case_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 {
 	char	*result_echo;
@@ -43,10 +59,8 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	result_echo = ft_echo(cmd, enviro);
 	if (!result_echo)
 		return (0);
-	if (ft_strcmp(cmd[1], "-n"))
+	if (case_n(cmd[1]))
 	{
-		dup2(fd, STDOUT_FILENO);
-		close(fd);
 		ft_putstr_fd(result_echo, fd);
 	}
 	else
@@ -62,12 +76,13 @@ int	ft_check_cots(char **str)
 {
 	int	i;
 	int	k;
+	int	j;
 
 	i = 0;
 	k = 0;
 	while (str[i])
 	{
-		int	j = 0;
+		j = 0;
 		while (str[i][j])
 		{
 			if (str[i][j] == 34)
@@ -82,30 +97,25 @@ int	ft_check_cots(char **str)
 int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 {
 	int		count_arg;
-	int		k;
 	int		retur;
 	char	**cmd;
-	int		fd;
 
-	k = 0;
 	cmd = ft_split(prec->input, ' ');
 	count_arg = ft_count(cmd);
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
-		ft_putstr_fd("Invalid arg! ", prec->stdout);
-		ft_putstr_fd("ft_check_cots(cmd)", prec->stdout);
-		printf("\n");
+		print_chech_builtin(prec);
 		return (1);
 	}
-	if (ft_strcmp(remove_char(cmd[k], '"'), "echo"))
+	if (ft_strcmp(remove_char(cmd[0], '"'), "echo"))
 	{
-		if (ft_strcmp(cmd[k + 1], "-n") && !cmd[k + 2])
+		if (case_n(cmd[0 + 1]) && !cmd[0 + 2])
 			return (1);
 		return (case_echo(cmd, enviro, env, prec->stdout));
 	}
 	else
 	{
-		retur = check_builtins_one(cmd, enviro, k, prec->stdout);
+		retur = check_builtins_one(cmd, enviro, 0, prec->stdout);
 		if (retur != 0)
 			init_status(enviro, retur);
 		return (retur);

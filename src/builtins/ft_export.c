@@ -69,7 +69,8 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 		j = 1;
 		export[1] = ft_echo(export, enviro);
 		if (ft_type_caracter(export[1][0]) ||
-			ft_isdigit(export[1][0]))
+			ft_isdigit(export[1][0]) ||
+			(export[1][0] == '?' && export[1][1] != '='))
 		{
 			printf("export: %s: not a valid identifier\n", export[1]);
 			return (1);

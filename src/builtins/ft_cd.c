@@ -38,7 +38,7 @@ void	ft_oldpwd(char **oldpwd, t_enviro **enviro)
 	oldpwd[2] = NULL;
 }
 
-void	ft_condition_cd_aux(char **cd, char **oldpwd, char **pwd,
+void	ft_condition_cd_aux(char **cd, char **pwd,
 		t_enviro **enviro)
 {
 	if (chdir(cd[1]) == -1)
@@ -76,7 +76,7 @@ int	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
 		ft_export(pwd, 2, enviro);
 	}
 	else
-		ft_condition_cd_aux(cd, oldpwd, pwd, enviro);
+		ft_condition_cd_aux(cd, pwd, enviro);
 	return (1);
 }
 
