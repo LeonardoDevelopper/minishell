@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/21 14:43:17 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 13:53:05 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,14 @@ int verify_dup_redirect_stdout(char *input)
         i++;
     }
     return (-1);
+}
+
+void    handle_stdout(t_prec *prec)
+{
+    prec->stdout_redirect = verify_redirect_stdout(prec->input);
+    prec->num_args = count_rows_splited(prec->args);
+    if (prec->stdout_redirect)
+        prec->stdout = prec->stdout_redirect->fd_list[0];
+    else
+        prec->stdout = STDOUT_FILENO;
 }

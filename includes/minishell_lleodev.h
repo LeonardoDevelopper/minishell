@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 13:36:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/02 14:06:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@ typedef struct	cmd_s
 	t_prec	**precedence;
 }		t_cmd;
 
+void    handle_args(t_prec *prec);
+void    handle_cmd_exist(t_prec *prec);
+void	handle_stdin(t_prec * prec);
 void    free_prec(t_prec **prec);
 void    free_cmd(t_cmd *cmd);
 void	wait_p(int num);
