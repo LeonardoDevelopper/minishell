@@ -1,13 +1,2 @@
-heredoc
-includes
-libs
-lleodev
-Makefile
-minishell
-obj
-README.md
-src
-test
-test0
-test_aborges
-testl
+blablabla
+@echo a
