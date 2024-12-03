@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 14:03:40 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 08:03:13 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void    handle_cmd(t_cmd *cmd)
         if (cmd->precedence)
         {
             if (test_commands(cmd))
+            {
                 run_multiple_cmd(cmd);
+            }
+            free_cmd(cmd);
         }
 	}
 }
@@ -33,10 +36,16 @@ void    handle_args(t_prec *prec)
 
     args = catch_cmd_args(prec->input);
     prec->args = ft_split(args, ' ');
+    free(args);
 }
 
 void    handle_cmd_exist(t_prec *prec)
 {
-    prec->cmd = ft_split(prec->input, ' ')[0];
+    char    **tmp;
+
+    tmp = ft_split(prec->input, ' ');
+    prec->cmd = (char *)malloc(ft_strlen(tmp[0]) + 1);
+    ft_strcpy(prec->cmd, tmp[0]);
     prec->path = cmd_exist(prec->cmd);
+    free_matrix(tmp);
 }

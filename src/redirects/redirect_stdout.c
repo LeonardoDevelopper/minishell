@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 13:53:05 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 08:47:34 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void    *verify_redirect_stdout(char *input)
             redirect_stdout->fd_list[0] = open(str_trimmed, O_WRONLY | O_CREAT | O_TRUNC, 0644);
         else if (verify_dup_redirect_stdout(input))
             redirect_stdout->fd_list[0] = open(str_trimmed, O_WRONLY | O_CREAT | O_APPEND, 0644);
-        free_matrix(redirect);
+        free(str_trimmed);
         if (redirect_stdout->fd_list[0] < 0)
             return (NULL);
         else

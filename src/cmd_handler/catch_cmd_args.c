@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 11:42:52 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 07:56:02 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 char	*catch_cmd_args(char *cmd)
 {
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
 	char	*args;
 	char	**args_splited;
 
 	i = 0;
 	k = 0;
-	args = (char *)malloc(sizeof(char ) * ft_strlen(cmd));
+	args = (char *)malloc(sizeof(char ) * 1024);
 	args_splited = ft_split(cmd, ' ');
 	while (args_splited[i])
 	{
@@ -36,11 +36,10 @@ char	*catch_cmd_args(char *cmd)
 				args[k++] = args_splited[i][j++];
 			args[k++] = ' ';
 			i++;
-			
 		}
 	}
 	args[k] = '\0';
-	return (args);
+	return (free_matrix(args_splited), args);
 }
 
 int	count_char(char *str, int c)

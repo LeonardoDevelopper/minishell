@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 14:08:34 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 08:41:52 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		handle_double_quotes(precedence[p]->input);
 		handle_args(precedence[p]);
 		handle_stdout(precedence[p]);
-		free(str_trimmed);
+		//free(str_trimmed);
 		p++;
 	}
 	free_matrix(commands);

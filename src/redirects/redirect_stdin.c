@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 13:47:02 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 08:48:46 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*verify_redirect_stdin(char *cmd)
 			rd = ft_split(redirect[i], ' ');
 			trimed_str = ft_strtrim(rd[0], " ");
 			redirec->fd_list[i - 1] = open(trimed_str, O_RDONLY);
-			free(trimed_str);
+			//free(trimed_str);
 			i++;
 		}
 		return (redirec);

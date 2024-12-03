@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 13:35:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 08:43:32 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void    free_cmd(t_cmd *cmd)
     if (cmd)
     {
         free_prec(cmd->precedence);
-        if (cmd->input)
-            free(cmd->input);
-        if (cmd->shell)
-            free(cmd->shell);
-        free(cmd);
+        //if (cmd->input)
+        //    free(cmd->input);
+        //if (cmd->shell)
+        //	free(cmd->shell);
+        //free(cmd);
     }
 }
 
@@ -40,6 +40,10 @@ void    free_prec(t_prec **prec)
 			free(prec[i]->path);
 		if (prec[i]->args)
 			free_matrix(prec[i]->args);
+		//if (prec[i]->child)
+		//	free(prec[i]->child);
+		//if (prec[i]->cmd)
+		//	free(prec[i]->cmd);
 		i++;
 	}
 	free_matrix(prec);
