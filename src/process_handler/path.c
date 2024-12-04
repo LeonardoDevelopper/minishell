@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 15:55:59 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:20:54 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*cmd_exist(char *cmd)
 	char	*full_path;
 	int		i;
 
-	i = 0;
+	i = -1;
 	full_path = NULL;
 	dir = split_dir();
 	if (cmd[0] == '/' || cmd[0] == '.')
@@ -29,13 +29,11 @@ char	*cmd_exist(char *cmd)
 	else
 	{
 		cmd = ft_strjoin("/", cmd);
-		while (dir[i])
+		while (dir[++i])
 		{
 			full_path = ft_strjoin(dir[i++], cmd);
 			if (access(full_path, X_OK) == 0)
-				free_matrix(dir);
-			if (access(full_path, X_OK) == 0)
-				return (free(cmd), full_path);
+				return (free(cmd), free_matrix(dir), full_path);
 			free(full_path);
 		}
 		free_matrix(dir);

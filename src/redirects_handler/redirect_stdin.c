@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 16:11:22 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:24:42 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,22 @@ void	*verify_redirect_stdin(char *cmd)
 	char		**rd;
 	t_redirect	*redirec;
 
-	i = 1;
+	i = 0;
 	if (ft_strchr(cmd, '<'))
 	{
 		redirec = initialize_redirect();
 		redirect = ft_split(cmd, '<');
 		redirec->count = (count_rows((char **)redirect) - 1);
 		redirec->fd_list = (int *)malloc(sizeof(int) * redirec->count);
-		while (redirect[i])
+		while (redirect[++i])
 		{
 			rd = ft_split(redirect[i], ' ');
 			trimed_str = ft_strtrim(rd[0], " ");
 			redirec->fd_list[i - 1] = open(trimed_str, O_RDONLY);
 			free(trimed_str);
 			free_matrix(rd);
-			i++;
 		}
-		free_matrix(redirect);
-		return (redirec);
+		return (free_matrix(redirect), redirec);
 	}
 	else
 		return (NULL);
