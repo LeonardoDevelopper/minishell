@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 14:06:58 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 12:37:04 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,17 @@ typedef struct	s_redirect
 
 typedef struct	s_prec
 {
-		int	num_args;
-		char	*path;
-		char	*input;
-		char	*cmd;
-		char	**args;
-		t_redirect	*stdin_redirect;
-		t_redirect	*stdout_redirect;
-		t_child_p	*child;
-		int			builtins;
-		int			stdout;
-		int			stdin;
+	int	num_args;
+	char	*path;
+	char	*input;
+	char	*cmd;
+	char	**args;
+	t_redirect	*stdin_redirect;
+	t_redirect	*stdout_redirect;
+	t_child_p	*child;
+	int			builtins;
+	int			stdout;
+	int			stdin;
 }		t_prec;
 
 typedef struct	cmd_s
@@ -64,6 +64,9 @@ typedef struct	cmd_s
 	t_prec	**precedence;
 }		t_cmd;
 
+void    initialize_cmd(t_cmd *cmd);
+t_redirect  *initialize_redirect(void);
+t_prec	*initialize_prec(void);
 void    handle_args(t_prec *prec);
 void    handle_cmd_exist(t_prec *prec);
 void	handle_stdin(t_prec * prec);
@@ -73,7 +76,7 @@ void	wait_p(int num);
 void    handle_cmd(t_cmd *cmd);
 void	run_multiple_cmd_test(t_cmd *cmd);
 void	run_multiple_cmd(t_cmd *cmd);
-void	run_cmd(t_cmd *cmd, char *env[]);
+void	run_cmd(t_cmd *cmd, t_prec *prec);
 void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
 void	*run_cmd_catch_output(char *cmd, char *env[]);
 void	run_child_p(t_prec *prec, t_child_p *child, char *env[]);
@@ -123,7 +126,7 @@ int		verify_heredoc(char *input);
 int		count_char(char *str, int c);
 int		is_builtins(t_prec **prec);
 int		check_builtins(t_prec *prec, t_enviro **enviro, char **env);
-
+void	handle_exit(t_cmd *cmd);
 t_child_p	*new_child_p(void *pipe);
 t_prec	**split_cmds(char *input, int num_cmd);
 

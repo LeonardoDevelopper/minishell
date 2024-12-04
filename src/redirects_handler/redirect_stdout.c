@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 09:11:48 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 12:59:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    *verify_redirect_stdout(char *input)
     char    **redirect;
     char    *str_trimmed;
 
-    redirect_stdout = (t_redirect *)malloc(sizeof(t_redirect));
+    redirect_stdout = initialize_redirect();
     redirect = ft_split(input, '>');
     str_trimmed = ft_strtrim(redirect[1], " ");
     redirect_stdout->count = count_rows((void **)redirect);
@@ -27,14 +27,14 @@ void    *verify_redirect_stdout(char *input)
     {
         redirect_stdout->fd_list = (int *)malloc(sizeof(int) * 1);
         if (verify_dup_redirect_stdout(input) < 0)
-            return (free_matrix(redirect_stdout), NULL);
+            return (free(redirect_stdout), NULL);
         else if (!verify_dup_redirect_stdout(input))
             redirect_stdout->fd_list[0] = open(str_trimmed, O_WRONLY | O_CREAT | O_TRUNC, 0644);
         else if (verify_dup_redirect_stdout(input))
             redirect_stdout->fd_list[0] = open(str_trimmed, O_WRONLY | O_CREAT | O_APPEND, 0644);
         free(str_trimmed);
         if (redirect_stdout->fd_list[0] < 0)
-            return (free_matrix(redirect_stdout), NULL);
+            return (free(redirect_stdout), NULL);
         else
             return (redirect_stdout);
     }

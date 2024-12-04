@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/02 13:06:14 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 13:21:24 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,16 @@ void	free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	if (matrix)
-	{
+	if (!matrix)
+		return ;
 		while (matrix[i])
-			free(matrix[i++]);
+		{
+			free(matrix[i]);
+			matrix[i] = NULL;
+			i++;
+		}
 		free(matrix);
-	}
+		matrix = NULL;
 }
 
 char	*ft_variadic_strjoin(char *str, ...)

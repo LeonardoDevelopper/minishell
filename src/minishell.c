@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 08:02:29 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 11:56:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_ctrld(cmd->input);
 		if (cmd->input && *cmd->input)
 		{
+			handle_exit(cmd);
 			handle_cmd(cmd);
 			add_history(cmd->input);
 			free(cmd->input);
 		}
 	}
-	//free_cmd(cmd);
 	return (0);
 }

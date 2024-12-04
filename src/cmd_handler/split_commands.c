@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 09:14:32 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 12:28:56 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_prec	**split_cmds(char *input, int num_cmd)
 	commands = ft_split(input, '|');
 	while (p < num_cmd)
 	{
-		precedence[p] = (t_prec *)malloc(sizeof(t_prec));
+		precedence[p] = initialize_prec();
 		str_trimmed = ft_strtrim(commands[p], " ");
 		precedence[p]->input = str_trimmed;
 		handle_stdin(precedence[p]);

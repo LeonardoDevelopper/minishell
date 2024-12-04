@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/02 13:17:30 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/04 09:17:58 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,15 +43,16 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_aux.c				\
 	./src/utils/ft_aux1.c				\
 	./src/utils/env.c					\
+	./src/init_handler/var_initializer.c	\
 	./src/signal_handler/ft_takesignal.c	\
 	./src/free_handler/free.c			\
-	./src/redirects/redirect_stdin.c	\
-	./src/redirects/redirect_stdout.c	\
-	./src/redirects/heredoc.c			\
-	./src/child_process/path.c			\
-	./src/child_process/exec_bin.c		\
-	./src/child_process/child_process.c	\
-	./src/child_process/pipe_handler.c	\
+	./src/redirects_handler/redirect_stdin.c	\
+	./src/redirects_handler/redirect_stdout.c	\
+	./src/redirects_handler/heredoc.c			\
+	./src/process_handler/path.c			\
+	./src/process_handler/exec_bin.c		\
+	./src/process_handler/child_process.c	\
+	./src/process_handler/pipe_handler.c	\
 	./src/display_cli.c					\
 	./src/minishell.c	
 
@@ -101,6 +102,17 @@ fclean: clean lleodev_header
 	@cd libs/libft && make fclean
 	make lleodev_header
 	@echo "$(RED_BG)Project cleaned! $(RESET)"
+
+norm_lleodev:
+	@norminette ./src/process_handler	\
+	./src/cmd_handler					\
+	./src/free_handler					\
+	./src/init_handler					\
+	./src/quotes_handler				\
+	./src/redirects_handler				\
+	./src/display_cli.c					\
+	./src/minishell.c
+				
 
 lleodev_header:
 	@clear

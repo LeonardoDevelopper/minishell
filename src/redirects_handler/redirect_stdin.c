@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 09:20:32 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 13:02:15 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*verify_redirect_stdin(char *cmd)
 	redirec = NULL;
 	if (ft_strchr(cmd, '<'))
 	{
-		redirec = (t_redirect *)malloc(sizeof(t_redirect));
+		redirec = initialize_redirect();
 		redirect = ft_split(cmd, '<');
 		redirec->count = (count_rows((void **)redirect) - 1);
 		redirec->fd_list = (int *)malloc(sizeof(int) * redirec->count);

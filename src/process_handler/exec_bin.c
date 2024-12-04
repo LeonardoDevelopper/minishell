@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/02 13:19:59 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/03 09:48:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,17 @@ void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
 	}
 }
 
-void	run_cmd(t_cmd *cmd, char *env[])
+void	run_cmd(t_cmd *cmd, t_prec *prec)
 {
-	t_child_p	*child;
-
-	child = new_child_p(NULL);
-	if (child->pid == 0)
+	if (prec->builtins)
+		check_builtins(prec, &cmd->enviro, cmd->env);
+	else
 	{
-		run_child_p(cmd->precedence[0], child, env);
-		free(child);
+		execve(prec->path,
+			prec->args, cmd->env);
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
-	waitpid(child->pid, &child->status, 0);
-	free(child);
 }
 
 void	run_multiple_cmd(t_cmd *cmd)
