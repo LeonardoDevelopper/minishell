@@ -55,7 +55,7 @@ void	export_check(char **export, int ac, t_enviro **enviro, int j)
 			export_check1(export, enviro, j);
 	}
 	else
-		printf("No\n");
+		return ;
 }
 
 int	ft_export(char **export, int ac, t_enviro **enviro)

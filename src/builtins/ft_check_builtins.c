@@ -72,26 +72,16 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	return (0);
 }
 
-int	ft_check_cots(char **str)
+int	take_return(int value)
 {
-	int	i;
-	int	k;
-	int	j;
+	int	result;
 
-	i = 0;
-	k = 0;
-	while (str[i])
+	if (value < 0 || value > 255)
 	{
-		j = 0;
-		while (str[i][j])
-		{
-			if (str[i][j] == 34)
-				k++;
-			j++;
-		}
-		i++;
+		result = value % 256;
+		return ((unsigned char)result);
 	}
-	return (k);
+	return (value);
 }
 
 int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
@@ -117,7 +107,7 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	{
 		retur = check_builtins_one(cmd, enviro, 0, prec->stdout);
 		if (retur != 0)
-			init_status(enviro, retur);
+			init_status(enviro, take_return(retur));
 		return (retur);
 	}
 }

@@ -26,8 +26,8 @@ int		ft_type_caracter(char c);
 
 //char	**ft_split(char *str);
 char	*ft_toupper_str(char *str);
-int		ft_listsize(t_enviro **enviro);
 char	**ft_split_path(char *path);
+int		ft_listsize(t_enviro **enviro);
 int		ft_searstr(char *s1, char *s2);
 void	ft_strcpy(char *dst, char *src);
 int		ft_strcmp(char *str1, char *str2);
@@ -47,10 +47,12 @@ int		check_env(char **export, t_enviro **enviro, int j);
 
 //builtin function echo
 int		case_n(char *str);
+int		ft_check_cots(char **str);
 char	**ft_split_echo(char *str);
-char	*create_aux_string(char *echo_indice, int i);
-char	*ft_echo(char **echo, t_enviro **enviro);
 char	*result_echo(int c, int reset);
+char	*ft_echo(char **echo, t_enviro **enviro);
+void	check_dolar(char **result, int i, int *j);
+char	*create_aux_string(char *echo_indice, int i);
 
 void	aux_cmpecho(char *aux, t_enviro *tmp);
 void	check_single_quotes(char *str, int *j);

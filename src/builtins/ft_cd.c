@@ -83,15 +83,20 @@ int	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
 int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 		t_enviro **enviro)
 {
+	int	value;
+
 	oldpwd[0] = NULL;
 	oldpwd[1] = NULL;
 	pwd[0] = NULL;
 	pwd[1] = NULL;
 	ft_oldpwd(oldpwd, enviro);
-	if (ft_condition_cd(cd, oldpwd, pwd, enviro) == -1)
+	value = ft_condition_cd(cd, oldpwd, pwd, enviro);
+	if (value == -1)
 		return (-1);
 	ft_export(oldpwd, 2, enviro);
 	free_cd(pwd, oldpwd);
+	if (value == 1)
+		return (1);
 	return (0);
 }
 

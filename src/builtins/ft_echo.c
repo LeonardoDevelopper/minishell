@@ -87,6 +87,7 @@ char	*ft_echo(char **echo, t_enviro **enviro)
 
 void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)
 {
+	check_dolar(result, i, j);
 	expandecho(result, enviro, i, *j);
 	(*j)++;
 	while (result[i][*j] && result[i][*j] != 32 && result[i][*j] != 34 &&

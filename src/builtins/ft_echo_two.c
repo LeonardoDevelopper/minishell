@@ -71,3 +71,50 @@ void	resave(char *str, t_enviro **enviro, int i)
 	if (aux)
 		free(aux);
 }
+
+int	ft_check_cots(char **str)
+{
+	int	i;
+	int	k;
+	int	j;
+
+	i = 0;
+	k = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (str[i][j])
+		{
+			if (str[i][j] == 34)
+				k++;
+			j++;
+		}
+		i++;
+	}
+	return (k);
+}
+
+void	check_dolar(char **result, int i, int *j)
+{
+	int	size;
+	int	k;
+
+	size = 0;
+	k = *j;
+	while (result[i][k] == '$')
+	{
+		size++;
+		k++;
+	}
+	if (size % 2 == 0 && size > 1)
+	{
+		write(1, "42", 2);
+		*j = k + 1;
+	}
+	else
+	{
+		if (result[i][*j + 1] == '\0')
+			write(1, "$", 1);
+		*j = k - 1;
+	}
+}
