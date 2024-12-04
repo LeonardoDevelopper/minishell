@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/04 09:17:58 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/04 15:32:58 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,6 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_free_builtins.c	\
 	./src/builtins/ft_export.c			\
 	./src/builtins/ft_check_builtins.c	\
-	./src/cmd_handler/list_commands.c	\
 	./src/cmd_handler/split_commands.c	\
 	./src/cmd_handler/commands_exist.c	\
 	./src/cmd_handler/catch_cmd_args.c	\

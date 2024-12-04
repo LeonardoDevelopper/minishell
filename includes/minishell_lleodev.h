@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 12:37:04 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 15:51:57 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,18 +74,14 @@ void    free_prec(t_prec **prec);
 void    free_cmd(t_cmd *cmd);
 void	wait_p(int num);
 void    handle_cmd(t_cmd *cmd);
-void	run_multiple_cmd_test(t_cmd *cmd);
 void	run_multiple_cmd(t_cmd *cmd);
 void	run_cmd(t_cmd *cmd, t_prec *prec);
-void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
 void	*run_cmd_catch_output(char *cmd, char *env[]);
-void	run_child_p(t_prec *prec, t_child_p *child, char *env[]);
 void	*verify_redirect_stdin(char *cmd);
 void    *verify_redirect_stdout(char *input);
-void	redirect_stdin(t_cmd *cmd, char *env[]);
-void	redirect_stdin_test(t_prec *prec, char *env[]);
 void	print_args(t_cmd *cmd);
 void	print_stdout_child(char *buffer);
+void	run_child_p(t_prec *prec, t_child_p *child, char *env[]);
 void	run_child_p_test(char *path, char **args, t_child_p *child, char *env[]);
 void	print_args(t_cmd *cmd);
 char	**handle_double_quotes(char *input);
@@ -105,22 +101,18 @@ char	*remove_char(char *str, char c);
 char	*remove_str(char *mat);
 int		ft_handle_tokens(char *input);
 int		ft_handle_quotes(char *input);
-int		handle_heredoc(char *del);
+int		handle_heredoc(char *del, char *name);
 int		test_commands(t_cmd *cmd);
 int 	verify_dup_redirect_stdin(char *input);
 int		**create_pipes(t_cmd *cmd);
 int 	close_pipes(int **pipes, int pipe_num);
-int		run_cmd_catch_output_test(t_prec *prec, t_enviro **enviro, char *env[]);
 int		count_cmds_num(char *input);
 int		count_rows_del(char *str, char c);
-int		count_cmd_args(char *cmd);
 int		count_rowss(char *str);
 int		count_desk(char *str);
 int		count_rows_splited(char **strstr);
 int		d_quote(char *cmd);
 int		verify_fd(t_redirect *redirec);
-int		ft_strlen_c(char *str, char c);
-int		cmd_exits(t_cmd *cmd);
 int		verify_dup_redirect_stdout(char *input);
 int		verify_heredoc(char *input);
 int		count_char(char *str, int c);

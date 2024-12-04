@@ -6,43 +6,43 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 09:04:21 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 15:57:10 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    free_cmd(t_cmd *cmd)
+void	free_cmd(t_cmd *cmd)
 {
-    if (cmd)
-    {
+	if (cmd)
+	{
 		if (cmd->precedence)
-        	free_prec(cmd->precedence);
-        //if (cmd->input)
-        //    free(cmd->input);
-        //if (cmd->shell)
-        //	free(cmd->shell);
-        //free(cmd);
-    }
+			free_prec(cmd->precedence);
+	}
 }
 
-void    free_prec(t_prec **prec)
+void	free_redirects(t_prec *prec)
+{
+	if (prec->stdin_redirect)
+	{
+		free(prec->stdin_redirect->fd_list);
+		free(prec->stdin_redirect);
+	}
+	if (prec->stdout_redirect)
+	{
+		free(prec->stdout_redirect->fd_list);
+		free(prec->stdout_redirect);
+	}
+}
+
+void	free_prec(t_prec **prec)
 {
 	int	i;
 
 	i = 0;
 	while (prec[i])
 	{
-		if (prec[i]->stdin_redirect)
-		{
-			free(prec[i]->stdin_redirect->fd_list);
-			free(prec[i]->stdin_redirect);
-		}
-		if (prec[i]->stdout_redirect)
-		{
-			free(prec[i]->stdout_redirect->fd_list);
-			free(prec[i]->stdout_redirect);
-		}
+		free_redirects(prec[i]);
 		if (prec[i]->path)
 			free(prec[i]->path);
 		if (prec[i]->args)
@@ -100,8 +100,6 @@ void	handle_exit(t_cmd *cmd)
 			ft_putstr_fd("exit: too many arguments\n", 2);
 		free(trimmed_str);
 		free_matrix(tmp);
-		//free_cmd(cmd);
-		rl_clear_history();
 		ft_exit(tmp, count, NULL);
 	}
 	free(trimmed_str);

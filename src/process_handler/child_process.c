@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 08:38:41 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/29 17:58:23 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 15:52:57 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*read_stdout_child(int fd)
 	while (n_bytes > 0)
 	{
 		buffer = malloc(sizeof(char ) * 43);
-		n_bytes =  read(fd, buffer, 42);
+		n_bytes = read(fd, buffer, 42);
 		if (n_bytes > 0)
 			buffer[n_bytes] = '\0';
 		output = ft_strjoin_ptr(output, buffer);

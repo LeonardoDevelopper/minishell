@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 13:02:15 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:11:22 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,18 @@ int	count_rows(void **mat)
 
 void	*verify_redirect_stdin(char *cmd)
 {
-	int		i;
-	char	**redirect;
-	char	*trimed_str;
-	char	**rd;
+	int			i;
+	char		**redirect;
+	char		*trimed_str;
+	char		**rd;
 	t_redirect	*redirec;
 
 	i = 1;
-	redirec = NULL;
 	if (ft_strchr(cmd, '<'))
 	{
 		redirec = initialize_redirect();
 		redirect = ft_split(cmd, '<');
-		redirec->count = (count_rows((void **)redirect) - 1);
+		redirec->count = (count_rows((char **)redirect) - 1);
 		redirec->fd_list = (int *)malloc(sizeof(int) * redirec->count);
 		while (redirect[i])
 		{
@@ -60,7 +59,6 @@ int	verify_fd(t_redirect *redirec)
 {
 	int	i;
 
-
 	i = 0;
 	while (i < redirec->count)
 	{
@@ -68,49 +66,57 @@ int	verify_fd(t_redirect *redirec)
 			return (0);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
-int verify_dup_redirect_stdin(char *input)
+int	verify_dup_redirect_stdin(char *input)
 {
-    int i;
-    int count;
+	int	i;
+	int	count;
 
-    i = 0;
-    count = 0;
-    while (input[i])
-    {
-        if (input[i] == '>')
-        {
-            count++;
-        }
-        else
-        {
-            if ((count == 2) && input[i + 1] != '>')
-                return (1);
-            else if (count == 1 && input[i + 1] != '>')
-                return (0);
-        }
-        i++;
-    }
-    return (-1);
-}
-
-void	handle_stdin(t_prec * prec)
-{
-	prec->stdin_redirect = verify_redirect_stdin(prec->input);
-	if (prec->stdin_redirect)
+	i = 0;
+	count = 0;
+	while (input[i])
 	{
-		if (verify_heredoc(prec->input) > 0)
+		if (input[i] == '>')
+			count++;
+		else
 		{
-			prec->stdin_redirect->fd_list[prec->stdin_redirect->count - 1] = handle_heredoc(ft_strtrim(ft_split(prec->input, ' ')[2], " "));
-			prec->stdin = prec->stdin_redirect->fd_list[prec->stdin_redirect->count - 1];
+			if ((count == 2) && input[i + 1] != '>')
+				return (1);
+			else if (count == 1 && input[i + 1] != '>')
+				return (0);
 		}
-		else if (verify_heredoc(prec->input) < 0)
+		i++;
+	}
+	return (-1);
+}
+
+void	handle_stdin(t_prec *p)
+{
+	char	*tmp;
+	char	**tmp2;
+	char	*name;
+
+	p->stdin_redirect = verify_redirect_stdin(p->input);
+	if (p->stdin_redirect)
+	{
+		if (verify_heredoc(p->input) > 0)
+		{
+			tmp2 = ft_split(p->input, ' ');
+			tmp = ft_strtrim(tmp2[2], " ");
+			p->stdin_redirect->fd_list[p->stdin_redirect->count - 1]
+				= handle_heredoc(tmp, name);
+			p->stdin = p->stdin_redirect->fd_list[p->stdin_redirect->count - 1];
+			free(tmp);
+			free_matrix(tmp2);
+		}
+		else if (verify_heredoc(p->input) < 0)
 			return (printf("error: Invalid token\n"), NULL);
-		else if (verify_heredoc(prec->input) == 0)
-			prec->stdin = prec->stdin_redirect->fd_list[prec->stdin_redirect->count - 1];
+		else if (verify_heredoc(p->input) == 0)
+			p->stdin
+				= p->stdin_redirect->fd_list[p->stdin_redirect->count - 1];
 	}
 	else
-		prec->stdin = STDIN_FILENO;
+		p->stdin = STDIN_FILENO;
 }

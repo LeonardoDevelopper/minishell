@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 07:56:02 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 14:31:53 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char	*catch_cmd_args(char *cmd)
 	while (args_splited[i])
 	{
 		if (ft_strcmp(args_splited[i], "<") || ft_strcmp(args_splited[i], ">")
-			|| ft_strcmp(args_splited[i], ">>") || ft_strcmp(args_splited[i], "<<"))
+			|| ft_strcmp(args_splited[i], ">>")
+			|| ft_strcmp(args_splited[i], "<<"))
 			i += 2;
 		else
 		{
