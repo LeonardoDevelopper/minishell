@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 16:20:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:38:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*cmd_exist(char *cmd)
 		cmd = ft_strjoin("/", cmd);
 		while (dir[++i])
 		{
-			full_path = ft_strjoin(dir[i++], cmd);
+			full_path = ft_strjoin(dir[i], cmd);
 			if (access(full_path, X_OK) == 0)
 				return (free(cmd), free_matrix(dir), full_path);
 			free(full_path);
