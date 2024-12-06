@@ -38,7 +38,7 @@ void	ft_oldpwd(char **oldpwd, t_enviro **enviro)
 	oldpwd[2] = NULL;
 }
 
-void	ft_condition_cd_aux(char **cd, char **oldpwd, char **pwd,
+void	ft_condition_cd_aux(char **cd, char **pwd,
 		t_enviro **enviro)
 {
 	if (chdir(cd[1]) == -1)
@@ -76,22 +76,27 @@ int	ft_condition_cd(char **cd, char **oldpwd, char **pwd,
 		ft_export(pwd, 2, enviro);
 	}
 	else
-		ft_condition_cd_aux(cd, oldpwd, pwd, enviro);
+		ft_condition_cd_aux(cd, pwd, enviro);
 	return (1);
 }
 
 int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 		t_enviro **enviro)
 {
+	int	value;
+
 	oldpwd[0] = NULL;
 	oldpwd[1] = NULL;
 	pwd[0] = NULL;
 	pwd[1] = NULL;
 	ft_oldpwd(oldpwd, enviro);
-	if (ft_condition_cd(cd, oldpwd, pwd, enviro) == -1)
+	value = ft_condition_cd(cd, oldpwd, pwd, enviro);
+	if (value == -1)
 		return (-1);
 	ft_export(oldpwd, 2, enviro);
 	free_cd(pwd, oldpwd);
+	if (value == 1)
+		return (1);
 	return (0);
 }
 

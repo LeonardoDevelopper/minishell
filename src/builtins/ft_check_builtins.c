@@ -6,14 +6,17 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/02 10:39:22 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:40:35 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int count_arg)
+int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
 {
+	int	count_arg;
+
+	count_arg = ft_count(cmd);
 	if (ft_strcmp(remove_char(cmd[k], '"'), "cd"))
 		return (ft_cd(cmd, count_arg, enviro));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "export"))
@@ -21,16 +24,32 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int count_arg)
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "unset"))
 		return (ft_unset(cmd, count_arg, enviro));
 	if (ft_strcmp(remove_char(cmd[k], '"'), "pwd"))
-		return (ft_pwd(count_arg));
+		return (ft_pwd(fd));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "env"))
 	{
-		ft_env(count_arg, cmd, enviro);
+		ft_env(count_arg, cmd, enviro, fd);
 		return (1);
 	}
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "exit"))
-		ft_exit(cmd, count_arg, enviro);
+		ft_exit(cmd, count_arg, enviro, fd);
 	else
 		return (0);
+}
+
+int	case_n(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
@@ -41,7 +60,7 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	char	*aux = catch_cmd_args(result_echo);
 	if (!aux)
 		return (0);
-	if (ft_strcmp(cmd[1], "-n"))
+	if (case_n(cmd[1]))
 	{
 		ft_putstr_fd(aux, fd);
 		ft_putchar_fd('\n', fd);
@@ -58,53 +77,42 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	return (0);
 }
 
-int	ft_check_cots(char **str)
+int	take_return(int value)
 {
-	int	i;
-	int	k;
+	int	result;
 
-	i = 0;
-	k = 0;
-	while (str[i])
+	if (value < 0 || value > 255)
 	{
-		int	j = 0;
-		while (str[i][j])
-		{
-			if (str[i][j] == 34)
-				k++;
-			j++;
-		}
-		i++;
+		result = value % 256;
+		return ((unsigned char)result);
 	}
-	return (k);
+	return (value);
 }
 
 int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 {
-	int	count_arg;
-	int	k;
-	int	retur;
+	int		count_arg;
+	int		retur;
 	char	**cmd;
 
-	k = 0;
 	cmd = ft_split(prec->input, ' ');
+	count_arg = ft_count(cmd);
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
-		printf("Invalid arg! %d\n", ft_check_cots(cmd));
+		print_chech_builtin(prec);
 		return (1);
 	}
-	count_arg = ft_count(cmd);
-	if (ft_strcmp(remove_char(cmd[k], '"'), "echo"))
+	if (ft_strcmp(remove_char(cmd[0], '"'), "echo"))
 	{
-		if (ft_strcmp(cmd[k + 1], "-n") && !cmd[k + 2])
+		if (case_n(cmd[0 + 1]) && !cmd[0 + 2])
 			return (1);
 		return (case_echo(cmd, enviro, env, prec->stdout));
 	}
 	else
 	{
-		retur = check_builtins_one(cmd, enviro, k, count_arg);
+		retur = check_builtins_one(cmd, enviro, 0, prec->stdout);
 		if (retur != 0)
-			init_status(enviro, retur);
+			init_status(enviro, take_return(retur));
 		return (retur);
 	}
 }

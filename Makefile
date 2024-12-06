@@ -41,6 +41,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_comands.c			\
 	./src/utils/ft_aux.c				\
 	./src/utils/ft_aux1.c				\
+	./src/utils/ft_aux2.c				\
 	./src/utils/env.c					\
 	./src/init_handler/var_initializer.c	\
 	./src/signal_handler/ft_takesignal.c	\

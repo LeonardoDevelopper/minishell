@@ -15,21 +15,26 @@
 void	ft_echo_aux(t_enviro **enviro, char **value)
 {
 	char	**result;
+	char	*new_result;
 	int		i;
 	char	*end_result;
 
 	result_echo(0, 1);
 	i = 0;
 	result = ft_split_echo(value);
-	if (ft_strcmp(result[i], "-n "))
+	while (result[i])
 	{
-		i++;
-		check_echo(result, enviro, i);
+		new_result = epur_str(result[i]);
+		if (case_n(new_result))
+			i++;
+		else
+		{
+			break ;
+			free(new_result);
+		}
+		free(new_result);
 	}
-	else
-	{
-		check_echo(result, enviro, i);
-	}
+	check_echo(result, enviro, i);
 }
 
 char	*result_echo(int c, int reset)
@@ -82,6 +87,7 @@ char	*ft_echo(char **echo, t_enviro **enviro)
 
 void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)
 {
+	check_dolar(result, i, j);
 	expandecho(result, enviro, i, *j);
 	(*j)++;
 	while (result[i][*j] && result[i][*j] != 32 && result[i][*j] != 34 &&
@@ -107,15 +113,11 @@ void	check_echo(char **result, t_enviro **enviro, int i)
 			else if (result[i][j] && result[i][j] == '$')
 				aux_check_echo(result, enviro, i, &j);
 			else if (result[i][j])
-			{
 				result_echo(result[i][j], 0);
-			}
 			j++;
 		}
 		i++;
 		if (result[i])
-		{
 			result_echo(32, 0);
-		}
 	}
 }
