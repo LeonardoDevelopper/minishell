@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 00:14:41 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 00:58:27 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,16 @@ int	handle_redirect_token(char *input)
 			i += skip_content_in_quote(new, i);
 		if ((i + 2) < ft_strlen(new))
 		{
+			if ((new[i] == '<' && (new[i + 1] == '>' || new[i + 1] == '|'))
+				|| (new[i] == '>' && (new[i + 1] == '<' || new[i + 1] == '|')))
+				return (1);
+			if (new[i] == '|' && (new[i + 1] == '|'
+					|| new[i + 1] == '>' || new[i + 1] == '<'))
+				return (1);
 			if ((new[i] == '<' || new[i] == '>' || new[i] == '|')
 				&& (new[i + 2] == '<' || new[i + 2] == '>'
 					|| new[i + 2] == '|'))
-			{
 				return (1);
-			}
 		}
 		i++;
 	}
