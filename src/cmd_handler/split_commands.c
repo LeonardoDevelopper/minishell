@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 14:32:35 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 23:25:46 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		precedence[p]->input = ft_strtrim(commands[p], " ");
 		handle_stdin(precedence[p]);
 		handle_cmd_exist(precedence[p]);
-		handle_double_quotes(precedence[p]->input);
 		handle_args(precedence[p]);
 		handle_stdout(precedence[p]);
 		p++;

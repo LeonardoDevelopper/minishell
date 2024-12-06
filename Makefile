@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/05 08:32:04 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/06 23:39:08 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/cmd_handler/commands_exist.c	\
 	./src/cmd_handler/catch_cmd_args.c	\
 	./src/cmd_handler/handle_cmd.c		\
-	./src/quotes_handler/handle_quote.c	\
+	./src/token_handler/handle_quote.c	\
+	./src/token_handler/handle_tokens.c	\
 	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
@@ -108,7 +109,7 @@ norm_lleodev:
 	./src/cmd_handler					\
 	./src/free_handler					\
 	./src/init_handler					\
-	./src/quotes_handler				\
+	./src/token_handler					\
 	./src/redirects_handler				\
 	./src/display_cli.c					\
 	./src/minishell.c					\
