@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/06 14:40:35 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 17:32:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 		ft_putstr_fd(aux, fd);
 		ft_putchar_fd('\n', fd);
 	}
-	if (fd != 1)
-		close(fd);
 	free(aux);
 	return (0);
 }
@@ -115,4 +113,5 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 			init_status(enviro, take_return(retur));
 		return (retur);
 	}
+	exit(0);
 }
