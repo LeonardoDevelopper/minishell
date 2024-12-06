@@ -6,11 +6,21 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 23:36:01 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 00:01:26 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	skip_space(char *cmd, int i)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] && cmd[i] == 32 || (cmd[i] > 9 && cmd[i] <= 13))
+		i++;
+	return (i);
+}
 
 int	check_cmd_tokens(char *cmd)
 {
@@ -23,11 +33,9 @@ int	check_cmd_tokens(char *cmd)
 	{
 		if (cmd[i] == '"' || cmd[i] == '\'')
 			i += skip_content_in_quote(cmd, i);
-		if ((cmd[0] == '|' || cmd[0] == '<' || cmd[0] == '>')
-			|| cmd[i - 1] == '|' || cmd[i - 1] == '<' || cmd[i - 1] == '>')
+		if ((cmd[0] == '|' || cmd[0] == '<' || cmd[0] == '>'))
 			return (1);
-		while (cmd[i] && cmd[i] == 32 || (cmd[i] > 9 && cmd[i] <= 13))
-			i++;
+		i += skip_space(cmd, i);
 		if (cmd[i] == '|')
 		{
 			count++;
@@ -38,6 +46,8 @@ int	check_cmd_tokens(char *cmd)
 			count = 0;
 		i++;
 	}
+	if (cmd[i - 1] == '|' || cmd[i - 1] == '<' || cmd[i - 1] == '>')
+		return (1);
 	return (0);
 }
 
@@ -54,10 +64,11 @@ int	handle_redirect_token(char *input)
 			i += skip_content_in_quote(new, i);
 		if ((i + 2) < ft_strlen(new))
 		{
-			if ((new[i] == '<' && new[i + 2] == '<')
-				|| (new[i] == '>' && new[i + 2] == '>')
-				|| (new[i] == '|' && new[i + 2] == '|'))
+			if ((new[i] == '<' || new[i] == '>' || new[i] == '|')
+				&& (new[i + 2] == '<' || new[i + 2] == '>'
+					|| new[i + 2] == '|'))
 			{
+				printf("HERE!");
 				return (1);
 			}
 		}
