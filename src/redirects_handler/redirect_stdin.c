@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 16:24:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 13:51:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*verify_redirect_stdin(char *cmd)
 	t_redirect	*redirec;
 
 	i = 0;
-	if (ft_strchr(cmd, '<'))
+	if (ft_findchar(cmd, '<'))
 	{
 		redirec = initialize_redirect();
 		redirect = ft_split(cmd, '<');

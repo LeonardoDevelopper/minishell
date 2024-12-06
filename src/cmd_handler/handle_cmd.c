@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 14:29:10 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/05 08:49:46 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	handle_cmd_exist(t_prec *prec)
 	tmp = ft_split(prec->input, ' ');
 	prec->cmd = (char *)malloc(ft_strlen(tmp[0]) + 1);
 	ft_strcpy(prec->cmd, tmp[0]);
-	prec->path = cmd_exist(prec->cmd);
 	free_matrix(tmp);
+	prec->path = cmd_exist(prec->cmd);
 }

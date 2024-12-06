@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/04 15:32:58 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/05 08:32:04 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,8 @@ norm_lleodev:
 	./src/quotes_handler				\
 	./src/redirects_handler				\
 	./src/display_cli.c					\
-	./src/minishell.c
+	./src/minishell.c					\
+	./includes/minishell_lleodev.h
 				
 
 lleodev_header:

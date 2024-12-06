@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:52:00 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 14:28:13 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:34:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int	ft_handle_tokens(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '\\' || input[i] == ';' || input[i] == '&')
+		if (input[i] == '\\' || input[i] == ';' || input[i] == '&'
+			|| (input[i] == '|' && input[i + 1] && input[i + 1] == '|'))
+			//|| end_of_input())
 		{
 			ft_putstr_fd("error: Unexpected token at the input\n",
 				STDERR_FILENO);

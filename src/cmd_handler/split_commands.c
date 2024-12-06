@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/03 12:28:56 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:32:35 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_prec	**split_cmds(char *input, int num_cmd)
 	int		p;
 	int		pipe[2];
 	char	**commands;
-	char	*str_trimmed;
 
 	p = 0;
 	precedence = (t_prec **)malloc(sizeof(t_prec *) * (num_cmd + 1));
@@ -32,14 +31,12 @@ t_prec	**split_cmds(char *input, int num_cmd)
 	while (p < num_cmd)
 	{
 		precedence[p] = initialize_prec();
-		str_trimmed = ft_strtrim(commands[p], " ");
-		precedence[p]->input = str_trimmed;
+		precedence[p]->input = ft_strtrim(commands[p], " ");
 		handle_stdin(precedence[p]);
 		handle_cmd_exist(precedence[p]);
 		handle_double_quotes(precedence[p]->input);
 		handle_args(precedence[p]);
 		handle_stdout(precedence[p]);
-		free(str_trimmed);
 		p++;
 	}
 	free_matrix(commands);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 15:57:10 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:33:10 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	free_prec(t_prec **prec)
 		free_redirects(prec[i]);
 		if (prec[i]->path)
 			free(prec[i]->path);
+		if (prec[i]->input)
+			free(prec[i]->input);
 		if (prec[i]->args)
 			free_matrix(prec[i]->args);
 		if (prec[i]->child)
