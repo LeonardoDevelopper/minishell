@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 00:01:26 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 00:14:41 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	skip_space(char *cmd, int i)
 {
-	int	i;
-
-	i = 0;
 	while (cmd[i] && cmd[i] == 32 || (cmd[i] > 9 && cmd[i] <= 13))
 		i++;
 	return (i);
@@ -25,25 +22,16 @@ int	skip_space(char *cmd, int i)
 int	check_cmd_tokens(char *cmd)
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
 	while (cmd[i])
 	{
 		if (cmd[i] == '"' || cmd[i] == '\'')
 			i += skip_content_in_quote(cmd, i);
 		if ((cmd[0] == '|' || cmd[0] == '<' || cmd[0] == '>'))
 			return (1);
-		i += skip_space(cmd, i);
-		if (cmd[i] == '|')
-		{
-			count++;
-			if (count > 1)
-				return (1);
-		}
-		else
-			count = 0;
+		if (cmd[i] == '|' && cmd[i + 1] == '|')
+			return (1);
 		i++;
 	}
 	if (cmd[i - 1] == '|' || cmd[i - 1] == '<' || cmd[i - 1] == '>')
@@ -68,7 +56,6 @@ int	handle_redirect_token(char *input)
 				&& (new[i + 2] == '<' || new[i + 2] == '>'
 					|| new[i + 2] == '|'))
 			{
-				printf("HERE!");
 				return (1);
 			}
 		}
