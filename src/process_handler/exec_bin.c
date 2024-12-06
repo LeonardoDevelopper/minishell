@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 17:35:23 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 19:34:25 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	*run_cmd_catch_output(char *cmd, char *env[])
 void	run_cmd(t_cmd *cmd, t_prec *prec)
 {
 	if (prec->builtins)
+	{
 		check_builtins(prec, &cmd->enviro, cmd->env);
+		exit(0);
+	}
 	else
 	{
 		execve(prec->path,
@@ -62,25 +65,26 @@ void	change_input_output(int i, int num, int **pipes, t_prec *prec)
 			dup2(prec->stdout, STDOUT_FILENO);
 		if (i > 0)
 			dup2(pipes[i - 1][0], STDIN_FILENO);
-		if (i < num -1)
+		if (i < num - 1)
 			dup2(pipes[i][1], STDOUT_FILENO);
 	}
 	else
 	{
-		if (i > 0)
-			prec->stdout = pipes[i - 1][0];
-		if (i < num -1)
-			prec->stdout = pipes[i][1];
+		if (num > 1)
+		{
+			dup2(pipes[i][1], STDOUT_FILENO);
+			close(pipes[i][1]);
+		}
 	}
 }
 
 void	run_multiple_cmd(t_cmd *cmd)
 {
-	int			**pipes;
-	int			i;
+	int	**pipes;
+	int	i;
 
-	pipes = create_pipes(cmd);
 	i = 0;
+	pipes = create_pipes(cmd);
 	while (i < cmd->cmd_num)
 	{
 		cmd->precedence[i]->child = new_child_p(NULL);
@@ -88,15 +92,20 @@ void	run_multiple_cmd(t_cmd *cmd)
 		{
 			change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
 			run_cmd(cmd, cmd->precedence[i]);
-			//close_pipes(pipes, cmd->cmd_num);
+			close_pipes(pipes, cmd->cmd_num);
 		}
-		//if (cmd->precedence[i]->stdout_redirect)
-		//	close(cmd->precedence[i]->stdout);
+		if (i > 0)
+			close(pipes[i - 1][0]);
+		if (i < cmd->cmd_num - 1)
+			close(pipes[i][1]);	
+		if (cmd->precedence[i]->stdout_redirect)
+			close(cmd->precedence[i]->stdout);
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
 	wait_p(cmd->cmd_num);
 }
+
 
 void	wait_p(int num)
 {
