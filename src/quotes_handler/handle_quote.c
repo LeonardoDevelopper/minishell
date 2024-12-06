@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:52:00 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 14:34:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 20:18:50 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,22 @@ int	d_quote(char *cmd)
 	return (counter);
 }
 
-char	*quote(char *cmd)
+int	check_cmd_start_end(char *cmd)
 {
-	char	*quote;
+	int		i;
+	char	*new;
 
-	quote = cmd;
-	if (d_quote(cmd) == 1)
+	i = 0;
+	new = ft_strtrim(cmd, " ");
+	while (new[i])
 	{
-		quote = ft_strjoin_ptr(quote, readline("\n >_ "));
-		while (d_quote(quote) < 2)
-		{
-			printf("%s", quote);
-			quote = ft_strjoin_ptr(quote, readline("\n >_ "));
-		}
+		if (new[0] == '|' || new[0] == '<' || new[0] == '>')
+			return (1);
+		i++;
 	}
-	return (quote);
+	if (new[i - 1] == '|' || new[i - 1] == '<' || new[i - 1] == '>')
+		return (1);
+	return (0);
 }
 
 int	ft_handle_tokens(char *input)
@@ -53,10 +54,10 @@ int	ft_handle_tokens(char *input)
 	while (input[i])
 	{
 		if (input[i] == '\\' || input[i] == ';' || input[i] == '&'
-			|| (input[i] == '|' && input[i + 1] && input[i + 1] == '|'))
-			//|| end_of_input())
+			|| (input[i] == '|' && input[i + 1] == '|')
+			|| check_cmd_start_end(input))
 		{
-			ft_putstr_fd("error: Unexpected token at the input\n",
+			ft_putstr_fd("error: syntax error near unexpected token\n",
 				STDERR_FILENO);
 			return (0);
 		}

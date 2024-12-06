@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 14:41:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 20:11:11 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct cmd_s
 	t_prec			**precedence;
 }		t_cmd;
 
+int			check_cmd_start_end(char *cmd);
 int			ft_handle_tokens(char *input);
 int			ft_handle_quotes(char *input);
 int			handle_heredoc(char *del, char *name);

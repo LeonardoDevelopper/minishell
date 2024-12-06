@@ -6,17 +6,19 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 09:00:59 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/05 09:06:55 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 20:02:44 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_findchar(char *str, int c)
+int ft_findchar(char *str, int c)
 {
     int i;
 
     i = 0;
+    if (!str)
+        return (0);
     while (str[i])
     {
         if (str[i] == c)
