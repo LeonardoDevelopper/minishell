@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/27 11:42:52 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:33:41 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,31 @@
 
 char	*catch_cmd_args(char *cmd)
 {
-	int	i;
-	int	j;
-	int	k;
+	int		i;
+	int		j;
+	int		k;
 	char	*args;
-	char	**args_splited;
+	char	**args_sp;
 
 	i = 0;
 	k = 0;
-	args = (char *)malloc(sizeof(char ) * ft_strlen(cmd));
-	args_splited = ft_split(cmd, ' ');
-	while (args_splited[i])
+	args = (char *)malloc(sizeof(char ) * 1024);
+	args_sp = ft_split(cmd, ' ');
+	while (args_sp[i])
 	{
-		if (ft_strcmp(args_splited[i], "<") || ft_strcmp(args_splited[i], ">")
-			|| ft_strcmp(args_splited[i], ">>") || ft_strcmp(args_splited[i], "<<"))
+		if (ft_strcmp(args_sp[i], "<") || ft_strcmp(args_sp[i], ">")
+			|| ft_strcmp(args_sp[i], ">>") || ft_strcmp(args_sp[i], "<<"))
 			i += 2;
 		else
 		{
 			j = 0;
-			while (args_splited[i][j])
-				args[k++] = args_splited[i][j++];
+			while (args_sp[i][j])
+				args[k++] = args_sp[i][j++];
 			args[k++] = ' ';
 			i++;
-			
 		}
 	}
-	args[k] = '\0';
-	return (args);
+	return (args[k] = '\0', free_matrix(args_sp), args);
 }
 
 int	count_char(char *str, int c)

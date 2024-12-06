@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/12 13:04:28 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:38:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,12 @@ char	*cmd_exist(char *cmd)
 {
 	char	**dir;
 	char	*full_path;
-	int	i;
+	int		i;
 
-	i = 0;
+	i = -1;
 	full_path = NULL;
 	dir = split_dir();
-	if (cmd[0] == '/')
-	{
-		if (access(cmd, X_OK) == 0)
-			return (cmd);
-	}
-	else if (cmd[0] == '.')
+	if (cmd[0] == '/' || cmd[0] == '.')
 	{
 		if (access(cmd, X_OK) == 0)
 			return (cmd);
@@ -34,27 +29,22 @@ char	*cmd_exist(char *cmd)
 	else
 	{
 		cmd = ft_strjoin("/", cmd);
-		while (dir[i])
+		while (dir[++i])
 		{
-			full_path = ft_strjoin(dir[i++], cmd);
+			full_path = ft_strjoin(dir[i], cmd);
 			if (access(full_path, X_OK) == 0)
-			{
-				free(cmd);
-				free_matrix(dir);
-				return (full_path);
-			}
+				return (free(cmd), free_matrix(dir), full_path);
 			free(full_path);
 		}
-			free(cmd);
-			free_matrix(dir);
+		free_matrix(dir);
 	}
-	return (NULL);
+	return (free(cmd), NULL);
 }
 
 char	**split_dir(void)
 {
-	char *env;
-	char path_cpy[1024];
+	char	*env;
+	char	path_cpy[1024];
 	char	**path;
 
 	env = getenv("PATH");
@@ -65,5 +55,5 @@ char	**split_dir(void)
 		path = ft_split(path_cpy, ':');
 		return (path);
 	}
-	return (NULL);	
+	return (NULL);
 }

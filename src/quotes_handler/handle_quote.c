@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:52:00 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/30 02:17:06 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 14:34:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	d_quote(char *cmd)
 {
-	int	counter;
+	int		counter;
 	char	*ptr_cmd;
 
 	ptr_cmd = cmd;
@@ -31,7 +31,6 @@ int	d_quote(char *cmd)
 char	*quote(char *cmd)
 {
 	char	*quote;
-	//char	*tmp;
 
 	quote = cmd;
 	if (d_quote(cmd) == 1)
@@ -53,9 +52,12 @@ int	ft_handle_tokens(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '\\' || input[i] == ';' || input[i] == '&')
+		if (input[i] == '\\' || input[i] == ';' || input[i] == '&'
+			|| (input[i] == '|' && input[i + 1] && input[i + 1] == '|'))
+			//|| end_of_input())
 		{
-			ft_putstr_fd("error: Unexpected token at the input\n", STDERR_FILENO);
+			ft_putstr_fd("error: Unexpected token at the input\n",
+				STDERR_FILENO);
 			return (0);
 		}
 		i++;
@@ -80,7 +82,6 @@ char	**handle_double_quotes(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if (input[i])
 		i++;
 	}
 }
