@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 02:16:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 11:13:17 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			check_builtins(t_prec *prec, t_enviro **enviro, char **env);
 int			**create_pipes(t_cmd *cmd);
 
 char		*get_content_quotes(char *input);
+char		*handle_literal(char *input);
+char		*handle_no_literal(char *input);
 char		*ft_strjoin_matrix(char **mat, char c);
 char		*display_shell(char *env[], char **tmp, char **enviro);
 char		*cmd_exist(char *cmd);
@@ -106,6 +108,7 @@ char		**handle_double_quotes(char *input);
 char		**ft_split_del(char *str, char c);
 char		**ft_split_args(char *str);
 
+void		print_args(t_cmd *cmd);
 void		free_matrix(char **matrix);
 void		initialize_cmd(t_cmd *cmd);
 void		handle_args(t_prec *prec);
@@ -117,12 +120,11 @@ void		wait_p(int num);
 void		handle_cmd(t_cmd *cmd);
 void		run_multiple_cmd(t_cmd *cmd);
 void		run_cmd(t_cmd *cmd, t_prec *prec);
-void		print_args(t_cmd *cmd);
 void		print_stdout_child(char *buffer);
 void		run_child_p(t_prec *prec, t_child_p *child, char *env[]);
-void		print_args(t_cmd *cmd);
 void		handle_exit(t_cmd *cmd);
 void		run_child_p_test(char *pth, char **ags, t_child_p *ch, char *env[]);
+void		*try_open(t_redirect *redir, char *input, char *tmp);
 void		*run_cmd_catch_output(char *cmd, char *env[]);
 void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 02:58:05 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 03:30:55 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ char	*catch_cmd_args(char *cmd)
 		if (ft_strcmp(args_sp[i], "<") || ft_strcmp(args_sp[i], ">")
 			|| ft_strcmp(args_sp[i], ">>") || ft_strcmp(args_sp[i], "<<"))
 			i += 2;
+		else if (ft_findchar(args_sp[i], '"') || ft_findchar(args_sp[i], '\''))
+			i++;
 		else
 		{
 			j = 0;

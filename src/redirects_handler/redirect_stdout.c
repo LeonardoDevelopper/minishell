@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 09:35:06 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 11:21:57 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,52 +18,40 @@ void	*verify_redirect_stdout(char *input)
 	char		**redirect;
 	char		*tmp;
 
-	redir = initialize_redirect();
-	redirect = ft_split(input, '>');
-	tmp = ft_strtrim(redirect[1], " ");
-	redir->count = count_rows((void **)redirect);
-	free_matrix(redirect);
-	if (redir->count > 1)
+	if (ft_findchar(input, '>'))
 	{
-		redir->fd_list = (int *)malloc(sizeof(int) * 1);
-		if (verify_dup_redirect_stdout(input) < 0)
-			return (free(redir), NULL);
-		else if (!verify_dup_redirect_stdout(input))
-			redir->fd_list[0] = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		else if (verify_dup_redirect_stdout(input))
-			redir->fd_list[0] = open(tmp, O_WRONLY | O_CREAT | O_APPEND, 0644);
-		free(tmp);
-		if (redir->fd_list[0] < 0)
-			return (free(redir), NULL);
+		redir = initialize_redirect();
+		redirect = ft_split(input, '>');
+		if (verify_quotes(redirect[1]))
+			tmp = get_content_quotes(redirect[1]);
 		else
+			tmp = ft_strtrim(redirect[1], " ");
+		redir->count = count_rows((void **)redirect);
+		free_matrix(redirect);
+		if (redir->count > 1)
+		{
+			redir->fd_list = (int *)malloc(sizeof(int) * 1);
+			redir = try_open(redir, input, tmp);
 			return (redir);
+		}
+		return (free(redir), NULL);
 	}
-	return (free(redir), NULL);
+	return (NULL);
 }
 
-int	verify_dup_redirect_stdout(char *input)
+void	*try_open(t_redirect *redir, char *input, char *tmp)
 {
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (input[i])
-	{
-		if (input[i] == '>')
-		{
-			count++;
-		}
-		else
-		{
-			if ((count == 2) && input[i + 1] != '>')
-				return (1);
-			else if (count == 1 && input[i + 1] != '>')
-				return (0);
-		}
-		i++;
-	}
-	return (-1);
+	if (verify_dup_redirect_stdout(input) < 0)
+		return (free(redir), NULL);
+	else if (!verify_dup_redirect_stdout(input))
+		redir->fd_list[0] = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	else if (verify_dup_redirect_stdout(input))
+		redir->fd_list[0] = open(tmp, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	free(tmp);
+	if (redir->fd_list[0] < 0)
+		return (free(redir), NULL);
+	else
+		return (redir);
 }
 
 void	handle_stdout(t_prec *prec)

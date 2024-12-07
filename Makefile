@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/06 23:39:08 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/07 10:53:41 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,12 +50,14 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/redirects_handler/redirect_stdin.c	\
 	./src/redirects_handler/redirect_stdout.c	\
 	./src/redirects_handler/heredoc.c			\
+	./src/redirects_handler/redirect_utils.c	\
 	./src/process_handler/path.c			\
 	./src/process_handler/exec_bin.c		\
 	./src/process_handler/child_process.c	\
 	./src/process_handler/pipe_handler.c	\
 	./src/display_cli.c					\
-	./src/minishell.c	
+	./src/minishell.c	\
+	./src/list_commands.c
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 
