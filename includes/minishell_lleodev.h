@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 23:15:17 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 02:16:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct cmd_s
 	t_prec			**precedence;
 }		t_cmd;
 
+int			skip_space(char *cmd, int i);
 int			skip_content_in_quote(char *input, int i);
 int			handle_special_chr(char *input);
 int			handle_redirect_token(char *input);
@@ -79,15 +80,16 @@ int			count_rows_del(char *str, char c);
 int			count_rowss(char *str);
 int			count_desk(char *str);
 int			count_rows_splited(char **strstr);
-int			d_quote(char *cmd);
 int			verify_fd(t_redirect *redirec);
 int			verify_dup_redirect_stdout(char *input);
 int			verify_heredoc(char *input);
 int			count_char(char *str, int c);
+int			verify_quotes(char *input);
 int			is_builtins(t_prec **prec);
 int			check_builtins(t_prec *prec, t_enviro **enviro, char **env);
 int			**create_pipes(t_cmd *cmd);
 
+char		*get_content_quotes(char *input);
 char		*ft_strjoin_matrix(char **mat, char c);
 char		*display_shell(char *env[], char **tmp, char **enviro);
 char		*cmd_exist(char *cmd);

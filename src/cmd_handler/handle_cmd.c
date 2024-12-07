@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 00:06:47 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 01:18:51 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	handle_cmd(t_cmd *cmd)
 {
 	if (ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
 	{
-		/*cmd->cmd_num = count_cmds_num(cmd->input) + 1;
+		cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 		cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
 		if (cmd->precedence)
 		{
 			if (test_commands(cmd))
 				run_multiple_cmd(cmd);
 			free_cmd(cmd);
-		}*/
+		}
 	}
 }
 

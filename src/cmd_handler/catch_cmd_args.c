@@ -6,12 +6,13 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 16:33:41 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 02:58:05 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+//BUG getting the argumments
 char	*catch_cmd_args(char *cmd)
 {
 	int		i;
