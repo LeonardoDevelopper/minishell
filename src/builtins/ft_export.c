@@ -80,6 +80,7 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 			export_check(export, ac, enviro, j);
 			j++;
 		}
+		free(export[1]);
 	}
 	return (0);
 }

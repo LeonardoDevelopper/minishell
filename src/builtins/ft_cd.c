@@ -32,23 +32,30 @@ void	ft_oldpwd(char **oldpwd, t_enviro **enviro)
 	if (!temp)
 	{
 		free(oldpwd[0]);
+		oldpwd[0] = NULL;
 		return ;
 	}
 	oldpwd[1] = temp;
 	oldpwd[2] = NULL;
 }
 
+
 void	ft_condition_cd_aux(char **cd, char **pwd,
 		t_enviro **enviro)
 {
+	char	*result = NULL;
+
 	if (chdir(cd[1]) == -1)
 	{
-		if (chdir(ft_echo(cd, enviro)) == -1)
+		result = ft_echo(cd, enviro);
+		if (chdir(result) == -1)
 		{
 			printf("cd: string not in %s\n", cd[1]);
-			return (1);
+			free(result);
+			return;
 		}
 	}
+	free(result);
 	ft_new_pwd(pwd, enviro);
 	ft_export(pwd, 2, enviro);
 }
@@ -94,7 +101,7 @@ int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 	if (value == -1)
 		return (-1);
 	ft_export(oldpwd, 2, enviro);
-	free_cd(pwd, oldpwd);
+	//free_cd(pwd, NULL);
 	if (value == 1)
 		return (1);
 	return (0);
@@ -105,14 +112,19 @@ int	ft_cd(char **cd, int ac, t_enviro **enviro)
 	char	**oldpwd;
 	char	**pwd;
 
-	oldpwd = (char **)malloc(2 * sizeof(char *));
+	oldpwd = (char **)malloc(3 * sizeof(char *));
 	if (!oldpwd)
 		return (0);
-	pwd = (char **)malloc(2 * sizeof(char *));
+	pwd = (char **)malloc(3 * sizeof(char *));
 	if (!pwd)
 	{
 		free(oldpwd);
 		return (0);
 	}
-	return (ft_start_cd(cd, oldpwd, pwd, enviro));
+	if (ft_start_cd(cd, oldpwd, pwd, enviro) == -1)
+	{
+		free_cd(pwd, oldpwd);
+		return (-1);
+	}
+	return (1);
 }

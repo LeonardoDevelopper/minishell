@@ -15,29 +15,35 @@
 void	init_status(t_enviro **enviro, int value)
 {
 	char	**status;
+	char	*str_itoa;
+	char	*str_join;
 
 	status = malloc(sizeof(char *) * 3);
 	if (!status)
 		return ;
-	status[0] = malloc(sizeof(char) * 1024);
+	status[0] = malloc(sizeof(char) * 240);
 	if (!status[0])
 	{
 		free(status);
 		return ;
 	}
 	ft_strcpy(status[0], "export");
-	status[1] = malloc(sizeof(char) * 1024);
+	status[1] = malloc(sizeof(char) * 250);
 	if (!status[1])
 	{
 		free(status[0]);
 		free(status);
 		return ;
 	}
-	ft_strcpy(status[1], ft_strjoin("?=", ft_itoa(value)));
+	str_itoa = ft_itoa(value);
+	str_join = ft_strjoin("?=", str_itoa);
+	ft_strcpy(status[1], str_join);
 	status[2] = NULL;
+	
 	ft_export(status, ft_count(status), enviro);
+	free(str_itoa);
+	free(str_join);
 	free(status[0]);
-	free(status[1]);
 	free(status);
 }
 

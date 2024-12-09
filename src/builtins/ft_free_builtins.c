@@ -29,14 +29,19 @@ void	free_cd(char **pwd, char **oldpwd)
 {
 	if (pwd)
 	{
-		free(pwd[0]);
-		free(pwd[1]);
+		if (pwd[0])
+			free(pwd[0]);
+		if (pwd[1])
+			free(pwd[1]);
 		free(pwd);
 	}
 	if (oldpwd)
 	{
-		free(oldpwd[0]);
-		free(oldpwd[1]);
+		if (oldpwd[0])
+			free(oldpwd[0]);
+		if (oldpwd[1])
+			free(oldpwd[1]);
 		free(oldpwd);
 	}
 }
+

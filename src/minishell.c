@@ -66,5 +66,6 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		free(cmd->shell);
 	}
+	free_enviro_list(&cmd->enviro);
 	return (0);
 }
