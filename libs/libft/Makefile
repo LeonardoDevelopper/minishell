@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleodev <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/16 11:51:34 by lleodev           #+#    #+#              #
-#    Updated: 2024/05/23 16:25:54 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/05 09:07:55 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ SRCS = 	ft_isalpha.c	\
 	ft_epur.c			\
 	get_next_line.c		\
 	get_next_line_utils.c	\
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c		\
+	ft_findchar.c		
 
 
 ################################COLORS######################################

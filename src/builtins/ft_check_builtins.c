@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/30 11:19:01 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/06 17:32:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,21 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	char	*result_echo;
 
 	result_echo = ft_echo(cmd, enviro);
-	if (!result_echo)
+	char	*aux = catch_cmd_args(result_echo);
+	if (!aux)
 		return (0);
 	if (case_n(cmd[1]))
 	{
-		ft_putstr_fd(result_echo, fd);
+		ft_putstr_fd(aux, fd);
+		ft_putchar_fd('\n', fd);
+
 	}
 	else
 	{
-		ft_putstr_fd(result_echo, fd);
-		printf("\n");
+		ft_putstr_fd(aux, fd);
+		ft_putchar_fd('\n', fd);
 	}
-	free(result_echo);
+	free(aux);
 	return (0);
 }
 
@@ -115,4 +118,5 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 		free_matrix(cmd);
 		return (retur);
 	}
+	exit(0);
 }

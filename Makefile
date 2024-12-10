@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/11/25 12:15:09 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/07 10:53:41 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,12 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_free_builtins.c	\
 	./src/builtins/ft_export.c			\
 	./src/builtins/ft_check_builtins.c	\
-	./src/cmd_handler/list_commands.c	\
 	./src/cmd_handler/split_commands.c	\
 	./src/cmd_handler/commands_exist.c	\
 	./src/cmd_handler/catch_cmd_args.c	\
-	./src/quotes_handler/handle_quote.c	\
+	./src/cmd_handler/handle_cmd.c		\
+	./src/token_handler/handle_quote.c	\
+	./src/token_handler/handle_tokens.c	\
 	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
@@ -43,16 +44,20 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_aux1.c				\
 	./src/utils/ft_aux2.c				\
 	./src/utils/env.c					\
+	./src/init_handler/var_initializer.c	\
 	./src/signal_handler/ft_takesignal.c	\
-	./src/redirects/redirect_stdin.c	\
-	./src/redirects/redirect_stdout.c	\
-	./src/redirects/heredoc.c			\
-	./src/child_process/path.c			\
-	./src/child_process/exec_bin.c		\
-	./src/child_process/child_process.c	\
-	./src/child_process/pipe_handler.c	\
+	./src/free_handler/free.c			\
+	./src/redirects_handler/redirect_stdin.c	\
+	./src/redirects_handler/redirect_stdout.c	\
+	./src/redirects_handler/heredoc.c			\
+	./src/redirects_handler/redirect_utils.c	\
+	./src/process_handler/path.c			\
+	./src/process_handler/exec_bin.c		\
+	./src/process_handler/child_process.c	\
+	./src/process_handler/pipe_handler.c	\
 	./src/display_cli.c					\
-	./src/minishell.c	
+	./src/minishell.c	\
+	./src/list_commands.c
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 
@@ -100,6 +105,18 @@ fclean: clean lleodev_header
 	@cd libs/libft && make fclean
 	make lleodev_header
 	@echo "$(RED_BG)Project cleaned! $(RESET)"
+
+norm_lleodev:
+	@norminette ./src/process_handler	\
+	./src/cmd_handler					\
+	./src/free_handler					\
+	./src/init_handler					\
+	./src/token_handler					\
+	./src/redirects_handler				\
+	./src/display_cli.c					\
+	./src/minishell.c					\
+	./includes/minishell_lleodev.h
+				
 
 lleodev_header:
 	@clear

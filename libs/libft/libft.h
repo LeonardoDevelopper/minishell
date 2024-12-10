@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:29:41 by lleodev           #+#    #+#             */
-/*   Updated: 2024/05/23 14:38:46 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/05 09:06:22 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_strjoin_custom(char const *s1, char const *s2);
 char	*get_next_line(int fd);
 int		ft_strlen_custom(const char *str);
 
+int     ft_findchar(char *str, int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/30 00:48:33 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/07 11:26:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_cmd	*cmd;
 	char	**tmp;
-	int	builtins;
 
 	argc = argc;
 	argv = argv;
@@ -40,31 +39,20 @@ int	main(int argc, char *argv[], char *envp[])
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!fill_env(&cmd->enviro, envp))
 		return (1);
-	ft_signal();
+	//ft_signal();
+	cmd->shell = display_shell(envp, tmp, envp);
 	while (1)
 	{
-		cmd->shell = display_shell(envp, tmp, &cmd->enviro);
 		cmd->input = readline(cmd->shell);
 		cmd->env = envp;
 		ft_ctrld(cmd->input);
 		if (cmd->input && *cmd->input)
 		{
-			if (ft_handle_tokens(cmd->input) && ft_handle_quotes(cmd->input))
-			{
-				cmd->cmd_splited = ft_split(cmd->input, ' ');
-				cmd->cmd_num = count_cmds_num(cmd->input) + 1;
-				cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
-				//print_args(cmd);
-				if (cmd->precedence)
-				{
-					if (test_commands(cmd))
-						run_multiple_cmd(cmd);
-				}
-			}
+			handle_exit(cmd);
+			handle_cmd(cmd);
 			add_history(cmd->input);
 			free(cmd->input);
 		}
-		free(cmd->shell);
 	}
 	free_enviro_list(&cmd->enviro);
 	return (0);
