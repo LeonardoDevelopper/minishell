@@ -25,6 +25,22 @@ void	free_enviro_list(t_enviro **enviro)
 	}
 }
 
+void	free_env_mat(char **mat)
+{
+	int	i;
+
+	if (!mat)
+		return ;
+	i = 0;
+	while (mat[i])
+	{
+		free(mat[i]);
+		i++;
+	}
+	free(mat);
+}
+
+
 void	free_cd(char **pwd, char **oldpwd)
 {
 	if (pwd)

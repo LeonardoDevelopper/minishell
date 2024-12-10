@@ -36,6 +36,7 @@ char	*ft_strjoin_space(char *s1, char *s2);
 //builtin function
 //int		ft_pwd(int ac, t_prec *prec);
 //void	print_chech_builtin(t_prec *prec);
+char	**fill_max(t_enviro **enviro);
 void	print_env(char **env, int fd);
 int		fill_env(t_enviro **enviro, char **env);
 void	print_list_env(char **list, int fd, int i);
