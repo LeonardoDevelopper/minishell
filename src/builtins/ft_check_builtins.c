@@ -95,12 +95,16 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
 		print_chech_builtin(prec);
+		free_matrix(cmd);
 		return (1);
 	}
 	if (ft_strcmp(remove_char(cmd[0], '"'), "echo"))
 	{
 		if (case_n(cmd[0 + 1]) && !cmd[0 + 2])
+		{
+			free_matrix(cmd);
 			return (1);
+		}
 		return (case_echo(cmd, enviro, env, prec->stdout));
 	}
 	else
@@ -108,6 +112,7 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 		retur = check_builtins_one(cmd, enviro, 0, prec->stdout);
 		if (retur != 0)
 			init_status(enviro, take_return(retur));
+		free_matrix(cmd);
 		return (retur);
 	}
 }
