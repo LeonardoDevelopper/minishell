@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 11:56:45 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/09 11:32:54 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	check_cmd_tokens(char *cmd)
 		}
 		i++;
 	}
-	if (i > 0)
+	if (i < len)
 	{
 		if (cmd[i - 1] == '|' || cmd[i - 1] == '<' || cmd[i - 1] == '>')
 			return (1);
@@ -51,38 +51,37 @@ int	handle_redirect_token(char *input)
 {
 	int		i;
 	int		len;
-	char	*new;
+	char	*n;
 
 	i = 0;
-	new = epur_str(input);
-	len = ft_strlen(new);
-	while (new[i])
+	n = epur_str(input);
+	len = ft_strlen(n);
+	while (n[i])
 	{
-		if (new[i] == '"' || new[i] == '\'')
+		if (n[i] == '"' || n[i] == '\'')
 		{
-			i += skip_content_in_quote(new, i);
+			i += skip_content_in_quote(n, i);
 			if (i >= len)
-            	break ;
+				break ;
 		}
 		if ((i + 1) < len)
 		{
-			if ((new[i] == '<' && (new[i + 1] == '>' || new[i + 1] == '|'))
-				|| (new[i] == '>' && (new[i + 1] == '<' || new[i + 1] == '|')))
-				return (free(new), 1);
-			if (new[i] == '|' && (new[i + 1] == '|'
-					|| new[i + 1] == '>' || new[i + 1] == '<'))
-				return (free(new), 1);
+			if ((n[i] == '<' && (n[i + 1] == '>' || n[i + 1] == '|'))
+				|| (n[i] == '>' && (n[i + 1] == '<' || n[i + 1] == '|')))
+				return (free(n), 1);
+			if (n[i] == '|' && (n[i + 1] == '|'
+					|| n[i + 1] == '>' || n[i + 1] == '<'))
+				return (free(n), 1);
 		}
 		if ((i + 2) < len)
 		{
-			if ((new[i] == '<' || new[i] == '>' || new[i] == '|')
-				&& (new[i + 2] == '<' || new[i + 2] == '>'
-					|| new[i + 2] == '|'))
-				return (free(new), 1);
+			if ((n[i] == '<' || n[i] == '>' || n[i] == '|')
+				&& (n[i + 2] == '<' || n[i + 2] == '>' || n[i + 2] == '|'))
+				return (free(n), 1);
 		}
 		i++;
 	}
-	return (free(new), 0);
+	return (free(n), 0);
 }
 
 int	handle_special_chr(char *input)
@@ -92,11 +91,13 @@ int	handle_special_chr(char *input)
 
 	i = 0;
 	len = ft_strlen(input);
-	while (i <= len)
+	while (i < len)
 	{
 		if (input[i] == '"' || input[i] == '\'')
 			i += skip_content_in_quote(input, i);
-		if (input[i] == '\\' || input[i] == ';' || input[i] == '&')
+		if (i >= len)
+			break ;
+		if (i < len && input[i] == '\\' || input[i] == ';' || input[i] == '&')
 			return (1);
 		i++;
 	}

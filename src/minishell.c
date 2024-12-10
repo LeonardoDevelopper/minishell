@@ -37,8 +37,8 @@ int	main(int argc, char *argv[], char *envp[])
 	argv = argv;
 	tmp = NULL;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	//if (!fill_env(&cmd->enviro, envp))
-	//	return (1);
+	if (!fill_env(&cmd->enviro, envp))
+		return (1);
 	//ft_signal();
 	cmd->shell = display_shell(envp, tmp, envp);
 	while (1)
