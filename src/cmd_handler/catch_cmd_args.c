@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/11 13:22:28 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:24:54 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		i;
 	{
 		if (ft_strcmp(args_sp[i], "<") || ft_strcmp(args_sp[i], ">")
 			|| ft_strcmp(args_sp[i], ">>") || ft_strcmp(args_sp[i], "<<"))
-			i += 2;
+			i += 2; 
 		else
 		{
 			j = 0;
