@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/11 12:59:47 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/11 16:07:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	handle_cmd(t_cmd *cmd)
 void	handle_args(t_prec *prec)
 {
 	char	*args;
+	char	*tmp;
 
 	args = catch_cmd_args(prec->input);
 	prec->args = ft_split(args, ' ');
-	printf("ARGS: %s\n", args);
 	fill_args(prec->args);
 	free(args);
 }

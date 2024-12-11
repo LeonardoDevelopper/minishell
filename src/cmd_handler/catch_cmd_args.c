@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/11 13:58:52 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/11 16:09:44 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,38 +50,43 @@ char	*handle_between_quotes(char *input)
 	return (res);
 }
 
+int	cpy_args(char *dst, char *src, int j)
+{
+	int	i;
+
+	i = 0;
+	while (src[i])
+		dst[j++] = src[i++];
+	dst[j++] = ' ';
+	return (j);
+}
+
 //BUG getting the argumments
 char	*catch_cmd_args(char *cmd)
 {
 	int		i;
-	int		j;
 	int		k;
-	int		quant;
-	char	*args;
-	char	**args_sp;
+	char	**sp;
 	char	*tmp;
+	char	*args;
 
 	i = 0;
 	k = 0;
-	quant = 0;
 	tmp = handle_between_quotes(cmd);
+	sp = ft_split(tmp, ' ');
 	args = (char *)malloc(sizeof(char ) * 1024);
-	args_sp = ft_split(tmp, ' ');
-	while (args_sp[i])
+	while (sp[i])
 	{
-		if (ft_strcmp(args_sp[i], "<") || ft_strcmp(args_sp[i], ">")
-			|| ft_strcmp(args_sp[i], ">>") || ft_strcmp(args_sp[i], "<<"))
-			i += 2; 
+		if (ft_strcmp(sp[i], "<") || ft_strcmp(sp[i], ">")
+			|| ft_strcmp(sp[i], ">>") || ft_strcmp(sp[i], "<<"))
+			i += 2;
 		else
 		{
-			j = 0;
-			while (args_sp[i][j])
-				args[k++] = args_sp[i][j++];
-			args[k++] = ' ';
+			k += cpy_args(args, sp[i], k);
 			i++;
 		}
 	}
-	return (args[k] = '\0', free_matrix(args_sp), args);
+	return (args[k] = '\0', free_matrix(sp), args);
 }
 
 void	fill_args(char **input)
