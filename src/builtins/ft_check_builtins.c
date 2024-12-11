@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/06 17:32:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/10 14:33:36 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
 	int	count_arg;
 
 	count_arg = ft_count(cmd);
-	if (ft_strcmp(remove_char(cmd[k], '"'), "cd"))
-		return (ft_cd(cmd, count_arg, enviro));
-	else if (ft_strcmp(remove_char(cmd[k], '"'), "export"))
+	//if (ft_strcmp(remove_char(cmd[k], '"'), "cd"))
+		//return (ft_cd(cmd, count_arg, enviro));
+	if (ft_strcmp(remove_char(cmd[k], '"'), "export"))
 		return (ft_export(cmd, count_arg, enviro));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "unset"))
 		return (ft_unset(cmd, count_arg, enviro));

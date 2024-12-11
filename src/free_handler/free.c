@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 14:33:10 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/10 15:09:25 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,11 @@ void	handle_exit(t_cmd *cmd)
 		free_matrix(tmp);
 		ft_exit(tmp, count, NULL);
 	}
+	/*else if (ft_strcmp(trimmed_str, "cd") == 1)
+	{
+		printf("%s\n", cmd->enviro->value)
+		//ft_cd(tmp, count, cmd->enviro);
+	}*/
 	free(trimmed_str);
 	free_matrix(tmp);
 }

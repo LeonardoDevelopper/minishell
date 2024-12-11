@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 11:13:17 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/11 11:29:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ int			is_builtins(t_prec **prec);
 int			check_builtins(t_prec *prec, t_enviro **enviro, char **env);
 int			**create_pipes(t_cmd *cmd);
 
+char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);
 char		*handle_literal(char *input);
 char		*handle_no_literal(char *input);
@@ -108,6 +109,7 @@ char		**handle_double_quotes(char *input);
 char		**ft_split_del(char *str, char c);
 char		**ft_split_args(char *str);
 
+void		fill_args(char **input);
 void		print_args(t_cmd *cmd);
 void		free_matrix(char **matrix);
 void		initialize_cmd(t_cmd *cmd);

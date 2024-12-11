@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:09:02 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/12 15:09:05 by aborges          ###   ########.fr       */
+/*   Updated: 2024/12/10 14:59:33 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,9 @@ int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 
 int	ft_cd(char **cd, int ac, t_enviro **enviro)
 {
+	printf("%s\n", cd[1]);
+	printf("%d\n", ac);
+	printf("%s\n", (*enviro)->value);
 	char	**oldpwd;
 	char	**pwd;
 

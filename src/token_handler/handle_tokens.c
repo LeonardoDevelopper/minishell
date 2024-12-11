@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/09 11:32:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/11 09:29:57 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,28 @@ int	check_cmd_tokens(char *cmd)
 {
 	int	i;
 	int	len;
+	char	*tmp;
 
-	len = ft_strlen(cmd);
+//str_trim
+	tmp = ft_strtrim(cmd, " ");
+	len = ft_strlen(tmp);
 	i = 0;
 	while (i < len)
 	{
-		if (cmd[i] == '"' || cmd[i] == '\'')
-			i += skip_content_in_quote(cmd, i);
-		if ((cmd[0] == '|' || cmd[0] == '<' || cmd[0] == '>'))
+		if (tmp[i] == '"' || tmp[i] == '\'')
+			i += skip_content_in_quote(tmp, i);
+		if ((tmp[0] == '|' || tmp[0] == '<' || tmp[0] == '>'))
 			return (1);
 		if ((i + 1) < len)
 		{
-			if (cmd[i] == '|' && cmd[i + 1] == '|')
+			if (tmp[i] == '|' && tmp[i + 1] == '|')
 				return (1);
 		}
 		i++;
 	}
 	if (i < len)
 	{
-		if (cmd[i - 1] == '|' || cmd[i - 1] == '<' || cmd[i - 1] == '>')
+		if (tmp[i - 1] == '|' || tmp[i - 1] == '<' || tmp[i - 1] == '>')
 			return (1);
 	}
 	return (0);
@@ -81,6 +84,9 @@ int	handle_redirect_token(char *input)
 		}
 		i++;
 	}
+	if (i > 0 && i < len && (n[i - 1] == '|'
+			|| n[i - 1] == '<' || n[i - 1] == '>'))
+		return (1);
 	return (free(n), 0);
 }
 

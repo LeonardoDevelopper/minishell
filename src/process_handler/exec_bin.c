@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 19:34:25 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/10 14:23:56 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	run_cmd(t_cmd *cmd, t_prec *prec)
 	if (prec->builtins)
 	{
 		check_builtins(prec, &cmd->enviro, cmd->env);
-		exit(0);
+	//	exit(0);
 	}
 	else
 	{
@@ -88,12 +88,12 @@ void	run_multiple_cmd(t_cmd *cmd)
 	while (i < cmd->cmd_num)
 	{
 		cmd->precedence[i]->child = new_child_p(NULL);
-		if (cmd->precedence[i]->child->pid == 0)
-		{
+		//if (cmd->precedence[i]->child->pid == 0)
+		//{
 			change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
 			run_cmd(cmd, cmd->precedence[i]);
 			close_pipes(pipes, cmd->cmd_num);
-		}
+		//}
 		if (i > 0)
 			close(pipes[i - 1][0]);
 		if (i < cmd->cmd_num - 1)
@@ -103,7 +103,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
-	wait_p(cmd->cmd_num);
+	//wait_p(cmd->cmd_num);
 }
 
 

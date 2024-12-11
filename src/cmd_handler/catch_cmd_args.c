@@ -6,38 +6,72 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/09 12:29:24 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:22:28 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+char	*handle_between_quotes(char *input)
+{
+	int		i;
+	int		j;
+	int		in;
+	char	*res;
+
+	i = 0;
+	in = 0;
+	j = 0;
+	res = (char *)malloc(sizeof(char ) * (ft_strlen(input) + 1));
+	while (input[i])
+	{
+		if (input[i] == '\'' || input[i] == '"')
+		{
+			if (in)
+				in = 0;
+			else
+				in = 1;
+			i++;
+			continue ;
+		}
+		if (in)
+		{
+			if (input[i] == 32 || input[i] <= 13)
+				res[j] = '\\';
+			else
+				res[j] = input[i];
+			j++;
+		}
+		else
+			res[j++] = input[i];
+		i++;
+	}
+	res[j] = '\0';
+	return (res);
+}
+
 //BUG getting the argumments
 char	*catch_cmd_args(char *cmd)
 {
-	int		i;
+int		i;
 	int		j;
 	int		k;
 	int		quant;
 	char	*args;
 	char	**args_sp;
+	char	*tmp;
 
 	i = 0;
 	k = 0;
 	quant = 0;
+	tmp = handle_between_quotes(cmd);
 	args = (char *)malloc(sizeof(char ) * 1024);
-	args_sp = ft_split(cmd, ' ');
+	args_sp = ft_split(tmp, ' ');
 	while (args_sp[i])
 	{
 		if (ft_strcmp(args_sp[i], "<") || ft_strcmp(args_sp[i], ">")
 			|| ft_strcmp(args_sp[i], ">>") || ft_strcmp(args_sp[i], "<<"))
-		{
-			while (ft_findchar(args_sp[i], '"') || ft_findchar(args_sp[i], '\''))
-			{
-				printf("HERE\n");
-				i++;
-			}
-		}
+			i += 2;
 		else
 		{
 			j = 0;
@@ -50,9 +84,34 @@ char	*catch_cmd_args(char *cmd)
 	return (args[k] = '\0', free_matrix(args_sp), args);
 }
 
-char **fill_args(char *input)
+void	fill_args(char **input)
 {
-	
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	while (input[i])
+	{
+		if (ft_findchar(input[i], '\\'))
+		{
+			j = 0;
+			tmp = (char *)malloc(sizeof(char ) * (ft_strlen(input[i]) + 1));
+			while (input[i][j])
+			{
+				if (input[i][j] == '\\')
+					tmp[j] = ' ';
+				else
+					tmp[j] = input[i][j];
+				j++;
+			}
+			tmp[j] = '\0';
+			free(input[i]);
+			input[i] = tmp;
+		}
+		i++;
+	}
+	return (input);
 }
 
 int	count_char(char *str, int c)
