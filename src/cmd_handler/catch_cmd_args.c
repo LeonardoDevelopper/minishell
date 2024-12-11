@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/11 13:24:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/11 13:58:52 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*handle_between_quotes(char *input)
 //BUG getting the argumments
 char	*catch_cmd_args(char *cmd)
 {
-int		i;
+	int		i;
 	int		j;
 	int		k;
 	int		quant;
