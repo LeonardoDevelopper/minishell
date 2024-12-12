@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/11 14:47:30 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 09:10:59 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ typedef struct s_prec
 	char		*input;
 	char		*cmd;
 	char		**args;
+	t_child_p	*child;
 	t_redirect	*stdin_redirect;
 	t_redirect	*stdout_redirect;
-	t_child_p	*child;
 }		t_prec;
 
 typedef struct cmd_s
@@ -87,6 +87,11 @@ int			count_char(char *str, int c);
 int			verify_quotes(char *input);
 int			is_builtins(t_prec **prec);
 int			check_builtins(t_prec *prec, t_enviro **enviro, char **env);
+int			in_quotes(int in);
+int			cpy_args(char *dst, char *src, int j);
+int			count_char(char *str, int c);
+int			skip_space(char *cmd, int i);
+int			check_cmd_token_end(char *str);
 int			**create_pipes(t_cmd *cmd);
 
 char		*handle_between_quotes(char *input);
@@ -99,7 +104,6 @@ char		*cmd_exist(char *cmd);
 char		*read_stdout_child(int fd);
 char		*catch_cmd_args(char *cmd);
 char		*ft_strjoin_ptr(char *s1, char *s2);
-char		*read_file(int fd);
 char		*replace_char(char *str, char c, char rep);
 char		*remove_end_char(char *str);
 char		*remove_char(char *str, char c);
@@ -109,6 +113,7 @@ char		**handle_double_quotes(char *input);
 char		**ft_split_del(char *str, char c);
 char		**ft_split_args(char *str);
 
+void		replace_in_quotes(char *dest, char *src, int index1, int index2);
 void		fill_args(char **input);
 void		print_args(t_cmd *cmd);
 void		free_matrix(char **matrix);
@@ -131,9 +136,11 @@ void		*run_cmd_catch_output(char *cmd, char *env[]);
 void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
 
-t_prec		**split_cmds(char *input, int num_cmd);
 t_prec		*initialize_prec(void);
+t_prec		**split_cmds(char *input, int num_cmd);
+
 t_child_p	*new_child_p(void *pipe);
+
 t_redirect	*initialize_redirect(void);
 
 #endif

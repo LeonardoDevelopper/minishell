@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/11 16:09:44 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 08:44:27 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,18 @@ char	*handle_between_quotes(char *input)
 	char	*res;
 
 	i = 0;
-	in = 0;
 	j = 0;
 	res = (char *)malloc(sizeof(char ) * (ft_strlen(input) + 1));
 	while (input[i])
 	{
 		if (input[i] == '\'' || input[i] == '"')
 		{
-			if (in)
-				in = 0;
-			else
-				in = 1;
+			in = in_quotes(in);
 			i++;
 			continue ;
 		}
 		if (in)
-		{
-			if (input[i] == 32 || input[i] <= 13)
-				res[j] = '\\';
-			else
-				res[j] = input[i];
-			j++;
-		}
+			replace_in_quotes(res, input, j++, i);
 		else
 			res[j++] = input[i];
 		i++;
@@ -50,18 +40,6 @@ char	*handle_between_quotes(char *input)
 	return (res);
 }
 
-int	cpy_args(char *dst, char *src, int j)
-{
-	int	i;
-
-	i = 0;
-	while (src[i])
-		dst[j++] = src[i++];
-	dst[j++] = ' ';
-	return (j);
-}
-
-//BUG getting the argumments
 char	*catch_cmd_args(char *cmd)
 {
 	int		i;
@@ -95,8 +73,8 @@ void	fill_args(char **input)
 	int		j;
 	char	*tmp;
 
-	i = 0;
-	while (input[i])
+	i = -1;
+	while (input[++i])
 	{
 		if (ft_findchar(input[i], '\\'))
 		{
@@ -114,50 +92,6 @@ void	fill_args(char **input)
 			free(input[i]);
 			input[i] = tmp;
 		}
-		i++;
 	}
 	return (input);
 }
-
-int	count_char(char *str, int c)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-/*
-
-char	*remove_char(char *str, char c)
-{
-	int	i;
-	int	j;
-	int	counter;
-	char	*new;
-
-	i = 0;
-	j = 0;
-	counter = count_char(str, c);
-	if (!counter)
-		return (str);
-	new = (char *)malloc(sizeof(char ) * ((ft_strlen(str) - counter) + 1));
-	while (str[i])
-	{
-		if (str[i] != c)
-			new[j++] = str[i++];
-		else
-			i++;
-	}
-	new[j] = '\0';
-	return (new);
-}
-*/

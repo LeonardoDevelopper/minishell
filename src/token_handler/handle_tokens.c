@@ -6,26 +6,18 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/11 09:29:57 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 09:27:31 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	skip_space(char *cmd, int i)
-{
-	while (cmd[i] && cmd[i] == 32 || (cmd[i] > 9 && cmd[i] <= 13))
-		i++;
-	return (i);
-}
-
 int	check_cmd_tokens(char *cmd)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	*tmp;
 
-//str_trim
 	tmp = ft_strtrim(cmd, " ");
 	len = ft_strlen(tmp);
 	i = 0;
@@ -42,11 +34,8 @@ int	check_cmd_tokens(char *cmd)
 		}
 		i++;
 	}
-	if (i < len)
-	{
-		if (tmp[i - 1] == '|' || tmp[i - 1] == '<' || tmp[i - 1] == '>')
-			return (1);
-	}
+	if (check_cmd_token_end(cmd))
+		return (1);
 	return (0);
 }
 
@@ -67,26 +56,10 @@ int	handle_redirect_token(char *input)
 			if (i >= len)
 				break ;
 		}
-		if ((i + 1) < len)
-		{
-			if ((n[i] == '<' && (n[i + 1] == '>' || n[i + 1] == '|'))
-				|| (n[i] == '>' && (n[i + 1] == '<' || n[i + 1] == '|')))
-				return (free(n), 1);
-			if (n[i] == '|' && (n[i + 1] == '|'
-					|| n[i + 1] == '>' || n[i + 1] == '<'))
-				return (free(n), 1);
-		}
-		if ((i + 2) < len)
-		{
-			if ((n[i] == '<' || n[i] == '>' || n[i] == '|')
-				&& (n[i + 2] == '<' || n[i + 2] == '>' || n[i + 2] == '|'))
-				return (free(n), 1);
-		}
+		if (dup_tokens_followed(n, i, len))
+			return (1);
 		i++;
 	}
-	if (i > 0 && i < len && (n[i - 1] == '|'
-			|| n[i - 1] == '<' || n[i - 1] == '>'))
-		return (1);
 	return (free(n), 0);
 }
 

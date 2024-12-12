@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/07 10:53:41 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/12 08:56:36 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,8 +33,10 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/cmd_handler/commands_exist.c	\
 	./src/cmd_handler/catch_cmd_args.c	\
 	./src/cmd_handler/handle_cmd.c		\
+	./src/cmd_handler/cmd_handler_utils.c\
 	./src/token_handler/handle_quote.c	\
 	./src/token_handler/handle_tokens.c	\
+	./src/token_handler/token_handler_utils.c \
 	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
@@ -50,7 +52,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/redirects_handler/redirect_stdin.c	\
 	./src/redirects_handler/redirect_stdout.c	\
 	./src/redirects_handler/heredoc.c			\
-	./src/redirects_handler/redirect_utils.c	\
+	./src/redirects_handler/redirects_handler_utils.c	\
 	./src/process_handler/path.c			\
 	./src/process_handler/exec_bin.c		\
 	./src/process_handler/child_process.c	\
