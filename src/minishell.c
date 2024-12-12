@@ -45,7 +45,7 @@ int	main(int argc, char *argv[], char *envp[])
 	{
 		cmd->shell = display_shell(envp, tmp, &cmd->enviro);
 		cmd->input = readline(cmd->shell);
-		cmd->env = envp;
+		cmd->env = fill_max(&cmd->enviro);
 		ft_ctrld(cmd->input);
 		if (cmd->input && *cmd->input)
 		{
