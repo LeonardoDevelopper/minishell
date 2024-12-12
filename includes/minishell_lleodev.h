@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 09:10:59 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 12:33:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void		handle_cmd_exist(t_prec *prec);
 void		handle_stdin(t_prec *prec);
 void		free_prec(t_prec **prec);
 void		free_cmd(t_cmd *cmd);
-void		wait_p(int num);
+void		wait_p(t_cmd *cmd);
 void		handle_cmd(t_cmd *cmd);
 void		run_multiple_cmd(t_cmd *cmd);
 void		run_cmd(t_cmd *cmd, t_prec *prec);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 09:28:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 12:47:47 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char *argv[], char *envp[])
 	while (1)
 	{
 		cmd->input = readline(cmd->shell);
-		cmd->env = envp;
+		cmd->env = envp; 
 		ft_ctrld(cmd->input);
 		if (cmd->input && *cmd->input)
 		{

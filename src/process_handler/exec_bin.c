@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 09:29:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 12:33:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,18 @@ void	run_multiple_cmd(t_cmd *cmd)
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
-	wait_p(cmd->cmd_num);
+	wait_p(cmd);
 }
 
-void	wait_p(int num)
+void	wait_p(t_cmd *cmd)
 {
 	int	i;
 
 	i = 0;
-	while (i < num)
+	while (i < cmd->cmd_num)
 	{
-		wait(NULL);
+		waitpid(cmd->precedence[i]->child->pid,
+			&cmd->precedence[i]->child->status, 0);
 		i++;
 	}
 }
