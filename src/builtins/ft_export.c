@@ -60,14 +60,18 @@ void	export_check(char **export, int ac, t_enviro **enviro, int j)
 
 int	ft_export(char **export, int ac, t_enviro **enviro)
 {
-	int	j;
+	int		j;
+	char	*tmp;
 
 	if (ac == 1)
 		ft_env_export(ac, export, enviro);
 	else if (ac > 1)
 	{
 		j = 1;
-		export[1] = ft_echo(export, enviro);
+		tmp = ft_echo(export, enviro);
+		if (export[1] != NULL)
+			free(export[1]);
+		export[1] = tmp;
 		if (ft_type_caracter(export[1][0]) ||
 			ft_isdigit(export[1][0]) ||
 			(export[1][0] == '?' && export[1][1] != '='))
@@ -80,7 +84,6 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 			export_check(export, ac, enviro, j);
 			j++;
 		}
-		free(export[1]);
 	}
 	return (0);
 }
