@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 09:27:31 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 12:10:43 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,17 @@ int	check_cmd_tokens(char *cmd)
 		if (tmp[i] == '"' || tmp[i] == '\'')
 			i += skip_content_in_quote(tmp, i);
 		if ((tmp[0] == '|' || tmp[0] == '<' || tmp[0] == '>'))
-			return (1);
+			return (free(tmp), 1);
 		if ((i + 1) < len)
 		{
 			if (tmp[i] == '|' && tmp[i + 1] == '|')
-				return (1);
+				return (free(tmp), 1);
 		}
 		i++;
 	}
 	if (check_cmd_token_end(cmd))
-		return (1);
-	return (0);
+		return (free(tmp), 1);
+	return (free(tmp), 0);
 }
 
 int	handle_redirect_token(char *input)

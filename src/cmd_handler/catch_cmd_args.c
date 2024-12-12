@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 08:44:27 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/12 12:12:14 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*catch_cmd_args(char *cmd)
 	k = 0;
 	tmp = handle_between_quotes(cmd);
 	sp = ft_split(tmp, ' ');
+	free(tmp);
 	args = (char *)malloc(sizeof(char ) * 1024);
 	while (sp[i])
 	{
