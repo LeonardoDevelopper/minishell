@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 17:11:20 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 18:13:31 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int			count_char(char *str, int c);
 int			skip_space(char *cmd, int i);
 int			check_cmd_token_end(char *str);
 int			**create_pipes(t_cmd *cmd);
-
 char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);
 char		*handle_literal(char *input);
@@ -115,6 +114,7 @@ char		**ft_split_args(char *str);
 char		**original_env(char *path_cpy, char *path);
 char		**aborges_env(t_cmd *cmd, char *path_cpy, char *path);
 
+void		change_input_output(int i, int num, int **pipes, t_prec *prec);
 void		replace_in_quotes(char *dest, char *src, int index1, int index2);
 void		fill_args(char **input);
 void		print_args(t_cmd *cmd);
@@ -128,7 +128,7 @@ void		free_cmd(t_cmd *cmd);
 void		wait_p(t_cmd *cmd, int num);
 void		handle_cmd(t_cmd *cmd);
 void		run_multiple_cmd(t_cmd *cmd);
-void		run_cmd(t_cmd *cmd, int i);
+void		run_cmd(t_cmd *cmd, t_prec *prec);
 void		print_stdout_child(char *buffer);
 void		run_child_p(t_prec *prec, t_child_p *child, char *env[]);
 void		handle_exit(t_cmd *cmd);
