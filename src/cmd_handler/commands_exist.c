@@ -48,20 +48,44 @@ int	is_builtins(t_prec **prec)
 	tmp = *prec;
 	tmp->builtins = 0;
 	if (!tmp->cmd)
-		tmp->builtins = 0;
+		return (0);
 	if (ft_strcmp(tmp->cmd, "echo"))
-		tmp->builtins = 1;
+		return (1);
 	else if (ft_strcmp(tmp->cmd, "cd"))
-		tmp->builtins = 1;
+		return (1);
 	else if (ft_strcmp(tmp->cmd, "export"))
-		tmp->builtins = 1;
+		return (1);
 	else if (ft_strcmp(tmp->cmd, "unset"))
-		tmp->builtins = 1;
+		return (1);
 	else if (ft_strcmp(tmp->cmd, "pwd"))
-		tmp->builtins = 1;
+		return (1);
 	else if (ft_strcmp(tmp->cmd, "env"))
-		tmp->builtins = 1;
+		return (1);
 	else if (ft_strcmp(tmp->cmd, "exit"))
-		tmp->builtins = 1;
-	return (tmp->builtins);
+		return (1);
+	return (0);
+}
+
+int	is_builtins_new(char *cmd)
+{
+	char	**tmp;
+
+	tmp = ft_split(cmd, 32);
+	if (!tmp)
+		return (0);
+	if (ft_strcmp(tmp[0], "echo"))
+		return (1);
+	else if (ft_strcmp(tmp[0], "cd"))
+		return (1);
+	else if (ft_strcmp(tmp[0], "export"))
+		return (1);
+	else if (ft_strcmp(tmp[0], "unset"))
+		return (1);
+	else if (ft_strcmp(tmp[0], "pwd"))
+		return (1);
+	else if (ft_strcmp(tmp[0], "env"))
+		return (1);
+	else if (ft_strcmp(tmp[0], "exit"))
+		return (1);
+	return (0);
 }

@@ -12,3 +12,15 @@ norm_lleodev:
 	./includes/minishell_lleodev.h
 lleodev_header:
 	@echo "$(BLUE_TEXT)Makefile created by lleodev $(RESET)"
+	
+	
+	Sim, você está certo! O problema ocorre porque alguns comandos precisam ser executados no processo principal (pai), não em processos filhos. Isso acontece porque certos comandos como cd, export, unset, e exit modificam o estado do shell. Se forem executados em um processo filho, as mudanças feitas (como mudar o diretório com cd) se perdem ao terminar o processo filho.
+
+Como Resolver:
+Executar Internamente no Pai:
+Antes de criar um processo filho, verifique se o comando é um builtin que afeta o shell principal.
+Se for, execute-o diretamente no processo pai.
+
+Por Que Isso Funciona:
+Os comandos internos são executados no processo principal, preservando mudanças no estado do shell.
+Os comandos externos são tratados normalmente em processos filhos.

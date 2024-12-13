@@ -109,12 +109,10 @@ int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 
 int	ft_cd(char **cd, int ac, t_enviro **enviro)
 {
-	printf("%s\n", cd[1]);
-	printf("%d\n", ac);
-	printf("%s\n", (*enviro)->value);
 	char	**oldpwd;
 	char	**pwd;
 
+	printf("CHEGOU CD\n");
 	oldpwd = (char **)malloc(3 * sizeof(char *));
 	if (!oldpwd)
 		return (0);

@@ -86,7 +86,9 @@ int			verify_heredoc(char *input);
 int			count_char(char *str, int c);
 int			verify_quotes(char *input);
 int			is_builtins(t_prec **prec);
-int			check_builtins(t_prec *prec, t_enviro **enviro, char **env);
+
+//int			check_builtins(t_prec *prec, t_enviro **enviro);
+int			check_builtins(t_prec **prec, t_enviro **enviro, char *str);
 int			in_quotes(int in);
 int			cpy_args(char *dst, char *src, int j);
 int			count_char(char *str, int c);

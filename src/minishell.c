@@ -32,13 +32,14 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_cmd	*cmd;
 	char	**tmp;
+	t_prec **prec;
 
 	argc = argc;
 	argv = argv;
 	tmp = NULL;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	//if (!fill_env(&cmd->enviro, envp))
-	//	return (1);
+	if (!fill_env(&cmd->enviro, envp))
+		return (1);
 	//ft_signal();
 	cmd->shell = display_shell(envp, tmp, envp);
 	while (1)
@@ -49,7 +50,11 @@ int	main(int argc, char *argv[], char *envp[])
 		if (cmd->input && *cmd->input)
 		{
 			handle_exit(cmd);
-			handle_cmd(cmd);
+		
+			if (is_builtins_new(cmd->input))
+				check_builtins(prec, &cmd->enviro, cmd->input);
+			else
+				handle_cmd(cmd);
 			add_history(cmd->input);
 			free(cmd->input);
 		}

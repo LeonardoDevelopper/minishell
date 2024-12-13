@@ -12,25 +12,25 @@
 
 #include "minishell.h"
 
-int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
+int	check_builtins_one(char **cmd, t_enviro **enviro, int fd)
 {
 	int	count_arg;
 
 	count_arg = ft_count(cmd);
-	//if (ft_strcmp(remove_char(cmd[k], '"'), "cd"))
-		//return (ft_cd(cmd, count_arg, enviro));
-	if (ft_strcmp(remove_char(cmd[k], '"'), "export"))
+	if (ft_strcmp(remove_char(cmd[0], '"'), "cd"))
+		return (ft_cd(cmd, count_arg, enviro));
+	if (ft_strcmp(remove_char(cmd[0], '"'), "export"))
 		return (ft_export(cmd, count_arg, enviro));
-	else if (ft_strcmp(remove_char(cmd[k], '"'), "unset"))
+	else if (ft_strcmp(remove_char(cmd[0], '"'), "unset"))
 		return (ft_unset(cmd, count_arg, enviro));
-	if (ft_strcmp(remove_char(cmd[k], '"'), "pwd"))
+	if (ft_strcmp(remove_char(cmd[0], '"'), "pwd"))
 		return (ft_pwd(fd));
-	else if (ft_strcmp(remove_char(cmd[k], '"'), "env"))
+	else if (ft_strcmp(remove_char(cmd[0], '"'), "env"))
 	{
 		ft_env(count_arg, cmd, enviro, fd);
 		return (1);
 	}
-	else if (ft_strcmp(remove_char(cmd[k], '"'), "exit"))
+	else if (ft_strcmp(remove_char(cmd[0], '"'), "exit"))
 		ft_exit(cmd, count_arg, enviro, fd);
 	else
 		return (0);
@@ -52,7 +52,7 @@ int	case_n(char *str)
 	return (1);
 }
 
-int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
+int	case_echo(char **cmd, t_enviro **enviro, int fd)
 {
 	char	*result_echo;
 
@@ -87,17 +87,20 @@ int	take_return(int value)
 	return (value);
 }
 
-int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
+//int	check_builtins(t_prec *prec, t_enviro **enviro)
+int	check_builtins(t_prec **prec, t_enviro **enviro, char *str)
 {
 	int		count_arg;
 	int		retur;
 	char	**cmd;
 
-	cmd = ft_split(prec->input, ' ');
+	cmd = ft_split(str, ' ');
+	if (!cmd)
+    	return (1);
 	count_arg = ft_count(cmd);
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
-		print_chech_builtin(prec);
+		print_chech_builtin(NULL);
 		free_matrix(cmd);
 		return (1);
 	}
@@ -108,11 +111,11 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 			free_matrix(cmd);
 			return (1);
 		}
-		return (case_echo(cmd, enviro, env, prec->stdout));
+		return (case_echo(cmd, enviro, NULL));
 	}
 	else
 	{
-		retur = check_builtins_one(cmd, enviro, 0, prec->stdout);
+		retur = check_builtins_one(cmd, enviro, NULL);
 		if (retur != 0)
 			init_status(enviro, take_return(retur));
 		free_matrix(cmd);

@@ -39,12 +39,12 @@ void	*run_cmd_catch_output(char *cmd, char *env[])
 	return (NULL);
 }
 
+/*
 void	run_cmd(t_cmd *cmd, t_prec *prec)
 {
 	if (prec->builtins)
 	{
-		check_builtins(prec, &cmd->enviro, cmd->env);
-		exit(0);
+		check_builtins(prec, &cmd->enviro);
 	}
 	else
 	{
@@ -53,6 +53,15 @@ void	run_cmd(t_cmd *cmd, t_prec *prec)
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
+}
+*/
+
+void	run_cmd(t_cmd *cmd, t_prec *prec)
+{
+	execve(prec->path,
+		prec->args, cmd->env);
+	perror("execve");
+	exit(EXIT_FAILURE);
 }
 
 void	change_input_output(int i, int num, int **pipes, t_prec *prec)
@@ -78,6 +87,7 @@ void	change_input_output(int i, int num, int **pipes, t_prec *prec)
 	}
 }
 
+/*
 void	run_multiple_cmd(t_cmd *cmd)
 {
 	int	**pipes;
@@ -105,6 +115,48 @@ void	run_multiple_cmd(t_cmd *cmd)
 	close_pipes(pipes, cmd->cmd_num);
 	wait_p(cmd);
 }
+
+*/
+
+void	run_multiple_cmd(t_cmd *cmd)
+{
+	int	**pipes;
+	int	i;
+
+	i = 0;
+	pipes = create_pipes(cmd);
+	while (i < cmd->cmd_num)
+	{
+		if (cmd->precedence[i] && cmd->precedence[i]->input)
+		{
+			cmd->precedence[i]->child = new_child_p(NULL);
+			if (!cmd->precedence[i]->child)
+			{
+				perror("Erro ao criar filho");
+				exit(EXIT_FAILURE);
+			}
+			if (cmd->precedence[i]->child->pid == 0)
+			{
+				change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
+				run_cmd(cmd, cmd->precedence[i]);
+				close_pipes(pipes, cmd->cmd_num);
+				exit(EXIT_SUCCESS);  // Finaliza corretamente o filho
+			}
+		}
+		if (i > 0)
+			close(pipes[i - 1][0]);
+		if (i < cmd->cmd_num - 1)
+			close(pipes[i][1]);
+		if (cmd->precedence[i]->stdout_redirect)
+			close(cmd->precedence[i]->stdout);
+		i++;
+	}
+	close_pipes(pipes, cmd->cmd_num);
+	wait_p(cmd);
+}
+
+
+
 
 void	wait_p(t_cmd *cmd)
 {

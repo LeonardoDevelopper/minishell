@@ -81,4 +81,6 @@ void	ft_signal_value(int signal_value);
 int		ft_execute(char **cmd, int ac, char **env, t_enviro **enviro);
 int		execute_cmd(char **cmd, int ac, t_enviro **enviro, char **env);
 
+int		is_builtins_new(char *cmd);
+
 #endif
