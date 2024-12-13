@@ -1,46 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipe_handler.c                                     :+:      :+:    :+:   */
+/*   free_handler_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 11:44:50 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:21:54 by lleodev          ###   ########.fr       */
+/*   Created: 2024/12/13 17:14:28 by lleodev           #+#    #+#             */
+/*   Updated: 2024/12/13 17:16:53 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	**create_pipes(t_cmd *cmd)
-{
-	int	**pipes;
-	int	i;
-	int	num;
-
-	i = 0;
-	num = cmd->cmd_num - 1;
-	pipes = (int **)malloc(sizeof(int *) * num);
-	while (i < num)
-	{
-		pipes[i] = (int *)malloc(sizeof(int) * 2);
-		if (pipe(pipes[i]) == -1)
-			perror("pipe");
-		i++;
-	}
-	return (pipes);
-}
-
-int	close_pipes(int **pipes, int pipe_num)
+void	free_matrix(char **matrix)
 {
 	int	i;
 
 	i = 0;
-	while (i < pipe_num - 1)
+	if (matrix)
 	{
-		close(pipes[i][0]);
-		close(pipes[i][1]);
-		i++;
+		while (matrix[i])
+			free(matrix[i++]);
+		free(matrix);
 	}
-	return (1);
 }

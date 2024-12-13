@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:12:40 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:45:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	handle_exit(t_cmd *cmd)
 			ft_putstr_fd("exit: too many arguments\n", 2);
 		free(trimmed_str);
 		free_matrix(tmp);
-		//ft_exit(tmp, count, NULL);
+		ft_exit(tmp, count, NULL);
 	}
 	free(trimmed_str);
 	free_matrix(tmp);

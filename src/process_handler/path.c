@@ -3,30 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/12 13:04:28 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:33:22 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*cmd_exist(char *cmd)
+char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 {
 	char	**dir;
 	char	*full_path;
-	int	i;
+	int		i;
 
-	i = 0;
+	i = -1;
 	full_path = NULL;
-	dir = split_dir();
-	if (cmd[0] == '/')
-	{
-		if (access(cmd, X_OK) == 0)
-			return (cmd);
-	}
-	else if (cmd[0] == '.')
+	dir = split_dir(s_cmd);
+	if (cmd[0] == '/' || cmd[0] == '.')
 	{
 		if (access(cmd, X_OK) == 0)
 			return (cmd);
@@ -34,36 +29,60 @@ char	*cmd_exist(char *cmd)
 	else
 	{
 		cmd = ft_strjoin("/", cmd);
-		while (dir[i])
+		while (dir && dir[++i])
 		{
-			full_path = ft_strjoin(dir[i++], cmd);
+			full_path = ft_strjoin(dir[i], cmd);
 			if (access(full_path, X_OK) == 0)
-			{
-				free(cmd);
-				free_matrix(dir);
-				return (full_path);
-			}
+				return (free(cmd), free_matrix(dir), full_path);
 			free(full_path);
 		}
-			free(cmd);
-			free_matrix(dir);
+		free_matrix(dir);
 	}
-	return (NULL);
+	return (free(cmd), NULL);
 }
 
-char	**split_dir(void)
+char	**original_env(char *path_cpy, char *path)
 {
-	char *env;
-	char path_cpy[1024];
-	char	**path;
+	char	*env;
 
 	env = getenv("PATH");
 	if (env)
 	{
-		strncpy(path_cpy, env, sizeof(path_cpy));
-		path_cpy[sizeof(path_cpy) - 1] = '\0';
+		ft_strcpy(path_cpy, env);
 		path = ft_split(path_cpy, ':');
 		return (path);
 	}
-	return (NULL);	
+	return (NULL);
+}
+
+char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
+{
+	int		i;
+	char	**mat;
+
+	i = 0;
+	mat = fill_max(&cmd->enviro);
+	while (mat[i])
+	{
+		if (ft_searstr(mat[i], "PATH="))
+		{
+			mat[i] += 5;
+			ft_strcpy(path_cpy, mat[i]);
+			path = ft_split(path_cpy, ':');
+			return (path);
+		}
+		i++;
+	}
+}
+
+char	**split_dir(t_cmd *cmd)
+{
+	char	path_cpy[1024];
+	char	**path;
+
+	if (!cmd)
+		return (original_env(path_cpy, path));
+	else
+		return (aborges_env(cmd, path_cpy, path));
+	return (NULL);
 }

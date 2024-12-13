@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 12:55:46 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 13:36:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,35 +41,51 @@ char	*handle_between_quotes(char *input)
 	return (res);
 }
 
-char	*catch_cmd_args(char *cmd)
+int	c(char *str1, char *str2)
+{
+	int	i;
+
+	if (!str1 || !str2)
+		return (0);
+	i = 0;
+	while (str1[i] && str2[i])
+	{
+		if (str1[i] != str2[i])
+			return (0);
+		i++;
+	}
+	if (str1[i] != '\0' || str2[i] != '\0')
+		return (0);
+	return (1);
+}
+
+char	*catch_cmd_args(char *cmd, char *tmp)
 {
 	int		i;
 	int		k;
+	int		j;
 	char	**sp;
-	char	*tmp;
 	char	*args;
 
 	i = 0;
 	k = 0;
 	tmp = handle_between_quotes(cmd);
 	sp = ft_split(tmp, ' ');
-	free(tmp);
 	args = (char *)malloc(sizeof(char ) * 1024);
 	while (sp[i])
 	{
-		if (ft_strcmp(sp[i], "<") || ft_strcmp(sp[i], ">")
-			|| ft_strcmp(sp[i], ">>") || ft_strcmp(sp[i], "<<"))
+		if (c(sp[i], "<") || c(sp[i], ">") || c(sp[i], ">>") || c(sp[i], "<<"))
 			i += 2;
 		else
 		{
-			int j = 0;
+			j = 0;
 			while (sp[i][j])
 				args[k++] = sp[i][j++];
 			args[k++] = ' ';
 			i++;
 		}
 	}
-	return (args[k] = '\0', free_matrix(sp), args);
+	return (args[k] = '\0', free(tmp), free_matrix(sp), args);
 }
 
 void	fill_args(char **input)

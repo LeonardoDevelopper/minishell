@@ -85,7 +85,7 @@ char	*read_stdout_child(int fd)
 	while (n_bytes > 0)
 	{
 		buffer = malloc(sizeof(char ) * 43);
-		n_bytes =  read(fd, buffer, 42);
+		n_bytes = read(fd, buffer, 42);
 		if (n_bytes > 0)
 			buffer[n_bytes] = '\0';
 		output = ft_strjoin_ptr(output, buffer);

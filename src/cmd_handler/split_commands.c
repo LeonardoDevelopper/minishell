@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:15:11 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:11:42 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	count_cmds_num(char *input)
 	return (count_rows_del(input, '|'));
 }
 
-t_prec	**split_cmds(char *input, int num_cmd)
+t_prec	**split_cmds(t_cmd *cmd, char *input, int num_cmd)
 {
 	t_prec	**precedence;
 	int		p;
@@ -33,7 +33,7 @@ t_prec	**split_cmds(char *input, int num_cmd)
 		precedence[p] = initialize_prec();
 		precedence[p]->input = ft_strtrim(commands[p], " ");
 		handle_stdin(precedence[p]);
-		handle_cmd_exist(precedence[p]);
+		handle_cmd_exist(cmd, precedence[p]);
 		handle_args(precedence[p]);
 		handle_stdout(precedence[p]);
 		p++;

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 11:45:03 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:51:07 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*run_cmd_catch_output(char *cmd, char *env[])
 	t_child_p	*child;
 
 	full_cmd = ft_split(cmd, ' ');
-	full_path = cmd_exist(full_cmd[0]);
+	full_path = cmd_exist(NULL, full_cmd[0]);
 	if (full_path)
 	{
 		pipe(pipe_fd);
@@ -39,28 +39,6 @@ void	*run_cmd_catch_output(char *cmd, char *env[])
 	return (NULL);
 }
 
-void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[])
-{
-	t_child_p	*child;
-	int			builtins;
-	int			pipe_fd[2];
-
-	builtins = check_builtins(prec->args, enviro, env);
-	if (!builtins)
-	{
-		pipe_fd[0] = prec->stdin;
-		pipe_fd[1] = prec->stdout;
-		child = new_child_p(pipe_fd);
-		if (child->pid == 0)
-		{
-			run_child_p(prec, child, env);
-			free(child);
-		}
-		waitpid(child->pid, &child->status, 0);
-		free(child);
-	}
-}
-
 void	change_input_output(t_cmd *cmd, int **pipes, int i)
 {
 	if (i > 0)
@@ -76,7 +54,9 @@ void	change_input_output(t_cmd *cmd, int **pipes, int i)
 void	run_cmd(t_cmd *cmd, int i)
 {
 	if (cmd->precedence[i]->builtins)
+	{
 		check_builtins(cmd->precedence[i], &cmd->enviro, cmd->env);
+	}
 	else
 	{
 		execve(cmd->precedence[i]->path,
@@ -88,8 +68,8 @@ void	run_cmd(t_cmd *cmd, int i)
 
 void	run_multiple_cmd(t_cmd *cmd)
 {
-	int			**pipes;
-	int			i;
+	int	**pipes;
+	int	i;
 
 	pipes = create_pipes(cmd);
 	i = 0;
@@ -107,17 +87,18 @@ void	run_multiple_cmd(t_cmd *cmd)
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
-	wait_p(cmd->cmd_num);
+	wait_p(cmd, cmd->cmd_num);
 }
 
-void	wait_p(int num)
+void	wait_p(t_cmd *cmd, int num)
 {
 	int	i;
 
 	i = 0;
 	while (i < num)
 	{
-		wait(NULL);
+		waitpid(cmd->precedence[i]->child->pid,
+			&cmd->precedence[i]->child->status, 0);
 		i++;
 	}
 }

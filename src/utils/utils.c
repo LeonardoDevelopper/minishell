@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/13 11:31:48 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:38:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ char	*ft_strjoin_ptr(char *s1, char *s2)
 		len = ft_strlen(s2);
 	res = (char *)malloc(sizeof(char ) * (len + 1));
 	res[len] = '\0';
-	if (!res)
-		return (NULL);
 	if (s1)
 	{
 		while (s1[i])
@@ -103,9 +101,8 @@ char	*remove_char(char *str, char c)
 	counter = 0;
 	while (str[i])
 	{
-		if (str[i] == c)
+		if (str[i++] == c)
 			counter++;
-		i++;
 	}
 	if (!counter)
 		return (str);
@@ -118,110 +115,5 @@ char	*remove_char(char *str, char c)
 		else
 			i++;
 	}
-	new[j] = '\0';
-	return (new);
-}
-
-void	free_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	if (matrix)
-	{
-		while (matrix[i])
-			free(matrix[i++]);
-		free(matrix);
-	}
-}
-
-char	*ft_variadic_strjoin(char *str, ...)
-{
-	
-}
-
-int	count_mat_char(char **mat)
-{
-	int	i;
-	int	j;
-	int	size;
-
-	i = 0;
-	size = 0;
-	while (mat[i])
-	{
-		j = 0;
-		while (mat[i][j])
-		{
-			size++;
-			j++;
-		}
-		size += 1;
-		i++;
-	}
-	return (size);
-}
-char	*ft_strjoin_matrix(char **mat, char c)
-{
-	int	i;
-	int	j;
-	int	k;
-	int	size;
-	char	*new_str;
-
-	i = 0;
-	k = 0;
-	size = count_mat_char(mat);
-	new_str = (char *)malloc(sizeof(char ) * (size + 1));
-	if (!new_str)
-		return (NULL);
-	new_str[size] = '\0';
-	while (mat[i])
-	{
-		j = 0;
-		while (mat[i][j])
-		{
-			new_str[k] = mat[i][j];
-			j++;
-			k++;
-		}
-		new_str[k++] = c;
-		i++;
-	}
-	return (new_str);
-}
-
-char	*remove_str(char *str)
-{
-	char	**mat1;
-	char	**mat2;
-	static char	res[1024];
-	int		i;
-	int		j;
-	int		k;
-
-	i = 0;
-	k = 0;
-	mat1 = ft_split(str, ' ');
-	while (mat1[i])
-	{
-		mat2 = ft_split(mat1[i], '<');
-		j = 0;
-		while (mat2[j])
-		{
-			printf("\n%s", mat2[j]);
-			j++;
-		}
-		i++;
-	}
-}
-
-int	count_rows(char **mat)
-{
-	int	i;
-
-	i = 0;
-	while (mat[i])
-		i++;
-	return (i);
+	return (new[j] = '\0', new);
 }

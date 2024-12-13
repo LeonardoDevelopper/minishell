@@ -6,10 +6,9 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:08:57 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:11:20 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_LLEODEV_H
 # define MINISHELL_LLEODEV_H
@@ -80,7 +79,6 @@ int			close_pipes(int **pipes, int pipe_num);
 int			count_cmds_num(char *input);
 int			count_rows_del(char *str, char c);
 int			count_rowss(char *str);
-int			count_desk(char *str);
 int			count_rows_splited(char **strstr);
 int			verify_fd(t_redirect *redirec);
 int			verify_dup_redirect_stdout(char *input);
@@ -102,30 +100,32 @@ char		*handle_literal(char *input);
 char		*handle_no_literal(char *input);
 char		*ft_strjoin_matrix(char **mat, char c);
 char		*display_shell(char *env[], char **tmp, char **enviro);
-char		*cmd_exist(char *cmd);
+char		*cmd_exist(t_cmd *s_cmd, char *cmd);
 char		*read_stdout_child(int fd);
-char		*catch_cmd_args(char *cmd);
+char		*catch_cmd_args(char *cmd, char *tmp);
 char		*ft_strjoin_ptr(char *s1, char *s2);
 char		*replace_char(char *str, char c, char rep);
 char		*remove_end_char(char *str);
 char		*remove_char(char *str, char c);
 char		*remove_str(char *mat);
-char		**split_dir(void);
+char		**split_dir(t_cmd *cmd);
 char		**handle_double_quotes(char *input);
 char		**ft_split_del(char *str, char c);
 char		**ft_split_args(char *str);
-void		change_output(t_cmd *cmd, int **pipes, int i);
+char		**original_env(char *path_cpy, char *path);
+char		**aborges_env(t_cmd *cmd, char *path_cpy, char *path);
+
 void		replace_in_quotes(char *dest, char *src, int index1, int index2);
 void		fill_args(char **input);
 void		print_args(t_cmd *cmd);
 void		free_matrix(char **matrix);
 void		initialize_cmd(t_cmd *cmd);
 void		handle_args(t_prec *prec);
-void		handle_cmd_exist(t_prec *prec);
+void		handle_cmd_exist(t_cmd *cmd, t_prec *prec);
 void		handle_stdin(t_prec *prec);
 void		free_prec(t_prec **prec);
 void		free_cmd(t_cmd *cmd);
-void		wait_p(int num);
+void		wait_p(t_cmd *cmd, int num);
 void		handle_cmd(t_cmd *cmd);
 void		run_multiple_cmd(t_cmd *cmd);
 void		run_cmd(t_cmd *cmd, int i);
@@ -139,7 +139,7 @@ void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
 
 t_prec		*initialize_prec(void);
-t_prec		**split_cmds(char *input, int num_cmd);
+t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);
 
 t_child_p	*new_child_p(void *pipe);
 

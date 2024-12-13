@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/12 08:56:36 by lleodev          ###   ########.fr        #
+#    Updated: 2024/12/13 17:39:46 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_split_prec.c			\
 	./src/utils/ft_split_prec_deli.c	\
 	./src/utils/utils.c					\
+	./src/utils/utils2.c					\
 	./src/utils/ft_utils_one.c			\
 	./src/utils/ft_comands.c			\
 	./src/utils/ft_aux.c				\
@@ -49,6 +50,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/init_handler/var_initializer.c	\
 	./src/signal_handler/ft_takesignal.c	\
 	./src/free_handler/free.c			\
+	./src/free_handler/free_handler_utils.c		\
 	./src/redirects_handler/redirect_stdin.c	\
 	./src/redirects_handler/redirect_stdout.c	\
 	./src/redirects_handler/heredoc.c			\
@@ -117,6 +119,8 @@ norm_lleodev:
 	./src/redirects_handler				\
 	./src/display_cli.c					\
 	./src/minishell.c					\
+	./src/utils/utils.c					\
+	./src/utils/utils2.c					\
 	./includes/minishell_lleodev.h
 				
 

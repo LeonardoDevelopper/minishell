@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:02:57 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 16:11:19 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	handle_cmd(t_cmd *cmd)
 	if (ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
 	{
 		cmd->cmd_num = count_cmds_num(cmd->input) + 1;
-		cmd->precedence = split_cmds(cmd->input, cmd->cmd_num);
+		cmd->precedence = split_cmds(cmd, cmd->input, cmd->cmd_num);
 		if (cmd->precedence)
 		{
 			if (test_commands(cmd))
 				run_multiple_cmd(cmd);
-			//free_cmd(cmd);
+			free_cmd(cmd);
 		}
 	}
 }
@@ -39,14 +39,13 @@ void	handle_args(t_prec *prec)
 	char	*args;
 	char	*tmp;
 
-	args = catch_cmd_args(prec->input);
+	args = catch_cmd_args(prec->input, tmp);
 	prec->args = ft_split(args, ' ');
-	printf("ARGS: %s\n", args);
 	fill_args(prec->args);
 	free(args);
 }
 
-void	handle_cmd_exist(t_prec *prec)
+void	handle_cmd_exist(t_cmd *cmd, t_prec *prec)
 {
 	char	**tmp;
 
@@ -54,5 +53,5 @@ void	handle_cmd_exist(t_prec *prec)
 	prec->cmd = (char *)malloc(ft_strlen(tmp[0]) + 1);
 	ft_strcpy(prec->cmd, tmp[0]);
 	free_matrix(tmp);
-	prec->path = cmd_exist(prec->cmd);
+	prec->path = cmd_exist(cmd, prec->cmd);
 }

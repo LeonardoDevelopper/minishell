@@ -6,40 +6,22 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:15:40 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 17:00:33 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	count_desk(char *str)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (str[i])
-	{
-		if (str[i] == '/')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_cmd	*cmd;
 	char	**tmp;
-	int	builtins;
+	int		builtins;
 
 	argc = argc;
 	argv = argv;
-	tmp = NULL;
 	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!fill_env(&cmd->enviro, envp))
-		return (1);
+	fill_env(&cmd->enviro, envp);
 	ft_signal();
 	while (1)
 	{
@@ -56,6 +38,5 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		free(cmd->shell);
 	}
-	free_enviro_list(&cmd->enviro);
-	return (0);
+	return (free_enviro_list(&cmd->enviro), 0);
 }

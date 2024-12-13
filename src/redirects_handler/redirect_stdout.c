@@ -6,13 +6,11 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 11:50:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 13:25:22 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-
 
 void	*verify_redirect_stdout(char *input)
 {
