@@ -1,0 +1,14 @@
+#    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #$
+#    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #$
+#    Updated: 2024/12/12 08:56:36 by lleodev          ###   ########.fr        #$
+	make lleodev_header$
+	make lleodev_header$
+	make lleodev_header$
+clean: lleodev_header$
+	make lleodev_header$
+fclean: clean lleodev_header$
+	make lleodev_header$
+norm_lleodev:$
+	./includes/minishell_lleodev.h$
+lleodev_header:$
+	@echo "$(BLUE_TEXT)Makefile created by lleodev $(RESET)"$

@@ -6,9 +6,10 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/30 11:08:27 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 13:08:57 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_LLEODEV_H
 # define MINISHELL_LLEODEV_H
@@ -26,113 +27,122 @@
 # define RESET "\033[0m"
 # define CMD_NO_EXIST "This command is not recognized on this shell: "
 
-typedef struct	s_child_p
+typedef struct s_child_p
 {
-	int	pid;
-	int	status;
+	int		pid;
+	int		status;
 	void	*pipe_fd;
 }		t_child_p;
 
-typedef struct	s_redirect
+typedef struct s_redirect
 {
 	int	count;
 	int	*fd_list;
 }		t_redirect;
 
-typedef struct	s_prec
+typedef struct s_prec
 {
-		int	num_args;
-		char	*path;
-		char	*input;
-		char	*cmd;
-		char	**args;
-		t_redirect	*stdin_redirect;
-		t_redirect	*stdout_redirect;
-		t_child_p	*child;
-		int			builtins;
-		int			stdout;
-		int			stdin;
+	int			num_args;
+	int			builtins;
+	int			stdout;
+	int			stdin;
+	char		*path;
+	char		*input;
+	char		*cmd;
+	char		**args;
+	t_child_p	*child;
+	t_redirect	*stdin_redirect;
+	t_redirect	*stdout_redirect;
 }		t_prec;
 
-typedef struct	cmd_s
+typedef struct cmd_s
 {
+	int				cmd_num;
+	char			*shell;
+	char			*input;
+	char			*cmd_splited;
+	char			**env;
 	t_enviro		*enviro;
-	void	*output;
-	t_redirect	*redirect;
-	int			cmd_num;
-	char	*shell;
-	char	*input;
-	char	**args;
-	char	**env;
-	char	*full_path;
-	char	**cmd_splited;
-	t_prec	**precedence;
-	char	*cmd;
+	t_prec			**precedence;
 }		t_cmd;
 
-void	wait_p(int num);
-void	run_multiple_cmd_test(t_cmd *cmd);
-void	run_multiple_cmd(t_cmd *cmd);
-void	run_cmd(t_cmd *cmd, char *env[]);
-void	run_cmd_test(t_prec *prec, t_enviro **enviro, char *env[]);
-void	*run_cmd_catch_output(char *cmd, t_enviro **enviro, char *env[]);
-void	run_child_p(t_prec *prec, t_child_p *child, char *env[]);
-void	*verify_redirect_stdin(char *cmd);
-void    *verify_redirect_stdout(char *input);
-void	redirect_stdin(t_cmd *cmd, char *env[]);
-void	redirect_stdin_test(t_prec *prec, char *env[]);
-void	print_args(t_cmd *cmd);
-void	print_stdout_child(char *buffer);
-void	run_child_p_test(char *path, char **args, t_child_p *child, char *env[]);
-void	print_args(t_cmd *cmd);
-char	**handle_double_quotes(char *input);
-char	**ft_split_del(char *str, char c);
-char	**ft_split_args(char *str);
-char	*ft_strjoin_matrix(char **mat, char c);
-char	*display_shell(char *env[], char **tmp, t_enviro **enviro);
-char	*cmd_exist(char *cmd);
-char	**split_dir(void);
-char	*read_stdout_child(int fd);
-char	*catch_cmd_args(char *cmd);
-char	*ft_strjoin_ptr(char *s1, char *s2);
-char	*read_file(int fd);
-char	*replace_char(char *str, char c, char rep);
-char	*remove_end_char(char *str);
-char	*remove_char(char *str, char c);
-char	*remove_str(char *mat);
-int		ft_handle_tokens(char *input);
-int		ft_handle_quotes(char *input);
-int		handle_heredoc(char *del);
-int		test_commands(t_cmd *cmd);
-int 	verify_dup_redirect_stdin(char *input);
-int		**create_pipes(t_cmd *cmd);
-int 	close_pipes(int **pipes, int pipe_num);
-int		run_cmd_catch_output_test(t_prec *prec, t_enviro **enviro, char *env[]);
-int		count_cmds_num(char *input);
-int		count_rows_del(char *str, char c);
-int		count_cmd_args(char *cmd);
-int		count_rowss(char *str);
-int		count_desk(char *str);
-int		count_rows_splited(char **strstr);
-int		d_quote(char *cmd);
-int		verify_fd(t_redirect *redirec);
-int		ft_strlen_c(char *str, char c);
-int		cmd_exits(t_cmd *cmd);
-int		verify_dup_redirect_stdout(char *input);
-int		verify_heredoc(char *input);
-int		count_char(char *str, int c);
+int			skip_space(char *cmd, int i);
+int			skip_content_in_quote(char *input, int i);
+int			handle_special_chr(char *input);
+int			handle_redirect_token(char *input);
+int			check_cmd_tokens(char *input);
+int			ft_handle_tokens(char *input);
+int			ft_handle_quotes(char *input);
+int			handle_heredoc(char *del, char *name);
+int			test_commands(t_cmd *cmd);
+int			verify_dup_redirect_stdin(char *input);
+int			close_pipes(int **pipes, int pipe_num);
+int			count_cmds_num(char *input);
+int			count_rows_del(char *str, char c);
+int			count_rowss(char *str);
+int			count_desk(char *str);
+int			count_rows_splited(char **strstr);
+int			verify_fd(t_redirect *redirec);
+int			verify_dup_redirect_stdout(char *input);
+int			verify_heredoc(char *input);
+int			count_char(char *str, int c);
+int			verify_quotes(char *input);
+int			is_builtins(t_prec **prec);
+int			check_builtins(t_prec *prec, t_enviro **enviro, char **env);
+int			in_quotes(int in);
+int			cpy_args(char *dst, char *src, int j);
+int			count_char(char *str, int c);
+int			skip_space(char *cmd, int i);
+int			check_cmd_token_end(char *str);
+int			**create_pipes(t_cmd *cmd);
 
-int		is_builtins(t_prec **prec);
-int		check_builtins(t_prec *prec, t_enviro **enviro, char **env);
-int		ft_pwd(int fd);
-void	ft_env(int ac, char **cmd, t_enviro **enviro, int fd);
-int		ft_export(char **export, int ac, t_enviro **enviro);
-void	print_chech_builtin(t_prec *prec);
-void	ft_exit(char **end, int ac, t_enviro **enviro, int fd);
+char		*handle_between_quotes(char *input);
+char		*get_content_quotes(char *input);
+char		*handle_literal(char *input);
+char		*handle_no_literal(char *input);
+char		*ft_strjoin_matrix(char **mat, char c);
+char		*display_shell(char *env[], char **tmp, char **enviro);
+char		*cmd_exist(char *cmd);
+char		*read_stdout_child(int fd);
+char		*catch_cmd_args(char *cmd);
+char		*ft_strjoin_ptr(char *s1, char *s2);
+char		*replace_char(char *str, char c, char rep);
+char		*remove_end_char(char *str);
+char		*remove_char(char *str, char c);
+char		*remove_str(char *mat);
+char		**split_dir(void);
+char		**handle_double_quotes(char *input);
+char		**ft_split_del(char *str, char c);
+char		**ft_split_args(char *str);
+void		change_output(t_cmd *cmd, int **pipes, int i);
+void		replace_in_quotes(char *dest, char *src, int index1, int index2);
+void		fill_args(char **input);
+void		print_args(t_cmd *cmd);
+void		free_matrix(char **matrix);
+void		initialize_cmd(t_cmd *cmd);
+void		handle_args(t_prec *prec);
+void		handle_cmd_exist(t_prec *prec);
+void		handle_stdin(t_prec *prec);
+void		free_prec(t_prec **prec);
+void		free_cmd(t_cmd *cmd);
+void		wait_p(int num);
+void		handle_cmd(t_cmd *cmd);
+void		run_multiple_cmd(t_cmd *cmd);
+void		run_cmd(t_cmd *cmd, int i);
+void		print_stdout_child(char *buffer);
+void		run_child_p(t_prec *prec, t_child_p *child, char *env[]);
+void		handle_exit(t_cmd *cmd);
+void		run_child_p_test(char *pth, char **ags, t_child_p *ch, char *env[]);
+void		*try_open(t_redirect *redir, char *input, char *tmp);
+void		*run_cmd_catch_output(char *cmd, char *env[]);
+void		*verify_redirect_stdin(char *cmd);
+void		*verify_redirect_stdout(char *input);
+
+t_prec		*initialize_prec(void);
+t_prec		**split_cmds(char *input, int num_cmd);
 
 t_child_p	*new_child_p(void *pipe);
-t_prec	**split_cmds(char *input, int num_cmd);
 
-void	free_matrix(char **matrix);
+t_redirect	*initialize_redirect(void);
 
 #endif

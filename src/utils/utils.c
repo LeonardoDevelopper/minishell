@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/16 19:28:15 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/13 11:31:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,4 +214,14 @@ char	*remove_str(char *str)
 		}
 		i++;
 	}
+}
+
+int	count_rows(char **mat)
+{
+	int	i;
+
+	i = 0;
+	while (mat[i])
+		i++;
+	return (i);
 }

@@ -50,7 +50,8 @@ SRCS = 	ft_isalpha.c	\
 	ft_epur.c			\
 	get_next_line.c		\
 	get_next_line_utils.c	\
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c		\
+	ft_findchar.c
 
 
 ################################COLORS######################################
