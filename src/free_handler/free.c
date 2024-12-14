@@ -43,7 +43,7 @@ void	free_prec(t_prec **prec)
 	while (prec[i])
 	{
 		free_redirects(prec[i]);
-		if (prec[i]->path)
+		if (prec[i]->path != NULL && prec[i]->path != prec[i]->cmd)
 			free(prec[i]->path);
 		if (prec[i]->input)
 			free(prec[i]->input);
@@ -100,6 +100,7 @@ void	handle_exit(t_cmd *cmd)
 		}
 		else
 			ft_putstr_fd("exit: too many arguments\n", 2);
+		free_env_mat(cmd->env);
 		free(trimmed_str);
 		free_matrix(tmp);
 		ft_exit(tmp, count, NULL);

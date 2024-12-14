@@ -81,15 +81,15 @@ char	**fill_max(t_enviro **enviro)
 	t_enviro	*tmp;
 	char		**new_mat;
 
-	new_mat = malloc(sizeof(char *) * (ft_listsize(enviro) + 1));
-	if (!new_mat)
+	new_mat = ft_calloc(sizeof(char *), (ft_listsize(enviro) + 1));
+	if (new_mat == NULL)
 		return (NULL);
 	tmp = *enviro;
 	i = 0;
-	while (tmp)
+	while (tmp != NULL)
 	{
-		new_mat[i] = malloc(sizeof(char) * (ft_strlen(tmp->value) + 1));
-		if (!new_mat[i])
+		new_mat[i] = ft_calloc(sizeof(char), (ft_strlen(tmp->value) + 1));
+		if (new_mat[i] == NULL)
 		{
 			free_env_mat(new_mat);
 			return (NULL);
@@ -98,6 +98,5 @@ char	**fill_max(t_enviro **enviro)
 		tmp = tmp->next;
 		i++;
 	}
-	new_mat[i] = NULL; 
 	return (new_mat);
 }

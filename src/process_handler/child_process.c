@@ -79,12 +79,12 @@ char	*read_stdout_child(int fd)
 
 	n_bytes = 1;
 	output = NULL;
-	output = malloc(sizeof(char ) * 43);
+	output = ft_calloc(sizeof(char ), 43);
 	n_bytes = read(fd, output, 42);
 	output[n_bytes] = '\0';
 	while (n_bytes > 0)
 	{
-		buffer = malloc(sizeof(char ) * 43);
+		buffer = ft_calloc(sizeof(char ), 43);
 		n_bytes = read(fd, buffer, 42);
 		if (n_bytes > 0)
 			buffer[n_bytes] = '\0';

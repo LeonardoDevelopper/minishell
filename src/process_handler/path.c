@@ -69,10 +69,14 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 			mat[i] += 5;
 			ft_strcpy(path_cpy, mat[i]);
 			path = ft_split(path_cpy, ':');
+			if (mat != NULL)
+				free_env_mat(mat);
 			return (path);
 		}
 		i++;
 	}
+	if (mat != NULL)
+		free_env_mat(mat);
 }
 
 char	**split_dir(t_cmd *cmd)
