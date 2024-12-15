@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/13 17:38:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:02:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,11 @@ char	*remove_char(char *str, char c)
 	if (!counter)
 		return (str);
 	new = (char *)malloc(sizeof(char ) * ((ft_strlen(str) - counter) + 1));
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] != c)
 			new[j++] = str[i++];
-		else
-			i++;
 	}
 	if (str != NULL)
 		free(str);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 17:00:33 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:03:30 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ int	main(int argc, char *argv[], char *envp[])
 			free(cmd->input);
 		}
 		free(cmd->shell);
-
 		free_env_mat(cmd->env);
 	}
 	return (free_enviro_list(&cmd->enviro), 0);
 }
-
-//  valgrind --leak-check=full --show-leak-kinds=all ./minishell
-//  valgrind --leak-check=full ./minishell

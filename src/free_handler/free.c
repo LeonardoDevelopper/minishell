@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 16:45:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:05:11 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,5 @@ void	handle_exit(t_cmd *cmd)
 		free_matrix(tmp);
 		ft_exit(tmp, count, NULL);
 	}
-	free(trimmed_str);
-	free_matrix(tmp);
+	return (free(trimmed_str), free_matrix(tmp));
 }
