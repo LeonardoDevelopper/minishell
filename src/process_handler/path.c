@@ -6,17 +6,17 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 17:33:22 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 07:10:39 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*cmd_exist(t_cmd *s_cmd, char *cmd)
+char *cmd_exist(t_cmd *s_cmd, char *cmd)
 {
-	char	**dir;
-	char	*full_path;
-	int		i;
+	char **dir;
+	char *full_path;
+	int i;
 
 	i = -1;
 	full_path = NULL;
@@ -41,9 +41,9 @@ char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 	return (free(cmd), NULL);
 }
 
-char	**original_env(char *path_cpy, char *path)
+char **original_env(char *path_cpy, char *path)
 {
-	char	*env;
+	char *env;
 
 	env = getenv("PATH");
 	if (env)
@@ -55,10 +55,10 @@ char	**original_env(char *path_cpy, char *path)
 	return (NULL);
 }
 
-char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
+char **aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 {
-	int		i;
-	char	**mat;
+	int i;
+	char **mat;
 
 	i = 0;
 	mat = fill_max(&cmd->enviro);
@@ -69,8 +69,8 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 			mat[i] += 5;
 			ft_strcpy(path_cpy, mat[i]);
 			path = ft_split(path_cpy, ':');
-			//if (mat != NULL)
-				//free_env_mat(mat);
+			// if (mat != NULL)
+			// free_env_mat(mat);
 			return (path);
 		}
 		i++;
@@ -79,10 +79,10 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 		free_env_mat(mat);
 }
 
-char	**split_dir(t_cmd *cmd)
+char **split_dir(t_cmd *cmd)
 {
-	char	path_cpy[1024];
-	char	**path;
+	char path_cpy[1024];
+	char **path;
 
 	if (!cmd)
 		return (original_env(path_cpy, path));
