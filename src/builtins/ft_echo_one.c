@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:55:07 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/15 09:54:27 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 12:56:31 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ void	ft_echo1(char **echo, int i, char *value)
 		j = 0;
 		while (echo[i][j])
 		{
-			
 			if (echo[i][j] == '>')
 			{
 				check = 1;

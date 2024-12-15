@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:44:50 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:21:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 13:28:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int	close_pipes(int **pipes, int pipe_num)
 		close(pipes[i][1]);
 		i++;
 	}
+	free(pipes);
 	return (1);
 }
