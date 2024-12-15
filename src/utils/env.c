@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:07:49 by lleodev           #+#    #+#             */
-/*   Updated: 2024/10/23 14:07:51 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 07:39:20 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,25 @@ void	init_status(t_enviro **enviro, int value)
 	char	**status;
 	char	*str_itoa;
 	char	*str_join;
+	int		n;
 
 	status = malloc(sizeof(char *) * 3);
 	if (!status)
 		return ;
 	status[0] = malloc(sizeof(char) * 240);
 	if (!status[0])
-	{
-		free(status);
-		return ;
-	}
+		return (free(status));
 	ft_strcpy(status[0], "export");
 	status[1] = malloc(sizeof(char) * 250);
 	if (!status[1])
-	{
-		free(status[0]);
-		free(status);
-		return ;
-	}
-	str_itoa = ft_itoa(value);
+		return (free(status[0]), free(status));
+	if (value < 0)
+		n = value + 255;
+	n = value % 255;
+	str_itoa = ft_itoa(n);
 	str_join = ft_strjoin("?=", str_itoa);
 	ft_strcpy(status[1], str_join);
 	status[2] = NULL;
-	
 	ft_export(status, ft_count(status), enviro);
 	free(str_itoa);
 	free(str_join);

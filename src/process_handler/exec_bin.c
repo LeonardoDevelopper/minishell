@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 18:16:14 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 07:40:24 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,4 +114,5 @@ void	wait_p(t_cmd *cmd, int num)
 			&cmd->precedence[i]->child->status, 0);
 		i++;
 	}
+	init_status(&cmd->enviro, cmd->precedence[num - 1]->child->status);
 }

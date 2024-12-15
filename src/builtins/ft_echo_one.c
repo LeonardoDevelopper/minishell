@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo_one.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 08:55:07 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/31 08:55:13 by aborges          ###   ########.fr       */
+/*   Updated: 2024/12/15 09:54:27 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	ft_echo1(char **echo, int i, char *value)
 {
 	int	k;
 	int	j;
+	int c = 0;
+	int check = 0;
 
 	k = 0;
 	while (echo[i])
@@ -94,9 +96,28 @@ void	ft_echo1(char **echo, int i, char *value)
 		j = 0;
 		while (echo[i][j])
 		{
-			value[k] = echo[i][j];
-			j++;
-			k++;
+			
+			if (echo[i][j] == '>')
+			{
+				check = 1;
+				i++;
+			}
+			if ((echo [i][j] == 34 || echo[i][j] == 39) && check == 1)
+			{
+				c++;
+			}
+
+			if (c != 1)
+			{
+				value[k] = echo[i][j];
+				j++;
+				k++;
+			}
+			else
+			{
+				j++;
+			}
+
 		}
 		i++;
 		if (echo[i])

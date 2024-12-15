@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/13 16:36:37 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 09:18:25 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	char	**cmd;
 
 	cmd = ft_split(prec->input, ' ');
+	//cmd = split(prec->input);
+	//printf("%s\n", cmd[3]);
 	count_arg = ft_count(cmd);
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
