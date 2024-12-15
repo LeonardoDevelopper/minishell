@@ -145,7 +145,7 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 		if (retur != 0)
 			init_status(enviro, take_return(retur));
 	}
-	free_matrix(cmd);  // Liberação centralizada
+	//free_matrix(cmd);  // Liberação centralizada
 	return (retur);
 }
 

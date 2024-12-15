@@ -22,6 +22,7 @@ void	ft_echo_aux(t_enviro **enviro, char **value)
 	result_echo(0, 1);
 	i = 0;
 	result = ft_split_echo(value);
+	printf("%s\n\n", result[0]);
 	while (result[i])
 	{
 		new_result = epur_str(result[i]);
