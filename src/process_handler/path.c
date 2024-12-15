@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/14 15:50:28 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 13:58:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 		}
 		i++;
 	}
+	if (mat != NULL)
+		free_env_mat(mat);
 }
 
 char	**split_dir(t_cmd *cmd)

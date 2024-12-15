@@ -37,6 +37,11 @@ int	main(int argc, char *argv[], char *envp[])
 			free(cmd->input);
 		}
 		free(cmd->shell);
+
+		free_env_mat(cmd->env);
 	}
 	return (free_enviro_list(&cmd->enviro), 0);
 }
+
+//  valgrind --leak-check=full --show-leak-kinds=all ./minishell
+//  valgrind --leak-check=full ./minishell

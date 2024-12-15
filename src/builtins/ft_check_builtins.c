@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/13 16:36:37 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 09:18:25 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 {
 	char	*result_echo;
 
-	result_echo = ft_echo(cmd, enviro);
+	result_echo = epur_str(ft_echo(cmd, enviro));
 	if (!result_echo)
 		return (0);
 	if (case_n(cmd[1]))
@@ -84,6 +84,7 @@ int	take_return(int value)
 	return (value);
 }
 
+/*
 int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 {
 	int		count_arg;
@@ -116,3 +117,37 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 		return (retur);
 	}
 }
+*/
+
+int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
+{
+	int		count_arg;
+	int		retur;
+	char	**cmd;
+
+	cmd = ft_split(prec->input, ' ');
+	//cmd = split(prec->input);
+	//printf("%s\n", cmd[3]);
+	count_arg = ft_count(cmd);
+	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
+	{
+		print_chech_builtin(prec);
+		retur = 1;
+	}
+	else if (ft_strcmp(remove_char(cmd[0], '"'), "echo"))
+	{
+		if (case_n(cmd[1]) && !cmd[2])
+			retur = 1;
+		else
+			retur = case_echo(cmd, enviro, env, prec->stdout);
+	}
+	else
+	{
+		retur = check_builtins_one(cmd, enviro, 0, prec->stdout);
+		if (retur != 0)
+			init_status(enviro, take_return(retur));
+	}
+	//free_matrix(cmd);  // Liberação centralizada
+	return (retur);
+}
+
