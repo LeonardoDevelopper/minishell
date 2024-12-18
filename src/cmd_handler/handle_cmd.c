@@ -28,7 +28,12 @@ void	handle_cmd(t_cmd *cmd)
 		if (cmd->precedence)
 		{
 			if (test_commands(cmd))
-				run_multiple_cmd(cmd);
+			{
+				if (cmd->cmd_num > 1)
+					run_multiple_cmd(cmd);
+				else
+				 run_cmd(cmd, NULL, 0);
+			}
 			free_cmd(cmd);
 		}
 	}

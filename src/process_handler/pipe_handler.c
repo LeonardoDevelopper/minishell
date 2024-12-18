@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:44:50 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/15 13:28:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/18 11:10:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,16 @@ int	**create_pipes(t_cmd *cmd)
 	return (pipes);
 }
 
-int	close_pipes(int **pipes, int pipe_num)
+int	close_pipes(int **pipes, int num)
 {
 	int	i;
 
 	i = 0;
-	while (i < pipe_num - 1)
+	while (i < (num - 1))
 	{
 		close(pipes[i][0]);
 		close(pipes[i][1]);
 		i++;
 	}
-	free(pipes);
 	return (1);
 }
