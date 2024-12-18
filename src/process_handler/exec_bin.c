@@ -83,7 +83,6 @@ void	run_cmd(t_cmd *cmd, int **pipes, int i)
 		waitpid(cmd->precedence[i]->child->pid,
 			&cmd->precedence[i]->child->status, 0);
 		init_status(&cmd->enviro, cmd->precedence[i]->child->status);
-
 	}
 }
 
