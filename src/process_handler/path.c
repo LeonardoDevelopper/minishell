@@ -29,18 +29,19 @@ char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 	char	*full_path;
 	int		i;
 
-	i = -1;
+	i = 0;
 	full_path = NULL;
 	dir = split_dir(s_cmd);
 	if (!is_absolute_path(cmd))
 	{
 		cmd = ft_strjoin("/", cmd);
-		while (dir && dir[++i])
+		while (dir && dir[i])
 		{
 			full_path = ft_strjoin(dir[i], cmd);
 			if (access(full_path, X_OK) == 0)
 				return (free_matrix(dir), full_path);
 			free(full_path);
+			i++;
 		}
 		free_matrix(dir);
 	}
@@ -81,6 +82,7 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 	}
 	if (mat != NULL)
 		free_env_mat(mat);
+	return (NULL);
 }
 
 char	**split_dir(t_cmd *cmd)
