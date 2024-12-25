@@ -33,7 +33,8 @@ int	main(int argc, char *argv[], char *envp[])
 		{
 			handle_exit(cmd);
 			handle_cmd(cmd);
-			add_history(cmd->input);
+				if (ft_strlen(cmd->input) > 0)
+					add_history(cmd->input);
 			free(cmd->input);
 		}
 		free(cmd->shell);

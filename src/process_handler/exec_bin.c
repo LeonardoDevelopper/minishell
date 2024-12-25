@@ -41,48 +41,34 @@ void	*run_cmd_catch_output(char *cmd, char *env[])
 
 void	execbin(t_cmd *cmd, t_prec *prec)
 {
-	if (prec->builtins)
-		check_builtins(prec, &cmd->enviro, cmd->env);
-	else
-	{
-		execve(prec->path,
-			prec->args, cmd->env);
-		perror("execve");
-		exit(EXIT_FAILURE);
-	}
-	exit(0);
-}
-
-void	change_input_output(int i, int num, int **pipes, t_prec *prec)
-{
-	if (pipes != NULL)
-	{
-		if (i > 0)
-			dup2(pipes[i - 1][0], STDIN_FILENO);
-		if (i < (num - 1))
-			dup2(pipes[i][1], STDOUT_FILENO);
-	}
-	if (prec->stdin_redirect)
-		dup2(prec->stdin, STDIN_FILENO);
-	if (prec->stdout_redirect)
-		dup2(prec->stdout, STDOUT_FILENO);
+	execve(prec->path, prec->args, cmd->env);
+	perror("execve");
+	exit(EXIT_FAILURE);
 }
 
 void	run_cmd(t_cmd *cmd, int **pipes, int i)
 {
-	cmd->precedence[i]->child = new_child_p(NULL);
-	if (cmd->precedence[i]->child->pid == 0)
+	if (!cmd->precedence[i]->builtins)
 	{
-		change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
-		if (pipes != NULL)
-			close_pipes(pipes, cmd->cmd_num);
-		execbin(cmd, cmd->precedence[i]);
+		cmd->precedence[i]->child = new_child_p(NULL);
+		if (cmd->precedence[i]->child->pid == 0)
+		{
+			change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
+			if (pipes != NULL)
+				close_pipes(pipes, cmd->cmd_num);
+			execbin(cmd, cmd->precedence[i]);
+		}
+		if (cmd->cmd_num == 1)
+		{
+			waitpid(cmd->precedence[i]->child->pid,
+				&cmd->precedence[i]->child->status, 0);
+			init_status(&cmd->enviro, cmd->precedence[i]->child->status);
+		}
 	}
-	if (cmd->cmd_num == 1)
+	else
 	{
-		waitpid(cmd->precedence[i]->child->pid,
-			&cmd->precedence[i]->child->status, 0);
-		init_status(&cmd->enviro, cmd->precedence[i]->child->status);
+		change_builtins_output(cmd, pipes, i);
+		check_builtins(cmd->precedence[i], &cmd->enviro, cmd->env);
 	}
 }
 
@@ -103,20 +89,6 @@ void	run_multiple_cmd(t_cmd *cmd)
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
+	free(pipes);
 	wait_p(cmd, cmd->cmd_num);
-}
-
-
-void	wait_p(t_cmd *cmd, int num)
-{
-	int	i;
-
-	i = 0;
-	while (i < num)
-	{
-		waitpid(cmd->precedence[i]->child->pid,
-			&cmd->precedence[i]->child->status, 0);
-		i++;
-	}
-	init_status(&cmd->enviro, cmd->precedence[num - 1]->child->status);
 }

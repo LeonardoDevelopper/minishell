@@ -38,7 +38,7 @@ char	*display_shell(char *envp[], char **tmp_tmp, char **env)
 	tmp[7] = NULL;
 	free_matrix(tmp_tmp);
 	shell = ft_strjoin_matrix(tmp, ' ');
-	return (free(host), shell);
+	return (free(host), printf("\n"), shell);
 }
 
 char	*display_shell2(char *envp[], char **tmp_tmp, char **env)
@@ -67,5 +67,5 @@ char	*display_shell2(char *envp[], char **tmp_tmp, char **env)
 	tmp[7] = NULL;
 	free_matrix(tmp_tmp);
 	shell = ft_strjoin_matrix(tmp, ' ');
-	return (free(host), shell);
+	return (free(host), printf("\n"), shell);
 }

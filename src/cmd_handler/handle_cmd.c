@@ -21,6 +21,8 @@ void	handle_cmd(t_cmd *cmd)
 	cmd->input = (char *)malloc(sizeof(char ) * ft_strlen(tmp) + 1);
 	ft_strcpy(cmd->input, tmp);
 	free(tmp);
+	if (ft_strlen(cmd->input) == 0)
+		return ;
 	if (ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
 	{
 		cmd->cmd_num = count_cmds_num(cmd->input) + 1;
@@ -54,6 +56,8 @@ void	handle_cmd_exist(t_cmd *cmd, t_prec *prec)
 {
 	char	**tmp;
 
+	if (!prec->input)
+		return ;
 	tmp = ft_split(prec->input, ' ');
 	prec->cmd = (char *)malloc(ft_strlen(tmp[0]) + 1);
 	ft_strcpy(prec->cmd, tmp[0]);

@@ -93,9 +93,3 @@ char	*read_stdout_child(int fd)
 	}
 	return (output);
 }
-
-void	print_stdout_child(char *buffer)
-{
-	if (buffer)
-		printf("%s", buffer);
-}

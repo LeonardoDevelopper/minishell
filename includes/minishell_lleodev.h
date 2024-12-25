@@ -93,6 +93,8 @@ int			count_char(char *str, int c);
 int			skip_space(char *cmd, int i);
 int			check_cmd_token_end(char *str);
 int			**create_pipes(t_cmd *cmd);
+int			cancel_heredoc(char *dir);
+
 char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);
 char		*handle_literal(char *input);
@@ -139,11 +141,13 @@ void		*try_open(t_redirect *redir, char *input, char *tmp);
 void		*run_cmd_catch_output(char *cmd, char *env[]);
 void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
+void	change_builtins_output(t_cmd * cmd, int **pipes, int i);
+
 
 t_prec		*initialize_prec(void);
 t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);
 
-t_child_p	*new_child_p(void *pipe);
+t_child_p	*new_child_p(void *);
 
 t_redirect	*initialize_redirect(void);
 

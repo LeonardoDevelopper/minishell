@@ -55,10 +55,12 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/redirects_handler/redirect_stdout.c	\
 	./src/redirects_handler/heredoc.c			\
 	./src/redirects_handler/redirects_handler_utils.c	\
+	./src/redirects_handler/redirects_handler_utils2.c	\
 	./src/process_handler/path.c			\
 	./src/process_handler/exec_bin.c		\
 	./src/process_handler/child_process.c	\
 	./src/process_handler/pipe_handler.c	\
+	./src/process_handler/process_handler_utils.c		\
 	./src/display_cli.c					\
 	./src/minishell.c	\
 	./src/list_commands.c

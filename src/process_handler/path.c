@@ -39,11 +39,12 @@ char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 		{
 			full_path = ft_strjoin(dir[i], cmd);
 			if (access(full_path, X_OK) == 0)
-				return (free_matrix(dir), full_path);
+				return (free_matrix(dir), free(cmd),  full_path);
 			free(full_path);
 			i++;
 		}
 		free_matrix(dir);
+		free(cmd);
 	}
 	return (NULL);
 }
