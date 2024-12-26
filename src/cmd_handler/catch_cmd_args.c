@@ -74,6 +74,8 @@ char	*catch_cmd_args(char *cmd, char *tmp)
 	args = (char *)malloc(sizeof(char ) * 1024);
 	while (sp[i])
 	{
+		if (sp[i + 1] == NULL)
+			break;
 		if (c(sp[i], "<") || c(sp[i], ">") || c(sp[i], ">>") || c(sp[i], "<<"))
 			i += 2;
 		else

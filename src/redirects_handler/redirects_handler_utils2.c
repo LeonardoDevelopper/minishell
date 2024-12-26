@@ -12,7 +12,7 @@ int	cancel_heredoc(char *dir)
 	dir = ft_strjoin(home, "/tmp");
 	tmp = ft_strjoin(dir, "/heredoc_empty");
 	fd = open(tmp, O_RDWR | O_CREAT);
-    //ft_putchar_fd(fd, '\n');
+    free(dir);
 	free(tmp);
 	return (fd);
 }
