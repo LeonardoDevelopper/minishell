@@ -139,7 +139,7 @@ echo "Hello" > file.txt | cat file.txt
 This project is Linux-only.
 The binary produced (minishell) is specific to Linux environments.
 👥 Authors
-<table> <tr> <td align="center"><a href="https://github.com/armando-borges"><img src="https://avatars.githubusercontent.com/u/placeholder?v=4" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/leonardo-jorge"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Leonardo_Jorge.png" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
+<table> <tr> <td align="center"><a href="https://github.com/armando-borges"><img src="https://avatars.githubusercontent.com/u/placeholder?v=4" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/leonardo-jorge"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Leonardo_Jorge.jpg" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
 Built with ❤️ for educational purposes.
 
 📜 License
