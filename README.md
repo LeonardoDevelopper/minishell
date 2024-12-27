@@ -116,30 +116,17 @@ make
 <p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Demo" width="600"> </p>
 <h3>Once the shell is running, you can:</h3>
 
-Navigate directories:
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-cd.png" width="100px;" alt="Leonardo Jorge"/><br />
 
-bash
-Copiar código
-cd /path/to/directory
-List files:
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-ls.png" width="100px;" alt="Leonardo Jorge"/><br />
 
-bash
-Copiar código
-ls -l
-Execute programs:
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="100px;" alt="Leonardo Jorge"/><br />
 
-bash
-Copiar código
-echo "Hello, Minishell!"
-Use redirections and pipes:
 
-bash
-Copiar código
-echo "Hello" > file.txt | cat file.txt
-🚧 Important Notes
+🚧 <h1>Important Notes</h1>
 This project is Linux-only.
 The binary produced (minishell) is specific to Linux environments.
-👥 Authors
+👥 <h1>Authors</h1>
 <table> <tr> <td align="center"><a href="https://github.com/armando-borges"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Armando_Borges.jpg" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/leonardo-jorge"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Leonardo_Jorge.jpg" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
 Built with ❤️ for educational purposes.
 
