@@ -1,4 +1,4 @@
-<p align="center"> <img src="https://img.shields.io/badge/Minishell-Linux%20Only-blue?style=for-the-badge" alt="Minishell Badge"> <img src="https://img.shields.io/github/stars/your-username/minishell?style=for-the-badge" alt="GitHub Stars Badge"> <img src="https://img.shields.io/badge/Made%20With-C%20Language-green?style=for-the-badge" alt="C Language Badge"> </p> <h1 align="center">🐚 Minishell</h1> <p align="center">A simplified shell project by <b>Armando Borges</b> & <b>Leonardo Jorge</b> 🛠️</p> <p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Screenshot" width="700"> </p>
+<p align="center"> <img src="https://img.shields.io/badge/Minishell-Linux%20Only-blue?style=for-the-badge" alt="Minishell Badge"> <img src="https://img.shields.io/github/stars/LeonardoDevelopper/minishell?style=for-the-badge" alt="GitHub Stars Badge"> <img src="https://img.shields.io/badge/Made%20With-C%20Language-green?style=for-the-badge" alt="C Language Badge"> </p> <h1 align="center">🐚 Minishell</h1> <p align="center">A simplified shell project by <b>Armando Borges</b> & <b>Leonardo Jorge</b> 🛠️</p> <p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Screenshot" width="700"> </p>
 🌟 <h1>Introduction</h1>
 The existence of shells is deeply connected to the history of computing itself. Back in the early days, developers communicated with computers using 1/0 switches, which was tedious and frustrating.
 
@@ -57,42 +57,53 @@ While this is a simplified version of a shell, it covers the essential features 
 
 ⚙️ <h1>Setup</h1>
 <h3>Prerequisites</h3>
-Ensure you have the following before getting started:
 
-A Linux-based operating system 🐧
-Required libraries and tools:
-Dependencies for the readline library
-The make utility
-🚀 How to Compile
-Clone the repository:
-bash
-Copiar código
-git clone https://github.com/LeonardoDevelopper/minishell
+<h4>Ensure you have the following before getting started:</h4>
+
+<ul>
+    <li>A Linux-based operating system 🐧</li>
+    <li>Libraries and tools Required by readline library</li>
+    <li>The make utility</li>
+</ul>
+
+
+🚀 <h1>How to Compile</h1>
+
+```bash
+# Clone the repository:
+git clone https://github.com/LeonardoDevelopper/minishell/
+
+```bash
+# turn in:
 cd minishell
-Install dependencies:
-bash
-Copiar código
+
+```bash
+# Install dependencies:
 sudo apt-get install libreadline-dev make
-Build the project:
-bash
-Copiar código
+
+```bash
+# Build the project:
 make
-Run the shell:
-bash
-Copiar código
+
+```bash
+# Run the shell:
 ./minishell
+
 📂 Project Structure
-plaintext
-Copiar código
-minishell/
-├── src/             # Source files
-├── lib/             # Static libraries
-├── include/         # Header files
-├── Makefile         # Build script
-└── README.md        # Project documentation
-🐧 Usage Example
-<p align="center"> <img src="https://user-images.githubusercontent.com/placeholder/demo.gif" alt="Shell Demo" width="600"> </p>
-Once the shell is running, you can:
+<pre>
+    <code>
+        minishell/
+        ├── src/             # Source files
+        ├── lib/             # Static libraries
+        ├── include/         # Header files
+        ├── Makefile         # Build script
+        └── README.md        # Project documentation
+    </code>
+</pre>
+
+🐧 <h1>Usage Example</h1>
+<p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell-exemple.png" alt="Shell Demo" width="600"> </p>
+<h3>Once the shell is running, you can:</h3>
 
 Navigate directories:
 
@@ -118,7 +129,7 @@ echo "Hello" > file.txt | cat file.txt
 This project is Linux-only.
 The binary produced (minishell) is specific to Linux environments.
 👥 Authors
-<table> <tr> <td align="center"><a href="https://github.com/armando-borges"><img src="https://avatars.githubusercontent.com/u/placeholder?v=4" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/leonardo-jorge"><img src="https://avatars.githubusercontent.com/u/placeholder?v=4" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
+<table> <tr> <td align="center"><a href="https://github.com/armando-borges"><img src="https://avatars.githubusercontent.com/u/placeholder?v=4" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/leonardo-jorge"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Leonardo_Jorge.png" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
 Built with ❤️ for educational purposes.
 
 📜 License
