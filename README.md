@@ -116,11 +116,11 @@ make
 <p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Demo" width="600"> </p>
 <h3>Once the shell is running, you can:</h3>
 
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-cd.png" width="100px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-cd.png" width="600px;" alt="Leonardo Jorge"/><br />
 
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-ls.png" width="100px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-ls.png" width="600px;" alt="Leonardo Jorge"/><br />
 
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="100px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="600px;" alt="Leonardo Jorge"/><br />
 
 
 🚧 <h1>Important Notes</h1>
