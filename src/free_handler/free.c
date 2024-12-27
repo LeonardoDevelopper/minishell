@@ -46,7 +46,9 @@ void	free_prec(t_prec **prec)
 	while (prec[i])
 	{
 		free_redirects(prec[i]);
-		if (prec[i]->path != NULL && prec[i]->path != prec[i]->cmd)
+		if (prec[i]->cmd)
+			free(prec[i]->cmd);
+		if (prec[i]->path)
 			free(prec[i]->path);
 		if (prec[i]->input)
 			free(prec[i]->input);
@@ -54,8 +56,6 @@ void	free_prec(t_prec **prec)
 			free_matrix(prec[i]->args);
 		if (prec[i]->child)
 			free(prec[i]->child);
-		if (prec[i]->cmd)
-			free(prec[i]->cmd);
 		free(prec[i]);
 		i++;
 	}

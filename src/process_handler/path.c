@@ -14,11 +14,24 @@
 
 char	*is_absolute_path(char *cmd)
 {
-	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/')
-		|| (cmd[0] == '~' && cmd[1] == '/'))
+	char	*home;
+	char	*tmp;
+
+	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/'))
 	{
-		if (access(cmd, X_OK) == 0)
-			return (cmd);
+		tmp = (char *)malloc(sizeof(char) * (ft_strlen(cmd) + 1));
+		ft_strcpy(tmp, cmd);
+		if (access(tmp, X_OK) == 0)
+			return (tmp);
+	}
+	else if ((cmd[0] == '~' && cmd[1] == '/'))
+	{
+		home = getenv("HOME");
+		tmp = ft_strjoin(home, "/");
+		tmp = ft_strjoin_ptr(tmp, cmd + 2);
+		cmd -= 2;
+		if (access(tmp, X_OK) == 0)
+			return (tmp);
 	}
 	return (NULL);
 }
@@ -30,21 +43,23 @@ char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 	int		i;
 
 	i = 0;
-	full_path = NULL;
 	dir = split_dir(s_cmd);
-	if (!is_absolute_path(cmd))
+	full_path = is_absolute_path(cmd);
+	if (full_path)
+		return (free_matrix(dir), full_path);
+	else
 	{
-		cmd = ft_strjoin("/", cmd);
+		full_path = NULL;
 		while (dir && dir[i])
 		{
+			dir[i] = ft_strjoin_ptr(dir[i], "/");
 			full_path = ft_strjoin(dir[i], cmd);
 			if (access(full_path, X_OK) == 0)
-				return (free_matrix(dir), free(cmd),  full_path);
+				return (free_matrix(dir), full_path);
 			free(full_path);
 			i++;
 		}
 		free_matrix(dir);
-		free(cmd);
 	}
 	return (NULL);
 }

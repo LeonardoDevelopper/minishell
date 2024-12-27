@@ -134,4 +134,4 @@ The binary produced (minishell) is specific to Linux environments.<br />
 Built with ❤️ for educational purposes.
 
 📜 License
-This project is licensed under the MIT License.
+This project is licensed under the global License.
