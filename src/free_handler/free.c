@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 16:45:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:05:11 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	free_cmd(t_cmd *cmd)
 	{
 		if (cmd->precedence)
 			free_prec(cmd->precedence);
+		if (cmd->env)
+			free_matrix(cmd->env);
+		
 	}
 }
 
@@ -43,7 +46,7 @@ void	free_prec(t_prec **prec)
 	while (prec[i])
 	{
 		free_redirects(prec[i]);
-		if (prec[i]->path)
+		if (prec[i]->path != NULL && prec[i]->path != prec[i]->cmd)
 			free(prec[i]->path);
 		if (prec[i]->input)
 			free(prec[i]->input);
@@ -100,10 +103,10 @@ void	handle_exit(t_cmd *cmd)
 		}
 		else
 			ft_putstr_fd("exit: too many arguments\n", 2);
+		free_env_mat(cmd->env);
 		free(trimmed_str);
 		free_matrix(tmp);
 		ft_exit(tmp, count, NULL);
 	}
-	free(trimmed_str);
-	free_matrix(tmp);
+	return (free(trimmed_str), free_matrix(tmp));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <aborges@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:25:51 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/23 12:33:14 by aborges          ###   ########.fr       */
+/*   Updated: 2024/12/15 07:17:54 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	ft_echo_aux(t_enviro **enviro, char **value)
 			i++;
 		else
 		{
-			break ;
 			free(new_result);
+			break ;
 		}
 		free(new_result);
 	}
@@ -82,7 +82,7 @@ char	*ft_echo(char **echo, t_enviro **enviro)
 	ft_echo1(echo, i, value);
 	ft_echo_aux(enviro, value);
 	free(value);
-	return (epur_str(result_echo('\0', 0)));
+	return (result_echo('\0', 0)); //return (epur_str(result_echo('\0', 0)));
 }
 
 void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)

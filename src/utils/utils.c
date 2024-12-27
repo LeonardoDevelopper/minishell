@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 10:27:11 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/13 17:38:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 14:02:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,20 @@ char	*ft_strjoin_ptr(char *s1, char *s2)
 	int		len;
 	char	*res;
 
-	i = 0;
-	j = 0;
-	if (s1)
-		len = ft_strlen(s1) + ft_strlen(s2);
-	else
-		len = ft_strlen(s2);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	if (len == 0)
+		return (NULL);
 	res = (char *)malloc(sizeof(char ) * (len + 1));
 	res[len] = '\0';
-	if (s1)
-	{
-		while (s1[i])
-		{
-			res[i] = s1[i];
-			i++;
-		}
+	i = -1;
+	while (s1 != NULL && s1[++i] != '\0')
+		res[i] = s1[i];
+	if (s1 != NULL)
 		free(s1);
-	}
-	while (s2[j])
+	j = 0;
+	while (s2 != NULL && s2[j] != '\0')
 		res[i++] = s2[j++];
+	res[i] = '\0';
 	return (res);
 }
 
@@ -107,13 +102,13 @@ char	*remove_char(char *str, char c)
 	if (!counter)
 		return (str);
 	new = (char *)malloc(sizeof(char ) * ((ft_strlen(str) - counter) + 1));
-	i = 0;
-	while (str[i])
+	i = -1;
+	while (str[++i])
 	{
 		if (str[i] != c)
 			new[j++] = str[i++];
-		else
-			i++;
 	}
+	if (str != NULL)
+		free(str);
 	return (new[j] = '\0', new);
 }

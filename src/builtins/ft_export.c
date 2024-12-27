@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <aborges@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:42:02 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/17 15:05:23 by aborges          ###   ########.fr       */
+/*   Updated: 2024/12/15 07:14:19 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,14 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 	else if (ac > 1)
 	{
 		j = 1;
-		tmp = ft_echo(export, enviro);
-		if (export[1] != NULL)
-			free(export[1]);
+		tmp = epur_str(ft_echo(export, enviro));
 		export[1] = tmp;
 		if (ft_type_caracter(export[1][0]) ||
 			ft_isdigit(export[1][0]) ||
 			(export[1][0] == '?' && export[1][1] != '='))
 		{
 			printf("export: %s: not a valid identifier\n", export[1]);
+			free(tmp);
 			return (1);
 		}
 		while (j < ac)
@@ -84,6 +83,7 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 			export_check(export, ac, enviro, j);
 			j++;
 		}
+		free(tmp);
 	}
 	return (0);
 }

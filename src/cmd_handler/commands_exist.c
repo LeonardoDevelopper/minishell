@@ -32,8 +32,8 @@ int	test_commands(t_cmd *cmd)
 		}
 		else
 		{
-			printf("%s%s%s\n", RED_TEXT, CMD_NO_EXIST,
-				cmd->precedence[i]->cmd);
+			printf("%s%s%s%s\n", RED_TEXT, CMD_NO_EXIST,
+				cmd->precedence[i]->cmd, RESET);
 			return (0);
 		}
 		i++;

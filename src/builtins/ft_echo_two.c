@@ -14,7 +14,7 @@
 
 void	double_asp(char *str, t_enviro **enviro, int i)
 {
-	if (str[i] == '$')
+	if (str[i] && str[i] == '$')
 	{
 		i++;
 		resave(str, enviro, i);
@@ -24,7 +24,7 @@ void	double_asp(char *str, t_enviro **enviro, int i)
 void	check_double_quotes(char *str, t_enviro **enviro, int *j)
 {
 	(*j)++;
-	while (str[*j] != 34)
+	while (str[*j] && str[*j] != 34)
 	{
 		if (str[*j] == '$')
 		{

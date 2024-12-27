@@ -6,11 +6,22 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 17:33:22 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/15 13:58:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*is_absolute_path(char *cmd)
+{
+	if (cmd[0] == '/' || (cmd[0] == '.' && cmd[1] == '/')
+		|| (cmd[0] == '~' && cmd[1] == '/'))
+	{
+		if (access(cmd, X_OK) == 0)
+			return (cmd);
+	}
+	return (NULL);
+}
 
 char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 {
@@ -18,27 +29,24 @@ char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 	char	*full_path;
 	int		i;
 
-	i = -1;
+	i = 0;
 	full_path = NULL;
 	dir = split_dir(s_cmd);
-	if (cmd[0] == '/' || cmd[0] == '.')
-	{
-		if (access(cmd, X_OK) == 0)
-			return (cmd);
-	}
-	else
+	if (!is_absolute_path(cmd))
 	{
 		cmd = ft_strjoin("/", cmd);
-		while (dir && dir[++i])
+		while (dir && dir[i])
 		{
 			full_path = ft_strjoin(dir[i], cmd);
 			if (access(full_path, X_OK) == 0)
-				return (free(cmd), free_matrix(dir), full_path);
+				return (free_matrix(dir), free(cmd),  full_path);
 			free(full_path);
+			i++;
 		}
 		free_matrix(dir);
+		free(cmd);
 	}
-	return (free(cmd), NULL);
+	return (NULL);
 }
 
 char	**original_env(char *path_cpy, char *path)
@@ -69,10 +77,12 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 			mat[i] += 5;
 			ft_strcpy(path_cpy, mat[i]);
 			path = ft_split(path_cpy, ':');
-			return (path);
+			mat[i] -= 5;
+			return (free_matrix(mat), path);
 		}
 		i++;
 	}
+	return (NULL);
 }
 
 char	**split_dir(t_cmd *cmd)

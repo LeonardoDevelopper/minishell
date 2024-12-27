@@ -93,12 +93,17 @@ int			count_char(char *str, int c);
 int			skip_space(char *cmd, int i);
 int			check_cmd_token_end(char *str);
 int			**create_pipes(t_cmd *cmd);
+int			cancel_heredoc(char *dir);
+int	ft_strcpy_custom(int begin, char *dest, char *src);
+
+
 char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);
 char		*handle_literal(char *input);
 char		*handle_no_literal(char *input);
 char		*ft_strjoin_matrix(char **mat, char c);
 char		*display_shell(char *env[], char **tmp, char **enviro);
+char		*display_shell2(char *envp[], char **tmp_tmp, char **env);
 char		*cmd_exist(t_cmd *s_cmd, char *cmd);
 char		*read_stdout_child(int fd);
 char		*catch_cmd_args(char *cmd, char *tmp);
@@ -114,6 +119,7 @@ char		**ft_split_args(char *str);
 char		**original_env(char *path_cpy, char *path);
 char		**aborges_env(t_cmd *cmd, char *path_cpy, char *path);
 
+void		execbin(t_cmd *cmd, t_prec *prec);
 void		change_input_output(int i, int num, int **pipes, t_prec *prec);
 void		replace_in_quotes(char *dest, char *src, int index1, int index2);
 void		fill_args(char **input);
@@ -128,7 +134,7 @@ void		free_cmd(t_cmd *cmd);
 void		wait_p(t_cmd *cmd, int num);
 void		handle_cmd(t_cmd *cmd);
 void		run_multiple_cmd(t_cmd *cmd);
-void		run_cmd(t_cmd *cmd, t_prec *prec);
+void		run_cmd(t_cmd *cmd, int **pipes, int i);
 void		print_stdout_child(char *buffer);
 void		run_child_p(t_prec *prec, t_child_p *child, char *env[]);
 void		handle_exit(t_cmd *cmd);
@@ -137,11 +143,13 @@ void		*try_open(t_redirect *redir, char *input, char *tmp);
 void		*run_cmd_catch_output(char *cmd, char *env[]);
 void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
+void	change_builtins_output(t_cmd * cmd, int **pipes, int i);
+
 
 t_prec		*initialize_prec(void);
 t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);
 
-t_child_p	*new_child_p(void *pipe);
+t_child_p	*new_child_p(void *);
 
 t_redirect	*initialize_redirect(void);
 

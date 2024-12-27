@@ -59,11 +59,19 @@ int	c(char *str1, char *str2)
 	return (1);
 }
 
+int	verify_len1(int i, char *sp)
+{
+	if (sp[i + 1] == NULL)
+		i += 1;
+	else
+		i += 2;
+	return (i);
+}
+
 char	*catch_cmd_args(char *cmd, char *tmp)
 {
 	int		i;
 	int		k;
-	int		j;
 	char	**sp;
 	char	*args;
 
@@ -71,18 +79,19 @@ char	*catch_cmd_args(char *cmd, char *tmp)
 	k = 0;
 	tmp = handle_between_quotes(cmd);
 	sp = ft_split(tmp, ' ');
-	args = (char *)malloc(sizeof(char ) * 1024);
+	args = (char *)ft_calloc(sizeof(char ) * 1024, 8);
 	while (sp[i])
 	{
 		if (c(sp[i], "<") || c(sp[i], ">") || c(sp[i], ">>") || c(sp[i], "<<"))
+		{
+			if (sp[i + 1] == NULL)
+				break ;
 			i += 2;
+		}
 		else
 		{
-			j = 0;
-			while (sp[i][j])
-				args[k++] = sp[i][j++];
+			k += ft_strcpy_custom(k, args, sp[i++]);
 			args[k++] = ' ';
-			i++;
 		}
 	}
 	return (args[k] = '\0', free(tmp), free_matrix(sp), args);

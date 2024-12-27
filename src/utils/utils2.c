@@ -69,3 +69,17 @@ int	count_rows(char **mat)
 		i++;
 	return (i);
 }
+
+int	ft_strcpy_custom(int begin, char *dest, char *src)
+{
+	int	i;
+	int	j;
+
+	i = begin;
+	j = 0;
+	if (!dest || !src)
+		return (NULL);
+	while (src[j])
+		dest[i++] = src[j++];
+	return (i);
+}

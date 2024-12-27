@@ -14,12 +14,19 @@
 
 void	ft_signal_value(int signal_value)
 {
+	char	*shell;
+	char	**tmp;
+	extern char **environ;
+
 	if (signal_value == SIGINT)
 	{
-		printf("\n");
-		rl_on_new_line();
+		shell = display_shell2(environ, tmp, NULL);
+		//write(1, "\n", 1);
 		rl_replace_line("", 0);
+		printf("\n%s\n", shell);
+		rl_on_new_line();
 		rl_redisplay();
+		free(shell);
 	}
 }
 

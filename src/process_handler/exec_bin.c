@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 18:16:14 by lleodev          ###   ########.fr       */
+/*   Updated: 2024/12/18 11:12:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,39 +39,36 @@ void	*run_cmd_catch_output(char *cmd, char *env[])
 	return (NULL);
 }
 
-void	run_cmd(t_cmd *cmd, t_prec *prec)
+void	execbin(t_cmd *cmd, t_prec *prec)
 {
-	if (prec->builtins)
-		check_builtins(prec, &cmd->enviro, cmd->env);
-	else
-	{
-		execve(prec->path,
-			prec->args, cmd->env);
-		perror("execve");
-		exit(EXIT_FAILURE);
-	}
+	execve(prec->path, prec->args, cmd->env);
+	perror("execve");
+	exit(EXIT_FAILURE);
 }
 
-void	change_input_output(int i, int num, int **pipes, t_prec *prec)
+void	run_cmd(t_cmd *cmd, int **pipes, int i)
 {
-	if (!prec->builtins)
+	if (!cmd->precedence[i]->builtins)
 	{
-		if (prec->stdin_redirect)
-			dup2(prec->stdin, STDIN_FILENO);
-		if (prec->stdout_redirect)
-			dup2(prec->stdout, STDOUT_FILENO);
-		if (i > 0)
-			dup2(pipes[i - 1][0], STDIN_FILENO);
-		if (i < num - 1)
-			dup2(pipes[i][1], STDOUT_FILENO);
+		cmd->precedence[i]->child = new_child_p(NULL);
+		if (cmd->precedence[i]->child->pid == 0)
+		{
+			change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
+			if (pipes != NULL)
+				close_pipes(pipes, cmd->cmd_num);
+			execbin(cmd, cmd->precedence[i]);
+		}
+		if (cmd->cmd_num == 1)
+		{
+			waitpid(cmd->precedence[i]->child->pid,
+				&cmd->precedence[i]->child->status, 0);
+			init_status(&cmd->enviro, cmd->precedence[i]->child->status);
+		}
 	}
 	else
 	{
-		if (num > 1)
-		{
-			dup2(pipes[i][1], STDOUT_FILENO);
-			close(pipes[i][1]);
-		}
+		change_builtins_output(cmd, pipes, i);
+		check_builtins(cmd->precedence[i], &cmd->enviro, cmd->env);
 	}
 }
 
@@ -81,37 +78,18 @@ void	run_multiple_cmd(t_cmd *cmd)
 	int	i;
 
 	i = 0;
+	pipes = NULL;
 	pipes = create_pipes(cmd);
 	while (i < cmd->cmd_num)
 	{
-		cmd->precedence[i]->child = new_child_p(NULL);
-		if (cmd->precedence[i]->child->pid == 0)
-		{
-			change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
-			close_pipes(pipes, cmd->cmd_num);
-			run_cmd(cmd, cmd->precedence[i]);
-		}
+		run_cmd(cmd, pipes, i);
 		if (i > 0)
 			close(pipes[i - 1][0]);
-		if (i < cmd->cmd_num - 1)
+		if (i < (cmd->cmd_num - 1))
 			close(pipes[i][1]);
-		if (cmd->precedence[i]->stdout_redirect)
-			close(cmd->precedence[i]->stdout);
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
+	free_matrix(pipes);
 	wait_p(cmd, cmd->cmd_num);
-}
-
-void	wait_p(t_cmd *cmd, int num)
-{
-	int	i;
-
-	i = 0;
-	while (i < num)
-	{
-		waitpid(cmd->precedence[i]->child->pid,
-			&cmd->precedence[i]->child->status, 0);
-		i++;
-	}
 }
