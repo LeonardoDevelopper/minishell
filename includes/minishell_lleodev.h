@@ -94,6 +94,8 @@ int			skip_space(char *cmd, int i);
 int			check_cmd_token_end(char *str);
 int			**create_pipes(t_cmd *cmd);
 int			cancel_heredoc(char *dir);
+int	ft_strcpy_custom(int begin, char *dest, char *src);
+
 
 char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);

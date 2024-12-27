@@ -38,7 +38,6 @@ int	main(int argc, char *argv[], char *envp[])
 			free(cmd->input);
 		}
 		free(cmd->shell);
-		free_env_mat(cmd->env);
 	}
 	return (free_enviro_list(&cmd->enviro), 0);
 }

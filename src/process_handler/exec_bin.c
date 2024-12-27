@@ -78,6 +78,7 @@ void	run_multiple_cmd(t_cmd *cmd)
 	int	i;
 
 	i = 0;
+	pipes = NULL;
 	pipes = create_pipes(cmd);
 	while (i < cmd->cmd_num)
 	{
@@ -89,6 +90,6 @@ void	run_multiple_cmd(t_cmd *cmd)
 		i++;
 	}
 	close_pipes(pipes, cmd->cmd_num);
-	free(pipes);
+	free_matrix(pipes);
 	wait_p(cmd, cmd->cmd_num);
 }

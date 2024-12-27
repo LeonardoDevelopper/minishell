@@ -12,7 +12,7 @@
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra  -g
+CFLAGS = -Wall -Wextra -g
 INCLUDES = -I./includes/ -I./libs/libft/
 
 LIB = ./libs/libft/libft.a

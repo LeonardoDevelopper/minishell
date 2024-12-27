@@ -77,12 +77,11 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
 			mat[i] += 5;
 			ft_strcpy(path_cpy, mat[i]);
 			path = ft_split(path_cpy, ':');
-			return (path);
+			mat[i] -= 5;
+			return (free_matrix(mat), path);
 		}
 		i++;
 	}
-	if (mat != NULL)
-		free_env_mat(mat);
 	return (NULL);
 }
 

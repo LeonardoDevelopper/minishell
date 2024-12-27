@@ -19,11 +19,12 @@ int	**create_pipes(t_cmd *cmd)
 	int	num;
 
 	i = 0;
-	num = cmd->cmd_num - 1;
-	pipes = (int **)malloc(sizeof(int *) * num);
+	num = cmd->cmd_num;
+	pipes = (int **)ft_calloc(sizeof(int *) * (num + 1), sizeof(int));
 	while (i < num)
 	{
 		pipes[i] = (int *)malloc(sizeof(int) * 2);
+		
 		if (pipe(pipes[i]) == -1)
 			perror("pipe");
 		i++;

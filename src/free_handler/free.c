@@ -18,6 +18,9 @@ void	free_cmd(t_cmd *cmd)
 	{
 		if (cmd->precedence)
 			free_prec(cmd->precedence);
+		if (cmd->env)
+			free_matrix(cmd->env);
+		
 	}
 }
 

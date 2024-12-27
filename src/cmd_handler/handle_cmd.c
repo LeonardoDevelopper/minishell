@@ -45,11 +45,15 @@ void	handle_args(t_prec *prec)
 {
 	char	*args;
 	char	*tmp;
+	args = NULL;
 
 	args = catch_cmd_args(prec->input, tmp);
-	prec->args = ft_split(args, ' ');
-	fill_args(prec->args);
-	free(args);
+	if (args)
+	{
+		prec->args = ft_split(args, ' ');
+		fill_args(prec->args);
+		free(args);
+	}
 }
 
 void	handle_cmd_exist(t_cmd *cmd, t_prec *prec)
