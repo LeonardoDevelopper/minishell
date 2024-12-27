@@ -116,10 +116,13 @@ make
 <p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Demo" width="600"> </p>
 <h3>Once the shell is running, you can:</h3>
 
+<h5>Navigate with cd</h5>
 <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-cd.png" width="600px;" alt="Leonardo Jorge"/><br />
 
+<h5>List directory</h5>
 <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-ls.png" width="600px;" alt="Leonardo Jorge"/><br />
 
+<h5>execute others commands</h5>
 <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="600px;" alt="Leonardo Jorge"/><br />
 
 
@@ -127,7 +130,7 @@ make
 This project is Linux-only.
 The binary produced (minishell) is specific to Linux environments.
 👥 <h1>Authors</h1>
-<table> <tr> <td align="center"><a href="https://github.com/armando-borges"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Armando_Borges.jpg" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/leonardo-jorge"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Leonardo_Jorge.jpg" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
+<table> <tr> <td align="center"><a href="https://github.com/Armando-Maria-Borges"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Armando_Borges.jpg" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/leonardo-jorge"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Leonardo_Jorge.jpg" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
 Built with ❤️ for educational purposes.
 
 📜 License
