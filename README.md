@@ -34,7 +34,7 @@ The make utility
 Clone the repository:
 bash
 Copiar código
-git clone https://github.com/your-username/minishell.git
+git clone https://github.com/LeonardoDevelopper/minishell
 cd minishell
 Install dependencies:
 bash
