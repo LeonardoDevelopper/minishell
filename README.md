@@ -76,7 +76,7 @@ git clone https://github.com/LeonardoDevelopper/minishell
 ```
 
 ```bash
-# turn in:
+# turn in directory:
 cd minishell
 
 ```
@@ -103,16 +103,17 @@ make
 <pre>
     <code>
         minishell/
-        ├── src/             # Source files
-        ├── lib/             # Static libraries
         ├── include/         # Header files
+        ├── libs/            # Static libraries
+        ├── obj/             # Object files
+        ├── src/             # Source files
         ├── Makefile         # Build script
         └── README.md        # Project documentation
     </code>
 </pre>
 
 🐧 <h1>Usage Example</h1>
-<p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell-exemple.png" alt="Shell Demo" width="600"> </p>
+<p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Demo" width="600"> </p>
 <h3>Once the shell is running, you can:</h3>
 
 Navigate directories:
