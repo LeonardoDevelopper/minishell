@@ -73,6 +73,7 @@ While this is a simplified version of a shell, it covers the essential features 
 # Clone the repository:
 git clone https://github.com/LeonardoDevelopper/minishell
 
+```
 
 ```bash
 # turn in:
