@@ -19,9 +19,41 @@ System-level programming concepts ⚙️
 While this is a simplified version of a shell, it covers the essential features and mechanics, giving you a deeper understanding of Unix systems.
 
 ✨ <h1>Key Skills Gained</h1>
-🔢 Algorithm Design
-🧑‍💻 Interactive Programming
-🐧 Unix System Programming
+<table>
+<tr>
+    <td>
+        <h4>Skills</h4>
+    </td>
+    <td>
+        <h4>Pts</h4>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h4>🔢 Algorithm Design</h4>
+    </td>
+    <td>
+        <h4>10/10</h4>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h4>🧑‍💻 Interactive Programming</h4>
+    </td>
+    <td>
+        <h4>10/10</h4>
+    </td>
+</tr>
+<tr>
+    <td>
+        <h4>🐧 Unix System Programming</h4>
+    </td>
+    <td>
+        <h4>10/10</h4>
+    </td>
+</tr>
+</table>
+
 
 ⚙️ <h1>Setup</h1>
 <h3>Prerequisites</h3>
