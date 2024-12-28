@@ -113,7 +113,7 @@ make
 </pre>
 
 🐧 <h1>Usage Example</h1>
-<p align="center"> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Demo" width="600"> </p>
+<p> <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/display-shell.png" alt="Shell Demo" width="600"> </p>
 <h3>Once the shell is running, you can:</h3>
 
 <h5>Navigate with cd</h5>
@@ -124,6 +124,8 @@ make
 
 <h5>execute others commands</h5>
 <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="600px;" alt="Leonardo Jorge"/><br />
+
+<h5>commands with redirections</h5>
 
 
 🚧 <h1>Important Notes</h1>

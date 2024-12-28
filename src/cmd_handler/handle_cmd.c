@@ -29,14 +29,13 @@ void	handle_cmd(t_cmd *cmd)
 		cmd->precedence = split_cmds(cmd, cmd->input, cmd->cmd_num);
 		if (cmd->precedence)
 		{
-			print_args(cmd);
-			/*if (test_commands(cmd))
+			if (test_commands(cmd))
 			{
 				if (cmd->cmd_num > 1)
 					run_multiple_cmd(cmd);
 				else
 				 run_cmd(cmd, NULL, 0);
-			}*/
+			}
 			free_cmd(cmd);
 		}
 	}
