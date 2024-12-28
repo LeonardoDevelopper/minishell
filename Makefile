@@ -124,7 +124,6 @@ norm_lleodev:
 	./src/utils/utils.c					\
 	./src/utils/utils2.c					\
 	./includes/minishell_lleodev.h
-				
 
 lleodev_header:
 	@clear
