@@ -79,7 +79,7 @@ char	*catch_cmd_args(char *cmd, char *tmp)
 	k = 0;
 	tmp = handle_between_quotes(cmd);
 	sp = ft_split(tmp, ' ');
-	args = (char *)ft_calloc(sizeof(char ) * 1024, 8);
+	args = (char *)malloc(sizeof(char ) * 1024);
 	while (sp[i])
 	{
 		if (c(sp[i], "<") || c(sp[i], ">") || c(sp[i], ">>") || c(sp[i], "<<"))
