@@ -126,6 +126,10 @@ make
 <img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="600px;" alt="Leonardo Jorge"/><br />
 
 <h5>commands with redirections</h5>
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-redir.png" width="600px;" alt="Leonardo Jorge"/><br />
+
+<h5>commands in pipeline</h5>
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-pipeline.png" width="600px;" alt="Leonardo Jorge"/><br />
 
 
 🚧 <h1>Important Notes</h1>
