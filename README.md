@@ -117,19 +117,19 @@ make
 <h3>Once the shell is running, you can:</h3>
 
 <h5>Navigate with cd</h5>
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-cd.png" width="600px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-cd.png" width="600px;" alt="navigation usage example"/><br />
 
 <h5>List directory</h5>
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-ls.png" width="600px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-ls.png" width="600px;" alt="list directory usage example"/><br />
 
 <h5>execute others commands</h5>
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="600px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-echo.png" width="600px;" alt="other example"/><br />
 
 <h5>commands with redirections</h5>
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-redir.png" width="600px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-redir.png" width="600px;" alt="redirection usage example"/><br />
 
 <h5>commands in pipeline</h5>
-<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-pipeline.png" width="600px;" alt="Leonardo Jorge"/><br />
+<img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/preview-pipeline.png" width="600px;" alt="pipeline usage example"/><br />
 
 
 🚧 <h1>Important Notes</h1>
