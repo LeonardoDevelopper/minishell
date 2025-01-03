@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell_lleodev.h                                :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 18:13:31 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/03 11:26:18 by lleodev          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #ifndef MINISHELL_LLEODEV_H
 # define MINISHELL_LLEODEV_H
@@ -94,7 +94,8 @@ int			skip_space(char *cmd, int i);
 int			check_cmd_token_end(char *str);
 int			**create_pipes(t_cmd *cmd);
 int			cancel_heredoc(char *dir);
-int	ft_strcpy_custom(int begin, char *dest, char *src);
+int			ft_strcpy_custom(int begin, char *dest, char *src);
+int			handle_exit(t_cmd *cmd);
 
 
 char		*handle_between_quotes(char *input);
@@ -137,7 +138,6 @@ void		run_multiple_cmd(t_cmd *cmd);
 void		run_cmd(t_cmd *cmd, int **pipes, int i);
 void		print_stdout_child(char *buffer);
 void		run_child_p(t_prec *prec, t_child_p *child, char *env[]);
-void		handle_exit(t_cmd *cmd);
 void		run_child_p_test(char *pth, char **ags, t_child_p *ch, char *env[]);
 void		*try_open(t_redirect *redir, char *input, char *tmp);
 void		*run_cmd_catch_output(char *cmd, char *env[]);

@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/15 14:05:11 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/03 11:38:30 by lleodev          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "minishell.h"
 
@@ -82,31 +82,31 @@ static int	all_digit(char **str)
 	return (1);
 }
 
-void	handle_exit(t_cmd *cmd)
+int	handle_exit(t_cmd *cmd)
 {
 	char	**tmp;
 	char	*trimmed_str;
 	int		count;
-	int		i;
 
-	i = 0;
 	tmp = ft_split(cmd->input, ' ');
 	count = count_rows_splited(tmp);
 	trimmed_str = ft_strtrim(tmp[0], " ");
 	if (ft_strcmp(trimmed_str, "exit") == 1)
 	{
-		printf("Bye Bye\n");
+		add_history(cmd->input);
 		if (count == 2 || count == 1)
 		{
+			printf("Bye Bye\n");
 			if (!all_digit(tmp))
 				ft_putstr_fd("exit: non numeric argument provided\n", 2);
+			free(trimmed_str);
+			ft_exit(tmp, count, NULL);
 		}
 		else
-			ft_putstr_fd("exit: too many arguments\n", 2);
-		free_env_mat(cmd->env);
-		free(trimmed_str);
-		free_matrix(tmp);
-		ft_exit(tmp, count, NULL);
+		{
+			return (free(trimmed_str), free_matrix(tmp),
+				ft_putstr_fd("exit: too many arguments\n", 2), 0);
+		}
 	}
-	return (free(trimmed_str), free_matrix(tmp));
+	return (free(trimmed_str), free_matrix(tmp), 1);
 }
