@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_handler_utils.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 08:07:39 by lleodev           #+#    #+#             */
+/*   Updated: 2025/01/06 08:07:41 by lleodev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -19,7 +30,7 @@ void	wait_p(t_cmd *cmd, int num)
 		init_status(&cmd->enviro, cmd->precedence[num - 1]->child->status);
 }
 
-void	change_builtins_output(t_cmd * cmd, int **pipes, int i)
+void	change_builtins_output(t_cmd *cmd, int **pipes, int i)
 {
 	if (pipes != NULL)
 	{

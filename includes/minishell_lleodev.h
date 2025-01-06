@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell_lleodev.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/11 09:56:17 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/03 11:26:18 by lleodev          ###   ########.fr       */
+/*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
+/*   Updated: 2025/01/06 08:11:42 by lleodev          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #ifndef MINISHELL_LLEODEV_H
 # define MINISHELL_LLEODEV_H
@@ -97,7 +97,6 @@ int			cancel_heredoc(char *dir);
 int			ft_strcpy_custom(int begin, char *dest, char *src);
 int			handle_exit(t_cmd *cmd);
 
-
 char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);
 char		*handle_literal(char *input);
@@ -143,13 +142,12 @@ void		*try_open(t_redirect *redir, char *input, char *tmp);
 void		*run_cmd_catch_output(char *cmd, char *env[]);
 void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
-void	change_builtins_output(t_cmd * cmd, int **pipes, int i);
-
+void		change_builtins_output(t_cmd *cmd, int **pipes, int i);
 
 t_prec		*initialize_prec(void);
 t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);
 
-t_child_p	*new_child_p(void *);
+t_child_p	*new_child_p(void *pipe);
 
 t_redirect	*initialize_redirect(void);
 

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:52:00 by lleodev           #+#    #+#             */
-/*   Updated: 2024/11/30 02:17:06 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/06 08:06:08 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	d_quote(char *cmd)
 {
-	int	counter;
+	int		counter;
 	char	*ptr_cmd;
 
 	ptr_cmd = cmd;
@@ -31,7 +31,6 @@ int	d_quote(char *cmd)
 char	*quote(char *cmd)
 {
 	char	*quote;
-	//char	*tmp;
 
 	quote = cmd;
 	if (d_quote(cmd) == 1)
@@ -55,7 +54,8 @@ int	ft_handle_tokens(char *input)
 	{
 		if (input[i] == '\\' || input[i] == ';' || input[i] == '&')
 		{
-			ft_putstr_fd("error: Unexpected token at the input\n", STDERR_FILENO);
+			ft_putstr_fd("error: Unexpected token at the input\n",
+				STDERR_FILENO);
 			return (0);
 		}
 		i++;
@@ -81,6 +81,6 @@ char	**handle_double_quotes(char *input)
 	while (input[i])
 	{
 		if (input[i])
-		i++;
+			i++;
 	}
 }
