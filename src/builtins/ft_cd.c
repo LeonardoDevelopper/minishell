@@ -107,6 +107,7 @@ int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 	return (0);
 }
 
+/*
 int	ft_cd(char **cd, int ac, t_enviro **enviro)
 {
 	char	**oldpwd;
@@ -126,5 +127,29 @@ int	ft_cd(char **cd, int ac, t_enviro **enviro)
 		free_cd(pwd, oldpwd);
 		return (-1);
 	}
+	return (1);
+}
+*/
+
+int	ft_cd(char **cd, int ac, t_enviro **enviro)
+{
+	char	**oldpwd;
+	char	**pwd;
+
+	oldpwd = (char **)malloc(3 * sizeof(char *));
+	if (!oldpwd)
+		return (0);
+	pwd = (char **)malloc(3 * sizeof(char *));
+	if (!pwd)
+	{
+		free(oldpwd);
+		return (0);
+	}
+	if (ft_start_cd(cd, oldpwd, pwd, enviro) == -1)
+	{
+		free_cd(pwd, oldpwd);
+		return (-1);
+	}
+	free_cd(pwd, oldpwd);
 	return (1);
 }

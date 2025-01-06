@@ -62,6 +62,7 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 {
 	int		j;
 	char	*tmp;
+	char	*original;
 
 	if (ac == 1)
 		ft_env_export(ac, export, enviro);
@@ -69,13 +70,16 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 	{
 		j = 1;
 		tmp = epur_str(ft_echo(export, enviro));
+		original = export[1];
 		export[1] = tmp;
-		if (ft_type_caracter(export[1][0]) ||
-			ft_isdigit(export[1][0]) ||
-			(export[1][0] == '?' && export[1][1] != '='))
+
+		if (ft_type_caracter(tmp[0]) ||
+			ft_isdigit(tmp[0]) ||
+			(tmp[0] == '?' && tmp[1] != '='))
 		{
-			printf("export: %s: not a valid identifier\n", export[1]);
+			printf("export: %s: not a valid identifier\n", tmp);
 			free(tmp);
+			export[1] = original;
 			return (1);
 		}
 		while (j < ac)
@@ -84,9 +88,11 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 			j++;
 		}
 		free(tmp);
+		export[1] = original;
 	}
 	return (0);
 }
+
 
 int	check_env(char **export, t_enviro **enviro, int j)
 {

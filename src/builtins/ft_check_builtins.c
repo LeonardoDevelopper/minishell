@@ -84,7 +84,6 @@ int	take_return(int value)
 	return (value);
 }
 
-/*
 int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 {
 	int		count_arg;
@@ -93,42 +92,7 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 
 	cmd = ft_split(prec->input, ' ');
 	count_arg = ft_count(cmd);
-	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
-	{
-		print_chech_builtin(prec);
-		free_matrix(cmd);
-		return (1);
-	}
-	if (ft_strcmp(remove_char(cmd[0], '"'), "echo"))
-	{
-		if (case_n(cmd[0 + 1]) && !cmd[0 + 2])
-		{
-			free_matrix(cmd);
-			return (1);
-		}
-		return (case_echo(cmd, enviro, env, prec->stdout));
-	}
-	else
-	{
-		retur = check_builtins_one(cmd, enviro, 0, prec->stdout);
-		if (retur != 0)
-			init_status(enviro, take_return(retur));
-		free_matrix(cmd);
-		return (retur);
-	}
-}
-*/
-
-int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
-{
-	int		count_arg;
-	int		retur;
-	char	**cmd;
-
-	cmd = ft_split(prec->input, ' ');
-	//cmd = split(prec->input);
-	//printf("%s\n", cmd[3]);
-	count_arg = ft_count(cmd);
+	retur = 0;
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
 		print_chech_builtin(prec);
@@ -147,7 +111,8 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 		if (retur != 0)
 			init_status(enviro, take_return(retur));
 	}
-	//free_matrix(cmd);  // Liberação centralizada
+	free_matrix(cmd);
 	return (retur);
 }
 
+// valgrind --leak-check=full ./minishell

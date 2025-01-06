@@ -24,24 +24,48 @@ void	init_status(t_enviro **enviro, int value)
 		return ;
 	status[0] = malloc(sizeof(char) * 240);
 	if (!status[0])
-		return (free(status));
+	{
+		free(status);
+		return ;
+	}
 	ft_strcpy(status[0], "export");
 	status[1] = malloc(sizeof(char) * 250);
 	if (!status[1])
-		return (free(status[0]), free(status));
+	{
+		free(status[0]);
+		free(status);
+		return ;
+	}
 	if (value < 0)
 		n = value + 255;
 	n = value % 255;
 	str_itoa = ft_itoa(n);
+	if (!str_itoa)
+	{
+		free(status[1]);
+		free(status[0]);
+		free(status);
+		return ;
+	}
 	str_join = ft_strjoin("?=", str_itoa);
+	if (!str_join)
+	{
+		free(str_itoa);
+		free(status[1]);
+		free(status[0]);
+		free(status);
+		return ;
+	}
 	ft_strcpy(status[1], str_join);
 	status[2] = NULL;
 	ft_export(status, ft_count(status), enviro);
 	free(str_itoa);
 	free(str_join);
+	free(status[1]);
 	free(status[0]);
 	free(status);
 }
+
 
 int	fill_env(t_enviro **enviro, char **env)
 {
