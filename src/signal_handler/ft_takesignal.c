@@ -36,8 +36,11 @@ void	ft_signal(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	ft_ctrld(char *input)
+void	ft_ctrld(char *input, char **mat_env)
 {
 	if (!input)
+	{
+		free_matrix(mat_env);
 		exit(0);
+	}
 }

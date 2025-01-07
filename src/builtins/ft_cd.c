@@ -39,7 +39,6 @@ void	ft_oldpwd(char **oldpwd, t_enviro **enviro)
 	oldpwd[2] = NULL;
 }
 
-
 void	ft_condition_cd_aux(char **cd, char **pwd,
 		t_enviro **enviro)
 {
@@ -55,7 +54,6 @@ void	ft_condition_cd_aux(char **cd, char **pwd,
 			return;
 		}
 	}
-	free(result);
 	ft_new_pwd(pwd, enviro);
 	ft_export(pwd, 2, enviro);
 }
@@ -101,35 +99,10 @@ int	ft_start_cd(char **cd, char **oldpwd, char **pwd,
 	if (value == -1)
 		return (-1);
 	ft_export(oldpwd, 2, enviro);
-	//free_cd(pwd, NULL);
 	if (value == 1)
 		return (1);
 	return (0);
 }
-
-/*
-int	ft_cd(char **cd, int ac, t_enviro **enviro)
-{
-	char	**oldpwd;
-	char	**pwd;
-
-	oldpwd = (char **)malloc(3 * sizeof(char *));
-	if (!oldpwd)
-		return (0);
-	pwd = (char **)malloc(3 * sizeof(char *));
-	if (!pwd)
-	{
-		free(oldpwd);
-		return (0);
-	}
-	if (ft_start_cd(cd, oldpwd, pwd, enviro) == -1)
-	{
-		free_cd(pwd, oldpwd);
-		return (-1);
-	}
-	return (1);
-}
-*/
 
 int	ft_cd(char **cd, int ac, t_enviro **enviro)
 {

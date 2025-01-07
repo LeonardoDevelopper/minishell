@@ -27,7 +27,7 @@ int	main(int argc, char *argv[], char *envp[])
 		cmd->shell = display_shell(envp, tmp, &cmd->enviro);
 		cmd->input = readline(cmd->shell);
 		cmd->env = fill_max(&cmd->enviro);
-		ft_ctrld(cmd->input);
+		ft_ctrld(cmd->input, cmd->env);
 		if (cmd->input && *cmd->input)
 		{
 			if (!handle_exit(cmd))
@@ -39,5 +39,7 @@ int	main(int argc, char *argv[], char *envp[])
 		}
 		free(cmd->shell);
 	}
+	if (cmd->env)
+		free_matrix(cmd->env);
 	return (free_enviro_list(&cmd->enviro), 0);
 }

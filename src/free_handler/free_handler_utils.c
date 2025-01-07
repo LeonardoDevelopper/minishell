@@ -17,10 +17,14 @@ void	free_matrix(char **matrix)
 	int	i;
 
 	i = 0;
-	if (matrix)
+	if (matrix != NULL)
 	{
-		while (matrix[i])
-			free(matrix[i++]);
+		while (matrix[i] != NULL)
+		{
+			free(matrix[i]);
+			matrix[i++] = NULL;
+		}
 		free(matrix);
+		matrix = NULL;
 	}
 }

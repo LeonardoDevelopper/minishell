@@ -23,7 +23,7 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
 		return (ft_export(cmd, count_arg, enviro));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "unset"))
 		return (ft_unset(cmd, count_arg, enviro));
-	if (ft_strcmp(remove_char(cmd[k], '"'), "pwd"))
+	else if (ft_strcmp(remove_char(cmd[k], '"'), "pwd"))
 		return (ft_pwd(fd));
 	else if (ft_strcmp(remove_char(cmd[k], '"'), "env"))
 	{

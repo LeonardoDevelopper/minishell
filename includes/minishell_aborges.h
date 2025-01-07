@@ -75,7 +75,7 @@ int		ft_unset(char **unset, int ac, t_enviro **enviro);
 
 //comand function
 void	ft_signal(void);
-void	ft_ctrld(char *input);
+void	ft_ctrld(char *input, char **mat_env);
 void	ft_signal_value(int signal_value);
 // int		check_builtins(t_prec *prec, t_enviro **enviro, char **env);
 int		ft_execute(char **cmd, int ac, char **env, t_enviro **enviro);

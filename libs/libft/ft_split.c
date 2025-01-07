@@ -16,12 +16,13 @@ static char	**ft_malloc_error(char **tab)
 	size_t	i;
 
 	i = 0;
-	while (tab[i])
+	while (tab != NULL && tab[i] != NULL)
 	{
 		free(tab[i]);
 		i++;
 	}
-	free(tab);
+	if (tab != NULL)
+		free(tab);
 	return (NULL);
 }
 
@@ -79,7 +80,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	tab = (char **)malloc(sizeof(char *) * (ft_nb_words(s, c) + 1));
+	tab = (char **)ft_calloc(sizeof(char *), (ft_nb_words(s, c) + 1));
 	if (!tab)
 		return (NULL);
 	i = 0;
@@ -88,7 +89,7 @@ char	**ft_split(char const *s, char c)
 	while (i < ft_nb_words(s, c))
 	{
 		ft_get_next_word(&next_word, &next_word_len, c);
-		tab[i] = (char *)malloc(sizeof(char) * (next_word_len + 1));
+		tab[i] = (char *)ft_calloc(sizeof(char), (next_word_len + 1));
 		if (!tab[i])
 			return (ft_malloc_error(tab));
 		ft_strlcpy(tab[i], next_word, next_word_len + 1);

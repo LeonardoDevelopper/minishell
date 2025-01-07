@@ -72,7 +72,6 @@ int	ft_export(char **export, int ac, t_enviro **enviro)
 		tmp = epur_str(ft_echo(export, enviro));
 		original = export[1];
 		export[1] = tmp;
-
 		if (ft_type_caracter(tmp[0]) ||
 			ft_isdigit(tmp[0]) ||
 			(tmp[0] == '?' && tmp[1] != '='))
