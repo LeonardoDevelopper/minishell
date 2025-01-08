@@ -46,3 +46,22 @@ void	print_export(char **list, int fd, int i)
 	ft_putstr_fd(list[i], fd);
 	ft_putstr_fd("\n", fd);
 }
+
+void	fill_str(char *str)
+{
+	str[0] = '~';
+	str[1] = '!';
+	str[2] = '@';
+	str[3] = '#';
+	str[4] = '$';
+	str[5] = '%';
+	str[6] = '^';
+	str[7] = '&';
+	str[8] = '*';
+	str[9] = '(';
+	str[10] = ')';
+	str[11] = '+';
+	str[12] = '-';
+	str[13] = '=';
+	str[14] = '\0';
+}

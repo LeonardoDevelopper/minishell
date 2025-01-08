@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 int	ft_absolutway(char **cmd, char **env, t_enviro **enviro)
 {
 	int		j;
@@ -140,3 +140,4 @@ int	execute_cmd(char **cmd, int ac, t_enviro **enviro, char **env)
 	}
 	return (1);
 }
+*/

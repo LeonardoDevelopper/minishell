@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_findchar.c                                      :+:      :+:    :+:   */
+/*   ft_export_one.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 09:00:59 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/06 20:02:44 by lleodev          ###   ########.fr       */
+/*   Created: 2025/01/08 12:38:52 by aborges           #+#    #+#             */
+/*   Updated: 2025/01/08 12:39:02 by aborges          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_findchar(char *str, int c)
+void	handle_export_loop(char **export, int ac, t_enviro **enviro)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
+	j = 1;
+	while (j < ac)
 	{
-		if (str[i] == c)
-			return (1);
-		i++;
+		export_check(export, ac, enviro, j);
+		j++;
 	}
-	return (0);
 }

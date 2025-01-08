@@ -40,7 +40,6 @@ void	free_env_mat(char **mat)
 	free(mat);
 }
 
-
 void	free_cd(char **pwd, char **oldpwd)
 {
 	if (pwd)
@@ -60,4 +59,3 @@ void	free_cd(char **pwd, char **oldpwd)
 		free(oldpwd);
 	}
 }
-

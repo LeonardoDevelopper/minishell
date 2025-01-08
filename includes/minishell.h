@@ -25,10 +25,10 @@
 # include "minishell_aborges.h"
 # include "minishell_lleodev.h"
 
-#define SHELL_1 "\001\033[1;36m\033[1;33m\002┌───("      // OK: Início e fim das sequências de cor
-#define SHELL_2 "\001\033[1;35m\002᯽ \001\033[1;32m\002"  // OK: Início e fim das sequências de cor
-#define SHELL_3 "\001\033[1;34m\002)⸺ [\001\033[1;34m\033[1;37m\002~" // OK: Início e fim das sequências de cor
-#define SHELL_4 "\001\033[1;34m\002]\001\033[0m\002\n\001\033[1;32m\033[1;36m\033[1;33m\002└──$ \001\033[0m\002" // OK: Início e fim das sequências de cor
-#define SHELL_4_2 "\001\033[1;34m\002]\001\033[0m\002"     // OK: Início e fim das sequências de cor
+# define SHELL_1 "\001\033[1;36m\033[1;33m\002┌───("
+# define SHELL_2 "\001\033[1;35m\002᯽ \001\033[1;32m\002"
+# define SHELL_3 "\001\033[1;34m\002)⸺ [\001\033[1;34m\033[1;37m\002~"
+# define SHELL_4 "\001\033[1;34m\002]\001\033[0m\002\n\001\033[1;32m\033[1;36m\033[1;33m\002└──$ \001\033[0m\002"
+# define SHELL_4_2 "\001\033[1;34m\002]\001\033[0m\002"
 
 #endif

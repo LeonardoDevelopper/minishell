@@ -42,8 +42,9 @@ void	ft_oldpwd(char **oldpwd, t_enviro **enviro)
 void	ft_condition_cd_aux(char **cd, char **pwd,
 		t_enviro **enviro)
 {
-	char	*result = NULL;
+	char	*result;
 
+	result = NULL;
 	if (chdir(cd[1]) == -1)
 	{
 		result = ft_echo(cd, enviro);
@@ -51,7 +52,7 @@ void	ft_condition_cd_aux(char **cd, char **pwd,
 		{
 			printf("cd: string not in %s\n", cd[1]);
 			free(result);
-			return;
+			return ;
 		}
 	}
 	ft_new_pwd(pwd, enviro);

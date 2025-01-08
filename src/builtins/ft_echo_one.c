@@ -85,47 +85,27 @@ void	expandecho(char **echo, t_enviro **enviro, int indice, int i)
 
 void	ft_echo1(char **echo, int i, char *value)
 {
-	int	k;
-	int	j;
-	int c = 0;
-	int check = 0;
+	int	var[5];
 
-	k = 0;
-	while (echo[i])
+	var[0] = 0;
+	var[1] = 0;
+	var[2] = 0;
+	var[3] = i;
+	while (echo[var[3]])
 	{
-		j = 0;
-		while (echo[i][j])
+		var[4] = 0;
+		while (echo[var[3]][var[4]])
 		{
-			if (echo[i][j] == '>')
-			{
-				check = 1;
-				i++;
-			}
-			if ((echo [i][j] == 34 || echo[i][j] == 39) && check == 1)
-			{
-				c++;
-			}
-
-			if (c != 1)
-			{
-				value[k] = echo[i][j];
-				j++;
-				k++;
-			}
-			else
-			{
-				j++;
-			}
-
+			case_redirect(echo, value, var);
 		}
-		i++;
-		if (echo[i])
+		var[3]++;
+		if (echo[var[3]] && var[2] == 0)
 		{
-			value[k] = 32;
-			k++;
+			value[var[0]] = ' ';
+			var[0]++;
 		}
-		value[k] = '\0';
 	}
+	value[var[0]] = '\0';
 }
 
 void	check_single_quotes(char *str, int *j)

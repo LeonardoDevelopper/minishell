@@ -20,6 +20,7 @@ COMPLIB = cd libs/libft/ && make
 
 SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_echo_one.c		\
+	./src/builtins/ft_echo_redirect.c   \
 	./src/builtins/ft_echo_two.c		\
 	./src/builtins/ft_cd.c				\
 	./src/builtins/ft_cd_one.c			\
@@ -27,6 +28,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_unset.c			\
 	./src/builtins/ft_builtins.c		\
 	./src/builtins/ft_free_builtins.c	\
+	./src/builtins/ft_export_one.c		\
 	./src/builtins/ft_export.c			\
 	./src/builtins/ft_check_builtins.c	\
 	./src/cmd_handler/split_commands.c	\
@@ -47,6 +49,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_aux1.c				\
 	./src/utils/ft_aux2.c				\
 	./src/utils/env.c					\
+	./src/utils/ft_init_status.c		\
 	./src/init_handler/var_initializer.c	\
 	./src/signal_handler/ft_takesignal.c	\
 	./src/free_handler/free.c			\

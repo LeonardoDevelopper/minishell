@@ -82,7 +82,7 @@ char	*ft_echo(char **echo, t_enviro **enviro)
 	ft_echo1(echo, i, value);
 	ft_echo_aux(enviro, value);
 	free(value);
-	return (result_echo('\0', 0)); //return (epur_str(result_echo('\0', 0)));
+	return (result_echo('\0', 0));
 }
 
 void	aux_check_echo(char **result, t_enviro **enviro, int i, int *j)

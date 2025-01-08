@@ -86,12 +86,10 @@ int	take_return(int value)
 
 int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 {
-	int		count_arg;
 	int		retur;
 	char	**cmd;
 
 	cmd = ft_split(prec->input, ' ');
-	count_arg = ft_count(cmd);
 	retur = 0;
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 	{
@@ -114,5 +112,4 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	free_matrix(cmd);
 	return (retur);
 }
-
 // valgrind --leak-check=full ./minishell

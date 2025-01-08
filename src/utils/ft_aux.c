@@ -89,25 +89,6 @@ char	**ft_split_path(char *path)
 	return (result);
 }
 
-void	fill_str(char *str)
-{
-	str[0] = '~';
-	str[1] = '!';
-	str[2] = '@';
-	str[3] = '#';
-	str[4] = '$';
-	str[5] = '%';
-	str[6] = '^';
-	str[7] = '&';
-	str[8] = '*';
-	str[9] = '(';
-	str[10] = ')';
-	str[11] = '+';
-	str[12] = '-';
-	str[13] = '=';
-	str[14] = '\0';
-}
-
 int	ft_type_caracter(char c)
 {
 	char	str[15];
