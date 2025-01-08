@@ -1,4 +1,4 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
@@ -6,9 +6,9 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/03 11:25:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/06 11:24:06 by lleodev          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -33,8 +33,8 @@ int	main(int argc, char *argv[], char *envp[])
 			if (!handle_exit(cmd))
 				continue ;
 			handle_cmd(cmd);
-				if (ft_strlen(cmd->input) > 0)
-					add_history(cmd->input);
+			if (ft_strlen(cmd->input) > 0)
+				add_history(cmd->input);
 			free(cmd->input);
 		}
 		free(cmd->shell);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 11:44:50 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/18 11:10:16 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/06 08:04:50 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	**create_pipes(t_cmd *cmd)
 	while (i < num)
 	{
 		pipes[i] = (int *)malloc(sizeof(int) * 2);
-		
 		if (pipe(pipes[i]) == -1)
 			perror("pipe");
 		i++;

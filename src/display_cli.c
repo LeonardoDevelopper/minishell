@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:43:12 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 17:25:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/06 12:23:19 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*display_shell(char *envp[], char **tmp_tmp, char **env)
 
 	user = getenv("USER");
 	host = (char *)run_cmd_catch_output("hostname", envp);
-	host = remove_char(host, '\n');
 	getcwd(dir, sizeof(dir));
 	tmp_tmp = ft_split(host, '.');
 	free(host);
@@ -51,7 +50,6 @@ char	*display_shell2(char *envp[], char **tmp_tmp, char **env)
 
 	user = getenv("USER");
 	host = (char *)run_cmd_catch_output("hostname", envp);
-	host = remove_char(host, '\n');
 	getcwd(dir, sizeof(dir));
 	tmp_tmp = ft_split(host, '.');
 	free(host);
