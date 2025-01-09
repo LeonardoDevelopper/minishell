@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 16:28:07 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:35:45 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*verify_redirect_stdout(char *input)
 		if (redir->count > 1)
 		{
 			redir->fd_list = (int *)malloc(sizeof(int) * 1);
-			return (try_open(redir, input, tmp));
+			return (free_matrix(redirect), try_open(redir, input, tmp));
 		}
 		return (free_matrix(redirect), free(redir), NULL);
 	}
