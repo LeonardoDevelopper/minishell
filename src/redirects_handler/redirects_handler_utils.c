@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect_utils.c                                   :+:      :+:    :+:   */
+/*   redirects_handler_utils.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 10:48:48 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 11:24:02 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:32:40 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,10 @@ char	*handle_literal(char *input)
 {
 	char	*tmp;
 	char	*tmp2;
+	int		first;
 
-	tmp = get_content_quotes(input);
+	first = first_quote(input);
+	tmp = get_content_quotes(input, first);
 	if (ft_findchar(tmp, '>'))
 	{
 		tmp = remove_char(tmp, '>');
