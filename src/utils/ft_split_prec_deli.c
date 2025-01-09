@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_prec_deli.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:12:14 by aborges           #+#    #+#             */
-/*   Updated: 2025/01/08 13:12:24 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:04:52 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_rows_del(char *str, char c)
 	len = 0;
 	while (str[i])
 	{
-	        if (str[i] == c)
+		if (str[i] == c)
 			len++;
 		i++;
 	}
@@ -40,10 +40,10 @@ int	ft_strlen_del(char *str, char c)
 
 char	**ft_split_del(char *str, char c)
 {
-	int	i;
-	int	j;
-	int	len1;
-	int	len2;
+	int		i;
+	int		j;
+	int		len1;
+	int		len2;
 	char	**res;
 
 	i = 0;

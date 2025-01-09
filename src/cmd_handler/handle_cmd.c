@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/08 14:05:13 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:02:50 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	handle_cmd(t_cmd *cmd)
 		cmd->precedence = split_cmds(cmd, cmd->input, cmd->cmd_num);
 		if (cmd->precedence)
 		{
-			print_args(cmd);
 			if (test_commands(cmd))
 			{
 				if (cmd->cmd_num > 1)
