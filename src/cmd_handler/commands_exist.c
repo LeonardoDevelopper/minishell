@@ -12,6 +12,54 @@
 
 #include "minishell.h"
 
+char	**prepare_echo_args(t_cmd *cmd, int i)
+{
+	char	**mat;
+
+	mat = malloc(sizeof(char *) * 3);
+	if (!mat)
+		return (NULL);
+	mat[0] = strdup("echo");
+	mat[1] = strdup(cmd->precedence[i]->cmd);
+	mat[2] = NULL;
+	if (!mat[0] || !mat[1])
+	{
+		free(mat[0]);
+		free(mat[1]);
+		free(mat);
+		return (NULL);
+	}
+	return (mat);
+}
+
+int	handle_non_builtin(t_cmd *cmd, int i)
+{
+	char	**mat;
+
+	printf("%s%s%s", GREEN_TEXT, CMD_NO_EXIST, RESET);
+	mat = prepare_echo_args(cmd, i);
+	if (!mat)
+		return (0);
+	printf("%s", ft_echo(mat, &cmd->enviro));
+	free(mat[0]);
+	free(mat[1]);
+	free(mat);
+	return (0);
+}
+
+int	handle_redirects(t_cmd *cmd, int i)
+{
+	if (cmd->precedence[i]->stdin_redirect)
+	{
+		if (!verify_fd(cmd->precedence[i]->stdin_redirect))
+		{
+			printf("No such file or directory\n");
+			return (0);
+		}
+	}
+	return (1);
+}
+
 int	test_commands(t_cmd *cmd)
 {
 	int	i;
@@ -21,21 +69,11 @@ int	test_commands(t_cmd *cmd)
 	{
 		if (is_builtins(&cmd->precedence[i]) || cmd->precedence[i]->path)
 		{
-			if (cmd->precedence[i]->stdin_redirect)
-			{
-				if (!verify_fd(cmd->precedence[i]->stdin_redirect))
-				{
-					printf("No such file or directory\n");
-					return (0);
-				}
-			}
+			if (!handle_redirects(cmd, i))
+				return (0);
 		}
 		else
-		{
-			printf("%s%s%s%s\n", RED_TEXT, CMD_NO_EXIST,
-				cmd->precedence[i]->cmd, RESET);
-			return (0);
-		}
+			return (handle_non_builtin(cmd, i));
 		i++;
 	}
 	return (1);
