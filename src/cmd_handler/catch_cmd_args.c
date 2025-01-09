@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:36:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:19:27 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	c(char *str1, char *str2)
 
 int	verify_len1(int i, char *sp)
 {
-	if (sp[i + 1] == NULL)
+	if (sp[i + 1] == '\0')
 		i += 1;
 	else
 		i += 2;
@@ -97,7 +97,7 @@ char	*catch_cmd_args(char *cmd, char *tmp)
 	return (args[k] = '\0', free(tmp), free_matrix(sp), args);
 }
 
-void	fill_args(char **input)
+char	**fill_args(char **input)
 {
 	int		i;
 	int		j;

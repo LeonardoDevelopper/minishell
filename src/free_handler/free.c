@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:08:03 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 11:01:28 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:27:44 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	handle_exit(t_cmd *cmd)
 			if (!all_digit(tmp))
 				ft_putstr_fd("exit: non numeric argument provided\n", 2);
 			free_left(trimmed_str, cmd);
-			ft_exit(tmp, count, NULL);
+			ft_exit(tmp, count, NULL, 1);
 		}
 		else
 		{

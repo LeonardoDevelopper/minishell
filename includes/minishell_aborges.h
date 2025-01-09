@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 13:57:12 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/30 11:09:11 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:28:37 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ char	*search_env(char *world, t_enviro **enviro);
 int		ft_cd(char **cd, int ac, t_enviro **enviro);
 int		check_env(char **export, t_enviro **enviro, int j);
 
+void	ft_new_pwd(char **pwd, t_enviro **enviro);
+void	free_cd(char **pwd, char **oldpwd);
+void	export_check(char **export, int ac, t_enviro **enviro, int j);
+void	ft_env_export(int ac, char **env, t_enviro **enviro);
 //builtin function echo
 int		case_n(char *str);
 int		ft_check_cots(char **str);
@@ -48,6 +52,13 @@ char	*ft_echo(char **echo, t_enviro **enviro);
 void	case_redirect(char **echo, char *value, int *var);
 void	check_dolar(char **result, int i, int *j);
 char	*create_aux_string(char *echo_indice, int i);
+void	fill_str(char *str);
+void	free_env_mat(char **mat);
+void	free_enviro_list(t_enviro **enviro);
+int		ft_pwd(int fd);
+void	ft_env(int ac, char **env, t_enviro **enviro, int fd);
+void	ft_exit(char **end, int ac, t_enviro **enviro, int fd);
+void	init_status(t_enviro **enviro, int value);
 
 void	aux_cmpecho(char *aux, t_enviro *tmp);
 void	check_single_quotes(char *str, int *j);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/15 09:18:25 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:16:02 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	check_builtins_one(char **cmd, t_enviro **enviro, int k, int fd)
 		ft_exit(cmd, count_arg, enviro, fd);
 	else
 		return (0);
+	return (0);
 }
 
 int	case_n(char *str)
@@ -56,6 +57,7 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 {
 	char	*result_echo;
 
+	env = env;
 	result_echo = epur_str(ft_echo(cmd, enviro));
 	if (!result_echo)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 11:01:06 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 13:26:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@
 # define BLUE_BG "\033[44m"
 # define RESET "\033[0m"
 # define CMD_NO_EXIST "This command is not recognized on this shell: "
+
+typedef struct s_tmp
+{
+	char	*tmp;
+	char	**tmp2;
+}		t_tmp;
 
 typedef struct s_child_p
 {
@@ -96,14 +102,16 @@ int			**create_pipes(t_cmd *cmd);
 int			cancel_heredoc(char *dir);
 int			ft_strcpy_custom(int begin, char *dest, char *src);
 int			handle_exit(t_cmd *cmd);
+int			dup_tokens_followed(char *n, int i, int len);
+int			count_rows(char **mat);
 
 char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);
 char		*handle_literal(char *input);
 char		*handle_no_literal(char *input);
 char		*ft_strjoin_matrix(char **mat, char c);
-char		*display_shell(char *env[], char **tmp, char **enviro);
-char		*display_shell2(char *envp[], char **tmp_tmp, char **env);
+char		*display_shell(char *env[], char **tmp);
+char		*display_shell2(char *envp[], char **tmp_tmp);
 char		*cmd_exist(t_cmd *s_cmd, char *cmd);
 char		*read_stdout_child(int fd);
 char		*catch_cmd_args(char *cmd, char *tmp);
@@ -116,19 +124,24 @@ char		**split_dir(t_cmd *cmd);
 char		**handle_double_quotes(char *input);
 char		**ft_split_del(char *str, char c);
 char		**ft_split_args(char *str);
-char		**original_env(char *path_cpy, char *path);
-char		**aborges_env(t_cmd *cmd, char *path_cpy, char *path);
+char		**original_env(char *path_cpy, char **path);
+char		**aborges_env(t_cmd *cmd, char *path_cpy, char **path);
 
+void		remove_old_file(char *dir);
+void		free_two(char *tmp, char **tmp2);
 void		execbin(t_cmd *cmd, t_prec *prec);
 void		change_input_output(int i, int num, int **pipes, t_prec *prec);
 void		replace_in_quotes(char *dest, char *src, int index1, int index2);
-void		fill_args(char **input);
+char		**fill_args(char **input);
 void		print_args(t_cmd *cmd);
 void		free_matrix(char **matrix);
+void		free_pipe(int **pipe);
 void		initialize_cmd(t_cmd *cmd);
 void		handle_args(t_prec *prec);
 void		handle_cmd_exist(t_cmd *cmd, t_prec *prec);
-void		handle_stdin(t_prec *prec);
+void		*handle_stdin(t_prec *prec);
+void		create_dir(char *dir);
+void		handle_stdout(t_prec *prec);
 void		free_prec(t_prec **prec);
 void		free_cmd(t_cmd *cmd);
 void		wait_p(t_cmd *cmd, int num);
@@ -144,6 +157,7 @@ void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
 void		change_builtins_output(t_cmd *cmd, int **pipes, int i);
 void		free_left(char *trimmed_str, t_cmd *cmd);
+void		print_chech_builtin(t_prec *prec);
 
 t_prec		*initialize_prec(void);
 t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);

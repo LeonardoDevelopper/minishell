@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:43:38 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/10 08:43:39 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:02:27 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	process_unset(char *tmp2, t_enviro **enviro)
 	{
 		if (ft_searstr_unset(tmp2, tmp->value))
 		{
-			ft_remove_env(tmp2, enviro, tmp->indice);
+			ft_remove_env(&tmp2, enviro, tmp->indice);
 			break ;
 		}
 		tmp = tmp->next;

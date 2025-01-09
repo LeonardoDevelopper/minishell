@@ -6,13 +6,13 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:43:12 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 11:08:58 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 13:05:00 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*display_shell(char *envp[], char **tmp_tmp, char **env)
+char	*display_shell(char *envp[], char **tmp_tmp)
 {
 	char	*user;
 	char	*host;
@@ -41,7 +41,7 @@ char	*display_shell(char *envp[], char **tmp_tmp, char **env)
 	return (free(host), printf("\n"), shell);
 }
 
-char	*display_shell2(char *envp[], char **tmp_tmp, char **env)
+char	*display_shell2(char *envp[], char **tmp_tmp)
 {
 	char	*user;
 	char	*host;

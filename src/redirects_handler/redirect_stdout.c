@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:25:22 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:51:15 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	*verify_redirect_stdout(char *input)
 			tmp = get_content_quotes(redirect[1]);
 		else
 			tmp = ft_strtrim(redirect[1], " ");
-		redir->count = count_rows((void **)redirect);
+		redir->count = count_rows((char **)redirect);
 		free_matrix(redirect);
 		if (redir->count > 1)
 		{

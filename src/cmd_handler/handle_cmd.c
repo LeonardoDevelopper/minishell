@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/08 16:02:50 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:20:12 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	handle_args(t_prec *prec)
 	char	*args;
 	char	*tmp;
 
+	tmp = NULL;
 	args = catch_cmd_args(prec->input, tmp);
 	if (args)
 	{

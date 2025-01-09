@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 23:34:52 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 12:10:43 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 13:15:41 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	handle_special_chr(char *input)
 			i += skip_content_in_quote(input, i);
 		if (i >= len)
 			break ;
-		if (i < len && input[i] == '\\' || input[i] == ';' || input[i] == '&')
+		if ((i < len && input[i] == '\\')
+			|| input[i] == ';' || input[i] == '&')
 			return (1);
 		i++;
 	}

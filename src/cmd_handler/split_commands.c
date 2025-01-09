@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 16:11:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:17:10 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_prec	**split_cmds(t_cmd *cmd, char *input, int num_cmd)
 {
 	t_prec	**precedence;
 	int		p;
-	int		pipe[2];
 	char	**commands;
 
 	p = 0;

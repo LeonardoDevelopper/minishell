@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 08:46:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 13:15:19 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 13:26:18 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,23 @@ void	*verify_redirect_stdin(char *cmd)
 		return (NULL);
 }
 
-void	handle_stdin(t_prec *p)
+void	*handle_stdin(t_prec *p)
 {
-	char	*tmp;
-	char	**tmp2;
+	t_tmp	t;
 	char	*name;
 
+	name = NULL;
 	p->stdin_redirect = verify_redirect_stdin(p->input);
 	if (p->stdin_redirect)
 	{
 		if (verify_heredoc(p->input) > 0)
 		{
-			tmp2 = ft_split(p->input, ' ');
-			tmp = ft_strtrim(tmp2[2], " ");
+			t.tmp2 = ft_split(p->input, ' ');
+			t.tmp = ft_strtrim(t.tmp2[2], " ");
 			p->stdin_redirect->fd_list[p->stdin_redirect->count - 1]
-				= handle_heredoc(tmp, name);
+				= handle_heredoc(t.tmp, name);
 			p->stdin = p->stdin_redirect->fd_list[p->stdin_redirect->count - 1];
-			free(tmp);
-			free_matrix(tmp2);
+			free_two(t.tmp, t.tmp2);
 		}
 		else if (verify_heredoc(p->input) < 0)
 			return (printf("error: Invalid token\n"), NULL);
@@ -68,4 +67,5 @@ void	handle_stdin(t_prec *p)
 	}
 	else
 		p->stdin = STDIN_FILENO;
+	return (NULL);
 }

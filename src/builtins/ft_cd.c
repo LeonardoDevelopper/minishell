@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:09:02 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/12 15:09:05 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:01:29 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	ft_cd(char **cd, int ac, t_enviro **enviro)
 	char	**oldpwd;
 	char	**pwd;
 
+	ac = ac;
 	oldpwd = (char **)malloc(3 * sizeof(char *));
 	if (!oldpwd)
 		return (0);

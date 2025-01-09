@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:37:56 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/06 08:08:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 13:16:25 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,12 @@ int	verify_heredoc(char *input)
 	return (-1);
 }
 
-int	close_heredoc(int signal)
+void	close_heredoc(int signal)
 {
 	char	*home;
 	char	*dir;
 
+	signal = signal;
 	home = getenv("HOME");
 	dir = ft_strjoin(home, "/tmp");
 	remove_old_file(dir);

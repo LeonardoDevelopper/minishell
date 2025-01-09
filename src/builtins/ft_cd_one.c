@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 09:17:52 by aborges           #+#    #+#             */
-/*   Updated: 2024/11/27 09:17:54 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:01:51 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_new_pwd_aux(char **pwd, t_enviro **enviro, char *temp)
 {
+	enviro = enviro;
 	pwd[1] = ft_strjoin("PWD=", temp);
 	pwd[2] = NULL;
 	free(temp);

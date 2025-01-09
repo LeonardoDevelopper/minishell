@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 08:51:54 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 09:27:44 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:23:01 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	skip_space(char *cmd, int i)
 {
-	while (cmd[i] && cmd[i] == 32 || (cmd[i] > 9 && cmd[i] <= 13))
+	while ((cmd[i] && cmd[i] == 32) || (cmd[i] > 9 && cmd[i] <= 13))
 		i++;
 	return (i);
 }
