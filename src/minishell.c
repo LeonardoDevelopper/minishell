@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/06 11:24:06 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 10:29:37 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_cmd	*cmd;
 	char	**tmp;
 
-	argc = argc;
-	argv = argv;
-	cmd = (t_cmd *)malloc(sizeof(t_cmd));
-	fill_env(&cmd->enviro, envp);
+	cmd = initialize_prompt(argc, argv, envp);
 	ft_signal();
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/06 08:11:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 11:01:06 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void		*run_cmd_catch_output(char *cmd, char *env[]);
 void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
 void		change_builtins_output(t_cmd *cmd, int **pipes, int i);
+void		free_left(char *trimmed_str, t_cmd *cmd);
 
 t_prec		*initialize_prec(void);
 t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);
@@ -150,5 +151,7 @@ t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);
 t_child_p	*new_child_p(void *pipe);
 
 t_redirect	*initialize_redirect(void);
+
+t_cmd		*initialize_prompt(int argc, char *argv[], char *envp[]);
 
 #endif

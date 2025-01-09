@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:43:12 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/06 12:23:19 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 11:08:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*display_shell(char *envp[], char **tmp_tmp, char **env)
 	char	*user;
 	char	*host;
 	char	dir[1024];
-	char	*tmp[8];
+	char	*tmp[9];
 	char	*shell;
 
 	user = getenv("USER");
@@ -34,7 +34,8 @@ char	*display_shell(char *envp[], char **tmp_tmp, char **env)
 	tmp[4] = SHELL_3;
 	tmp[5] = dir;
 	tmp[6] = SHELL_4;
-	tmp[7] = NULL;
+	tmp[7] = SHELL_4_1;
+	tmp[8] = NULL;
 	free_matrix(tmp_tmp);
 	shell = ft_strjoin_matrix(tmp, ' ');
 	return (free(host), printf("\n"), shell);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <aborges@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:45:28 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/23 10:26:16 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/09 10:53:27 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,6 @@ void	ft_exit(char **end, int ac, t_enviro **enviro, int fd)
 		exit(ft_atoi(end[1]));
 	if (end)
 		rl_clear_history();
+	free_matrix(end);
 	exit(0);
 }
