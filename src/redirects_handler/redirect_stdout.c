@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 12:51:15 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:28:07 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,26 @@ void	*verify_redirect_stdout(char *input)
 	t_redirect	*redir;
 	char		**redirect;
 	char		*tmp;
+	int			first;
 
 	if (ft_findchar(input, '>'))
 	{
 		redir = initialize_redirect();
 		redirect = ft_split(input, '>');
 		if (verify_quotes(redirect[1]))
-			tmp = get_content_quotes(redirect[1]);
+		{
+			first = first_quote(redirect[1]);
+			tmp = get_content_quotes(redirect[1], first);
+		}
 		else
 			tmp = ft_strtrim(redirect[1], " ");
 		redir->count = count_rows((char **)redirect);
-		free_matrix(redirect);
 		if (redir->count > 1)
 		{
 			redir->fd_list = (int *)malloc(sizeof(int) * 1);
-			redir = try_open(redir, input, tmp);
-			return (redir);
+			return (try_open(redir, input, tmp));
 		}
-		return (free(redir), NULL);
+		return (free_matrix(redirect), free(redir), NULL);
 	}
 	return (NULL);
 }
@@ -48,10 +50,7 @@ void	*try_open(t_redirect *redir, char *input, char *tmp)
 	else if (verify_dup_redirect_stdout(input))
 		redir->fd_list[0] = open(tmp, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	free(tmp);
-	if (redir->fd_list[0] < 0)
-		return (free(redir), NULL);
-	else
-		return (redir);
+	return (redir);
 }
 
 void	handle_stdout(t_prec *prec)

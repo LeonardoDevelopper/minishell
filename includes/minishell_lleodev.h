@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 13:26:58 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:58:17 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,10 @@ int			ft_strcpy_custom(int begin, char *dest, char *src);
 int			handle_exit(t_cmd *cmd);
 int			dup_tokens_followed(char *n, int i, int len);
 int			count_rows(char **mat);
+int			first_quote(char *tmp);
 
-char		*handle_between_quotes(char *input);
-char		*get_content_quotes(char *input);
+char		*handle_between_quotes(char *input, int first);
+char		*get_content_quotes(char *input, int first);
 char		*handle_literal(char *input);
 char		*handle_no_literal(char *input);
 char		*ft_strjoin_matrix(char **mat, char c);
@@ -114,7 +115,7 @@ char		*display_shell(char *env[], char **tmp);
 char		*display_shell2(char *envp[], char **tmp_tmp);
 char		*cmd_exist(t_cmd *s_cmd, char *cmd);
 char		*read_stdout_child(int fd);
-char		*catch_cmd_args(char *cmd, char *tmp);
+char		*catch_cmd_args(char *cmd, char *tmp, int first);
 char		*ft_strjoin_ptr(char *s1, char *s2);
 char		*replace_char(char *str, char c, char rep);
 char		*remove_end_char(char *str);
