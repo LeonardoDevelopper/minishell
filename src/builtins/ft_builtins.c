@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_builtins.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <aborges@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:45:28 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/23 10:26:16 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:05:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_env_export(int ac, char **env, t_enviro **enviro)
 	i = ft_listsize(enviro) - 1;
 	while (i >= 0)
 	{
-		if (ft_searstr(list[i], "?=") == NULL)
+		if (ft_searstr(list[i], "?=") == 0)
 			printf("declare -x %s\n", list[i]);
 		i--;
 	}
@@ -88,13 +88,17 @@ char	*search_env(char *world, t_enviro **enviro)
 			return (tmp->value);
 		tmp = tmp->next;
 	}
+	return (NULL);
 }
 
 void	ft_exit(char **end, int ac, t_enviro **enviro, int fd)
 {
+	enviro = enviro;
+	fd = fd;
 	if (ac > 1)
 		exit(ft_atoi(end[1]));
 	if (end)
 		rl_clear_history();
+	free_matrix(end);
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 17:37:48 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/13 17:38:25 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:23:39 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	ft_strcpy_custom(int begin, char *dst, char *src)
 	i = 0;
 	j = begin;
 	if (!dst || !src)
-		return (NULL);
+		return (0);
 	while (src[i])
 		dst[j++] = src[i++];
 	return (i);

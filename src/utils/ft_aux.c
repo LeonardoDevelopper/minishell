@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <aborges@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 13:48:06 by aborges           #+#    #+#             */
-/*   Updated: 2024/10/23 12:26:54 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:25:07 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ char	**ft_split_path(char *path)
 		while (path[i] && path[i] != ':')
 			mat[j][k++] = path[i++];
 		mat[j][k] = '/';
-		result[j++] = mat[j];
+		result[j] = mat[j];
+		j++;
 		if (path[i])
 			i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:25:51 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/15 07:17:54 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 11:59:13 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ void	ft_echo_aux(t_enviro **enviro, char **value)
 	char	**result;
 	char	*new_result;
 	int		i;
-	char	*end_result;
 
 	result_echo(0, 1);
 	i = 0;
-	result = ft_split_echo(value);
+	result = ft_split_echo(*value);
 	while (result[i])
 	{
 		new_result = epur_str(result[i]);
@@ -59,7 +58,6 @@ char	*result_echo(int c, int reset)
 char	*ft_echo(char **echo, t_enviro **enviro)
 {
 	int			i;
-	int			j;
 	size_t		size;
 	char		*value;
 
@@ -80,7 +78,7 @@ char	*ft_echo(char **echo, t_enviro **enviro)
 		return (NULL);
 	i = 1;
 	ft_echo1(echo, i, value);
-	ft_echo_aux(enviro, value);
+	ft_echo_aux(enviro, &value);
 	free(value);
 	return (result_echo('\0', 0));
 }

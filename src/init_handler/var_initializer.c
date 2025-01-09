@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:11:37 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/04 13:13:43 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 10:28:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,15 @@ t_redirect	*initialize_redirect(void)
 	redirect->count = 0;
 	redirect->fd_list = NULL;
 	return (redirect);
+}
+
+t_cmd	*initialize_prompt(int argc, char *argv[], char *envp[])
+{
+	t_cmd	*prompt;
+
+	argc = argc;
+	argv = argv;
+	prompt = (t_cmd *)malloc(sizeof(t_cmd));
+	fill_env(&prompt->enviro, envp);
+	return (prompt);
 }

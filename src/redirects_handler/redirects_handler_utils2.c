@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirects_handler_utils2.c                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/06 08:09:27 by lleodev           #+#    #+#             */
+/*   Updated: 2025/01/06 08:09:29 by lleodev          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -12,7 +22,7 @@ int	cancel_heredoc(char *dir)
 	dir = ft_strjoin(home, "/tmp");
 	tmp = ft_strjoin(dir, "/heredoc_empty");
 	fd = open(tmp, O_RDWR | O_CREAT);
-    free(dir);
+	free(dir);
 	free(tmp);
 	return (fd);
 }

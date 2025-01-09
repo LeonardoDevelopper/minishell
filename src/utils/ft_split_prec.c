@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_prec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/08 13:11:44 by aborges           #+#    #+#             */
-/*   Updated: 2025/01/08 13:11:47 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/08 16:08:02 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_rowss(char *str)
 	len = 0;
 	while (str[i])
 	{
-	        if (str[i] == '<' || str[i] == '>' || str[i] == '|')
+		if (str[i] == '<' || str[i] == '>' || str[i] == '|')
 			len++;
 		i++;
 	}
@@ -40,10 +40,10 @@ int	ft_strlenn(char *str)
 
 char	**ft_split_args(char *str)
 {
-	int	i;
-	int	j;
-	int	len1;
-	int	len2;
+	int		i;
+	int		j;
+	int		len1;
+	int		len2;
 	char	**res;
 
 	i = 0;

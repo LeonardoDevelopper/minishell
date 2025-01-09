@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_aux2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aborges <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:56:56 by aborges           #+#    #+#             */
-/*   Updated: 2024/12/02 10:56:58 by aborges          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:26:13 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_list_env(char **list, int fd, int i)
 {
 	while (i >= 0)
 	{
-		if (ft_searstr(list[i], "?=") == NULL)
+		if (ft_searstr(list[i], "?=") == 0)
 		{
 			ft_putstr_fd(list[i], fd);
 			ft_putstr_fd("\n", fd);

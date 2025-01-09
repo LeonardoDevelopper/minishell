@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/15 13:58:09 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 12:59:32 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 	return (NULL);
 }
 
-char	**original_env(char *path_cpy, char *path)
+char	**original_env(char *path_cpy, char **path)
 {
 	char	*env;
 
@@ -78,7 +78,7 @@ char	**original_env(char *path_cpy, char *path)
 	return (NULL);
 }
 
-char	**aborges_env(t_cmd *cmd, char *path_cpy, char *path)
+char	**aborges_env(t_cmd *cmd, char *path_cpy, char **path)
 {
 	int		i;
 	char	**mat;
@@ -105,6 +105,7 @@ char	**split_dir(t_cmd *cmd)
 	char	path_cpy[1024];
 	char	**path;
 
+	path = NULL;
 	if (!cmd)
 		return (original_env(path_cpy, path));
 	else

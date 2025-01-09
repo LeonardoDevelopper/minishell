@@ -6,13 +6,13 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2024/12/13 17:39:46 by lleodev          ###   ########.fr        #
+#    Updated: 2025/01/09 11:56:47 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I./includes/ -I./libs/libft/
 
 LIB = ./libs/libft/libft.a
@@ -65,8 +65,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/process_handler/pipe_handler.c	\
 	./src/process_handler/process_handler_utils.c		\
 	./src/display_cli.c					\
-	./src/minishell.c	\
-	./src/list_commands.c
+	./src/minishell.c
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 

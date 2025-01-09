@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 13:11:15 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/03 11:38:30 by lleodev          ###   ########.fr       */
+/*   Created: 2025/01/06 08:08:03 by lleodev           #+#    #+#             */
+/*   Updated: 2025/01/09 12:27:44 by lleodev          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -18,9 +18,6 @@ void	free_cmd(t_cmd *cmd)
 	{
 		if (cmd->precedence)
 			free_prec(cmd->precedence);
-		if (cmd->env)
-			free_matrix(cmd->env);
-		
 	}
 }
 
@@ -99,8 +96,8 @@ int	handle_exit(t_cmd *cmd)
 			printf("Bye Bye\n");
 			if (!all_digit(tmp))
 				ft_putstr_fd("exit: non numeric argument provided\n", 2);
-			free(trimmed_str);
-			ft_exit(tmp, count, NULL);
+			free_left(trimmed_str, cmd);
+			ft_exit(tmp, count, NULL, 1);
 		}
 		else
 		{

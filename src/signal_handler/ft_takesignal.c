@@ -18,9 +18,10 @@ void	ft_signal_value(int signal_value)
 	char		**tmp;
 	extern char	**environ;
 
+	tmp = NULL;
 	if (signal_value == SIGINT)
 	{
-		shell = display_shell2(environ, tmp, NULL);
+		shell = display_shell2(environ, tmp);
 		rl_replace_line("", 0);
 		printf("\n%s\n", shell);
 		rl_on_new_line();
