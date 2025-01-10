@@ -6,16 +6,11 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 12:17:10 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 10:03:48 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	count_cmds_num(char *input)
-{
-	return (count_rows_del(input, '|'));
-}
 
 t_prec	**split_cmds(t_cmd *cmd, char *input, int num_cmd)
 {
