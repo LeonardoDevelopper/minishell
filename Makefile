@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2025/01/10 10:57:08 by lleodev          ###   ########.fr        #
+#    Updated: 2025/01/10 11:05:17 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_echo_one.c		\
 	./src/builtins/ft_echo_redirect.c   \
 	./src/builtins/ft_echo_two.c		\
+	./src/builtins/ft_clean_echo.c		\
 	./src/builtins/ft_cd.c				\
 	./src/builtins/ft_cd_one.c			\
 	./src/utils/ft_split_echo.c      	\

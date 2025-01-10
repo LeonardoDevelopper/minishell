@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/10 11:02:26 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 11:05:49 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ void	handle_cmd(t_cmd *cmd)
 	if (ft_strlen(cmd->input) == 0)
 		return ;
 	if (ft_expand(cmd) && ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
+
+	char	**new_command = handle_non_builtin1(cmd->input);
+	printf("\nNEW COMMAND ECHO: %s\n", ft_echo(new_command, &cmd->enviro));
+
+	if (ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
 	{
 		cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 		cmd->precedence = split_cmds(cmd, cmd->input, cmd->cmd_num);
@@ -43,11 +48,13 @@ void	handle_cmd(t_cmd *cmd)
 
 void	handle_args(t_prec *prec)
 {
+	int		first;
 	char	*args;
 	char	*tmp;
 
 	tmp = NULL;
-	args = catch_cmd_args(prec->input, tmp);
+	first = first_quote(prec->input);
+	args = catch_cmd_args(prec->input, tmp, first);
 	if (args)
 	{
 		prec->args = ft_split(args, ' ');

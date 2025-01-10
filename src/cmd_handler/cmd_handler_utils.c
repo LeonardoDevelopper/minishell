@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 08:41:57 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/12 09:30:16 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 16:24:09 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,20 @@ int	count_char(char *str, int c)
 		i++;
 	}
 	return (count);
+}
+
+int	first_quote(char *tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp[i])
+	{
+		if (tmp[i] == '\'')
+			return ('\'');
+		else if (tmp[i] == '"')
+			return ('"');
+		i++;
+	}
+	return (0);
 }

@@ -48,6 +48,8 @@ int		case_n(char *str);
 int		ft_check_cots(char **str);
 char	**ft_split_echo(char *str);
 char	*result_echo(int c, int reset);
+char	**prepare_echo_args1(char *cmd);
+char	**handle_non_builtin1(char *cmd);
 char	*ft_echo(char **echo, t_enviro **enviro);
 void	case_redirect(char **echo, char *value, int *var);
 void	check_dolar(char **result, int i, int *j);

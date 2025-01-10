@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 14:52:00 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/07 02:24:25 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:58:44 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	verify_quotes(char *input)
 	return (0);
 }
 
-char	*get_content_quotes(char *input)
+char	*get_content_quotes(char *input, int first)
 {
 	int		i;
 	int		j;
@@ -61,11 +61,11 @@ char	*get_content_quotes(char *input)
 	j = 0;
 	i += skip_space(input, i);
 	content = (char *)malloc(sizeof (char) * 1024);
-	if (input[i] == '\'' || input[i] == '"')
+	if (first && (input[i] == first))
 		i++;
 	while (input[i])
 	{
-		if ((input[i] == '\'' || input[i] == '"'))
+		if ((input[i] == first))
 			break ;
 		content[j++] = input[i];
 		i++;

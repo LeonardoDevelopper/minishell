@@ -6,13 +6,13 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 09:19:21 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 12:19:27 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/09 14:38:43 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*handle_between_quotes(char *input)
+char	*handle_between_quotes(char *input, int first)
 {
 	int		i;
 	int		j;
@@ -25,7 +25,7 @@ char	*handle_between_quotes(char *input)
 	res = (char *)malloc(sizeof(char ) * (ft_strlen(input) + 1));
 	while (input[i])
 	{
-		if (input[i] == '\'' || input[i] == '"')
+		if (first && (input[i] == first))
 		{
 			in = in_quotes(in);
 			i++;
@@ -68,7 +68,7 @@ int	verify_len1(int i, char *sp)
 	return (i);
 }
 
-char	*catch_cmd_args(char *cmd, char *tmp)
+char	*catch_cmd_args(char *cmd, char *tmp, int first)
 {
 	int		i;
 	int		k;
@@ -77,7 +77,7 @@ char	*catch_cmd_args(char *cmd, char *tmp)
 
 	i = 0;
 	k = 0;
-	tmp = handle_between_quotes(cmd);
+	tmp = handle_between_quotes(cmd, first);
 	sp = ft_split(tmp, ' ');
 	args = (char *)malloc(sizeof(char ) * 1024);
 	while (sp[i])
