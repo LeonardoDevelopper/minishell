@@ -6,11 +6,59 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:04:59 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/10 15:12:45 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 12:28:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	**prepare_echo_args(t_cmd *cmd, int i)
+{
+	char	**mat;
+
+	mat = malloc(sizeof(char *) * 3);
+	if (!mat)
+		return (NULL);
+	mat[0] = strdup("echo");
+	mat[1] = strdup(cmd->precedence[i]->cmd);
+	mat[2] = NULL;
+	if (!mat[0] || !mat[1])
+	{
+		free(mat[0]);
+		free(mat[1]);
+		free(mat);
+		return (NULL);
+	}
+	return (mat);
+}
+
+int	handle_non_builtin(t_cmd *cmd, int i)
+{
+	char	**mat;
+
+	printf("%s%s%s", RED_TEXT, CMD_NO_EXIST, RESET);
+	mat = prepare_echo_args(cmd, i);
+	if (!mat)
+		return (0);
+	printf("%s", ft_echo(mat, &cmd->enviro));
+	free(mat[0]);
+	free(mat[1]);
+	free(mat);
+	return (0);
+}
+
+int	handle_redirects(t_cmd *cmd, int i)
+{
+	if (cmd->precedence[i]->stdin_redirect)
+	{
+		if (!verify_fd(cmd->precedence[i]->stdin_redirect))
+		{
+			printf("No such file or directory\n");
+			return (0);
+		}
+	}
+	return (1);
+}
 
 int	test_commands(t_cmd *cmd)
 {

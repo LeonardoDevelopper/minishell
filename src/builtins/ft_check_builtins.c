@@ -41,6 +41,10 @@ int	case_n(char *str)
 {
 	int	i;
 
+	if (str == NULL)
+	{
+		return (0);
+	}
 	i = 0;
 	if (str[i] == '-')
 		i++;
@@ -58,13 +62,16 @@ int	case_echo(char **cmd, t_enviro **enviro, char **env, int fd)
 	char	*result_echo;
 
 	env = env;
+	if (ft_count(cmd) == 1)
+	{
+		printf("\n");
+		return (0);
+	}
 	result_echo = epur_str(ft_echo(cmd, enviro));
 	if (!result_echo)
 		return (0);
 	if (case_n(cmd[1]))
-	{
 		ft_putstr_fd(result_echo, fd);
-	}
 	else
 	{
 		ft_putstr_fd(result_echo, fd);
@@ -94,11 +101,11 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	cmd = ft_split(prec->input, ' ');
 	retur = 0;
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
-	{
 		print_chech_builtin(prec);
+	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 		retur = 1;
-	}
-	else if (ft_strcmp(remove_char(cmd[0], '"'), "echo"))
+	else if (ft_strcmp(remove_char(cmd[0], '"'), "echo")
+		|| ft_strcmp(remove_char(cmd[0], 39), "echo"))
 	{
 		if (case_n(cmd[1]) && !cmd[2])
 			retur = 1;
@@ -114,4 +121,3 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	free_matrix(cmd);
 	return (retur);
 }
-// valgrind --leak-check=full ./minishell

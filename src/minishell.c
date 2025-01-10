@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 13:52:02 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 13:08:08 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int	main(int argc, char *argv[], char *envp[])
 		ft_ctrld(cmd->input, cmd->env);
 		if (cmd->input && *cmd->input)
 		{
+			if (ft_strlen(cmd->input) > 0)
+				add_history(cmd->input);
+			ft_expand(cmd);
 			if (!handle_exit(cmd))
 				continue ;
 			handle_cmd(cmd);
-			if (ft_strlen(cmd->input) > 0)
-				add_history(cmd->input);
-			free(cmd->input);
 		}
 		free(cmd->shell);
 		free_matrix(cmd->env);
