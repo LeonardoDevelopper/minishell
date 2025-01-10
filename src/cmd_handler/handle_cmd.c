@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/10 13:10:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 21:29:03 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	handle_cmd(t_cmd *cmd)
 	ft_strcpy(cmd->input, tmp);
 	free(tmp);
 	if (ft_strlen(cmd->input) == 0)
-		return ;
-	if (ft_expand(cmd) && ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
+		return (free(cmd->input));
+	if (ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
 	{
 		cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 		cmd->precedence = split_cmds(cmd, cmd->input, cmd->cmd_num);
@@ -61,12 +61,22 @@ void	handle_args(t_prec *prec)
 void	handle_cmd_exist(t_cmd *cmd, t_prec *prec)
 {
 	char	**tmp;
+	char	*tmp2;
+	char	*args;
+	char	*desk_to_sp;
+	int		first;
 
 	if (!prec->input)
 		return ;
-	tmp = ft_split(prec->input, ' ');
+	tmp2 = NULL;
+	first = first_quote(prec->input);
+	args = catch_cmd_args(prec->input, tmp2, first);
+	desk_to_sp = desk_to_space(args);
+	tmp = ft_split(desk_to_sp, ' ');
 	prec->cmd = (char *)malloc(ft_strlen(tmp[0]) + 1);
 	ft_strcpy(prec->cmd, tmp[0]);
 	free_matrix(tmp);
+	free(args);
+	free(desk_to_sp);
 	prec->path = cmd_exist(cmd, prec->cmd);
 }

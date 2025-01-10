@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:58:00 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/10 13:10:40 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 21:28:41 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,34 @@ int	count_cmds_num(char *input)
 	return (count_rows_del(input, '|'));
 }
 
-char	*ft_expand(t_cmd *cmd)
+char	*ft_expand(t_cmd *cmd, t_prec *prec)
 {
 	char	**tmp2;
 
-	tmp2 = handle_non_builtin1(cmd->input);
-	free(cmd->input);
-	cmd->input = ft_echo(tmp2, &cmd->enviro);
+	tmp2 = handle_non_builtin1(prec->input);
+	free(prec->input);
+	prec->input = ft_echo(tmp2, &cmd->enviro);
 	free_matrix(tmp2);
-	if (!ft_strlen(cmd->input))
+	if (!ft_strlen(prec->input))
 		return (NULL);
-	return (cmd->input);
+	return (prec->input);
+}
+
+char	*desk_to_space(char *input)
+{
+	int		i;
+	char	*res;
+
+	i = 0;
+	res = (char *)malloc(sizeof(char) * (ft_strlen(input) + 1));
+	res[ft_strlen(input)] = '\0';
+	while (input[i])
+	{
+		if (input[i] == '\\')
+			res[i] = ' ';
+		else
+			res[i] = input[i];
+		i++;
+	}
+	return (res);
 }

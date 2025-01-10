@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/10 13:13:15 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 21:28:08 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,10 @@ int			ft_strcpy_custom(int begin, char *dest, char *src);
 int			handle_exit(t_cmd *cmd);
 int			dup_tokens_followed(char *n, int i, int len);
 int			count_rows(char **mat);
-char		*ft_expand(t_cmd *cmd);
 int			count_cmds_num(char *input);
 int			first_quote(char *tmp);
 
-char		*ft_expand(t_cmd *cmd);
+char		*ft_expand(t_cmd *cmd, t_prec *prec);
 char		*handle_between_quotes(char *input, int first);
 char		*get_content_quotes(char *input, int first);
 char		*handle_literal(char *input);
@@ -124,6 +123,7 @@ char		*replace_char(char *str, char c, char rep);
 char		*remove_end_char(char *str);
 char		*remove_char(char *str, char c);
 char		*remove_str(char *mat);
+char		*desk_to_space(char *input);
 char		**split_dir(t_cmd *cmd);
 char		**handle_double_quotes(char *input);
 char		**ft_split_del(char *str, char c);
@@ -161,6 +161,7 @@ void		*verify_redirect_stdin(char *cmd);
 void		*verify_redirect_stdout(char *input);
 void		change_builtins_output(t_cmd *cmd, int **pipes, int i);
 void		free_left(char *trimmed_str, t_cmd *cmd);
+void		free_left2(char *trimmed_str, t_cmd *cmd);
 void		print_chech_builtin(t_prec *prec);
 
 t_prec		*initialize_prec(void);

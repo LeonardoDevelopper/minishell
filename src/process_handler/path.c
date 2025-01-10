@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:04:27 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 12:59:32 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 20:37:58 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char	*is_absolute_path(char *cmd)
 		ft_strcpy(tmp, cmd);
 		if (access(tmp, X_OK) == 0)
 			return (tmp);
+		free(tmp);
 	}
 	else if ((cmd[0] == '~' && cmd[1] == '/'))
 	{
@@ -32,6 +33,7 @@ char	*is_absolute_path(char *cmd)
 		cmd -= 2;
 		if (access(tmp, X_OK) == 0)
 			return (tmp);
+		free(tmp);
 	}
 	return (NULL);
 }
@@ -49,7 +51,6 @@ char	*cmd_exist(t_cmd *s_cmd, char *cmd)
 		return (free_matrix(dir), full_path);
 	else
 	{
-		full_path = NULL;
 		while (dir && dir[i])
 		{
 			dir[i] = ft_strjoin_ptr(dir[i], "/");
@@ -97,6 +98,7 @@ char	**aborges_env(t_cmd *cmd, char *path_cpy, char **path)
 		}
 		i++;
 	}
+	free_matrix(mat);
 	return (NULL);
 }
 

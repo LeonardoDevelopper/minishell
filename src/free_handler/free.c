@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:08:03 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 13:56:03 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 18:50:52 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int	handle_exit(t_cmd *cmd)
 		}
 		else
 		{
-			return (free(trimmed_str), free_matrix(tmp),
+			return (free_left2(trimmed_str, cmd), free_matrix(tmp),
 				ft_putstr_fd("exit: too many arguments\n", 2), 0);
 		}
 	}
