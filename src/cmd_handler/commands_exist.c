@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:04:59 by lleodev           #+#    #+#             */
-/*   Updated: 2024/12/10 15:12:45 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 12:28:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	handle_non_builtin(t_cmd *cmd, int i)
 {
 	char	**mat;
 
-	printf("%s%s%s", GREEN_TEXT, CMD_NO_EXIST, RESET);
+	printf("%s%s%s", RED_TEXT, CMD_NO_EXIST, RESET);
 	mat = prepare_echo_args(cmd, i);
 	if (!mat)
 		return (0);
@@ -69,11 +69,21 @@ int	test_commands(t_cmd *cmd)
 	{
 		if (is_builtins(&cmd->precedence[i]) || cmd->precedence[i]->path)
 		{
-			if (!handle_redirects(cmd, i))
-				return (0);
+			if (cmd->precedence[i]->stdin_redirect)
+			{
+				if (!verify_fd(cmd->precedence[i]->stdin_redirect))
+				{
+					printf("No such file or directory\n");
+					return (0);
+				}
+			}
 		}
 		else
-			return (handle_non_builtin(cmd, i));
+		{
+			printf("%s%s%s%s\n", RED_TEXT, CMD_NO_EXIST,
+				cmd->precedence[i]->cmd, RESET);
+			return (0);
+		}
 		i++;
 	}
 	return (1);
