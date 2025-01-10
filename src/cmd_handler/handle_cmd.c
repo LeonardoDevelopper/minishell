@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 10:06:32 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 12:20:12 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 11:02:26 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_cmd(t_cmd *cmd)
 	free(tmp);
 	if (ft_strlen(cmd->input) == 0)
 		return ;
-	if (ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
+	if (ft_expand(cmd) && ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
 	{
 		cmd->cmd_num = count_cmds_num(cmd->input) + 1;
 		cmd->precedence = split_cmds(cmd, cmd->input, cmd->cmd_num);

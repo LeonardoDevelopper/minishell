@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 13:26:58 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 11:01:39 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ int			ft_strcpy_custom(int begin, char *dest, char *src);
 int			handle_exit(t_cmd *cmd);
 int			dup_tokens_followed(char *n, int i, int len);
 int			count_rows(char **mat);
+int			ft_expand(t_cmd *cmd);
+int			count_cmds_num(char *input);
+
 
 char		*handle_between_quotes(char *input);
 char		*get_content_quotes(char *input);

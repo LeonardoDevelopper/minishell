@@ -6,7 +6,7 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2025/01/09 11:56:47 by lleodev          ###   ########.fr        #
+#    Updated: 2025/01/10 10:57:08 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,7 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/cmd_handler/catch_cmd_args.c	\
 	./src/cmd_handler/handle_cmd.c		\
 	./src/cmd_handler/cmd_handler_utils.c\
+	./src/cmd_handler/cmd_handler_utils2.c\
 	./src/token_handler/handle_quote.c	\
 	./src/token_handler/handle_tokens.c	\
 	./src/token_handler/token_handler_utils.c \
