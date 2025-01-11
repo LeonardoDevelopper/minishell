@@ -42,11 +42,9 @@ int	case_n(char *str)
 	int	i;
 
 	if (str == NULL)
-	{
 		return (0);
-	}
 	i = 0;
-	if (str[i] == '-')
+	if (str[i] == '-' && str[i + 1] != '\0')
 		i++;
 	while (str[i])
 	{
@@ -101,14 +99,14 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 	cmd = ft_split(prec->input, ' ');
 	retur = 0;
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
-		print_chech_builtin(prec);
-	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
-		retur = 1;
+		retur = print(prec);
 	else if (ft_strcmp(remove_char(cmd[0], '"'), "echo")
 		|| ft_strcmp(remove_char(cmd[0], 39), "echo"))
 	{
 		if (case_n(cmd[1]) && !cmd[2])
 			retur = 1;
+		else if (case_n(cmd[1]) && !cmd[2])
+			retur = case_echo(cmd, enviro, env, prec->stdout);
 		else
 			retur = case_echo(cmd, enviro, env, prec->stdout);
 	}

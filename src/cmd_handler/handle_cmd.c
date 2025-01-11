@@ -24,8 +24,8 @@ void	handle_cmd(t_cmd *cmd)
 	if (ft_strlen(cmd->input) == 0)
 		return ;
 
-	char	**new_command = handle_non_builtin1(cmd->input);
-	printf("\nNEW COMMAND ECHO: %s\n", ft_echo(new_command, &cmd->enviro));
+	//char	**new_command = handle_non_builtin1(cmd->input);
+	//printf("\nNEW COMMAND ECHO: %s\n", ft_echo(new_command, &cmd->enviro));
 
 	if (ft_handle_quotes(cmd->input) && ft_handle_tokens(cmd->input))
 	{

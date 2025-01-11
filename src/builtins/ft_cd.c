@@ -51,7 +51,6 @@ void	ft_condition_cd_aux(char **cd, char **pwd,
 		if (chdir(result) == -1)
 		{
 			printf("cd: string not in %s\n", cd[1]);
-			free(result);
 			return ;
 		}
 	}

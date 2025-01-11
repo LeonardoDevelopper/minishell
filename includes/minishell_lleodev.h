@@ -105,6 +105,7 @@ int			handle_exit(t_cmd *cmd);
 int			dup_tokens_followed(char *n, int i, int len);
 int			count_rows(char **mat);
 int			first_quote(char *tmp);
+int			print(t_prec *prec);
 
 char		*handle_between_quotes(char *input, int first);
 char		*get_content_quotes(char *input, int first);
