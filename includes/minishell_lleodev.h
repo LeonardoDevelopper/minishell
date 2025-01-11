@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/11 09:24:42 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/11 15:15:36 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void		print_args(t_cmd *cmd);
 void		free_matrix(char **matrix);
 void		free_pipe(int **pipe);
 void		initialize_cmd(t_cmd *cmd);
-void		handle_args(t_prec *prec, t_enviro *enviro);
+void		handle_args(t_prec *prec);
 void		handle_cmd_exist(t_cmd *cmd, t_prec *prec);
 void		*handle_stdin(t_prec *prec);
 void		create_dir(char *dir);
