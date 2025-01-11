@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/11 15:15:36 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/11 17:04:23 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct cmd_s
 	int				cmd_num;
 	char			*shell;
 	char			*input;
+	char			*expanded_input;
 	char			*cmd_splited;
 	char			**env;
 	t_enviro		*enviro;
@@ -108,7 +109,6 @@ int			count_cmds_num(char *input);
 int			first_quote(char *tmp);
 int			print(t_prec *prec);
 
-char		*ft_expand(t_cmd *cmd, t_prec *prec);
 char		*handle_between_quotes(char *input, int first);
 char		*get_content_quotes(char *input, int first);
 char		*handle_literal(char *input);
@@ -133,6 +133,7 @@ char		**ft_split_args(char *str);
 char		**original_env(char *path_cpy, char **path);
 char		**aborges_env(t_cmd *cmd, char *path_cpy, char **path);
 
+void		ft_expand(t_cmd *cmd);
 void		remove_old_file(char *dir);
 void		free_two(char *tmp, char **tmp2);
 void		execbin(t_cmd *cmd, t_prec *prec);

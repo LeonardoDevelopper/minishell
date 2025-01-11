@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:58:00 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/10 21:28:41 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/11 17:11:00 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,29 @@ int	count_cmds_num(char *input)
 	return (count_rows_del(input, '|'));
 }
 
-char	*ft_expand(t_cmd *cmd, t_prec *prec)
+void	ft_expand(t_cmd *cmd)
 {
-	char	**tmp2;
+	char	*tmp;
+	char	*tmp2;
+	char	**tmptmp;
+	int		first;
 
-	tmp2 = handle_non_builtin1(prec->input);
-	free(prec->input);
-	prec->input = ft_echo(tmp2, &cmd->enviro);
-	free_matrix(tmp2);
-	if (!ft_strlen(prec->input))
-		return (NULL);
-	return (prec->input);
+	first = first_quote(cmd->input);
+	tmp = expand_tokens(cmd->input, first);
+	tmptmp = ft_split(tmp, ' ');
+	tmp2 = ft_echo_quots(tmptmp, &cmd->enviro);
+	if (tmp2)
+	{
+		printf("NEW1: %s\n", tmp2);
+		cmd->expanded_input = (char *)malloc(sizeof(char) * (ft_strlen(tmp2) + 1));
+		ft_strcpy(cmd->expanded_input, tmp2);
+	}
+	else
+	{
+		printf("NEW2: %s\n", tmp);
+		cmd->expanded_input = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 1));
+		ft_strcpy(cmd->expanded_input, tmp);
+	}
 }
 
 char	*desk_to_space(char *input)
