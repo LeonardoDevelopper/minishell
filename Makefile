@@ -23,11 +23,13 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/builtins/ft_echo_redirect.c   \
 	./src/builtins/ft_echo_two.c		\
 	./src/builtins/ft_clean_echo.c		\
+	./src/builtins/ft_echo_quots.c		\
 	./src/builtins/ft_cd.c				\
 	./src/builtins/ft_cd_one.c			\
 	./src/utils/ft_split_echo.c      	\
 	./src/builtins/ft_unset.c			\
 	./src/builtins/ft_builtins.c		\
+	./src/builtins/builtin.c			\
 	./src/builtins/ft_free_builtins.c	\
 	./src/builtins/ft_export_one.c		\
 	./src/builtins/ft_export.c			\
@@ -54,20 +56,23 @@ SRC =	./src/builtins/ft_echo.c		\
 	./src/utils/ft_init_status.c		\
 	./src/init_handler/var_initializer.c	\
 	./src/signal_handler/ft_takesignal.c	\
-	./src/free_handler/free.c			\
+	./src/free_handler/free.c				\
 	./src/free_handler/free_handler_utils.c		\
 	./src/redirects_handler/redirect_stdin.c	\
 	./src/redirects_handler/redirect_stdout.c	\
 	./src/redirects_handler/heredoc.c			\
 	./src/redirects_handler/redirects_handler_utils.c	\
 	./src/redirects_handler/redirects_handler_utils2.c	\
-	./src/process_handler/path.c			\
-	./src/process_handler/exec_bin.c		\
-	./src/process_handler/child_process.c	\
-	./src/process_handler/pipe_handler.c	\
+	./src/process_handler/path.c						\
+	./src/process_handler/exec_bin.c					\
+	./src/process_handler/child_process.c				\
+	./src/process_handler/pipe_handler.c				\
 	./src/process_handler/process_handler_utils.c		\
 	./src/display_cli.c					\
-	./src/minishell.c
+	./src/minishell.c					\
+	./src/echo/ft_ech_one.c				\
+	./src/echo/ft_ech_two.c				\
+	./src/echo/ft_ech.c
 
 OBJ = $(SRC:./src/%.c=obj/%.o)
 

@@ -43,6 +43,7 @@ void	ft_new_pwd(char **pwd, t_enviro **enviro);
 void	free_cd(char **pwd, char **oldpwd);
 void	export_check(char **export, int ac, t_enviro **enviro, int j);
 void	ft_env_export(int ac, char **env, t_enviro **enviro);
+
 //builtin function echo
 int		case_n(char *str);
 int		ft_check_cots(char **str);
@@ -87,5 +88,23 @@ void	ft_ctrld(char *input, char **mat_env);
 void	ft_signal_value(int signal_value);
 int		ft_execute(char **cmd, int ac, char **env, t_enviro **enviro);
 int		execute_cmd(char **cmd, int ac, t_enviro **enviro, char **env);
+
+//NEW ECHO
+void	ft_echo_quots_aux(t_enviro **enviro, char **value);
+char	*result_echo_quots(int c, int reset);
+char	*ft_echo_quots(char **echo_quots, t_enviro **enviro);
+void	aux_check_echo_quots(char **result, t_enviro **enviro, int i, int *j);
+void	check_echo_quots(char **result, t_enviro **enviro, int i);
+void	aux_cmpecho_quots(char *aux, t_enviro *tmp);
+char	*create_aux_string_quots(char *echo_quots_indice, int i);
+void	expandecho_quots(char **echo_quots,
+			t_enviro **enviro, int indice, int i);
+void	ft_echo_quots1(char **echo_quots, int i, char *value);
+void	check_single_quotes1(char *str, int *j);
+void	check_double_quotes1(char *str, t_enviro **enviro, int *j);
+void	double_asp_quots(char *str, t_enviro **enviro, int i);
+void	resave_quots(char *str, t_enviro **enviro, int i);
+int		ft_check_cots_quots(char **str);
+void	check_dolar_quots(char **result, int i, int *j);
 
 #endif

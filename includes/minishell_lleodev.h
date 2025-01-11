@@ -106,6 +106,7 @@ int			dup_tokens_followed(char *n, int i, int len);
 int			count_rows(char **mat);
 int			count_cmds_num(char *input);
 int			first_quote(char *tmp);
+int			print(t_prec *prec);
 
 char		*ft_expand(t_cmd *cmd, t_prec *prec);
 char		*handle_between_quotes(char *input, int first);
