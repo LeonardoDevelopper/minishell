@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 15:09:02 by aborges           #+#    #+#             */
-/*   Updated: 2025/01/09 12:01:29 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/10 21:51:28 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	ft_condition_cd_aux(char **cd, char **pwd,
 		if (chdir(result) == -1)
 		{
 			printf("cd: string not in %s\n", cd[1]);
-			free(result);
 			return ;
 		}
 	}

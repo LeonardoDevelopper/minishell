@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/10 21:28:08 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/11 09:24:42 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,7 @@ char		*read_stdout_child(int fd);
 char		*catch_cmd_args(char *cmd, char *tmp, int first);
 char		*ft_strjoin_ptr(char *s1, char *s2);
 char		*replace_char(char *str, char c, char rep);
+char		*expand_tokens(char *input, int first);
 char		*remove_end_char(char *str);
 char		*remove_char(char *str, char c);
 char		*remove_str(char *mat);
@@ -141,7 +142,7 @@ void		print_args(t_cmd *cmd);
 void		free_matrix(char **matrix);
 void		free_pipe(int **pipe);
 void		initialize_cmd(t_cmd *cmd);
-void		handle_args(t_prec *prec);
+void		handle_args(t_prec *prec, t_enviro *enviro);
 void		handle_cmd_exist(t_cmd *cmd, t_prec *prec);
 void		*handle_stdin(t_prec *prec);
 void		create_dir(char *dir);
