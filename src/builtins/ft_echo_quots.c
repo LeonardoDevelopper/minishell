@@ -23,7 +23,7 @@ char	*ft_echo_quots(char **echo_quots, t_enviro **enviro)
 	if (!echo_quots[1])
 		return (NULL);
 	value = NULL;
-	i = 1;
+	i = 0;
 	size = 0;
 	while (echo_quots[i])
 	{
@@ -33,7 +33,7 @@ char	*ft_echo_quots(char **echo_quots, t_enviro **enviro)
 	value = malloc(sizeof(char *) * size + ft_count(echo_quots) - 1);
 	if (!value)
 		return (NULL);
-	i = 1;
+	i = 0;
 	ft_echo_quots1(echo_quots, i, value);
 	ft_echo_quots_aux(enviro, &value);
 	free(value);
