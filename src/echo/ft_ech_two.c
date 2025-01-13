@@ -62,7 +62,7 @@ void	ft_echo_quots1(char **echo_quots, int i, char *value)
 		var[4] = 0;
 		while (echo_quots[var[3]][var[4]])
 		{
-			case_redirect(echo_quots, value, var);
+			case_redirect_quots(echo_quots, value, var);
 		}
 		var[3]++;
 		if (echo_quots[var[3]] && var[2] == 0)
