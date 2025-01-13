@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 09:08:27 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/13 10:15:38 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ int	main(int argc, char *argv[], char *envp[])
 				add_history(cmd->input);
 			if (!handle_exit(cmd))
 				continue ;
-			handle_cmd(cmd);
+			handle_cmd(cmd, cmd->expanded_input);
 		}
-		free_matrix(cmd->env);
-		free(cmd->input);
-		free(cmd->shell);
+		(free_matrix(cmd->env), free(cmd->expanded_input));
+		(free(cmd->input), free(cmd->shell));
 	}
 	return (free_enviro_list(&cmd->enviro), 0);
 }

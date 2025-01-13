@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 04:01:08 by aborges           #+#    #+#             */
-/*   Updated: 2025/01/11 16:02:52 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/13 12:11:24 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,15 +98,6 @@ int	check_builtins(t_prec *prec, t_enviro **enviro, char **env)
 
 	cmd = ft_split(prec->input, ' ');
 	retur = 0;
-
-
-	char	*new_echo = ft_echo_quots(cmd, enviro);
-	if (new_echo == NULL)
-		printf("\nft_check_builtins.c****: %s\n", cmd[0]);
-	else
-		printf("\nft_check_builtins.c****: %s\n", new_echo);
-
-
 	if (cmd[1] && (ft_check_cots(cmd) % 2 != 0))
 		retur = print(prec);
 	else if (ft_strcmp(remove_char(cmd[0], '"'), "echo")

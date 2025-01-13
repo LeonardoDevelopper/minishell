@@ -6,96 +6,77 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 09:09:36 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/13 11:48:50 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*expand_tokens(char *input, int first)
+int	cpy_tokens(char *res, const char *src, int k)
+{
+	int	j;
+
+	j = 0;
+	while (src[j])
+	{
+		res[k] = src[j];
+		k++;
+		j++;
+	}
+	return (k);
+}
+
+int	switch_token(char *input, char *res, int i, int k)
+{
+	if (input[i] == '<')
+		k = cpy_tokens(res, "rdin", k);
+	else if (input[i] == '>')
+		k = cpy_tokens(res, "rdout", k);
+	else if (input[i] == '|')
+		k = cpy_tokens(res, "pipe", k);
+	else
+		res[k++] = input[i];
+	return (k);
+}
+
+char	*expand_tokens(char *input, int first, int in)
 {
 	int		i;
 	int		k;
-	int		in;
-	int		j;
-	char    *res;
+	char	*res;
 
-	i = 0;
+	i = -1;
 	k = 0;
-	in = 0;
-	char	*rdin = "rdin";
-	char	*rdout = "redout";
-	char    *pipe = "pipe";
-	res = (char *)malloc(sizeof(char ) * 1024);
-	while (input[i])
+	res = (char *)malloc(sizeof(char) * 1024);
+	while (input[++i])
 	{
-		j = 0;
-		if (first && (input[i] == first))
+		if (first && input[i] == first)
 		{
 			in++;
-			res[k++] = input[i];
-			i++;
+			res[k++] = input[i++];
 			continue ;
 		}
 		if (in == 1)
-		{
-			if (input[i] == '<')
-			{
-				while (rdin[j])
-				{
-					res[k] = rdin[j];
-					k++;
-					j++;
-				}
-			}
-			else if (input[i] == '>')
-			{
-				while (rdout[j])
-				{
-					res[k] = rdout[j];
-					k++;
-					j++;
-				}
-			}
-			else if (input[i] == '|')
-			{
-				while (pipe[j])
-				{
-					res[k] = pipe[j];
-					k++;
-					j++;
-				}
-			}
-			else
-			{
-				res[k++] = input[i];
-			}
-		}
+			k = switch_token(input, res, i, k);
 		else
 		{
 			if (in > 1)
-			{
 				in = 0;
-			}
 			res[k++] = input[i];
 		}
-		i++;
 	}
-	res[k] = '\0';
-	return (res);
+	return (res[k] = '\0', res);
 }
 
-t_prec	**split_cmds(t_cmd *cmd, char *input, int num_cmd)
+t_prec	**split_cmds(t_cmd *cmd, int num_cmd)
 {
 	t_prec	**precedence;
 	int		p;
 	char	**commands;
 
 	p = 0;
-	input = input;
 	precedence = (t_prec **)malloc(sizeof(t_prec *) * (num_cmd + 1));
 	precedence[num_cmd] = NULL;
-	input = input;
 	commands = ft_split(cmd->expanded_input, '|');
 	while (p < num_cmd)
 	{
