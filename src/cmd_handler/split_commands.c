@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 11:48:50 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/13 13:04:01 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ char	*expand_tokens(char *input, int first, int in)
 	int		k;
 	char	*res;
 
-	i = -1;
+	i = 0;
 	k = 0;
 	res = (char *)malloc(sizeof(char) * 1024);
-	while (input[++i])
+	while (input[i])
 	{
 		if (first && input[i] == first)
 		{
@@ -64,6 +64,7 @@ char	*expand_tokens(char *input, int first, int in)
 				in = 0;
 			res[k++] = input[i];
 		}
+		i++;
 	}
 	return (res[k] = '\0', res);
 }
