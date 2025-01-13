@@ -106,5 +106,6 @@ void	double_asp_quots(char *str, t_enviro **enviro, int i);
 void	resave_quots(char *str, t_enviro **enviro, int i);
 int		ft_check_cots_quots(char **str);
 void	check_dolar_quots(char **result, int i, int *j);
+void	case_redirect_quots(char **echo, char *value, int *var);
 
 #endif
