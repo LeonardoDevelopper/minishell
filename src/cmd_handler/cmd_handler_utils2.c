@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:58:00 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 11:49:34 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 10:12:13 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ void	ft_expand(t_cmd *cmd)
 			= (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 1));
 		ft_strcpy(cmd->expanded_input, tmp);
 	}
-	free(tmp);
-	free_matrix(tmptmp);
+	(free(tmp), free_matrix(tmptmp));
 }
 
 char	*desk_to_space(char *input)

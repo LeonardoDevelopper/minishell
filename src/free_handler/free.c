@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:08:03 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 09:58:41 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 09:58:02 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,13 @@ int	handle_exit(t_cmd *cmd)
 			printf("Bye Bye\n");
 			if (!all_digit(tmp))
 				ft_putstr_fd("exit: non numeric argument provided\n", 2);
-			free_left(trimmed_str, cmd);
-			ft_exit(tmp, count, NULL, 1);
+			(free_left(trimmed_str, cmd), ft_exit(tmp, count, NULL, 2));
 		}
 		else
 		{
 			return (free_left2(trimmed_str, cmd), free_matrix(tmp),
-				ft_putstr_fd("exit: too many arguments\n", 2), 0);
+				ft_putstr_fd("exit: too many arguments\n", 2),
+				init_status(&cmd->enviro, 1), 0);
 		}
 	}
 	return (free(trimmed_str), free_matrix(tmp), 1);

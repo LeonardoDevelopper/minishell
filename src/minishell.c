@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:55:36 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 10:15:38 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 10:06:05 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char *argv[], char *envp[])
 		cmd->shell = display_shell(envp, tmp);
 		cmd->input = readline(cmd->shell);
 		cmd->env = fill_max(&cmd->enviro);
-		ft_ctrld(cmd->input, cmd->env);
+		ft_ctrld(cmd->input, cmd->env, cmd);
 		if (cmd->input && *cmd->input)
 		{
 			ft_expand(cmd);

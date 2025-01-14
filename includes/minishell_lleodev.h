@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 11:48:59 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 09:56:43 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ char		**ft_split_args(char *str);
 char		**original_env(char *path_cpy, char **path);
 char		**aborges_env(t_cmd *cmd, char *path_cpy, char **path);
 
+void		ft_ctrld(char *input, char **mat_env, t_cmd *cmd);
 void		ft_expand(t_cmd *cmd);
 void		remove_old_file(char *dir);
 void		free_two(char *tmp, char **tmp2);

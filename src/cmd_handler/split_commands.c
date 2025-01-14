@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 12:10:42 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/13 13:04:01 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 08:50:16 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int	cpy_tokens(char *res, const char *src, int k)
 	return (k);
 }
 
+int	inside(int in)
+{
+	if (in > 1)
+		in = 0;
+	return (in);
+}
+
 int	switch_token(char *input, char *res, int i, int k)
 {
 	if (input[i] == '<')
@@ -34,6 +41,12 @@ int	switch_token(char *input, char *res, int i, int k)
 		k = cpy_tokens(res, "rdout", k);
 	else if (input[i] == '|')
 		k = cpy_tokens(res, "pipe", k);
+	else if (input[i] == ';')
+		k = cpy_tokens(res, "scolon", k);
+	else if (input[i] == '?')
+		k = cpy_tokens(res, "qmark", k);
+	else if (input[i] == '&')
+		k = cpy_tokens(res, "eco", k);
 	else
 		res[k++] = input[i];
 	return (k);
@@ -60,8 +73,7 @@ char	*expand_tokens(char *input, int first, int in)
 			k = switch_token(input, res, i, k);
 		else
 		{
-			if (in > 1)
-				in = 0;
+			in = inside(in);
 			res[k++] = input[i];
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 13:57:12 by aborges           #+#    #+#             */
-/*   Updated: 2025/01/09 12:28:37 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 09:42:32 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		ft_unset(char **unset, int ac, t_enviro **enviro);
 
 //comand function
 void	ft_signal(void);
-void	ft_ctrld(char *input, char **mat_env);
 void	ft_signal_value(int signal_value);
 int		ft_execute(char **cmd, int ac, char **env, t_enviro **enviro);
 int		execute_cmd(char **cmd, int ac, t_enviro **enviro, char **env);
