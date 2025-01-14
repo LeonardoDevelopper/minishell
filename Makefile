@@ -6,13 +6,13 @@
 #    By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/11 09:58:36 by lleodev           #+#    #+#              #
-#    Updated: 2025/01/14 09:59:46 by lleodev          ###   ########.fr        #
+#    Updated: 2025/01/14 10:14:24 by lleodev          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I./includes/ -I./libs/libft/
 
 LIB = ./libs/libft/libft.a
