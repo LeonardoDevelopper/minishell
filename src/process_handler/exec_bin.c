@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/12 13:01:34 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 13:02:34 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/15 11:30:43 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	run_cmd(t_cmd *cmd, int **pipes, int i)
 		cmd->precedence[i]->child = new_child_p(NULL);
 		if (cmd->precedence[i]->child->pid == 0)
 		{
+			signal(SIGQUIT, SIG_DFL);
 			change_input_output(i, cmd->cmd_num, pipes, cmd->precedence[i]);
 			if (pipes != NULL)
 				close_pipes(pipes, cmd->cmd_num);
@@ -64,6 +65,8 @@ void	run_cmd(t_cmd *cmd, int **pipes, int i)
 				&cmd->precedence[i]->child->status, 0);
 			init_status(&cmd->enviro, cmd->precedence[i]->child->status);
 		}
+		if (cmd->precedence[i]->child->status == 131)
+			printf("Quit (core dumped)\n");
 	}
 	else
 	{
