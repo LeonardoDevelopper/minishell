@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 13:57:12 by aborges           #+#    #+#             */
-/*   Updated: 2025/01/09 12:28:37 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/15 11:04:15 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int		ft_unset(char **unset, int ac, t_enviro **enviro);
 
 //comand function
 void	ft_signal(void);
-void	ft_ctrld(char *input, char **mat_env);
 void	ft_signal_value(int signal_value);
 int		ft_execute(char **cmd, int ac, char **env, t_enviro **enviro);
 int		execute_cmd(char **cmd, int ac, t_enviro **enviro, char **env);
@@ -106,5 +105,6 @@ void	double_asp_quots(char *str, t_enviro **enviro, int i);
 void	resave_quots(char *str, t_enviro **enviro, int i);
 int		ft_check_cots_quots(char **str);
 void	check_dolar_quots(char **result, int i, int *j);
+void	case_redirect_quots(char **echo, char *value, int *var);
 
 #endif

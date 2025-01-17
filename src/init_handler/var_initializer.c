@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 12:11:37 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 10:28:48 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 09:52:05 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_cmd	*initialize_prompt(int argc, char *argv[], char *envp[])
 	argc = argc;
 	argv = argv;
 	prompt = (t_cmd *)malloc(sizeof(t_cmd));
+	prompt->expanded_input = NULL;
 	fill_env(&prompt->enviro, envp);
 	return (prompt);
 }

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 10:58:00 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/11 17:11:00 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 11:04:31 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,43 @@ int	count_cmds_num(char *input)
 	return (count_rows_del(input, '|'));
 }
 
-void	ft_expand(t_cmd *cmd)
+int	clean_input(char *input)
 {
 	char	*tmp;
-	char	*tmp2;
-	char	**tmptmp;
-	int		first;
 
-	first = first_quote(cmd->input);
-	tmp = expand_tokens(cmd->input, first);
+	tmp = ft_strtrim(input, " ");
+	if (ft_strlen(tmp) == 0)
+		return (free(tmp), 0);
+	free(tmp);
+	return (1);
+}
+
+void	ft_expand(t_cmd *c)
+{
+	char		*tmp;
+	char		*t2;
+	char		**tmptmp;
+	int			first;
+	int			in;
+
+	in = 0;
+	if (!clean_input(c->input))
+		return ;
+	first = first_quote(c->input);
+	tmp = expand_tokens(c->input, first, in);
 	tmptmp = ft_split(tmp, ' ');
-	tmp2 = ft_echo_quots(tmptmp, &cmd->enviro);
-	if (tmp2)
+	t2 = ft_echo_quots(tmptmp, &c->enviro);
+	if (t2)
 	{
-		printf("NEW1: %s\n", tmp2);
-		cmd->expanded_input = (char *)malloc(sizeof(char) * (ft_strlen(tmp2) + 1));
-		ft_strcpy(cmd->expanded_input, tmp2);
+		c->expanded_input = (char *)malloc(sizeof(char) * (ft_strlen(t2) + 1));
+		ft_strcpy(c->expanded_input, t2);
 	}
 	else
 	{
-		printf("NEW2: %s\n", tmp);
-		cmd->expanded_input = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 1));
-		ft_strcpy(cmd->expanded_input, tmp);
+		c->expanded_input = (char *)malloc(sizeof(char) * (ft_strlen(tmp) + 1));
+		ft_strcpy(c->expanded_input, tmp);
 	}
+	(free(tmp), free_matrix(tmptmp));
 }
 
 char	*desk_to_space(char *input)

@@ -36,11 +36,14 @@ void	ft_signal(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	ft_ctrld(char *input, char **mat_env)
+void	ft_ctrld(char *input, char **mat_env, t_cmd *cmd)
 {
 	if (!input)
 	{
+		free_enviro_list(&cmd->enviro);
 		free_matrix(mat_env);
-		exit(0);
+		free(cmd->shell);
+		free(cmd);
+		exit(127);
 	}
 }
