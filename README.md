@@ -136,7 +136,7 @@ make
 This project is Linux-only.
 The binary produced (minishell) is specific to Linux environments.<br />
 👥 <h1>Authors</h1>
-<table> <tr> <td align="center"><a href="https://github.com/Armando-Maria-Borges"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Armando_Borges.jpg" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/LeonardoDevelopper"><img src="https://github.com/LeonardoDevelopper/minishell/blob/lleodev/Leonardo_Jorge.jpg" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
+<table> <tr> <td align="center"><a href="https://github.com/Armando-Maria-Borges"><img src="https://github.com/LeonardoDevelopper/minishell/blob/main/Armando_Borges.jpg" width="100px;" alt="Armando Borges"/><br /><sub><b>Armando Borges</b></sub></a></td> <td align="center"><a href="https://github.com/LeonardoDevelopper"><img src="https://github.com/LeonardoDevelopper/minishell/blob/main/Leonardo_Jorge.jpg" width="100px;" alt="Leonardo Jorge"/><br /><sub><b>Leonardo Jorge</b></sub></a></td> </tr> </table>
 Built with ❤️ for educational purposes.
 
 📜 License
