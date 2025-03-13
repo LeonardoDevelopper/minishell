@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 08:45:28 by aborges           #+#    #+#             */
-/*   Updated: 2025/01/09 12:05:16 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 08:58:59 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,14 +91,13 @@ char	*search_env(char *world, t_enviro **enviro)
 	return (NULL);
 }
 
-void	ft_exit(char **end, int ac, t_enviro **enviro, int fd)
+void	ft_exit(char **end, int ac, t_enviro **enviro, int exit_n)
 {
 	enviro = enviro;
-	fd = fd;
 	if (ac > 1)
 		exit(ft_atoi(end[1]));
 	if (end)
 		rl_clear_history();
 	free_matrix(end);
-	exit(0);
+	exit(exit_n);
 }

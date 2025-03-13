@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 08:10:48 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/11 17:04:23 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 09:56:43 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct cmd_s
 {
 	int				cmd_num;
 	char			*shell;
+	char			*tmp;
 	char			*input;
 	char			*expanded_input;
 	char			*cmd_splited;
@@ -108,6 +109,7 @@ int			count_rows(char **mat);
 int			count_cmds_num(char *input);
 int			first_quote(char *tmp);
 int			print(t_prec *prec);
+char		*expand_tokens(char *input, int first, int in);
 
 char		*handle_between_quotes(char *input, int first);
 char		*get_content_quotes(char *input, int first);
@@ -121,7 +123,6 @@ char		*read_stdout_child(int fd);
 char		*catch_cmd_args(char *cmd, char *tmp, int first);
 char		*ft_strjoin_ptr(char *s1, char *s2);
 char		*replace_char(char *str, char c, char rep);
-char		*expand_tokens(char *input, int first);
 char		*remove_end_char(char *str);
 char		*remove_char(char *str, char c);
 char		*remove_str(char *mat);
@@ -133,6 +134,7 @@ char		**ft_split_args(char *str);
 char		**original_env(char *path_cpy, char **path);
 char		**aborges_env(t_cmd *cmd, char *path_cpy, char **path);
 
+void		ft_ctrld(char *input, char **mat_env, t_cmd *cmd);
 void		ft_expand(t_cmd *cmd);
 void		remove_old_file(char *dir);
 void		free_two(char *tmp, char **tmp2);
@@ -152,7 +154,7 @@ void		handle_stdout(t_prec *prec);
 void		free_prec(t_prec **prec);
 void		free_cmd(t_cmd *cmd);
 void		wait_p(t_cmd *cmd, int num);
-void		handle_cmd(t_cmd *cmd);
+void		handle_cmd(t_cmd *cmd, char *expanded_input);
 void		run_multiple_cmd(t_cmd *cmd);
 void		run_cmd(t_cmd *cmd, int **pipes, int i);
 void		print_stdout_child(char *buffer);
@@ -168,7 +170,7 @@ void		free_left2(char *trimmed_str, t_cmd *cmd);
 void		print_chech_builtin(t_prec *prec);
 
 t_prec		*initialize_prec(void);
-t_prec		**split_cmds(t_cmd *cmd, char *input, int num_cmd);
+t_prec		**split_cmds(t_cmd *cmd, int num_cmd);
 
 t_child_p	*new_child_p(void *pipe);
 

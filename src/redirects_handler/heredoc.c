@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 11:37:56 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 13:16:25 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/13 12:10:30 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,20 @@ void	close_heredoc(int signal)
 	char	*home;
 	char	*dir;
 
-	signal = signal;
-	home = getenv("HOME");
-	dir = ft_strjoin(home, "/tmp");
-	remove_old_file(dir);
-	exit(0);
+	if (signal == SIGQUIT)
+	{
+		home = getenv("HOME");
+		dir = ft_strjoin(home, "/tmp");
+		remove_old_file(dir);
+		exit(0);
+	}
+	if (signal == SIGINT)
+	{
+		home = getenv("HOME");
+		dir = ft_strjoin(home, "/tmp");
+		remove_old_file(dir);
+		exit(130);
+	}
 }
 
 void	heredoc(char *line, char *del, int fd)

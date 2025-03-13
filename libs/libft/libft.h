@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleodev <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 11:29:41 by lleodev           #+#    #+#             */
-/*   Updated: 2024/05/23 14:38:46 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/13 10:09:15 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ char	*ft_itoa(int n);
 char	*epur_str(char *str);
 char	**ft_split(char const *s, char c);
 
+int		ft_findchar(char *str, int c);
 int		ft_strlen(const char *str);
+
 size_t	ft_strlcpy(char *dest, const char *src, size_t dstsize);
 size_t	ft_strlcat(char *dest, const char *src, size_t dstsize);
-
-int ft_findchar(char *str, int c);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 11:31:13 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/09 16:35:45 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/14 08:41:56 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ void	*try_open(t_redirect *redir, char *input, char *tmp)
 
 void	handle_stdout(t_prec *prec)
 {
+	if (prec->stdin_redirect)
+	{
+		if (!verify_fd(prec->stdin_redirect))
+			return (prec->stdout = STDOUT_FILENO, ft_putchar_fd('\0', 1));
+	}
 	prec->stdout_redirect = verify_redirect_stdout(prec->input);
 	prec->num_args = count_rows_splited(prec->args);
 	if (prec->stdout_redirect)

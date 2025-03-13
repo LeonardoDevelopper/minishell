@@ -6,7 +6,7 @@
 /*   By: lleodev <lleodev@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/13 17:14:28 by lleodev           #+#    #+#             */
-/*   Updated: 2025/01/10 18:51:17 by lleodev          ###   ########.fr       */
+/*   Updated: 2025/01/15 10:41:54 by lleodev          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	free_left(char *trimmed_str, t_cmd *cmd)
 	free(cmd->input);
 	free(trimmed_str);
 	free(cmd->shell);
+	free(cmd->expanded_input);
 	free_matrix(cmd->env);
 	free_enviro_list(&cmd->enviro);
 	free(cmd);
@@ -42,6 +43,7 @@ void	free_left(char *trimmed_str, t_cmd *cmd)
 void	free_left2(char *trimmed_str, t_cmd *cmd)
 {
 	free(cmd->input);
+	free(cmd->expanded_input);
 	free(trimmed_str);
 	free(cmd->shell);
 	free_matrix(cmd->env);
